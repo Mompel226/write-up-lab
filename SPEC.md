@@ -1,0 +1,216 @@
+# Write-Up Lab — the spec every station and tool follows
+
+A site that teaches students who know almost nothing to write a lab report, then an IB Internal Assessment,
+then an IB Extended Essay — **one part at a time**. Built for Dr Daniel Mompel Riera's Biology classes at
+NLCS Jeju. **The students are Korean and learn in English**: short sentences, one idea each, the examined word
+rather than the everyday one, visual examples wherever something can be shown.
+
+Read first: `docs/lab-reports/BRIEF.md` (what is decided, and the corrections to Daniel's documents),
+`docs/lab-reports/RESEARCH-cambridge.md` and `docs/lab-reports/RESEARCH-ib.md` (the facts, with page
+numbers), and Daniel's own guides in `docs/lab-reports/source-text/` (his voice and examples — but where the
+BRIEF lists a correction, the correction wins). The IB Biology guide's full text is
+`docs/lab-reports/source-text/ib-biology-guide-2025.txt`.
+
+**The reference station is `js/stations/variables.js`.** Read it before writing anything. Match its shape,
+density and tone.
+
+## Files — who owns what
+- Core (do NOT edit; report what you need in your final message): `index.html`, `css/app.css`, `js/core.js`,
+  `js/plot.js`, `js/blocks.js`, `js/quiz.js`, `js/app.js`, `js/specimen.js`, `js/data/*`.
+- You own only the station files and widget files named in your brief. Each file already exists as a stub and is
+  already loaded by `index.html`.
+- A widget may add its own CSS with `WUL.css('<widget-name>', '…css…')`. Class names must start with
+  `wd-<widget-name>` (e.g. `.wd-graph-doctor__grid`). Use the CSS variables from `css/app.css` (`--ink`, `--ink-2`,
+  `--ink-3`, `--sheet`, `--sheet-2`, `--edge`, `--rule`, `--red`, `--red-wash`, `--green`, `--green-wash`,
+  `--blue`, `--plum`, `--lvl`, `--lvl-wash`, `--hl`, `--hl-soft`, `--p1…--p6`, `--serif`, `--sans`, `--mono`,
+  `--hand`, `--r`, `--shadow`, `--shadow-sm`) so light and dark themes both work. Reusable classes: `.sheet`,
+  `.sheet--vis`, `.btn`, `.btn--go`, `.btn--ghost`, `.seg` (segmented buttons with aria-pressed), `.wd-panel`,
+  `.wd-row`, `.wd-k`, `.wd-out`, `.chip`, `.chips`, `.fb .fb--ok/.fb--no`, `.hint`, `table.dt`.
+
+## Levels — ONE report, not three (Daniel, 24 Sep 2026)
+There is **no level switch** in the top bar. A part's page shows its first level (IGCSE for most parts) and,
+in the SAME list, the IB material marked **IB IA / IB EE** with a dashed outline, closed until clicked — so an
+IGCSE student meets it and can open it out of curiosity. A build block whose `lv` excludes `g` becomes one of
+these IB steps; red pens and question sets with their own IB version get a small IGCSE · IB IA · IB EE switch
+inside their tab. Each part's page is **tabs** (Learn · Red pen · Mistakes to avoid · Test yourself · Keywords ·
+Go further) and Learn is a **list of steps opened one at a time** — never one long scroll. Give every block a
+short plain `title`: it becomes the step's name. The home page is the report itself, two pages of parts you
+open in place (`WUL.reportMap` in `js/specimen.js`), each with "How the IB IA / IB EE changes this".
+The notes below on `lv` still hold: they decide which steps are IB steps.
+
+`g` IGCSE (Years 9–11) · `i` IB Internal Assessment · `e` IB Extended Essay. The reader picks one in the top bar;
+`WUL.level()` returns it. Any content item may carry `lv:'gie'` / `'ie'` / `'g'` … (absent = every level).
+`job`, `where`, `redpen`, `frames`, `buildTitle` may be per-level objects `{g:…, i:…, e:…}`; the reader gets
+their level's value or the nearest lower one.
+
+## A station
+```js
+WUL.station({
+  id, stage: 'start'|'plan'|'record'|'show'|'sense'|'judge'|'finish', order: <n within stage>,
+  title, levels: 'gie',
+  job: 'One sentence, ≤ 25 words: what this part is for.',   // or {g,i,e}
+  where: 'Where it goes in the report.',                       // or {g,i,e}
+  ladder: { g:[…], i:[…], e:[…] },   // what each level ADDS; 1–4 short items each (markup)
+  build: [ blocks… ],                // the teaching: 5–10 blocks, visual first
+  redpen: { g:{…}, i:{…}, e:{…} },   // a weak example, marked up (see below); one per level where it differs
+  traps: [ {bad, good, lv} ],        // 4–6 "where marks are lost": ✘ then ✔, each ≤ 20 words
+  frames: [ '…___…' ] or {g,i,e},    // optional sentence frames (a block of type frames is usually better)
+  test: [ questions… ],              // 7–10, mixed types; include IB-only ones (lv:'ie') where the station is gie
+  words: [ {term, forms:[…], def, eg, lv} ],   // 3–8 keywords THIS station owns (see ownership list)
+  further: [ {title, md, cite, lv} ],// 0–2 fenced "beyond the syllabus" panels, each with a real citation
+  sources: [ 'IB Biology guide (2025) p. 121', … ]   // what the page was checked against
+});
+```
+
+### Build blocks (`build: [...]`) — see `js/blocks.js`
+- `{type:'anatomy', title, intro, model, parts:[{n,name,note}], after}` — a model answer with colour-coded parts
+  `{1:…}`…`{6:…}` in the markup; the legend lights each part. **The best way to teach any written section.**
+  `model` may also be `{table:spec}` whose cells use `{n:…}`.
+- `{type:'steps', title, intro, stage:{table:spec}|{plot:spec}|{html}, steps:[{title, text, show:[els], focus:[els], lv}], always:[els]}`
+  — a walkthrough that BUILDS a table or graph one step at a time. Every element with `data-el` starts hidden; each
+  step reveals its `show` list (cumulative) and rings its `focus` list in yellow. It never moves on by itself.
+  Table cells get an element id with `{t:'…', el:'iv-head'}`; the caption with `capEl:'title'`.
+  Plot element ids are listed at the top of `js/plot.js` (`paper, axis-x, axis-y, ticks-x, ticks-y, label-x,
+  label-y, title, caption, key, break, bars, bar-<i>, err-bars, pts-<id>, line-<id>, err-<id>`).
+- `{type:'compare', title, bad, good, badLabel, goodLabel, why}` — ✘ and ✔ side by side. `bad`/`good` are markup,
+  `{table:spec}`, `{plot:spec}` or `{html}`.
+- `{type:'rules', title, items:['markup' | {t, lv, icon}]}` — the key things to remember.
+- `{type:'callout', label, md}` — ONE sentence to remember.
+- `{type:'note', tone:'ib'|'ee'|'igcse'|'warn'|'tip'|'house', label, title, md}` — use `house` for OUR rules
+  (things that are good practice but not an exam requirement — say so honestly).
+- `{type:'table', title, spec, after}` · `{type:'plot', title, spec, after}` · `{type:'grid2', title, items:[{label, tone:'g'|'i'|'e'|'red', v, note}]}`
+- `{type:'frames', title, items:['… ___ …']}` — sentence frames (`___` becomes a gap). Give every writing station some.
+- `{type:'widget', title, name, opts}` — a tool (see below).
+- `{type:'text', title, md}` — plain prose. **Use sparingly.** If it can be a picture, a table, a compare or an
+  anatomy, it should be.
+
+### Red pen
+```js
+{ title: 'A student wrote this. Five phrases would lose marks.',
+  body: 'markup with [!a:the wrong phrase] …' | {table:spec with [!a:…] in cells} | {plot:spec},
+  notes: { a:{label:'2–3 words, handwritten', why:'the reason, and what to write instead'}, … },
+  fixed: same kinds, the corrected version (==highlight== what changed),
+  fixedNote: 'one sentence' }
+```
+For a graph, `body:{plot:…}` and each note carries `el:'label-y'` (the plot element to ring), optionally `lx, ly`
+(label position in viewBox units). 4–6 marks. Labels are short and blunt, like a teacher's pen: "units!",
+"which amylase?", "n = 1", "human error?".
+
+### Questions (`test`) — see `js/quiz.js`. Never free writing.
+- `choose` `{q, opts:[{t, ok:true, why}, {t, why}…], show}` — exactly one right; EVERY option has a `why`.
+- `multi` `{q, opts:[{t, ok, why}…], why}` — tick all that apply.
+- `sort` `{q, bins:[…], items:[{t, bin, why}…]}`
+- `order` `{q, items:[in the right order…], why}`
+- `spot` `{q, text:'… [!a:mistake] … [?:a fine phrase] …', why:{a:…}}` — include fine phrases too.
+- `build` `{q, chips:[…], answer:[…] or answers:[[…],[…]], why}` — include 1–3 distractor chips.
+- `show` (optional on any question): a table/plot/markup to look at.
+Aim for 7–10 per station, at least four types, easy → harder, IB-only ones last with `lv:'ie'` (or `'e'`).
+
+### Tools (widgets)
+```js
+WUL.widget('graph-doctor', function (host, opts, ctx) { /* build the DOM inside host */ });
+WUL.tool({ name:'graph-doctor', title:'Graph doctor', blurb:'≤ 15 words', station:'graphs', lv:'gie', icon:'✚' });
+```
+A tool is placed in a station with `{type:'widget', name, opts}` and also gets its own page `#/tool/<name>`.
+It must: work by tap and by keyboard (buttons, not bare divs); work at 360 px wide (no fixed widths wider than
+the screen; SVG with viewBox and `width:100%`); never move on by itself (the reader presses a button); give
+instant feedback that EXPLAINS; read `WUL.level()` when behaviour should differ by level; draw graphs with
+`WUL.plot` so every graph on the site looks the same; use `WUL.data` numbers for the running example.
+Helpers: `WUL.h(tag, attrs, kids)`, `WUL.md(markup, {inline:true})`, `WUL.table(spec)`, `WUL.plot(spec)`,
+`WUL.plotScale(spec)` (→ `px(v)`, `py(v)` to place your own marks), `WUL.mean`, `WUL.sd` (=STDEV.S),
+`WUL.fix(v, dp)`, `WUL.shuffle`, `WUL.store.get/set` (per-device memory, key prefix = your widget name),
+`WUL.whenLive(node, fn)` (run fn once node is in the page — needed for getBBox).
+
+### The markup (every content string)
+`[[keyword]]` or `[[shown words|keyword]]` highlighted, tap for meaning · `==highlight==` ·
+`__underline__` (the house style for emphasis — not bold) · `**bold**` sparingly · `*Species name*` ·
+`{1:part}`…`{6:part}` anatomy colours · `[!k:mistake]` · `[?:fine phrase]` · blank line = new paragraph.
+Units and symbols as real characters: cm³, dm³, s⁻¹, °C, ±, ×, −, µm, α, χ².
+
+## The running examples — `js/data/datasets.js` (use these numbers; never invent other amylase data)
+- `WUL.data.amylase` — amylase + starch; iodine sampled every **10 s**, so times are multiples of 10 s and their
+  uncertainty is **± 10 s** (the sampling interval, NOT the stopwatch's 0.01 s). IGCSE: 3 trials, means
+  180/117/73/53/93 s at 20–60 °C. IB: 5 trials, fungal α-amylase from *Aspergillus oryzae*; means
+  178/118/74/54/98 s, SD 8.4/8.4/5.5/5.5/8.4 s, SE 3.7/3.7/2.4/2.4/3.7 s, rate (1 ÷ mean time) 5.6/8.5/13.5/18.5/10.2
+  ×10⁻³ s⁻¹. Optimum near 50 °C. Temperature ± 0.5 °C.
+- `WUL.data.soils` — bean seedlings, 4 soils A–D, n = 10: means 43.0, 43.6, 44.0, 44.3 cm; SD 1.4, 1.6, 1.3, 1.5.
+  A to D differ by 1.3 cm (3 %); the SD bars overlap. The bar-chart / truncated-axis example.
+- Other examples are fine (pondweed and light, potato cylinders and sucrose, catalase and hydrogen peroxide,
+  yeast and sugars, woodlice and humidity with a choice chamber) — biologically correct, realistic numbers.
+
+## Writing rules (Daniel checks every word)
+0. **The reader IS the student** (Daniel, 24 Sep 2026). Speak to them as "you". Never write about "a student",
+   "students" or "the learner" as if a teacher were reading. Simple words, plain headings, no clever or showy
+   introductions. Third persons only for someone else: another student's example, people in an experiment,
+   the examiner, members of your group.
+1. **Short.** A sentence carries one idea. Most sentences under 20 words. No paragraph over 3 sentences. If a
+   block needs more than ~60 words of prose, turn it into a visual, a list, a compare or an anatomy.
+2. **The examined word, not the everyday one.** No phrasal verbs (take in, carry out → "was carried out" is the
+   one standard exception in methods, used sparingly; go up → increase; find out → determine). "Amount" is never
+   a property: volume, mass, concentration, number. Name the process precisely.
+3. **Second person, present tense** for teaching text ("You name the…"). **Model answers are impersonal:** third
+   person, past tense, passive, never I / we / my / our / you (the checker rejects them).
+4. **British spelling**, no exclamation marks, no filler, no emoji. Underline (`__`) for emphasis, not bold.
+5. **Keywords:** highlight a keyword the first time it appears in each block. Every `[[keyword]]` must be defined
+   by some station (checker enforces). Define only the keywords your station owns (list below); reference the
+   rest freely. Definitions: one sentence, ≤ 20 words, at the depth an IGCSE student can use; an `eg` from biology.
+6. **Honest about sources.** Distinguish an exam requirement from good practice (`note` tone `house` = "Our
+   rule"). Never claim something earns or loses a mark unless RESEARCH-cambridge.md or RESEARCH-ib.md says so.
+   Quote the IB criteria only as written there. Never invent a citation: every `cite` must be a real, findable
+   source (author, title, year); if unsure, leave `further` out.
+7. **Biology must be right.** Enzymes: active site, substrate, enzyme–substrate complex, denaturation (tertiary
+   structure, hydrogen/ionic bonds). Do not simplify into something false. Fence university-level material in
+   `further`.
+8. **Visual first.** Tables and graphs must be SHOWN (WUL.table / WUL.plot), not described. Examples short.
+   Highlight the parts that matter with `==…==` or anatomy colours.
+9. **Corrections to respect** (from BRIEF.md): a ±2 °C fluctuation is RANDOM error (an offset is systematic);
+   control measure = what reduces the risk, emergency action = what to do if it happens; at IB answer the RQ
+   first — one line on the hypothesis is allowed ("evaluate hypotheses" is an IB skill) but earns nothing alone;
+   IB Evaluation 5–6 = RELATIVE impact (rank the weaknesses); extensions earn nothing in the 2025 IA;
+   Cambridge: > half the grid (not ¾), crosses or encircled dots (large dots penalised), axes need not start at 0,
+   titles are good practice but never a 0610 mark, a key IS a mark; best-fit lines are allowed at IB (Tool 3) when
+   the shape is justified, never beyond the data; R² only for a fitted trend line; no confidence intervals (not in
+   the IB course); Campbell 12th ed. = Urry et al.; the new EE: 30 marks, criterion E = Reflection on the RPF.
+
+## Keyword ownership (define only yours; `[[…]]` any)
+- variables: independent variable, dependent variable, control variable, fair test, interval, monitored variable
+- report: lab report, passive voice, third person, scientific voice
+- question: research question, aim, system (as "the system": the organism/tissue/enzyme studied)
+- background: scientific context, literature review, background theory
+- hypothesis: hypothesis, prediction, sketch graph, optimum
+- apparatus: apparatus, materials, resolution, uncertainty, measuring instrument
+- safety: hazard, risk, control measure, emergency action, ethics, environmental impact
+- method: method, equilibration, pilot run
+- tables: raw data, processed data, solidus, column heading, decimal places
+- processing: mean, rate, percentage change, significant figures, worked example, derived quantity
+- observations: qualitative data, quantitative data, observation
+- graphs: line graph, bar chart, histogram, scatter graph, line of best fit, extrapolate, interpolate, key,
+  continuous variable, categorical variable, axis, scale
+- errorbars: error bar, standard deviation, standard error, range (of data), interquartile range, spread
+- stats: t-test, chi-squared test, null hypothesis, p-value, correlation coefficient, coefficient of determination,
+  statistically significant, correlation, causation
+- analysis: trend, anomalous result, gradient, plateau
+- conclusion: conclusion, published value, justify
+- discussion: discussion, discrepancy, synthesis
+- evaluation: evaluation, weakness, limitation, improvement, relative impact, extension
+- measurement: accuracy, precision, reliability, validity, random error, systematic error, repeatable,
+  reproducible, true value, technical replicate, true replicate, pseudoreplication, calibration, zero error
+- sources: citation, in-text citation, reference list, bibliography, Works Cited, MLA, DOI, access date
+- format: word count, appendix, candidate code, title page
+- integrity: academic integrity, plagiarism, collusion, collaboration, malpractice, paraphrase
+- reflection: Reflection and Progress Form, viva voce, reflective statement, Researcher's reflection space
+
+## Check your work — required before you report
+1. `node tools/check.mjs` (from `labs/write-up-lab/`) must print `✔ all checks passed`. Warnings about another
+   agent's station are not yours; errors in yours are.
+2. A local server runs at `http://127.0.0.1:8830/labs/write-up-lab/index.html` (it serves the whole Biology Hub
+   folder). `?lv=g|i|e` before the `#` sets the level, e.g. `index.html?lv=i#/part/tables`.
+   - `node tools/smoke.mjs <station-id> [more ids]` renders each station at all three levels in headless Chrome
+     and reports script errors, missing tools and empty sections. It must pass.
+   - Then LOOK at your pages. Screenshot with
+     `/private/tmp/claude-503/-Users-NLCS-Library-CloudStorage-OneDrive-Personal-NLCS-CCA-BioCoders-Claude/d13bf587-264f-4c2e-aadc-b94c7ee1c461/scratchpad/shot.sh "<url>" <out.png> <width> <height>`
+     at 1440 × 4000 and at 390 × 6000, and read the PNGs. Save screenshots in that scratchpad folder, never in
+     the site. Fix what looks wrong: clipped text, overflow at 390 px, crossed label lines, a graph that is not
+     to scale, a legend that covers data. Tools that need tapping: drive them with the Browser tools
+     (`mcp__Claude_Browser__*`, the pane is already open at that server) and confirm each button does what it says.
+3. Read your own text once more against the Writing rules.
