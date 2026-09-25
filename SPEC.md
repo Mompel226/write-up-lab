@@ -212,7 +212,7 @@ than 5 % of the time" — NEVER "a less than 5 % chance that the difference is d
 ## The p-value has ONE home (Daniel, 25 Sep 2026: "use fewer words; link, don't repeat")
 `stats.js` block `id: 'pvalue'`, "What the p-value means", placed BEFORE the worked t-test: one question ("if there
 were no real difference, how often would chance alone give a result like yours?"), p read as "times in 100", below /
-above 0.05, no slogan yet (rejected: "…the null will fly" and "Small p, big news": a non-significant result can be big news), NO second example (a coin was tried twice and confused
+above 0.05, the memory line "Too rare for chance? Stop pretending." (Daniel chose it; rejected: "…the null will fly", and "Small p, big news" because a non-significant result can be big news), NO second example (a coin was tried twice and confused
 Daniel: the enzyme example is enough), and "never the chance that your hypothesis is right". Everywhere else: one short line and a link to
 `#/part/stats/build/pvalue` (app.js opens that step: `#/part/<id>/build/<block id>`). Never write "unlikely to be
 due to chance": write "statistically significant" or "chance alone would rarely give a difference this large".
