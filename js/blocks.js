@@ -138,6 +138,7 @@
   B.grid2 = function (s) {
     var n = h('div', { class: 'blk-grid2' });
     if (s.title) n.appendChild(h('h3', { class: 'bh', text: s.title }));
+    if (s.intro) n.appendChild(h('p', { class: 'bintro', html: md(s.intro, { inline: true }) }));
     var row = h('div', { class: 'g2' });
     s.items.forEach(function (it) {
       row.appendChild(h('div', { class: 'g2__c' + (it.tone ? ' g2--' + it.tone : ''), html: (it.label ? '<div class="g2__k">' + esc(it.label) + '</div>' : '') + '<div class="sheet sheet--vis">' + visual(it.v) + '</div>' + (it.note ? '<p class="g2__n">' + md(it.note, { inline: true }) + '</p>' : '') }));

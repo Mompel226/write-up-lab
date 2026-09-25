@@ -94,7 +94,7 @@
       '.' + C + '{display:grid;gap:14px}' +
       '.' + C + '__bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}' +
       '.' + C + '__bar .seg{flex-wrap:wrap}' +
-      '.' + C + '__intro{font-size:.97rem;color:var(--ink-2);max-width:70ch}' +
+      '.' + C + '__intro{font-size:.97rem;color:var(--ink-2)}' +
       '.' + C + '__main{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;align-items:start}' +
       '@media (max-width:820px){.' + C + '__main{grid-template-columns:minmax(0,1fr)}}' +
       '.' + C + '__plotwrap{position:relative;width:100%;max-width:520px}' +
