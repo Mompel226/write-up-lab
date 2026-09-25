@@ -102,12 +102,10 @@
         { label: 'One-tailed', v: { html: WUL.tailsSvg('one') }, note: 'Only one direction counts: all 5 % at one end. Only if you predicted the direction before collecting any data. Rare in an IA.' }
       ] },
 
-      { type: 'grid2', title: 'Significant or not? Where t lands', items: [
+      { type: 'grid2', title: 'Significant or not? Where t lands', intro: 'The red tails: with no real difference, chance lands there only 5 times in 100. So t in the red means p < 0.05: significant. [What p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue).', items: [
         { label: 'Not significant', tone: 'red', v: { html: WUL.tailsSvg('two', 1.15) }, note: 'Means of 70 s and 74 s: t = 1.15, in the white. p = 0.28: __not significant__.' },
         { label: 'Significant', tone: 'g', v: { html: WUL.tailsSvg('two', 5.77) }, note: 'Means of 54 s and 74 s: t = 5.77, beyond the red. p = 0.0004: __significant__.' }
       ] },
-
-      { type: 'callout', title: 'What the red tails are', label: 'The red tails and p', md: 'With no real difference, chance lands in the red only 5 times in 100. So t in the red: p < 0.05, significant. [What p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue).' },
 
       { type: 'table', title: 'A worked chi-squared test',
         spec: {

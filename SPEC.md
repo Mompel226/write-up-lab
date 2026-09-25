@@ -81,7 +81,7 @@ WUL.station({
 - `{type:'callout', label, md}` — ONE sentence to remember.
 - `{type:'note', tone:'ib'|'ee'|'igcse'|'warn'|'tip'|'house', label, title, md}` — use `house` for OUR rules
   (things that are good practice but not an exam requirement — say so honestly).
-- `{type:'table', title, spec, after}` · `{type:'plot', title, spec, after}` · `{type:'grid2', title, items:[{label, tone:'g'|'i'|'e'|'red', v, note}]}`
+- `{type:'table', title, spec, after}` · `{type:'plot', title, spec, after}` · `{type:'grid2', title, intro, items:[{label, tone:'g'|'i'|'e'|'red', v, note}]}`
 - `{type:'frames', title, items:['… ___ …']}` — sentence frames (`___` becomes a gap). Give every writing station some.
 - `{type:'widget', title, name, opts}` — a tool (see below).
 - `{type:'text', title, md}` — plain prose. **Use sparingly.** If it can be a picture, a table, a compare or an
@@ -204,8 +204,9 @@ The worked t-test has a step "Two tails: either direction" before "Find p"; a gr
 Find your test. The two-tailed test IS the normal t-test (=T.TEST(…, 2, …); R's default); one-tailed only when the
 direction was predicted before collecting data.
 Then "Significant or not? Where t lands": the same curve twice, t = 1.15 in the white (50 °C times 66, 76, 66, 76,
-66 s: mean 70 v 74 s, p = 0.28, not significant) and t = 5.77 beyond the red (p = 0.0004); and a callout, "The red
-tails and p": with NO real difference, chance alone puts t in the red 5 % of the time (2.5 % at each end).
+66 s: mean 70 v 74 s, p = 0.28, not significant) and t = 5.77 beyond the red (p = 0.0004). What the red tails
+are is the pair's own `intro` line, not a separate step (Daniel, 25 Sep 2026): with NO real difference, chance
+alone puts t in the red 5 % of the time, so t in the red means p < 0.05.
 Wording of p, always: "if there were no real difference, a difference this large would happen by chance less
 than 5 % of the time" — NEVER "a less than 5 % chance that the difference is due to chance".
 
@@ -237,6 +238,11 @@ due to chance": write "statistically significant" or "chance alone would rarely 
   A to D differ by 1.3 cm (3 %); the SD bars overlap. The bar-chart / truncated-axis example.
 - Other examples are fine (pondweed and light, potato cylinders and sucrose, catalase and hydrogen peroxide,
   yeast and sugars, woodlice and humidity with a choice chamber) — biologically correct, realistic numbers.
+
+## Text fills its box (Daniel, 25 Sep 2026: "make sure they expand the whole width available")
+No `max-width` in `ch` on text inside a box or a page column (step text, intros, afters, the part's job line, the
+home lede). A short measure left white space beside the words and he read it as broken. Only the big home heading
+keeps its 17ch, for its shape.
 
 ## Writing rules (Daniel checks every word)
 0. **The reader IS the student** (Daniel, 24 Sep 2026). Speak to them as "you". Never write about "a student",
