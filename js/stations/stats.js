@@ -63,12 +63,11 @@
 
       /* THE p-value explanation of the site: everything else is one line and a link here (#/part/stats/build/pvalue) */
       { type: 'rules', id: 'pvalue', title: 'What the p-value means', items: [
-        { t: 'The **p-value** answers one question: __if there were no real difference, how often would chance alone give a result like yours?__', icon: '?' },
-        { t: 'Read it as “times in 100”. p = 0.05 is 5 times in 100 (1 in 20). p = 0.28 is 28 times in 100. p = 0.0004 is 4 times in 10,000.', icon: '%' },
-        { t: '__Below 0.05:__ chance alone would rarely do this. The difference is [[statistically significant]].', icon: '✓' },
-        { t: '__0.05 or above:__ chance could easily do this. The difference is not significant. That does not show that there is no difference.', icon: '✗' },
-        { t: '__To remember:__ “Small p, big news. Big p, no news.” Below 0.05: significant. 0.05 or above: not significant.', icon: '★' },
-        { t: '__Like this:__ a friend says she can guess coin tosses. She gets 3 right in a row: chance does that 1 time in 8, so you are not convinced. She gets 10 right: chance does that about 1 time in 1,000. Now you believe her.', icon: '→' },
+        { t: '__Pretend:__ temperature does nothing, so any difference between 40 °C and 50 °C is just chance. This is the [[null hypothesis]].', icon: '1' },
+        { t: '__Check:__ in that pretend world, how often would chance alone give a difference as big as ours, 20 s? That number is the **p-value**. In the worked t-test below, p = 0.0004: 4 times in 10,000.', icon: '2' },
+        { t: '__Decide:__ almost never? Then stop pretending: the difference is [[statistically significant]]. The line is 0.05, or 5 times in 100. At 0.05 or above, keep pretending: not significant, which does not show that there is no difference.', icon: '3' },
+        { t: '__The same steps with a coin.__ Pretend it is fair. Check: 10 heads in a row happens ½ × ½ × … ten times = 1 time in 1,024 (p ≈ 0.001). Decide: almost never, so stop pretending: the coin is probably not fair. (3 heads in a row happens 1 time in 8: common, so keep pretending.)', icon: '→' },
+        { t: '__To remember:__ “Small p, big news. Big p, no news.”', icon: '★' },
         { t: 'p is __never__ the chance that your hypothesis is right.', icon: '!' }
       ] },
 
@@ -245,7 +244,7 @@
       { term: 't-test', forms: ['t-tests', 't test', "Student's t-test"], def: 'A statistical test of whether the means of two groups differ by more than chance would explain.', eg: 'Mean time at 40 °C (74 s) against 50 °C (54 s): t = 5.77.' },
       { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected.', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected.' },
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },
-      { term: 'p-value', forms: ['p value', 'p-values'], def: 'How often chance alone would give a result like yours, if there were no real difference. Below 0.05 (1 time in 20): significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
+      { term: 'p-value', forms: ['p value', 'p-values'], def: 'Pretend there is no real difference: p is how often chance alone would then give a difference as big as yours. Below 0.05: significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
       { term: 'correlation coefficient', forms: ['correlation coefficients', 'r', "Pearson's r"], def: 'A number, r, from −1 to +1, showing the strength and direction of a straight-line relationship.', eg: 'r = −0.99 for potato mass change and sucrose concentration.' },
       { term: 'coefficient of determination', forms: ['R²', 'R2', 'R squared'], def: 'R², from 0 to 1: how well a trend line fits, as the fraction of the variation it explains.', eg: 'R² = 0.99: the line explains 99 % of the variation.' },
       { term: 'statistically significant', forms: ['significant', 'significantly', 'statistical significance', 'significance'], def: 'A result that chance alone would rarely give if there were no real difference: p below 0.05.', eg: 'The mean time at 50 °C was significantly shorter (p < 0.001).' },
