@@ -67,7 +67,7 @@
         { t: 'Read it as “times in 100”. p = 0.05 is 5 times in 100 (1 in 20). p = 0.28 is 28 times in 100. p = 0.0004 is 4 times in 10,000.', icon: '%' },
         { t: '__Below 0.05:__ chance alone would rarely do this. The difference is [[statistically significant]].', icon: '✓' },
         { t: '__0.05 or above:__ chance could easily do this. The difference is not significant. That does not show that there is no difference.', icon: '✗' },
-        { t: '__To remember:__ “If p is low, the null must go.” Below 0.05, reject the [[null hypothesis]]: significant. “If p is high, the null will fly”: it stays.', icon: '★' },
+        { t: '__To remember:__ “Small p, big news. Big p, no news.” Below 0.05: significant. 0.05 or above: not significant.', icon: '★' },
         { t: '__Like this:__ a friend says she can guess coin tosses. She gets 3 right in a row: chance does that 1 time in 8, so you are not convinced. She gets 10 right: chance does that about 1 time in 1,000. Now you believe her.', icon: '→' },
         { t: 'p is __never__ the chance that your hypothesis is right.', icon: '!' }
       ] },
