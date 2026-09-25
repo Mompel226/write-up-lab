@@ -28,8 +28,11 @@ density and tone.
   `.wd-row`, `.wd-k`, `.wd-out`, `.chip`, `.chips`, `.fb .fb--ok/.fb--no`, `.hint`, `table.dt`.
 
 ## Levels — ONE report, not three (Daniel, 24 Sep 2026)
+Level colours: IGCSE green `--green`, IB IA blue `--blue`, IB EE burnt orange `--ee` (#B45309). EE was purple until
+25 Sep 2026: at dot size it could not be told from blue. `--plum` is now only a data colour (SE bars in graphs).
 There is **no level switch** in the top bar. A part's page shows its first level (IGCSE for most parts) and,
-in the SAME list, the IB material marked **IB IA / IB EE** with a dashed outline, closed until clicked — so an
+in the SAME list, the IB material marked **IB IA / IB EE** with a dashed outline and a light tint of its level colour (never an
+empty box: Daniel, 25 Sep 2026), closed until clicked — so an
 IGCSE student meets it and can open it out of curiosity. A build block whose `lv` excludes `g` becomes one of
 these IB steps; red pens and question sets with their own IB version get a small IGCSE · IB IA · IB EE switch
 inside their tab. Each part's page is **tabs** (Learn · Red pen · Mistakes to avoid · Test yourself · Keywords ·

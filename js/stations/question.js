@@ -15,7 +15,7 @@
     rung('r2', '--red', '✘ Still too broad', 'How does <mark class="hl">temperature</mark> affect <mark class="hl">amylase</mark>?', 3) +
     rung('r3', '--green', '✔ Focused: IGCSE', 'How does temperature, <mark class="hl">from 20 °C to 60 °C</mark>, affect <mark class="hl">the time taken for amylase to digest starch</mark>?', 6) +
     rung('r4', '--blue', '✔ Focused, with its system: IB IA', 'How does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by <mark class="hl">fungal α-amylase from <i>Aspergillus oryzae</i></mark>?', 9) +
-    rung('r5', '--plum', '✔ A question for 4,000 words: IB EE', '<mark class="hl">To what extent</mark> does temperature (20–60 °C) affect the rate of starch hydrolysis by α-amylase from <i>Aspergillus oryzae</i>?', 12) +
+    rung('r5', '--ee', '✔ A question for 4,000 words: IB EE', '<mark class="hl">To what extent</mark> does temperature (20–60 °C) affect the rate of starch hydrolysis by α-amylase from <i>Aspergillus oryzae</i>?', 12) +
     '</ol>';
 
   WUL.station({

@@ -236,7 +236,7 @@
     });
     R.forEach(function (rg) {
       var ib = rg.lv && rg.lv.indexOf('g') < 0;
-      var el = h('div', { class: 'rm' + (ib ? ' rm--ib' : ''), 'data-id': rg.id });
+      var el = h('div', { class: 'rm' + (ib ? ' rm--ib' + (rg.lv.indexOf('i') < 0 ? ' rm--ee' : '') : ''), 'data-id': rg.id });
       var btn = h('button', { type: 'button', class: 'rm__tile', 'aria-expanded': 'false',
         html: '<span class="rm__name">' + esc(rg.name) + '</span>' + (ib ? WUL.ibTag(rg.lv) : '') + preview(rg.kind) });
       var body = h('div', { class: 'rm__body', hidden: true });

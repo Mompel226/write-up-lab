@@ -10,7 +10,7 @@
   'use strict';
 
   /* the timeline of the RPF, drawn as a spine */
-  var P = 'var(--plum)';
+  var P = 'var(--ee)';
   function step(n, title, sub, dashed) {
     return '<li style="display:flex;gap:12px;align-items:flex-start;margin-left:-14px;padding:5px 0">' +
       '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:var(--sheet);border:2px ' + (dashed ? 'dashed var(--ink-3)' : 'solid ' + P) + ';color:' + (dashed ? 'var(--ink-3)' : P) +
