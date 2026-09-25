@@ -92,6 +92,13 @@
         { label: 'One-tailed', v: { html: WUL.tailsSvg('one') }, note: 'Asks: is 50 °C faster, __only__? All 5 % sits in one tail, so the bar is lower: 1.86. Allowed only if you predicted the direction before collecting any data, and a difference the other way would not count. Rarely used in an IA.' }
       ] },
 
+      { type: 'grid2', title: 'Significant or not? Where t lands', items: [
+        { label: 'Not significant', tone: 'red', v: { html: WUL.tailsSvg('two', 1.15) }, note: 'Times at 50 °C of 66, 76, 66, 76 and 66 s: a mean of 70 s against 74 s. t = 1.15 lands in the white middle, where chance alone often puts t. p = 0.28: more than 0.05, so the difference is __not significant__.' },
+        { label: 'Significant', tone: 'g', v: { html: WUL.tailsSvg('two', 5.77) }, note: 'The real data: a mean of 54 s against 74 s. t = 5.77 lands far out in a red tail. p = 0.0004: less than 0.05, so the difference is __significant__.' }
+      ] },
+
+      { type: 'callout', title: 'What the red tails are', label: 'The red tails and p', md: 'If there were __no real difference__, chance alone would still give a t in the red tails 5 % of the time: 2.5 % at each end. So a t in the red means p < 0.05, and the difference is significant. A t in the white means p > 0.05: chance could easily explain it.' },
+
       { type: 'rules', title: 'What p < 0.05 means', items: [
         '__p < 0.05__ means: if the [[null hypothesis]] were true, a difference at least this large would happen by chance less than 5 % of the time.',
         'So the null hypothesis is rejected, and the difference is [[statistically significant]].',
