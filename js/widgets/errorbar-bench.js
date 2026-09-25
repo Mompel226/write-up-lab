@@ -422,8 +422,8 @@
         var cl = h('div', { class: C + '__claims' });
         var cap = P.claim.charAt(0).toUpperCase() + P.claim.slice(1);
         if (overlap) {
-          cl.appendChild(h('div', { class: C + '__can', html: '<b>✔ You can write:</b> “These data do not show a difference between ' + esc(P.names[0]) + ' and ' + esc(P.names[1]) + '.”' }));
-          cl.appendChild(h('div', { class: C + '__cannot', html: '<b>✘ You cannot write:</b> “' + esc(cap) + '.” The difference could be due to chance. You also cannot write “there is no difference”: overlap does not prove that the means are equal.' }));
+          cl.appendChild(h('div', { class: C + '__can', html: '<b>✔ You can write:</b> “The ' + esc(kindName()) + ' overlap, so the graph alone cannot show whether ' + esc(P.names[0]) + ' and ' + esc(P.names[1]) + ' differ.” Then report the statistical test that decides.' }));
+          cl.appendChild(h('div', { class: C + '__cannot', html: '<b>✘ You cannot write:</b> “' + esc(cap) + '.” The difference could be due to chance. You also cannot write “there is no difference” or “no significant difference”: overlap cannot decide that, only a test can.' }));
         } else {
           cl.appendChild(h('div', { class: C + '__can', html: kind === 'se'
             ? '<b>✔ You can write:</b> “The ± 1 SE bars do not overlap, which suggests that ' + esc(P.claim) + '. A statistical test is needed to confirm it.” SE bars are short, so a gap between them is a weaker hint than a gap between SD bars.'

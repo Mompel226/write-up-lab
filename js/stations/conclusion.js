@@ -135,7 +135,7 @@
         'Enzymes are not alive. They are __denatured__, never “killed”.',
         'Name the process: kinetic energy, successful collisions, enzyme–substrate complexes, active site, denatured.',
         { t: 'Answer the research question __first__, with processed data and its uncertainty.', lv: 'ie' },
-        { t: 'Where [[error bars|error bar]] overlap, say that the conditions __cannot be separated__.', lv: 'ie' },
+        { t: 'Where [[error bars|error bar]] overlap, say that the graph __alone__ cannot separate the conditions, and report the test that decides.', lv: 'ie' },
         { t: 'Keep weaknesses and limitations for the [[evaluation]].', lv: 'ie' }
       ] },
 
@@ -149,7 +149,7 @@
       { type: 'frames', lv: 'i', title: 'Sentences for an IA conclusion', items: [
         'Within ___, the ___ was highest at ___, so ___.',
         'The mean ___ at ___ was ___ (SD ___), compared with ___ at ___.',
-        'The error bars at ___ and ___ overlap, so these conditions cannot be separated.',
+        'The error bars at ___ and ___ overlap, so the graph alone cannot separate these conditions; a ___ gave p = ___.',
         '___ report ___ for ___ (___); this is ___ the value found here.',
         'These results support / do not support the hypothesis that ___.'
       ] },
@@ -260,10 +260,10 @@
         ] },
       { type: 'choose', lv: 'ie', q: 'Every SD bar on this graph overlaps. Which conclusion is justified?', show: { plot: plotSoils },
         opts: [
-          { t: 'The four soils cannot be separated: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'Where the bars overlap, say that the conditions cannot be separated.' },
+          { t: 'The graph alone cannot separate the four soils: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'Where the bars overlap, the graph alone cannot decide. Only a statistical test can.' },
           { t: 'Soil D is the best soil for bean seedlings.', why: 'Its mean is highest, but the overlap means the difference may not be real.' },
           { t: 'Soil type has no effect on the growth of any plant.', why: 'Too wide: one species, four soils, 21 days.' },
-          { t: 'Soil A reduced growth by 3 %.', why: 'The 3 % is within the spread of the data, so it cannot be claimed as an effect.' }
+          { t: 'Soil A reduced growth by 3 %.', why: 'The 3 % is within the spread of the data, so it cannot be claimed as an effect without a statistical test.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'What does the top band (5–6) of the IA Conclusion criterion need?',
         opts: [
