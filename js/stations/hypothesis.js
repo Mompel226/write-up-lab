@@ -23,7 +23,7 @@
   WUL.station({
     id: 'hypothesis', stage: 'plan', order: 4, title: 'Hypothesis', levels: 'gie',
     job: 'Predict what will happen to the dependent variable, and the shape of the graph, with a biological reason.',
-    where: { g: 'After the aim, before the method.', i: 'After the background. It is optional in the IA.', e: 'In the introduction, after the literature review.' },
+    where: { g: 'After the aim, before the method.', i: 'Inside your introduction, after the background. It is optional in the IA.', e: 'Inside the introduction, after the literature review.' },
 
     ladder: {
       g: ['“If … then … because …”, with a biological reason', 'A [[prediction]] of the __shape__ of the graph, not only its direction'],

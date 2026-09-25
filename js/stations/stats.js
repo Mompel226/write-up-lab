@@ -135,7 +135,7 @@
   WUL.station({
     id: 'stats', stage: 'show', order: 3, title: 'Statistical tests', levels: 'ie',
     job: 'Use a statistical test to judge whether a difference or a relationship is likely to be real, then report it in one line.',
-    where: { i: 'In the data analysis, after the processed data and the graphs.', e: 'In the analysis, where statistics are appropriate.' },
+    where: { i: 'Not a section of its own: inside your Data analysis, after the processed data and the graphs.', e: 'Not a section of its own: inside your analysis, where statistics are appropriate.' },
 
     ladder: {
       g: [],
@@ -144,8 +144,6 @@
     },
 
     build: [
-      { type: 'callout', title: 'Where it goes', label: 'Where it goes', md: 'Not a section of its own: the test and its result go inside your __data analysis__, after the graphs.' },
-
       { type: 'grid2', title: 'Choose the right test', items: [
         { label: 'Match the test to the data', v: { html: WHICH }, note: 'Tool 3 names the t-test and the chi-squared test, and asks you to interpret r and to apply R².' }
       ] },

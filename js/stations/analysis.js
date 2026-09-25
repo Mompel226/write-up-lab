@@ -55,7 +55,7 @@
   WUL.station({
     id: 'analysis', stage: 'sense', order: 1, title: 'Data analysis', levels: 'gie',
     job: { g: 'Describe the pattern in your results, with numbers. Do not explain it yet.', i: 'Describe the pattern in the processed data, and say what the uncertainties allow you to claim.', e: 'Describe each finding, and show how it helps to answer the research question.' },
-    where: { g: 'After the graph, before the conclusion.', i: 'After the processed data and the graph, before the conclusion.', e: 'In the analysis section, after the results.' },
+    where: { g: 'After the graph, before the conclusion.', i: 'The last part of your Data analysis: after the tables, graphs and any test, before the conclusion.', e: 'In the analysis section, after the results.' },
 
     ladder: {
       g: ['The overall [[trend]], with both variables named', 'Key values, with both coordinates and units', 'One calculated comparison, and any [[anomalous results|anomalous result]]'],

@@ -55,9 +55,9 @@
     id: 'observations', stage: 'record', order: 3, title: 'Observations', levels: 'gie',
     job: 'Record what you see as well as what you measure: colour, cloudiness, bubbles, texture, damage. It can explain the numbers.',
     where: {
-      g: 'In an Observations column of the results table, or a short note under it.',
-      i: 'Beside the raw data: an Observations column, or a short note under the table.',
-      e: 'In the body, next to the data each observation helps to explain.'
+      g: 'Not a section of its own: an Observations column in your results table, or a short note under it.',
+      i: 'Not a section of its own: inside your Data analysis, beside the raw data: an Observations column, or a short note under the table.',
+      e: 'Not a section of its own: in the body, next to the data each observation helps to explain.'
     },
 
     ladder: {

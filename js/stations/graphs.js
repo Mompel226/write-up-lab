@@ -232,7 +232,7 @@
       i: 'Turn the processed data into a picture that shows the pattern, and how far it can be trusted.',
       e: 'Show the analysis in numbered figures, with the one that answers the research question first.'
     },
-    where: { g: 'In the results, straight after the table.', i: 'In the data analysis, after the processed-data table.', e: 'In the body of the essay, next to the analysis it supports.' },
+    where: { g: 'In the results, straight after the table.', i: 'Inside your Data analysis, after the processed-data table.', e: 'In the body of the essay, next to the analysis it supports.' },
 
     ladder: {
       g: ['Choose the type: [[bar chart]], [[histogram]], [[line graph]] or [[scatter graph]]',

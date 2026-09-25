@@ -136,7 +136,7 @@
   WUL.station({
     id: 'measurement', stage: 'judge', order: 2, title: 'Accuracy, precision, reliability, validity', levels: 'gie',
     job: 'Use the measurement words exactly, so that every error and weakness you name is the right kind.',
-    where: { g: 'In the evaluation, when you judge your results and your method.', i: 'In the evaluation, and wherever you discuss uncertainties.', e: 'In the discussion and the evaluation.' },
+    where: { g: 'Not a section of its own: words you use in your evaluation, when you judge your results and your method.', i: 'Not a section of its own: words you use in your evaluation, and wherever you discuss uncertainties.', e: 'Not a section of its own: words you use in the discussion and the evaluation.' },
 
     ladder: {
       g: ['Tell [[accuracy]] from [[precision]]', 'Name each error as a [[random error]] or a [[systematic error]]', 'Say why you repeated: to identify anomalous results and to calculate a mean'],

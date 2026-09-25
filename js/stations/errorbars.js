@@ -67,7 +67,7 @@
   WUL.station({
     id: 'errorbars', stage: 'show', order: 2, title: 'Error bars', levels: 'ie',
     job: 'Show how far each mean can be trusted: draw a bar for the spread of the repeats, and name the bar in the caption.',
-    where: 'On every graph of means, with the kind of bar and n in the figure caption.',
+    where: 'Not a section of its own: on every graph of means, with the kind of bar and n in the figure caption.',
 
     ladder: {
       g: [],

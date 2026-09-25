@@ -118,7 +118,7 @@
       g: 'List every piece of equipment and every material, with its size or quantity. Then someone else could repeat the same experiment.',
       i: 'List every item with its size or quantity. State the uncertainty of every measuring instrument, and where it comes from.'
     },
-    where: { g: 'After the variables, before the method. A list is fine.', i: 'In the methodology, before the method. A list or a table.', e: 'In the methodology section, before the method.' },
+    where: { g: 'After the variables, before the method. A list is fine.', i: 'Not a section of its own: inside your methodology, before the method. A list or a table.', e: 'Inside your methodology section, before the method.' },
 
     ladder: {
       g: ['Separate [[apparatus]] (equipment) from [[materials]] (what is consumed)', 'A size for every piece of apparatus; a volume and a concentration for every solution', 'Choose the [[measuring instrument]] whose divisions suit the volume, mass or time'],
