@@ -209,6 +209,14 @@ tails and p": with NO real difference, chance alone puts t in the red 5 % of the
 Wording of p, always: "if there were no real difference, a difference this large would happen by chance less
 than 5 % of the time" — NEVER "a less than 5 % chance that the difference is due to chance".
 
+## The p-value has ONE home (Daniel, 25 Sep 2026: "use fewer words; link, don't repeat")
+`stats.js` block `id: 'pvalue'`, "What the p-value means", placed BEFORE the worked t-test: one question ("if there
+were no real difference, how often would chance alone give a result like yours?"), p read as "times in 100", below /
+above 0.05, the rhyme "If p is low, the null must go", a coin-guessing analogy (3 right: 1 in 8; 10 right: about 1 in
+1,000), and "never the chance that your hypothesis is right". Everywhere else: one short line and a link to
+`#/part/stats/build/pvalue` (app.js opens that step: `#/part/<id>/build/<block id>`). Never write "unlikely to be
+due to chance": write "statistically significant" or "chance alone would rarely give a difference this large".
+
 ## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
 - No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
 - Overlap: "the graph **alone** cannot show a difference" + the test's p-value. NEVER "these data do not show a

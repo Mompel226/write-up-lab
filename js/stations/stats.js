@@ -52,7 +52,7 @@
       { type: 'widget', title: 'Find your test', name: 'test-chooser' },
 
       { type: 'anatomy', title: 'How to report a test',
-        intro: 'A test does not prove anything. It says how often chance alone would give a difference this large. Report it in four parts.',
+        intro: 'A test does not prove anything. Its p-value says how often chance alone would give a difference this large ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). Report it in four parts.',
         model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.} {2:A [[two-tailed|two-tailed test]] t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
         parts: [
           { n: 1, name: 'The null hypothesis', note: 'What “no effect” would look like. State it before the test.' },
@@ -60,6 +60,17 @@
           { n: 3, name: 'The numbers', note: 'The value, the degrees of freedom (df) and p.' },
           { n: 4, name: 'The meaning', note: 'One sentence in words, with the means and their units.' }
         ] },
+
+      /* THE p-value explanation of the site: everything else is one line and a link here (#/part/stats/build/pvalue) */
+      { type: 'rules', id: 'pvalue', title: 'What the p-value means', items: [
+        { t: 'The **p-value** answers one question: __if there were no real difference, how often would chance alone give a result like yours?__', icon: '?' },
+        { t: 'Read it as “times in 100”. p = 0.05 is 5 times in 100 (1 in 20). p = 0.28 is 28 times in 100. p = 0.0004 is 4 times in 10,000.', icon: '%' },
+        { t: '__Below 0.05:__ chance alone would rarely do this. The difference is [[statistically significant]].', icon: '✓' },
+        { t: '__0.05 or above:__ chance could easily do this. The difference is not significant. That does not show that there is no difference.', icon: '✗' },
+        { t: '__To remember:__ “If p is low, the null must go.” Below 0.05, reject the [[null hypothesis]]: significant. “If p is high, the null will fly”: it stays.', icon: '★' },
+        { t: '__Like this:__ a friend says she can guess coin tosses. She gets 3 right in a row: chance does that 1 time in 8, so you are not convinced. She gets 10 right: chance does that about 1 time in 1,000. Now you believe her.', icon: '→' },
+        { t: 'p is __never__ the chance that your hypothesis is right.', icon: '!' }
+      ] },
 
       { type: 'steps', title: 'A worked t-test',
         intro: 'The IB amylase data, five trials at each temperature. Press Next step.',
@@ -81,31 +92,23 @@
           { title: 'State the null hypothesis', show: ['h0'], text: 'Before testing, say what “no effect” would look like: there is no difference between the mean time at 40 °C and at 50 °C.' },
           { title: 'Find the two means', show: ['mean-1', 'mean-2'], text: '74 s at 40 °C and 54 s at 50 °C: a difference of 20 s.' },
           { title: 'Find the two standard deviations', show: ['sd-1', 'sd-2'], text: 'Both are 5.5 s. Their spreads are similar, which this t-test needs. Keep the unrounded value: SD² = 30 exactly.' },
-          { title: 'Calculate t', show: ['t'], text: 't = difference in means ÷ √(SD₁²/n₁ + SD₂²/n₂). The larger t is, the less likely it is that chance alone gave the difference.' },
+          { title: 'Calculate t', show: ['t'], text: 't = difference in means ÷ √(SD₁²/n₁ + SD₂²/n₂). The larger t is, the bigger the difference compared with the spread, and the more rarely chance alone would give it.' },
           { title: 'Find the degrees of freedom', show: ['df'], text: 'For two groups, df = n₁ + n₂ − 2 = 5 + 5 − 2 = 8.' },
           { title: 'Two tails: either direction', show: [], focus: ['h0'], text: 'The null hypothesis says “no difference”. A real difference could go either way: 50 °C could be faster, or slower, than 40 °C. So a large t at __either__ end, or tail, of the chance results counts. That makes the test **two-tailed**. It is the normal t-test: spreadsheets and R do it unless you ask for something else.' },
-          { title: 'Find p, and decide', show: ['p', 'dec'], text: 'In a spreadsheet, =T.TEST(B2:B6, C2:C6, 2, 2) gives p directly. The first 2 means two tails. The second 2 means two separate groups with similar spreads. With a table of critical values: for df = 8, t must be above 2.31 for p < 0.05. Here t is 5.77.' }
+          { title: 'Find p, and decide', show: ['p', 'dec'], text: 'In a spreadsheet, =T.TEST(B2:B6, C2:C6, 2, 2) gives p directly ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). The first 2 means two tails. The second 2 means two separate groups with similar spreads. With a table of critical values: for df = 8, t must be above 2.31 for p < 0.05. Here t is 5.77.' }
         ] },
 
       { type: 'grid2', title: 'Two tails or one?', items: [
-        { label: 'Two-tailed: the normal t-test', tone: 'g', v: { html: WUL.tailsSvg('two') }, note: 'Asks: is there a difference, __in either direction__? The 5 % of rarest chance results is split, 2.5 % in each tail. For df = 8, t must pass 2.31. Use this one.' },
-        { label: 'One-tailed', v: { html: WUL.tailsSvg('one') }, note: 'Asks: is 50 °C faster, __only__? All 5 % sits in one tail, so the bar is lower: 1.86. Allowed only if you predicted the direction before collecting any data, and a difference the other way would not count. Rarely used in an IA.' }
+        { label: 'Two-tailed: the normal t-test', tone: 'g', v: { html: WUL.tailsSvg('two') }, note: 'A difference __either way__ counts. The rarest 5 % of chance results is split: 2.5 % at each end. Use this one.' },
+        { label: 'One-tailed', v: { html: WUL.tailsSvg('one') }, note: 'Only one direction counts: all 5 % at one end. Only if you predicted the direction before collecting any data. Rare in an IA.' }
       ] },
 
       { type: 'grid2', title: 'Significant or not? Where t lands', items: [
-        { label: 'Not significant', tone: 'red', v: { html: WUL.tailsSvg('two', 1.15) }, note: 'Times at 50 °C of 66, 76, 66, 76 and 66 s: a mean of 70 s against 74 s. t = 1.15 lands in the white middle, where chance alone often puts t. p = 0.28: more than 0.05, so the difference is __not significant__.' },
-        { label: 'Significant', tone: 'g', v: { html: WUL.tailsSvg('two', 5.77) }, note: 'The real data: a mean of 54 s against 74 s. t = 5.77 lands far out in a red tail. p = 0.0004: less than 0.05, so the difference is __significant__.' }
+        { label: 'Not significant', tone: 'red', v: { html: WUL.tailsSvg('two', 1.15) }, note: 'Means of 70 s and 74 s: t = 1.15, in the white. p = 0.28: __not significant__.' },
+        { label: 'Significant', tone: 'g', v: { html: WUL.tailsSvg('two', 5.77) }, note: 'Means of 54 s and 74 s: t = 5.77, beyond the red. p = 0.0004: __significant__.' }
       ] },
 
-      { type: 'callout', title: 'What the red tails are', label: 'The red tails and p', md: 'If there were __no real difference__, chance alone would still give a t in the red tails 5 % of the time: 2.5 % at each end. So a t in the red means p < 0.05, and the difference is significant. A t in the white means p > 0.05: chance could easily explain it.' },
-
-      { type: 'rules', title: 'What p < 0.05 means', items: [
-        '__p < 0.05__ means: if the [[null hypothesis]] were true, a difference at least this large would happen by chance less than 5 % of the time.',
-        'So the null hypothesis is rejected, and the difference is [[statistically significant]].',
-        'It does __not__ mean a 95 % chance that your hypothesis is right.',
-        'p > 0.05 does __not__ show that there is no difference. It shows only that these data cannot show one.',
-        'Plan __one__ comparison before you collect the data. If you test many pairs, about 1 test in 20 looks “significant” by chance alone.'
-      ] },
+      { type: 'callout', title: 'What the red tails are', label: 'The red tails and p', md: 'With no real difference, chance lands in the red only 5 times in 100. So t in the red: p < 0.05, significant. [What p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue).' },
 
       { type: 'table', title: 'A worked chi-squared test',
         spec: {
@@ -242,10 +245,10 @@
       { term: 't-test', forms: ['t-tests', 't test', "Student's t-test"], def: 'A statistical test of whether the means of two groups differ by more than chance would explain.', eg: 'Mean time at 40 °C (74 s) against 50 °C (54 s): t = 5.77.' },
       { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected.', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected.' },
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },
-      { term: 'p-value', forms: ['p value', 'p-values'], def: 'The probability of a result at least this extreme if the null hypothesis were true.', eg: 'p = 0.0004: chance alone would very rarely give a difference of 20 s.' },
+      { term: 'p-value', forms: ['p value', 'p-values'], def: 'How often chance alone would give a result like yours, if there were no real difference. Below 0.05 (1 time in 20): significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
       { term: 'correlation coefficient', forms: ['correlation coefficients', 'r', "Pearson's r"], def: 'A number, r, from −1 to +1, showing the strength and direction of a straight-line relationship.', eg: 'r = −0.99 for potato mass change and sucrose concentration.' },
       { term: 'coefficient of determination', forms: ['R²', 'R2', 'R squared'], def: 'R², from 0 to 1: how well a trend line fits, as the fraction of the variation it explains.', eg: 'R² = 0.99: the line explains 99 % of the variation.' },
-      { term: 'statistically significant', forms: ['significant', 'significantly', 'statistical significance', 'significance'], def: 'Too large a difference to be explained by chance alone at the chosen level, usually p < 0.05.', eg: 'The mean time at 50 °C was significantly shorter (p < 0.001).' },
+      { term: 'statistically significant', forms: ['significant', 'significantly', 'statistical significance', 'significance'], def: 'A result that chance alone would rarely give if there were no real difference: p below 0.05.', eg: 'The mean time at 50 °C was significantly shorter (p < 0.001).' },
       { term: 'correlation', forms: ['correlations', 'correlated', 'positive correlation', 'negative correlation'], def: 'A relationship in which one variable changes as another changes.', eg: 'Ponds with more water lilies had more frogs.' },
       { term: 'causation', forms: ['causal relationship', 'cause and effect'], def: 'When a change in one variable directly produces a change in another.', eg: 'A controlled experiment shows that temperature changes the rate of amylase activity.' }
     ],

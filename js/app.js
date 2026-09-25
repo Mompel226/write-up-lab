@@ -2,6 +2,7 @@
    app.js — the pages. Hash routes:
      #/                     home: the report to explore, then every part, then the tools
      #/part/<id>[/<tab>]    one part of a report, in tabs: learn · redpen · traps · test · words · further
+     #/part/<id>/build/<b>  …with the learn step whose block has id <b> open (the p-value links use it)
      #/start                "Start from zero": the parts in order
      #/tools · #/tool/<n>   the tools
      #/words                every keyword
@@ -68,7 +69,7 @@
     var s = (location.hash || '').replace(/^#\/?/, '');
     var p = s.split('/');
     if (!s) return { page: 'home' };
-    if (p[0] === 'part' && p[1]) return { page: 'part', id: p[1], tab: p[2] };
+    if (p[0] === 'part' && p[1]) return { page: 'part', id: p[1], tab: p[2], step: p[3] };
     if (p[0] === 'tool' && p[1]) return { page: 'tool', id: p[1] };
     return { page: p[0] };
   }
@@ -78,7 +79,7 @@
     WUL.closePop();
     document.querySelectorAll('.topnav a').forEach(function (a) { a.classList.toggle('is-on', a.getAttribute('data-page') === r.page); });
     /* switching tabs inside the same part does not redraw the page */
-    if (r.page === 'part' && lastPart === r.id && main.querySelector('.ptabs')) { showTab(r.tab || 'build'); return; }
+    if (r.page === 'part' && lastPart === r.id && main.querySelector('.ptabs')) { showTab(r.tab || 'build'); if (r.step && WUL.openStep) WUL.openStep(r.step); return; }
     lastPart = r.page === 'part' ? r.id : null;
     main.innerHTML = '';
     var f = PAGES[r.page] || PAGES.home;
@@ -281,6 +282,11 @@
         }
       }
       open(0, true);
+      WUL.openStep = function (sid) {
+        for (var j = 0; j < steps.length; j++) if (steps[j].b.id === sid) { open(j, true); steps[j].li.scrollIntoView({ block: 'start' }); return true; }
+        return false;
+      };
+      if (r.step) setTimeout(function () { WUL.openStep(r.step); }, 0);
       /* ?all=1 draws every step at once (tools/smoke.mjs uses it to test every block) */
       if (/[?&]all=1/.test(location.search)) steps.forEach(function (st, k) { fill(st, k); });
     }
