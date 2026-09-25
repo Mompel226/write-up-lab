@@ -69,7 +69,12 @@ WUL.station({
 - `{type:'anatomy', title, intro, model, parts:[{n,name,note}], after}` — a model answer with colour-coded parts
   `{1:…}`…`{6:…}` in the markup; the legend lights each part. **The best way to teach any written section.**
   `model` may also be `{table:spec}` whose cells use `{n:…}`.
-- `{type:'steps', title, intro, stage:{table:spec}|{plot:spec}|{html}, steps:[{title, text, show:[els], focus:[els], lv}], always:[els]}`
+- `{type:'steps', title, intro, stage:{table:spec}|{plot:spec}|{html}, steps:[{title, text, show:[els], focus:[els], hide:[els], lv}], always:[els]}`
+  `show: ['e']` shows every `e-1`, `e-2`…; `hide` takes a picture away again, so `.panes > .pane` pictures can take
+  turns in one place (on a phone only the current one takes room). A stage that calls `WUL.plot` at load must be
+  lazy with a stub naming its data-els (`lazy()` in graphs.js and stats.js): tools/check.mjs does not load plot.js.
+  Inside a stage, strip WUL.plot's own reveal ids (`still()` in stats.js) or the whole plot stays hidden.
+- WUL.plot bars may be paired: `{at, off, w, dash, solid, el}`; `texts:[{x, y, t, tone, el, dy}]` writes on a plot.
   — a walkthrough that BUILDS a table or graph one step at a time. Every element with `data-el` starts hidden; each
   step reveals its `show` list (cumulative) and rings its `focus` list in yellow. It never moves on by itself.
   Table cells get an element id with `{t:'…', el:'iv-head'}`; the caption with `capEl:'title'`.
@@ -225,7 +230,17 @@ due to chance": write "statistically significant" or "chance alone would rarely 
    grand total = 42.2 / 21.8 / 23.8 / 12.2; χ² = 42.4 with E rounded, as the book and Daniel's C4.1 deck do (42.1
    unrounded, as R's `chisq.test(…, correct = FALSE)` in Learn R); df = 1; 3.84; positive association; not a cause
    (shade and damp under heather, trampled paths). A stepper, Table 3. Find your test's association answer uses the
-   same numbers.
+   same numbers. Beside the table, Figure 2: O (solid) and E (dashed) bars for the four groups with O − E = ±14.8
+   (Daniel's C4.1 slide 58); each bar shares its data-el with its table cell, so a step lights both.
+
+## Check your data before a t-test (Daniel, 25 Sep 2026: "they really need to test for normality and homoscedasticity")
+Stepper `id: 'checks'`, "Beyond the IB guide", right after Find your test (whose t-test answer links to it). Drawn as
+his C4.1 slides 52–55, imagined heather heights: one bell (66 quadrats, 5 cm classes) → each group on its own (with
+moss mean 41.5, without 25.8, SD about 4; mixed = two peaks, which only shows the groups differ) → similar spread
+(SD 4 v 4, and 2.5 v 8; rule of thumb: larger SD under twice the smaller; the word homoscedasticity) → the two tests
+(Shapiro–Wilk; F-test, =F.TEST, var.test; H₀ = the condition holds, so p > 0.05 is no evidence of a problem, not
+proof; with 5 values nothing can show much: say normality was assumed) → if one fails (Mann–Whitney U; Welch's,
+=T.TEST(…, 2, 3)). χ² needs neither, only every E ≥ 5. Keywords: normal distribution, homoscedasticity.
 
 ## Many tests need a correction (Daniel, 25 Sep 2026)
 Wherever the lab warns against t-tests between every pair (red pen, Mistakes to avoid, Find your test), it also
@@ -308,7 +323,8 @@ keeps its 17ch, for its shape.
 - graphs: line graph, bar chart, histogram, scatter graph, line of best fit, extrapolate, interpolate, key,
   continuous variable, categorical variable, axis, scale
 - errorbars: error bar, standard deviation, standard error, range (of data), interquartile range, spread
-- stats: t-test, chi-squared test, null hypothesis, p-value, correction for multiple comparisons, correlation coefficient, coefficient of determination,
+- stats: t-test, chi-squared test, null hypothesis, p-value, correction for multiple comparisons, normal distribution,
+  homoscedasticity, correlation coefficient, coefficient of determination,
   statistically significant, correlation, causation
 - analysis: trend, anomalous result, gradient, plateau
 - conclusion: conclusion, published value, justify
