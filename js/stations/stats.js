@@ -150,7 +150,7 @@
           a: { label: '“proved”?', why: 'A test never proves. Write “showed a significant difference”, or “the null hypothesis was rejected”.' },
           b: { label: 'df? p?', why: 'Report the value, the degrees of freedom and p: t = 5.77, df = 8, p < 0.001.' },
           c: { label: 'wrong meaning', why: 'p < 0.05 means: if there were no real difference, a difference this large would happen by chance less than 5 % of the time.' },
-          d: { label: 'too many tests', why: 'With many tests at p = 0.05, about 1 in 20 looks significant by chance alone. Plan one comparison before you collect the data.' }
+          d: { label: 'too many tests', why: 'With many tests at p = 0.05, about 1 in 20 looks significant by chance alone. Plan one comparison before you collect the data. To test several pairs, apply a [[correction for multiple comparisons]]: with 10 tests, each p must be below 0.005 (0.05 ÷ 10).' }
         },
         fixed: '==The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.== A [[two-tailed|two-tailed test]] t-test ==showed== that the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s) ==(t = 5.77, df = 8, p < 0.001)==. ==If there were no real difference, a difference this large would arise by chance less than 0.1 % of the time.== ==This one comparison was planned before the data were collected.== It tests whether the rate still rises between 40 °C and 50 °C, below the published optimum of 55 °C.',
         fixedNote: 'The null hypothesis, the full numbers, a correct meaning of p, and one planned comparison.'
@@ -163,7 +163,7 @@
       { bad: 't = 5.77.', good: 't = 5.77, df = 8, p < 0.001, then one sentence of meaning.' },
       { bad: 'A strong correlation, so one variable causes the other.', good: 'A strong correlation (r = 0.82). A third variable may explain both.' },
       { bad: 'Chi-squared on percentages: 80 % and 20 %.', good: 'Chi-squared on the counts themselves: 32 and 8 woodlice.' },
-      { bad: 't-tests between every pair, reporting the most different.', good: 'One comparison, planned before the data were collected.' }
+      { bad: 't-tests between every pair, reporting the most different.', good: 'One comparison, planned before the data were collected. Or, for several pairs, a [[correction for multiple comparisons]].' }
     ],
 
     test: [
@@ -243,6 +243,7 @@
       { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected.', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected.' },
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },
       { term: 'p-value', forms: ['p value', 'p-values'], def: 'Pretend there is no real difference: p is how often chance alone would then give a difference as big as yours. Below 0.05: significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
+      { term: 'correction for multiple comparisons', forms: ['corrections for multiple comparisons', 'multiple comparisons', 'Bonferroni correction'], def: 'A stricter line for p when you run several tests on the same data, so a false “significant” result stays rare. The simplest is the Bonferroni correction: divide 0.05 by the number of tests. With 10 tests, each p must be below 0.005.' },
       { term: 'correlation coefficient', forms: ['correlation coefficients', 'r', "Pearson's r"], def: 'A number, r, from −1 to +1, showing the strength and direction of a straight-line relationship.', eg: 'r = −0.99 for potato mass change and sucrose concentration.' },
       { term: 'coefficient of determination', forms: ['R²', 'R2', 'R squared'], def: 'R², from 0 to 1: how well a trend line fits, as the fraction of the variation it explains.', eg: 'R² = 0.99: the line explains 99 % of the variation.' },
       { term: 'statistically significant', forms: ['significant', 'significantly', 'statistical significance', 'significance'], def: 'A result that chance alone would rarely give if there were no real difference: p below 0.05.', eg: 'The mean time at 50 °C was significantly shorter (p < 0.001).' },
@@ -255,7 +256,7 @@
         md: 'The t-test was published in 1908 by William Gosset, a scientist at the Guinness brewery in Dublin. The brewery asked its staff to use pen names, so he signed it “Student”: that is why it is also called __Student’s t-test__. The letter t itself has no agreed meaning. What matters is what t measures: how many times bigger your difference is than the difference chance typically makes.',
         cite: 'Student. “The Probable Error of a Mean.” *Biometrika*, vol. 6, no. 1, 1908, pp. 1–25.' },
       { title: 'Comparing three or more groups: ANOVA',
-        md: 'To compare three or more means in one test, biologists use analysis of variance (ANOVA). It tests all the groups together, so the chance of a false “significant” result stays at 5 %. If ANOVA finds a difference, a second test shows which groups differ. You do not need any of this for the IB, but you will see it in university research papers.',
+        md: 'To compare three or more means in one test, biologists use analysis of variance (ANOVA). It tests all the groups together, so the chance of a false “significant” result stays at 5 %. If ANOVA finds a difference, a second test shows which groups differ, and it corrects for multiple comparisons itself. You do not need any of this for the IB, but you will see it in university research papers.',
         cite: 'Whitlock, Michael C., and Dolph Schluter. *The Analysis of Biological Data*. 3rd ed., Macmillan Learning, 2020.' }
     ],
 
