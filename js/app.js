@@ -78,6 +78,12 @@
     var r = parse();
     WUL.closePop();
     document.querySelectorAll('.topnav a').forEach(function (a) { a.classList.toggle('is-on', a.getAttribute('data-page') === r.page); });
+    /* the top-left link goes ONE level up: home → the Biology Hub, a tool → Tools, any other page → this site's home */
+    var up = document.querySelector('.up');
+    if (up) {
+      var u = r.page === 'home' || !PAGES[r.page] ? ['https://nlcsbiology.com/biology-hub/', '← Biology Hub'] : r.page === 'tool' ? ['#/tools', '← Tools'] : ['#/', '← Write-Up Lab'];
+      up.setAttribute('href', u[0]); up.textContent = u[1];
+    }
     /* switching tabs inside the same part does not redraw the page */
     if (r.page === 'part' && lastPart === r.id && main.querySelector('.ptabs')) { showTab(r.tab || 'build'); if (r.step && WUL.openStep) WUL.openStep(r.step); return; }
     lastPart = r.page === 'part' ? r.id : null;
