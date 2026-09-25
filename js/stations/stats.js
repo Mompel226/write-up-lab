@@ -16,9 +16,9 @@
       rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td style="' + td + (i === 0 ? ';font-weight:600' : '') + '">' + md(c) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
   }
   var WHICH = proseTable(['Test', 'Use it to ask', 'Example'], [
-    ['[[t-test]]', 'Do the means of __two__ groups of measurements differ by more than chance would explain?', 'Mean time at 40 °C against 50 °C'],
-    ['[[Chi-squared test|chi-squared test]]', 'Do the __counts__ in categories differ from the counts expected?', 'Woodlice on the damp and dry sides; a 9 : 3 : 3 : 1 ratio'],
-    ['[[Correlation coefficient (r)|correlation coefficient]]', 'How strongly are __two__ measured variables related, and in which direction?', 'Light intensity and moss cover in 20 quadrats'],
+    ['[[t-test]]', 'Do the means of __two__ groups of [[measurements|measured variable]] differ by more than chance would explain?', 'Mean time at 40 °C against 50 °C'],
+    ['[[Chi-squared test|chi-squared test]]', 'Do the __counts__ in [[categories|categorical variable]] differ from the counts expected?', 'Woodlice on the damp and dry sides; a 9 : 3 : 3 : 1 ratio'],
+    ['[[Correlation coefficient (r)|correlation coefficient]]', 'How strongly are __two__ [[measured variables|measured variable]] related, and in which direction?', 'Light intensity and moss cover in 20 quadrats'],
     ['[[Coefficient of determination (R²)|coefficient of determination]]', 'How well does a fitted trend line match the points?', 'Change in mass of potato against sucrose concentration']
   ]);
   function minus(v) { return String(v).replace('-', '−'); }
@@ -43,6 +43,8 @@
     },
 
     build: [
+      { type: 'callout', title: 'Where it goes', label: 'Where it goes', md: 'Not a section of its own: the test and its result go inside your __data analysis__, after the graphs.' },
+
       { type: 'grid2', title: 'Choose the right test', items: [
         { label: 'Match the test to the data', v: { html: WHICH }, note: 'Tool 3 names the t-test and the chi-squared test, and asks you to interpret r and to apply R².' }
       ] },
@@ -221,6 +223,8 @@
     ],
 
     words: [
+      { term: 'measured variable', forms: ['measured variables', 'measurement', 'measurements'], def: 'A variable recorded as a number: measured on a scale (continuous) or counted (discrete).', eg: 'Time in s; the number of stomata in a field of view.', fig: 'data', hi: 'quant' },
+      { term: 'discrete variable', forms: ['discrete variables', 'discrete', 'discrete data'], def: 'A numerical variable that can take only separate values, usually whole-number counts.', eg: 'The number of seeds in a pod: 4 or 5, never 4.5.', fig: 'data', hi: 'discrete' },
       { term: 't-test', forms: ['t-tests', 't test', "Student's t-test"], def: 'A statistical test of whether the means of two groups differ by more than chance would explain.', eg: 'Mean time at 40 °C (74 s) against 50 °C (54 s): t = 5.77.' },
       { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected.', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected.' },
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },

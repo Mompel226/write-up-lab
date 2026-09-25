@@ -184,6 +184,19 @@ Biology rules, taught on the Graphs page (rules block, the `axis-start` widget, 
   IB model enzyme graphs on the site are `line: 'smooth'`; IGCSE ones are `'ruled'`. The conclusion walkthrough's
   green/red segments stay ruled on purpose (they mark the rise and the fall).
 
+## Statistics live INSIDE the data analysis (Daniel, 25 Sep 2026)
+Statistics keeps its own part (he likes it separate), but every place says the test goes inside the data analysis:
+the Statistics tile ("no section of its own"), the Data analysis tiles (IA and EE), the IA analysis model (part 6,
+"The statistical test"), the EE line of argument (a statistics step), a note "No separate statistics section", and
+the Statistics page's first block "Where it goes".
+
+## Types of data pop-up (Daniel, 25 Sep 2026, after his Year 7 poster "Types of data")
+A keyword can carry `fig: 'data', hi: 'continuous'|'discrete'|'quant'|'qual'|'nominal'|'ordinal'`: its pop-up then
+opens wide with `WUL.figs.data` (quantitative = continuous / discrete; qualitative = nominal / ordinal; which test
+each leads to; "counting does not always mean χ²"; the IB's D3.2.14 use of "discrete" for blood group). Used by
+`measured variable`, `discrete variable` (stats) and `continuous variable`, `categorical variable` (graphs), and
+linked from the "Choose the right test" table. Pop-ups close on a WIDTH change only (a phone's toolbar changes height).
+
 ## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
 - No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
 - Overlap: "the graph **alone** cannot show a difference" + the test's p-value. NEVER "these data do not show a

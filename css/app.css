@@ -117,6 +117,28 @@ mark.hl{background:var(--hl);color:inherit;padding:0 2px;border-radius:2px}
 .kwpop__d{color:var(--ink)}
 .kwpop__e{margin-top:8px;color:var(--ink-2);font-size:.88rem;border-top:1px dashed var(--rule);padding-top:7px}
 .kwpop__e span{font:600 .68rem/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
+/* a keyword that opens with a figure: the types of data (after Daniel's Year 7 poster) */
+.kwpop--wide{padding:14px 16px 16px}
+.kwpop__x{position:absolute;top:6px;right:8px;width:34px;height:34px;border:0;background:transparent;font:400 1.5rem/1 var(--sans);color:var(--ink-3);cursor:pointer;border-radius:50%}
+.kwpop__x:hover{background:var(--rule-2);color:var(--ink)}
+.tod{margin-top:12px;display:grid;gap:10px}
+.tod__root{justify-self:center;padding:6px 16px;border:2px solid var(--ink);border-radius:4px;background:#FFD166;font:650 1.05rem/1.2 var(--serif);color:#1A2126}
+.tod__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tod__col{--c:var(--green);border:1.5px solid color-mix(in srgb,var(--c) 45%,var(--edge));border-radius:6px;background:color-mix(in srgb,var(--c) 9%,var(--sheet));padding:8px}
+.tod__col--c{--c:var(--red)}
+.tod__col.is-hi{border-width:2.5px;border-color:var(--c)}
+.tod__h{font:650 .98rem/1.2 var(--serif);text-align:center;margin-bottom:8px;color:var(--ink)}
+.tod__h small{display:block;font:500 .74rem/1.3 var(--sans);color:var(--ink-2);margin-top:2px}
+.tod__kids{display:grid;gap:6px}
+.tod__k{display:grid;gap:1px;padding:7px 9px;border-radius:5px;background:var(--sheet);border:1px solid var(--edge);font-size:.84rem;line-height:1.35}
+.tod__k b{font:650 .9rem/1.2 var(--sans);color:var(--c)}
+.tod__k span{color:var(--ink)}
+.tod__k i{font-style:normal;color:var(--ink-2);font-size:.8rem}
+.tod__k.is-hi{border:2px solid var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+.tod__tests{list-style:none;margin:0;padding:8px 10px;border-radius:6px;background:var(--sheet-2);border:1px dashed var(--rule);display:grid;gap:3px;font-size:.86rem}
+.tod__trap{margin:0;padding:8px 10px;border-left:3px solid var(--amber);background:var(--amber-wash);font-size:.84rem;line-height:1.45}
+.tod__ib{margin:0;font-size:.78rem;color:var(--ink-3);line-height:1.4}
+@media (max-width:480px){.tod__cols{grid-template-columns:1fr}}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;border-radius:var(--r);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);font:600 .92rem/1.2 var(--sans);text-decoration:none;cursor:pointer;transition:background-color .15s,border-color .15s,transform .05s}

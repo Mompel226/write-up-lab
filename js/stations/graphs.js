@@ -584,8 +584,8 @@
       { term: 'extrapolate', forms: ['extrapolated', 'extrapolation', 'extrapolating'], def: 'To extend a line beyond the first or last point, into values that were not measured.', eg: 'Continuing the line to 0 °C, which was never tested.' },
       { term: 'interpolate', forms: ['interpolated', 'interpolation', 'interpolating'], def: 'To read a value from the line between two plotted points.', eg: 'Reading the sucrose concentration at which the change in mass is 0 %.' },
       { term: 'key', forms: ['keys', 'legend'], def: 'A box that shows which symbol or line belongs to each data set on a graph.', eg: 'Solid line = 20 °C; dashed line = 30 °C.' },
-      { term: 'continuous variable', forms: ['continuous variables', 'continuous', 'continuous data'], def: 'A variable that can take any value in a range, including values between those measured.', eg: 'Temperature: 35.5 °C is possible.' },
-      { term: 'categorical variable', forms: ['categorical variables', 'categorical', 'categorical data', 'category', 'categories'], def: 'A variable whose values are names or groups, not numbers on a scale.', eg: 'Soil type: A, B, C or D.' },
+      { term: 'continuous variable', forms: ['continuous variables', 'continuous', 'continuous data'], def: 'A variable that can take any value in a range, including values between those measured.', eg: 'Temperature: 35.5 °C is possible.', fig: 'data', hi: 'continuous' },
+      { term: 'categorical variable', forms: ['categorical variables', 'categorical', 'categorical data', 'category', 'categories'], def: 'A variable whose values are names or groups, not numbers on a scale.', eg: 'Soil type: A, B, C or D.', fig: 'data', hi: 'qual' },
       { term: 'axis', forms: ['axes', 'x-axis', 'y-axis'], def: 'One of the two ruled lines that carry the scales: the x-axis across, the y-axis up.', eg: 'Temperature on the x-axis; mean time on the y-axis.' },
       { term: 'scale', forms: ['scales'], def: 'The numbers along an axis, rising in equal steps from one large square to the next.', eg: '0, 50, 100, 150, 200 s: 50 s per large square.' }
     ],

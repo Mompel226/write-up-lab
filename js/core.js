@@ -120,7 +120,7 @@
       if (WORDS[key] && WORDS[key].def !== w.def) {
         (WUL.problems = WUL.problems || []).push('keyword "' + w.term + '" is defined twice (' + WORDS[key].station + ', ' + stationId + ')');
       }
-      if (!WORDS[key]) WORDS[key] = { term: w.term, def: w.def, eg: w.eg || '', lv: w.lv || '', station: stationId };
+      if (!WORDS[key]) WORDS[key] = { term: w.term, def: w.def, eg: w.eg || '', lv: w.lv || '', station: stationId, fig: w.fig || '', hi: w.hi || '' };
       FORMS[key] = key;
       (w.forms || []).forEach(function (f) { FORMS[f.toLowerCase()] = key; });
     });
@@ -216,6 +216,40 @@
     { id: 'finish', name: 'Finish', blurb: 'Name your sources and check the format' }
   ];
 
+  /* ---------- figures a keyword can open with (w.fig), the clicked part lit (w.hi) ----------
+     'data': the types of data, after Daniel's Year 7 poster (KS3 Inquiry Skills, week 6, "Types of data"):
+     quantitative (numerical) = discrete (counted) or continuous (measured); qualitative (categorical,
+     "think of words, not numbers") = nominal (multicategory or binary) or ordinal (in order).
+     Biology examples; then which test each kind leads to, and the trap: counting is not χ². */
+  WUL.figs = {
+    data: function (hi) {
+      function kid(id, name, what, eg) {
+        return '<div class="tod__k' + (hi === id ? ' is-hi' : '') + '"><b>' + name + '</b><span>' + what + '</span><i>' + eg + '</i></div>';
+      }
+      var q = hi === 'quant' || hi === 'continuous' || hi === 'discrete', c = hi === 'qual' || hi === 'nominal' || hi === 'ordinal';
+      return '<div class="tod">' +
+        '<div class="tod__root">Types of data</div>' +
+        '<div class="tod__cols">' +
+          '<div class="tod__col tod__col--q' + (q ? ' is-hi' : '') + '"><div class="tod__h">Quantitative<small>numerical variables: numbers</small></div><div class="tod__kids">' +
+            kid('continuous', 'Continuous', 'Measured. Any value in a range.', 'time, length, mass, temperature, rate') +
+            kid('discrete', 'Discrete', 'Counted. Whole numbers.', 'stomata in a field of view, seeds in a pod') +
+          '</div></div>' +
+          '<div class="tod__col tod__col--c' + (c ? ' is-hi' : '') + '"><div class="tod__h">Qualitative<small>categorical variables: words, not numbers</small></div><div class="tod__kids">' +
+            kid('nominal', 'Nominal', 'Names, in no order. Binary: only two.', 'blood group, species, flower colour; present / absent') +
+            kid('ordinal', 'Ordinal', 'Categories in an order.', 'rare, occasional, frequent, abundant; low, medium, high') +
+          '</div></div>' +
+        '</div>' +
+        '<ul class="tod__tests">' +
+          '<li><b>Numbers in two groups</b> → t-test</li>' +
+          '<li><b>Two numbers for each individual</b> → correlation</li>' +
+          '<li><b>How many fall in each category</b> → χ²</li>' +
+        '</ul>' +
+        '<p class="tod__trap"><b>Careful:</b> counting does not always mean χ². Stomata counted in each field of view are numbers (discrete): compare two groups of them with a t-test. χ² counts how many individuals fall in each category.</p>' +
+        '<p class="tod__ib">The IB guide (D3.2.14) calls ABO blood group “discrete”: separate groups, with nothing in between. In statistics it is categorical (nominal).</p>' +
+      '</div>';
+    }
+  };
+
   /* ---------- keyword pop-over (instant on tap / Enter; never the title attribute) ---------- */
   var pop = null, popFor = null;
   function closePop() { if (pop) { pop.remove(); pop = null; } if (popFor) popFor.setAttribute('aria-expanded', 'false'); popFor = null; }
@@ -224,14 +258,22 @@
     if (popFor === el) { closePop(); return; }
     closePop();
     pop = h('div', { class: 'kwpop', role: 'dialog', 'aria-label': w ? w.term : k });
+    var fig = w && w.fig && WUL.figs[w.fig];
     if (w) {
       pop.innerHTML = '<div class="kwpop__t">' + esc(w.term) + '</div><div class="kwpop__d">' + md(w.def, { inline: true }) + '</div>' +
-        (w.eg ? '<div class="kwpop__e"><span>Example</span> ' + md(w.eg, { inline: true }) + '</div>' : '');
+        (w.eg ? '<div class="kwpop__e"><span>Example</span> ' + md(w.eg, { inline: true }) + '</div>' : '') +
+        (fig ? fig(w.hi) : '');
+      if (fig) {
+        pop.className += ' kwpop--wide';
+        var x = h('button', { type: 'button', class: 'kwpop__x', 'aria-label': 'Close', text: '×' });
+        x.addEventListener('click', function () { var f = popFor; closePop(); if (f) f.focus(); });
+        pop.insertBefore(x, pop.firstChild);
+      }
     } else {
       pop.innerHTML = '<div class="kwpop__t">' + esc(k) + '</div><div class="kwpop__d">No definition yet.</div>';
     }
     document.body.appendChild(pop);
-    var r = el.getBoundingClientRect(), pw = Math.min(340, window.innerWidth - 24);
+    var r = el.getBoundingClientRect(), pw = Math.min(fig ? 640 : 340, window.innerWidth - 24);
     pop.style.width = pw + 'px';
     var left = Math.max(12, Math.min(window.scrollX + r.left + r.width / 2 - pw / 2, window.scrollX + window.innerWidth - pw - 12));
     pop.style.left = left + 'px';
@@ -252,7 +294,9 @@
     if (kw && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openPop(kw); }
   });
   global.addEventListener('hashchange', closePop);
-  global.addEventListener('resize', closePop);
+  /* close on a real resize only: on a phone, scrolling shows and hides the toolbar, which changes only the height */
+  var lastW = global.innerWidth;
+  global.addEventListener('resize', function () { if (global.innerWidth !== lastW) { lastW = global.innerWidth; closePop(); } });
   WUL.closePop = closePop;
 
   /* ---------- small helpers other files share ---------- */
