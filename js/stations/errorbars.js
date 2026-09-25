@@ -3,7 +3,9 @@
      seven heights 41.0–44.5 cm: mean 43.0, SD 1.29, SE 0.49 (checked with node, =STDEV.S)
      amylase (IB) 40 °C: 74 ± 5.5 s (68.5–79.5); 50 °C: 54 ± 5.5 s (48.5–59.5) — no overlap
      soils A and D (n = 10): SD bars 41.6–44.4 and 42.8–45.8 overlap; SE bars 42.6–43.4 and 43.8–44.8 do not;
-     a t-test gives t = 2.00, df = 18, p = 0.060 (the "Go further" panel). */
+     a t-test gives t = 2.00, df = 18, p = 0.060 (the "Go further" panel).
+     the same means and SDs with 30 plants per soil: t = 3.47, df = 58, p = 0.001 (checked in R, 25 Sep 2026):
+     identical SD bars, a different verdict. That is why overlap never decides (Cumming et al. 2007). */
 (function (WUL) {
   'use strict';
   /* inline markup; ± is kept on the same line as its number */
@@ -52,6 +54,7 @@
   }
   var soilsAD = pairPlot(['Soil A', 'Soil D'], [S.means[0], S.means[3]], [S.sds[0], S.sds[3]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 3. Dot plot showing the effect of soil type (A and D) on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).');
   var amy4050 = pairPlot(['40 °C', '50 °C'], [A.i.means[2], A.i.means[3]], [A.i.sds[2], A.i.sds[3]], { min: 40, max: 90, step: 10, minor: 5, label: 'Mean time / s' }, 'Figure 4. Dot plot showing the effect of temperature (40.0 and 50.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).');
+  var soilsAD30 = pairPlot(['Soil A', 'Soil D'], [S.means[0], S.means[3]], [S.sds[0], S.sds[3]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 6. Dot plot showing the effect of soil type (A and D) on the mean height of bean seedlings after 21 days (n = 30; error bars = ± 1 SD).');
   var soilsAB = pairPlot(['Soil A', 'Soil B'], [S.means[0], S.means[1]], [S.sds[0], S.sds[1]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 5. Dot plot showing the effect of soil type (A and B) on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).');
 
   var KINDS = proseTable(['Bar', 'What it shows', 'When to use it'], [
@@ -94,17 +97,31 @@
         ] },
 
       { type: 'grid2', title: 'Read the overlap', items: [
-        { label: 'The bars overlap', tone: 'red', v: { plot: soilsAD }, note: 'Soils A and D: you __cannot__ claim a difference from this graph.' },
+        { label: 'The bars overlap', tone: 'red', v: { plot: soilsAD }, note: 'Soils A and D: the graph __alone__ cannot show a difference. A t-test decides: here p = 0.06, so the difference is not significant.' },
         { label: 'The bars do not overlap', tone: 'g', v: { plot: amy4050 }, note: '40 °C and 50 °C: a difference is __likely__. A statistical test can confirm it.' }
+      ] },
+
+      { type: 'grid2', title: 'Same bars, a different answer', items: [
+        { label: '10 plants in each soil', tone: 'red', v: { plot: soilsAD }, note: 'A t-test gives p = 0.06: __not__ significant.' },
+        { label: '30 plants in each soil', tone: 'g', v: { plot: soilsAD30 }, note: 'The same means and the same SD bars, so the same overlap. But a t-test gives p = 0.001: __significant__.' }
+      ] },
+
+      { type: 'note', tone: 'warn', label: 'The bars show the plants. The test weighs the means.', title: 'Why overlap cannot decide',
+        md: 'An SD bar shows how much the __individual plants__ vary. Measuring more plants does not make the plants less varied, so the SD bars stay the same length.\n\nBut every extra plant makes each __mean__ more certain. A t-test uses the SD __and__ the number of plants, so with 30 plants it can find a difference that 10 plants could not. The graph cannot show this. The test can.\n\n**Analogy:** some Year 7 pupils are taller than some Year 9 pupils, so their heights overlap. Yet Year 9 pupils are taller on average, and measuring many pupils in each year shows it clearly.' },
+
+      { type: 'rules', title: 'What overlap lets you write', items: [
+        { t: '__The bars do not overlap:__ a real difference is likely. A statistical test can confirm it.', icon: '✓' },
+        { t: '__The bars overlap:__ the graph alone cannot show whether there is a difference. Report a statistical test, and let the p-value decide.', icon: '?' },
+        { t: '__Never__ write “there is no difference” because bars overlap, and never write “significant” without a test.', icon: '✗' }
       ] },
 
       { type: 'anatomy', title: 'Write about the overlap',
         intro: 'Name the points, say whether the bars overlap, and say what you can claim.',
-        model: '{1:The ± 1 SD bars for 40 °C and 50 °C} {2:do not overlap}, {3:so the shorter mean time at 50 °C is likely to be a real effect of temperature}.\n\n{1:The ± 1 SD bars for soils A and D} {2:overlap}, {3:so these data do not show a difference in height between the two soils}.',
+        model: '{1:The ± 1 SD bars for 40 °C and 50 °C} {2:do not overlap}, {3:so the shorter mean time at 50 °C is likely to be a real effect of temperature}.\n\n{1:The ± 1 SD bars for soils A and D} {2:overlap}, {3:so the graph alone cannot show a difference; a t-test found no significant difference between the two soils (p = 0.06)}.',
         parts: [
           { n: 1, name: 'Name the two points', note: 'Which means, and which kind of bar.' },
           { n: 2, name: 'Overlap or not', note: 'Compare the ends of the bars, not the crosses.' },
-          { n: 3, name: 'What can be claimed', note: '“Likely” or “do not show”. Never “proves”.' }
+          { n: 3, name: 'What can be claimed', note: '“Likely”, or “the graph alone cannot show”, then the test. Never “proves”.' }
         ],
         after: 'Overlap is a hint, not proof: only a statistical test can decide. “The bars are quite big” earns nothing.' },
 
@@ -134,12 +151,12 @@
         notes: {
           a: { label: 'which bars?', why: 'Give n and name the kind of bar: “(n = 10; error bars = ± 1 SD)”.' },
           b: { label: 'calculate them', why: 'Calculate the bars from your repeats with =STDEV.S. Do not estimate them by eye.' },
-          c: { label: 'they overlap', why: 'Overlapping bars mean you cannot claim a difference. Write: these data do not show a difference.' },
+          c: { label: 'they overlap', why: 'Overlapping bars do not show a difference, and they do not rule one out. Say the graph alone cannot show a difference, then report the t-test.' },
           d: { label: 'dishonest', why: 'SE answers a different question from SD. Choosing it because it looks smaller hides how much the plants varied.' },
-          e: { label: '“proves”?', why: 'A graph never proves. With overlapping bars, the data do not support this claim at all.' }
+          e: { label: '“proves”?', why: 'Nothing proves it, and here the t-test found no significant difference (p = 0.06), so the data do not support this claim.' }
         },
-        fixed: 'Figure 3 shows the mean height of the seedlings in each soil, ==with error bars of ± 1 standard deviation (n = 10)==. The standard deviations were ==calculated from the ten heights with =STDEV.S==. The bars for soils A and D overlap, ==so these data do not show a difference in height between the two soils==. ==SD bars were used because they show how much the plants varied.== ==The data do not support the claim that soil type affects growth.==',
-        fixedNote: 'The bars are named and calculated, and the claim now matches what overlapping bars allow.'
+        fixed: 'Figure 3 shows the mean height of the seedlings in each soil, ==with error bars of ± 1 standard deviation (n = 10)==. The standard deviations were ==calculated from the ten heights with =STDEV.S==. The bars for soils A and D overlap, ==so the graph alone cannot show a difference, and a t-test found no significant difference in height between the two soils (t = 2.00, df = 18, p = 0.06)==. ==SD bars were used because they show how much the plants varied.== ==These data do not support the claim that soil type affects growth.==',
+        fixedNote: 'The bars are named and calculated, and the claim now rests on the test, not on the overlap.'
       }
     },
 
@@ -147,6 +164,7 @@
       { bad: 'Figure 1. Mean time at each temperature.', good: 'Figure 1. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).' },
       { bad: 'SE bars, chosen because they look smaller.', good: 'SD to show the spread of the data; SE to show how well the mean is known.' },
       { bad: 'The bars overlap, so there is a difference.', good: 'The bars overlap, so a difference cannot be claimed from this graph.' },
+      { bad: 'The bars overlap, so there is no significant difference.', good: 'The bars overlap, so the graph alone cannot decide; a t-test gave p = 0.06, so the difference is not significant.' },
       { bad: 'Error bars on points that are single measurements.', good: 'Bars only on means of repeats. One value has no spread.' },
       { bad: 'Excel’s preset “Standard Deviation” error bars.', good: 'Custom error bars, from your own column of =STDEV.S values.' },
       { bad: 'SE calculated from the rounded SD: 5.5 ÷ √5 = 2.5 s.', good: 'Use the unrounded SD: 5.477 ÷ √5 = 2.4 s. Or use a spreadsheet.' }
@@ -194,9 +212,9 @@
       { type: 'choose', q: 'The ± 1 SD bars for soils A and B overlap. What can you write?',
         show: { plot: soilsAB },
         opts: [
-          { t: 'These data do not show a difference between soils A and B.', ok: true, why: 'Overlapping bars mean a difference cannot be claimed from the graph.' },
+          { t: 'The graph alone cannot show a difference between soils A and B: a statistical test is needed.', ok: true, why: 'Overlapping bars do not show a difference, and they do not rule one out. A test decides.' },
           { t: 'Soil B gives taller seedlings than soil A.', why: 'The bars overlap, so the difference could be due to chance.' },
-          { t: 'Soils A and B give exactly the same height.', why: 'Overlap does not prove the means are equal. It only means no difference can be claimed.' },
+          { t: 'There is no significant difference, because the bars overlap.', why: 'Significance needs a test. With more plants, bars that overlap this much can still give p < 0.05, as Figure 6 shows.' },
           { t: 'Soil B is significantly better.', why: '“Significantly” needs a statistical test, and here the bars overlap.' }
         ] },
       { type: 'spot', q: 'Tap the three mistakes.',
@@ -233,6 +251,9 @@
     ],
 
     further: [
+      { title: 'Overlap rules for each kind of bar',
+        md: '**SD bars** show the spread of the values, so their overlap depends on n. Bars that just touch give p ≈ 0.07 with three values in each group, but p ≈ 0.01 with five, and p < 0.001 with ten. Overlap alone cannot tell you.\n\n**SE bars** (about ten values or more in each group): if they overlap, p > 0.05. They need a gap of about one SE before p falls to 0.05.\n\n**95 % confidence intervals:** if they do not overlap, p < 0.05. But they can overlap by up to about half of one arm and still give p ≈ 0.05. So overlapping 95 % CIs do __not__ mean “no significant difference”.',
+        cite: 'Cumming, Geoff, Fiona Fidler, and David L. Vaux. “Error Bars in Experimental Biology.” *Journal of Cell Biology*, vol. 177, no. 1, 2007, pp. 7–11.' },
       { title: 'How large a gap do SE bars need?',
         md: 'Soils A and D show a problem. Their SE bars do __not__ overlap, yet a t-test gives t = 2.00, df = 18, p = 0.06: not significant. With about ten values in each group, SE bars need a gap of about one SE before p falls to 0.05.\n\nThe same paper gives a second rule: draw error bars only from independent repeats, never from repeat measurements of one sample.',
         cite: 'Cumming, Geoff, Fiona Fidler, and David L. Vaux. “Error Bars in Experimental Biology.” *Journal of Cell Biology*, vol. 177, no. 1, 2007, pp. 7–11.' }

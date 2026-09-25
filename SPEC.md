@@ -181,6 +181,16 @@ Biology rules, taught on the Graphs page (rules block, the `axis-start` widget, 
   IB model enzyme graphs on the site are `line: 'smooth'`; IGCSE ones are `'ruled'`. The conclusion walkthrough's
   green/red segments stay ruled on purpose (they mark the rise and the fall).
 
+## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
+- No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
+- Overlap: "the graph **alone** cannot show a difference" + the test's p-value. NEVER "these data do not show a
+  difference", "cannot be separated" as a rule, or "no significant difference" from overlap alone.
+- The proof on the page (errorbars.js): soils A and D with n = 10 → p = 0.06; the SAME means and SD bars with
+  n = 30 → t = 3.47, df = 58, p = 0.001 (Figure 6; checked in R). SD bars show the plants, the test weighs the means.
+- Per kind of bar (Cumming, Fidler & Vaux 2007, "Go further"): SD overlap depends on n; SE bars (n ≈ 10+) that
+  overlap → p > 0.05, a one-SE gap → p ≈ 0.05; 95 % CIs that do not overlap → p < 0.05, overlap of up to half an
+  arm → p ≈ 0.05. Daniel's own IB R tutorial had overlapping CIs (79.4–84.0 vs 75.0–79.8) with t-test p = 0.010.
+
 ## The running examples — `js/data/datasets.js` (use these numbers; never invent other amylase data)
 - `WUL.data.amylase` — amylase + starch; iodine sampled every **10 s**, so times are multiples of 10 s and their
   uncertainty is **± 10 s** (the sampling interval, NOT the stopwatch's 0.01 s). IGCSE: 3 trials, means

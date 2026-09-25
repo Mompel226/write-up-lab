@@ -147,7 +147,7 @@
 
       { type: 'grid2', lv: 'ie', title: 'What error bars let you claim',
         items: [
-          { label: 'Error bars overlap', v: { plot: plotSoils }, note: 'The four soils differ by only 1.3 cm (3 %), and every SD bar overlaps. The soils __cannot be separated__.' },
+          { label: 'Error bars overlap', v: { plot: plotSoils }, note: 'The four soils differ by only 1.3 cm (3 %), and every SD bar overlaps. The graph __alone__ cannot separate the soils: only a statistical test can decide.' },
           { label: 'Error bars do not overlap', v: { plot: plotAmyl }, note: 'No pair of SD bars overlaps. The differences are probably real; a [[t-test]] can test whether they are [[statistically significant]].' }
         ] },
 
@@ -161,7 +161,7 @@
       { type: 'frames', lv: 'ie', title: 'Sentences for an IA analysis', items: [
         'As the ___ increased from ___ to ___, the mean ___ decreased from ___ to ___.',
         'This is a ___ % decrease, followed by a ___ % increase.',
-        'The error bars at ___ and ___ overlap, so these two conditions cannot be separated.',
+        'The error bars at ___ and ___ overlap, so the graph alone cannot show a difference; a ___ gave p = ___.',
         'The error bars at ___ and ___ do not overlap, which suggests a real difference.',
         'A ___ comparing ___ with ___ gave t = ___, df = ___, p ___, so the difference is / is not statistically significant.'
       ] }
@@ -265,10 +265,10 @@
         why: 'It names both variables, the direction and the values, and it gives no reason.' },
       { type: 'choose', lv: 'ie', q: 'Every SD bar on this graph overlaps. Which statement is justified?', show: { plot: plotSoils },
         opts: [
-          { t: 'The four soils cannot be separated: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'Overlapping SD bars mean the difference could be due to variation between plants.' },
+          { t: 'The graph alone cannot separate the four soils: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'The difference could be due to variation between plants. Only a statistical test can decide.' },
           { t: 'Soil D is the best soil, because its mean is highest.', why: 'Its mean is highest, but the overlap means that difference may not be real.' },
           { t: 'The error bars are small, so the results are accurate.', why: 'SD bars show spread, not accuracy.' },
-          { t: 'Soil A reduced growth by 3 %, which is statistically significant.', why: 'Significance needs a statistical test, and the overlap suggests it would not be significant.' }
+          { t: 'Soil A reduced growth by 3 %, which is statistically significant.', why: 'Significance needs a statistical test. Overlapping bars cannot tell you the answer.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'Which sentence reports a statistical test properly in an analysis?',
         opts: [
