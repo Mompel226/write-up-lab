@@ -111,7 +111,7 @@
 
       { type: 'rules', title: 'What overlap lets you write', items: [
         { t: '__The bars do not overlap:__ a real difference is likely. A statistical test can confirm it.', icon: '✓' },
-        { t: '__The bars overlap:__ the graph alone cannot show whether there is a difference. Report a statistical test, and let the p-value decide.', icon: '?' },
+        { t: '__The bars overlap:__ the graph alone cannot show whether there is a difference. Report a statistical test, and let the [[p-value]] decide.', icon: '?' },
         { t: '__Never__ write “there is no difference” because bars overlap, and never write “significant” without a test.', icon: '✗' }
       ] },
 
