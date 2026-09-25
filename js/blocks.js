@@ -194,7 +194,10 @@
     var i = 0;
     function show() {
       var shown = {}, k;
-      for (k = 0; k <= i; k++) (steps[k].show || []).forEach(function (e) { shown[e] = 1; });
+      for (k = 0; k <= i; k++) {   /* hide: a later step can take a part away again (one picture replaces another) */
+        (steps[k].show || []).forEach(function (e) { shown[e] = 1; });
+        (steps[k].hide || []).forEach(function (e) { delete shown[e]; });
+      }
       var focus = {};
       (steps[i].focus || steps[i].show || []).forEach(function (e) { focus[e] = 1; });
       all.forEach(function (el) {

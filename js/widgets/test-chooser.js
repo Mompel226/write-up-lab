@@ -45,7 +45,7 @@
     t: { test: 't-test', why: 'You are comparing the means of two groups of measurements.',
       h0: 'There is no difference between the mean time for the starch to disappear at 40 °C and at 50 °C.',
       say: 'A [[two-tailed|two-tailed test]] t-test showed that the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s) (t = 5.77, df = 8, p < 0.001).',
-      care: 'The spread in the two groups should be similar. Our rule: at least five repeats in each group.' },
+      care: 'Each group should be roughly [[normal distribution|normal]], and the two spreads similar: [how to check](https://nlcsbiology.com/write-up-lab/#/part/stats/build/checks). Our rule: at least five repeats in each group.' },
     chi: { test: 'Chi-squared test', why: 'You are comparing the counts you observed with the counts you expected.',
       h0: 'The woodlice show no preference: they are equally likely to be on the damp side and on the dry side.',
       say: 'Significantly more woodlice were found on the damp side than expected by chance (χ² = 14.4, df = 1, p < 0.001).',

@@ -19,6 +19,10 @@
                 tone:'ink'|'lvl'|'red'|'green'|'blue'|'plum'|'grey',
                 err:[±…] or errLo/errHi:[…], extend:[x0,x1], label, dash }]
      bars: { items:[{label,v,err,tone}], width:.6, touch:false }
+             an item may also take at (category index), off (shift, in categories),
+             w (width), dash:true (an outline: "expected"), solid:true, el (its data-el)
+     texts: [{x, y, t, tone, el, dy, anchor, cls}]   words placed in data units
+             (on a category axis, x = category index + 0.5)
      caption, title, key:true, keyAt:'tl'|'tr'|'bl'|'br', axisBreak:true,
      hl: ['label-y', …]      elements to ring in yellow
      marks: [{el, text}]     red-pen circles (used by the graph doctor)
@@ -109,16 +113,17 @@
     if (o.bars) {
       var bw = (o.bars.width || (o.bars.touch ? 1 : 0.6)), bs = '';
       o.bars.items.forEach(function (b, i) {
-        var x0 = px(i + 0.5 - bw / 2), x1 = px(i + 0.5 + bw / 2), base = Math.max(Y.min, 0 >= Y.min ? 0 : Y.min);
+        var mid = (b.at != null ? b.at : i) + 0.5 + (b.off || 0), w = b.w || bw;
+        var x0 = px(mid - w / 2), x1 = px(mid + w / 2);
         var yTop = py(b.v), yBase = py(Y.min > 0 ? Y.min : 0);
-        bs += '<g data-el="bar-' + i + '"><rect class="pl-bar tone-' + (b.tone || o.bars.tone || 'ink') + '" x="' + x0.toFixed(2) + '" y="' + Math.min(yTop, yBase).toFixed(2) + '" width="' + (x1 - x0).toFixed(2) + '" height="' + Math.abs(yBase - yTop).toFixed(2) + '"/></g>';
+        bs += '<g data-el="' + esc(b.el || 'bar-' + i) + '"><rect class="pl-bar tone-' + (b.tone || o.bars.tone || 'ink') + (b.dash ? ' pl-bar--dash' : '') + (b.solid ? ' pl-bar--solid' : '') + '" x="' + x0.toFixed(2) + '" y="' + Math.min(yTop, yBase).toFixed(2) + '" width="' + (x1 - x0).toFixed(2) + '" height="' + Math.abs(yBase - yTop).toFixed(2) + '"/></g>';
       });
       s += g('bars', 'pl-bars', bs);
       if (o.bars.items.some(function (b) { return b.err != null; })) {
         var eb = '';
         o.bars.items.forEach(function (b, i) {
           if (b.err == null) return;
-          var cx = px(i + 0.5), a = py(b.v + b.err), c = py(b.v - b.err);
+          var cx = px((b.at != null ? b.at : i) + 0.5 + (b.off || 0)), a = py(b.v + b.err), c = py(b.v - b.err);
           eb += '<line x1="' + cx + '" y1="' + a + '" x2="' + cx + '" y2="' + c + '"/><line x1="' + (cx - 7) + '" y1="' + a + '" x2="' + (cx + 7) + '" y2="' + a + '"/><line x1="' + (cx - 7) + '" y1="' + c + '" x2="' + (cx + 7) + '" y2="' + c + '"/>';
         });
         s += g('err-bars', 'pl-err tone-ink', eb);
@@ -200,6 +205,12 @@
       });
       if (m !== 'none') s += g('pts-' + id, 'pl-pts tone-' + tone, mk);
       if (se.label) keyItems.push({ tone: tone, m: m, line: se.line, label: se.label, dash: se.dash });
+    });
+
+    /* words placed on the plot */
+    (o.texts || []).forEach(function (t) {
+      var tt = '<text class="' + (t.cls || 'pl-txt') + (t.tone ? ' tone-' + t.tone : '') + '" x="' + px(t.x).toFixed(2) + '" y="' + (py(t.y) + (t.dy || 0)).toFixed(2) + '" text-anchor="' + (t.anchor || 'middle') + '">' + esc(t.t) + '</text>';
+      s += t.el ? '<g data-el="' + esc(t.el) + '">' + tt + '</g>' : tt;
     });
 
     /* the key shows each series' own mark */

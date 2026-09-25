@@ -31,6 +31,107 @@
     caption: 'Figure 1. Line graph showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 24 hours (n = 5), with a straight line of best fit (r = −0.99, R² = 0.99).'
   };
 
+  /* a stage built only in the page (plot.js is not loaded by tools/check.mjs); the stub names its parts for the check */
+  function lazy(build, names) {
+    var stub = names.map(function (n) { return '<i data-el="' + n + '"></i>'; }).join('');
+    return { get html() { return typeof WUL.plot === 'function' ? build() : stub; } };
+  }
+  /* a plot drawn whole: drop the reveal ids WUL.plot puts on every part, except those matching keep */
+  function still(html, keep) {
+    return html.replace(/ data-el="([^"]*)"/g, function (m, id) { return keep && keep.test(id) ? m : ''; });
+  }
+
+  /* ---------- heather and moss (Course Companion pp. 521–522), the association test ----------
+     The table and, beside it, O against E as bars, as in Daniel's C4.1 slide. Each bar shares
+     its data-el with its table cell, so a step lights both. */
+  var HEATHER_TABLE = {
+    cls: 'dt--tight',
+    caption: 'Table 3. Raw and processed data showing the distribution of heather (*Calluna vulgaris*) and a moss (*Rhytidiadelphus squarrosus*) in 100 random quadrats on Caer Caradoc, England, with a chi-squared test for association.',
+    head: [['', 'Heather present', 'Heather absent', 'Row total']],
+    rows: [
+      ['Hypotheses', { t: 'H₀: heather and moss are distributed independently. H₁: they are associated.', cs: 3, el: 'h0' }],
+      ['Moss present: observed (O)', { t: '57', el: 'o-1' }, { t: '7', el: 'o-2' }, { t: '64', el: 'tot-1' }],
+      ['Moss absent: observed (O)', { t: '9', el: 'o-3' }, { t: '27', el: 'o-4' }, { t: '36', el: 'tot-2' }],
+      ['Column total', { t: '66', el: 'tot-3' }, { t: '34', el: 'tot-4' }, { t: '100', el: 'tot-5' }],
+      ['Moss present: expected (E)', { t: '64 × 66 ÷ 100 = 42.2', el: 'e-1' }, { t: '64 × 34 ÷ 100 = 21.8', el: 'e-2' }, ''],
+      ['Moss absent: expected (E)', { t: '36 × 66 ÷ 100 = 23.8', el: 'e-3' }, { t: '36 × 34 ÷ 100 = 12.2', el: 'e-4' }, ''],
+      ['χ² = Σ (O − E)² ÷ E', { t: '5.19 + 10.05 + 9.20 + 17.95 = 42.4', cs: 3, el: 'chi' }],
+      ['df', { t: '(2 − 1) × (2 − 1) = 1', cs: 3, el: 'df' }],
+      ['Decision', { t: '42.4 > 3.84: the null hypothesis is rejected (p < 0.001)', cs: 3, el: 'dec' }]
+    ]
+  };
+  var OE = { o: [57, 7, 9, 27], e: [42.2, 21.8, 23.8, 12.2] }, oeBars = [], oeTexts = [];
+  OE.o.forEach(function (o, i) {
+    var e = OE.e[i], d = Math.round((o - e) * 10) / 10, k = i + 1;
+    oeBars.push({ at: i, off: -0.19, w: 0.36, v: o, tone: 'lvl', solid: true, el: 'o-' + k });
+    oeBars.push({ at: i, off: 0.19, w: 0.36, v: e, dash: true, el: 'e-' + k });
+    oeTexts.push({ x: i + 0.31, y: o, dy: -6, t: String(o), tone: 'lvl', el: 'o-' + k });
+    oeTexts.push({ x: i + 0.69, y: e, dy: -6, t: e.toFixed(1), tone: 'grey', el: 'e-' + k });
+    oeTexts.push({ x: i + 0.5, y: Math.max(o, e) + 9, t: (d > 0 ? '+' : '−') + Math.abs(d).toFixed(1), tone: d > 0 ? 'green' : 'red', el: 'd-' + k });
+  });
+  var HEATHER_STAGE = lazy(function () { return '<div class="oe">' + WUL.table(HEATHER_TABLE) + '<div class="oe__fig">' +
+    '<p class="oe__key"><span><span class="oe__sw"></span>observed (O)</span><span><span class="oe__sw oe__sw--e"></span>expected (E), if H₀ is true</span><span data-el="d-5">±14.8 = O − E</span></p>' +
+    still(WUL.plot({
+      w: 420, h: 320, pad: { l: 54, r: 8, t: 12, b: 56 },
+      x: { cat: ['both', 'moss only', 'heather only', 'neither'], label: 'Species in the quadrat' },
+      y: { min: 0, max: 70, step: 10, label: 'Number of quadrats' },
+      bars: { items: oeBars }, texts: oeTexts,
+      caption: 'Figure 2. Bar chart showing the distribution of the 100 quadrats among the four groups, observed (O) and expected (E).'
+    }), /^[oed]-\d$/) + '</div></div>'; }, ['h0', 'o-1', 'o-2', 'o-3', 'o-4', 'tot-1', 'tot-2', 'tot-3', 'tot-4', 'tot-5', 'e-1', 'e-2', 'e-3', 'e-4', 'chi', 'df', 'dec', 'd-1', 'd-2', 'd-3', 'd-4', 'd-5']);
+
+  /* ---------- Beyond the IB guide: the two conditions of a t-test ----------
+     Drawn as in Daniel's C4.1 slides 52–55. Imagined heather heights: 66 quadrats in 5 cm
+     classes (mean 33.3, SD 8.65); with moss 50 quadrats (mean 41.5, SD 3.85) and without
+     moss 50 (mean 25.8, SD 3.89), 2 cm classes. The panes take turns in one place. */
+  function hist(o) {
+    var n = o.f.length, texts = [], k, b;
+    for (k = 0; k <= n; k++) { b = o.lo + k * o.cw; if (b % o.every === 0) texts.push({ x: k, y: 0, dy: 18, t: String(b), cls: 'pl-tick' }); }
+    return still(WUL.plot({
+      w: o.w || 300, h: o.h || 290, pad: { l: 46, r: 10, t: 34, b: 48 }, title: o.title,
+      x: { cat: o.f.map(function () { return ''; }), label: 'Height of heather / cm' },
+      y: { min: 0, max: o.ymax, step: o.ystep, label: 'Number of quadrats' },
+      bars: { touch: true, tone: o.tone, items: o.f.map(function (v) { return { label: '', v: v }; }) }, texts: texts
+    }));
+  }
+  function bell(m, sd) {   /* expected quadrats per 2 cm class, from a normal curve: 50 × 2 × density */
+    var pts = [], x;
+    for (x = 10; x <= 60; x += 0.5) pts.push([x, 100 / (sd * Math.sqrt(2 * Math.PI)) * Math.exp(-Math.pow(x - m, 2) / (2 * sd * sd))]);
+    return pts;
+  }
+  function spread(title, sdWith, sdWithout) {
+    return still(WUL.plot({
+      w: 400, h: 265, pad: { l: 14, r: 12, t: 34, b: 48 }, title: title, paper: true,
+      x: { min: 10, max: 60, step: 10, label: 'Height of heather / cm' },
+      y: { min: 0, max: 20, step: 5, ticks: false },
+      series: [{ id: 'n', pts: bell(26, sdWithout), mark: 'none', line: 'smooth', tone: 'ink' },
+               { id: 'm', pts: bell(42, sdWith), mark: 'none', line: 'smooth', tone: 'green' }],
+      texts: [{ x: 26, y: 100 / (sdWithout * 2.5066) + 1.2, t: 'without moss' }, { x: 42, y: 100 / (sdWith * 2.5066) + 1.2, t: 'with moss', tone: 'green' }]
+    }));
+  }
+  var WITHOUT = [1, 2, 6, 7, 10, 11, 6, 4, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0], WITH = [0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 5, 8, 11, 9, 7, 4, 1, 1];
+  var CHECKS_STAGE = lazy(function () { return '<div class="panes">' +
+    '<div class="pane" data-el="nd"><div class="pane__one">' + hist({ w: 460, h: 280, title: 'Heather height in 66 quadrats: one bell', f: [1, 3, 7, 12, 16, 13, 8, 4, 2], lo: 10, cw: 5, every: 10, ymax: 20, ystep: 5, tone: 'lvl' }) + '</div></div>' +
+    '<div class="pane" data-el="grp"><div class="pane-3">' +
+      '<div>' + hist({ title: 'With moss: one bell ✓', f: WITH, lo: 16, cw: 2, every: 10, ymax: 12, ystep: 4, tone: 'green' }) + '</div>' +
+      '<div>' + hist({ title: 'Without moss: one bell ✓', f: WITHOUT, lo: 16, cw: 2, every: 10, ymax: 12, ystep: 4 }) + '</div>' +
+      '<div>' + hist({ title: 'Both mixed: two peaks', f: WITH.map(function (v, i) { return v + WITHOUT[i]; }), lo: 16, cw: 2, every: 10, ymax: 12, ystep: 4 }) + '</div>' +
+    '</div></div>' +
+    '<div class="pane" data-el="spr"><div class="pane-2">' +
+      '<div>' + spread('Same spread ✓ (SD 4 and 4 cm)', 4, 4) + '</div>' +
+      '<div>' + spread('Different spread ✗ (SD 2.5 and 8 cm)', 2.5, 8) + '</div>' +
+    '</div></div>' +
+    '<div class="pane" data-el="tst">' + WUL.table({
+      head: [['', 'A normal distribution', 'A similar spread']],
+      rows: [
+        ['Look at', 'a histogram of each group: one bell?', 'the two SDs: is the larger less than twice the smaller?'],
+        ['Test', 'Shapiro–Wilk test, on each group', 'F-test'],
+        ['In R', 'shapiro.test(x)', 'var.test(x, y)'],
+        ['In a spreadsheet', 'not built in', '=F.TEST(B2:B6, C2:C6)'],
+        ['If it fails', { t: 'Mann–Whitney U test', el: 'tstf-1' }, { t: 'Welch’s t-test: =T.TEST(B2:B6, C2:C6, 2, 3)', el: 'tstf-2' }]
+      ]
+    }) + '</div>' +
+  '</div>'; }, ['nd', 'grp', 'spr', 'tst', 'tstf-1', 'tstf-2']);
+
   WUL.station({
     id: 'stats', stage: 'show', order: 3, title: 'Statistical tests', levels: 'ie',
     job: 'Use a statistical test to judge whether a difference or a relationship is likely to be real, then report it in one line.',
@@ -50,6 +151,17 @@
       ] },
 
       { type: 'widget', title: 'Find your test', name: 'test-chooser' },
+
+      { type: 'steps', id: 'checks', title: 'Beyond the IB guide: check your data before a t-test',
+        intro: 'The IB does not ask for this. But a t-test assumes two things about your data. If they are false, its p-value can mislead you, so check them first. Press Next step.',
+        stage: CHECKS_STAGE,
+        steps: [
+          { title: 'Condition 1: a normal distribution', show: ['nd'], focus: [], text: 'A [[normal distribution]] is one bell: most values near the middle, fewer and fewer towards both ends, and the two sides roughly the same. These heather heights from 66 quadrats form one bell (imagined data).' },
+          { title: 'Check each group on its own', show: ['grp'], hide: ['nd'], focus: [], text: 'A t-test compares two groups, so check each group separately. Heather with moss forms one bell (mean about 42 cm). Heather without moss forms another (about 26 cm). Mixed together, the same 100 heights have two peaks: that only shows the groups differ.' },
+          { title: 'Condition 2: a similar spread', show: ['spr'], hide: ['grp'], focus: [], text: 'The standard t-test also needs a similar spread in both groups: similar standard deviations (SD). This is called [[homoscedasticity]]. A rule of thumb: the larger SD is less than twice the smaller. Left: 4 and 4 cm, fine. Right: 8 cm is more than twice 2.5 cm.' },
+          { title: 'The two tests', show: ['tst', 'tstf'], hide: ['spr'], focus: [], text: 'Each condition has its own test. In both, H₀ says the condition is met, so p > 0.05 means no evidence of a problem, not proof. With only 5 values in a group, no histogram or test can show much: say in your evaluation that a normal distribution was assumed.' },
+          { title: 'If a check fails', show: [], focus: ['tstf'], text: 'Not normal: use the Mann–Whitney U test. Different spreads: use Welch’s t-test, which does not need a similar spread. A χ² test needs neither check, because it uses counts in categories. It needs every expected count to be at least 5.' }
+        ] },
 
       { type: 'anatomy', title: 'How to report a test',
         intro: 'A test does not prove anything. Its p-value says how often chance alone would give a difference this large ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). Report it in four parts.',
@@ -122,27 +234,12 @@
       { type: 'steps', title: 'A worked chi-squared test: two species (association)',
         intro: 'The other use of χ²: are two species found together more often than chance? This is the ecology test (C4.1.15). The data are the Course Companion’s: heather and a moss in 100 random quadrats. Press Next step.',
         always: ['o-1', 'o-2', 'o-3', 'o-4'],
-        stage: { table: {
-          cls: 'dt--tight',
-          caption: 'Table 3. Raw and processed data showing the distribution of heather (*Calluna vulgaris*) and a moss (*Rhytidiadelphus squarrosus*) in 100 random quadrats on Caer Caradoc, England, with a chi-squared test for association.',
-          head: [['', 'Heather present', 'Heather absent', 'Row total']],
-          rows: [
-            ['Hypotheses', { t: 'H₀: heather and moss are distributed independently. H₁: they are associated.', cs: 3, el: 'h0' }],
-            ['Moss present: observed (O)', { t: '57', el: 'o-1' }, { t: '7', el: 'o-2' }, { t: '64', el: 'tot-1' }],
-            ['Moss absent: observed (O)', { t: '9', el: 'o-3' }, { t: '27', el: 'o-4' }, { t: '36', el: 'tot-2' }],
-            ['Column total', { t: '66', el: 'tot-3' }, { t: '34', el: 'tot-4' }, { t: '100', el: 'tot-5' }],
-            ['Moss present: expected (E)', { t: '64 × 66 ÷ 100 = 42.2', el: 'e-1' }, { t: '64 × 34 ÷ 100 = 21.8', el: 'e-2' }, ''],
-            ['Moss absent: expected (E)', { t: '36 × 66 ÷ 100 = 23.8', el: 'e-3' }, { t: '36 × 34 ÷ 100 = 12.2', el: 'e-4' }, ''],
-            ['χ² = Σ (O − E)² ÷ E', { t: '5.19 + 10.05 + 9.20 + 17.95 = 42.4', cs: 3, el: 'chi' }],
-            ['df', { t: '(2 − 1) × (2 − 1) = 1', cs: 3, el: 'df' }],
-            ['Decision', { t: '42.4 > 3.84: the null hypothesis is rejected (p < 0.001)', cs: 3, el: 'dec' }]
-          ]
-        } },
+        stage: HEATHER_STAGE,
         steps: [
           { title: 'State the hypotheses', show: ['h0'], text: 'H₀: heather and moss are distributed independently, so finding one tells you nothing about the other. H₁: the two species are associated.' },
           { title: 'Count the four groups', show: ['tot'], focus: ['o', 'tot'], text: 'Ask two questions of each quadrat: heather? moss? That sorts the 100 quadrats into four groups: both (57), moss only (7), heather only (9) and neither (27). Then add the row and column totals.' },
           { title: 'Calculate the expected counts', show: ['e'], text: 'If H₀ is true, heather is as common in the moss quadrats as everywhere else. Heather grows in 66 of the 100 quadrats, so 66 % of the 64 moss quadrats should have it: 64 × 66 ÷ 100 = 42.2. For every cell: row total × column total ÷ grand total. Each E must be at least 5.' },
-          { title: 'Compare O with E', show: [], focus: ['o-1', 'e-1', 'o-4', 'e-4'], text: 'Both species: 57 observed, 42.2 expected. Neither: 27 observed, 12.2 expected. One species alone: fewer than expected. So the two are found together more often than chance predicts. Is the gap too big for chance?' },
+          { title: 'Compare O with E', show: ['d'], focus: ['o-1', 'e-1', 'o-4', 'e-4', 'd'], text: 'Both species: 57 observed, 42.2 expected, so O − E = +14.8. Neither: 27 against 12.2, also +14.8. Each species alone: 14.8 fewer than expected. So the two are found together more often than chance predicts. Is the gap too big for chance?' },
           { title: 'Calculate χ²', show: ['chi'], text: 'For each cell, (O − E)² ÷ E. Squaring stops the + and − gaps cancelling out. Dividing by E compares each gap with its expected size. Add the four: χ² = 42.4. (A spreadsheet or R keeps E unrounded and gives 42.1.)' },
           { title: 'Find the degrees of freedom', show: ['df'], text: 'df = (rows − 1) × (columns − 1) = (2 − 1) × (2 − 1) = 1. Once the totals are fixed, one count decides the other three.' },
           { title: 'Decide', show: ['dec'], text: 'For df = 1, χ² must be above 3.84 for p < 0.05. Here χ² = 42.4, so H₀ is rejected: heather and moss are significantly associated. The association is positive: they are found together more often than expected.' },
@@ -273,6 +370,8 @@
       { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected. It has two uses: a choice or a ratio (goodness of fit), and two species found together (association).', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected. Heather and moss together in 57 of 100 quadrats, against 42.2 expected.' },
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },
       { term: 'p-value', forms: ['p value', 'p-values'], def: 'Pretend there is no real difference: p is how often chance alone would then give a difference as big as yours. Below 0.05: significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
+      { term: 'normal distribution', forms: ['normal distributions', 'normally distributed', 'normality', 'bell-shaped'], def: 'A spread of values shaped like one bell: most values near the mean, fewer and fewer towards both ends, the two sides roughly the same. The t-test assumes it in each group.', eg: 'Heather heights in 66 quadrats: most near 33 cm, few below 15 cm or above 50 cm.' },
+      { term: 'homoscedasticity', forms: ['homoscedastic', 'equal variance', 'equal variances', 'similar spread'], def: 'When groups have a similar spread: similar standard deviations. The standard t-test assumes it; Welch’s t-test does not.', eg: 'SD 4 cm and 4 cm: similar. SD 2.5 cm and 8 cm: not similar.' },
       { term: 'correction for multiple comparisons', forms: ['corrections for multiple comparisons', 'multiple comparisons', 'Bonferroni correction'], def: 'A stricter line for p when you run several tests on the same data, so a false “significant” result stays rare. The simplest is the Bonferroni correction: divide 0.05 by the number of tests. With 10 tests, each p must be below 0.005.' },
       { term: 'correlation coefficient', forms: ['correlation coefficients', 'r', "Pearson's r"], def: 'A number, r, from −1 to +1, showing the strength and direction of a straight-line relationship.', eg: 'r = −0.99 for potato mass change and sucrose concentration.' },
       { term: 'coefficient of determination', forms: ['R²', 'R2', 'R squared'], def: 'R², from 0 to 1: how well a trend line fits, as the fraction of the variation it explains.', eg: 'R² = 0.99: the line explains 99 % of the variation.' },
