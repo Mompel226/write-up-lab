@@ -23,7 +23,7 @@
       { id: 'down', pts: pts('g', 'means', 50, 60), line: 'ruled', mark: 'none', tone: 'red' },
       { id: 'm', pts: pts('g', 'means'), line: 'none', mark: 'x', tone: 'ink' }
     ],
-    caption: 'Figure 1. Effect of temperature on the mean time for amylase to digest starch (n = 3)'
+    caption: 'Figure 1. Line graph showing the effect of temperature (20–60 °C) on the mean time taken for amylase to digest starch.'
   };
   var plotI = {
     w: 540, h: 340, x: X,
@@ -33,20 +33,20 @@
       { id: 'down', pts: pts('i', 'rates', 50, 60), line: 'ruled', mark: 'none', tone: 'red' },
       { id: 'm', pts: pts('i', 'rates'), line: 'none', mark: 'x', tone: 'ink' }
     ],
-    caption: 'Figure 2. Mean rate of starch hydrolysis by *A. oryzae* α-amylase (n = 5; rate = 1 ÷ mean time, plotted in 10⁻³ s⁻¹)'
+    caption: 'Figure 2. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean rate of starch hydrolysis by *A. oryzae* α-amylase (n = 5; rate = 1 ÷ mean time).'
   };
   var plotShow = {
     w: 480, h: 300, x: X,
     y: { min: 0, max: 200, step: 40, minor: 4, label: 'Mean time / s' },
     series: [{ id: 'm', pts: pts('g', 'means'), line: 'ruled', mark: 'x', tone: 'ink' }],
-    caption: 'Mean time for amylase to digest starch (n = 3)'
+    caption: 'Figure 1. Line graph showing the effect of temperature (20–60 °C) on the mean time taken for amylase to digest starch.'
   };
   var plotSoils = {
-    w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 }, axisBreak: true,
+    w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 },
     x: { cat: S.labels, label: 'Soil' },
     y: { min: 40, max: 47, step: 1, minor: 2, label: 'Mean height / cm' },
     series: [{ id: 's', pts: S.means.map(function (m, i) { return [i + 0.5, m]; }), err: S.sds, line: 'none', mark: 'x', tone: 'ink' }],
-    caption: 'Mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD)'
+    caption: 'Figure 2. Dot plot showing the effect of soil type on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).'
   };
 
   WUL.station({

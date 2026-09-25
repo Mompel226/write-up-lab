@@ -16,7 +16,7 @@
 
   function igTable() {
     return WUL.table({
-      caption: 'Table 1. The effect of temperature on the time taken for amylase to digest starch',
+      caption: 'Table 1. Data showing the effect of temperature (20–60 °C) on the time taken for amylase to digest starch.',
       head: [[{ t: 'Temperature / °C', rs: 2 }, { t: 'Time for starch to disappear / s', cs: 4 }], ['Trial 1', 'Trial 2', 'Trial 3', 'Mean']],
       rows: D.g.temps.map(function (t, i) { return [t].concat(D.g.trials[i]).concat([D.g.means[i]]); }),
       cls: 'dt--mini'
@@ -24,7 +24,7 @@
   }
   function iaRaw() {
     return WUL.table({
-      caption: 'Table 1. Raw data. The mixture was sampled every 10 s.',
+      caption: 'Table 1. Raw data showing the effect of temperature (20.0–60.0 °C) on the time taken for fungal α-amylase to digest starch (n = 5; sampled every 10 s).',
       head: [[{ t: 'Temperature / °C ± 0.5', rs: 2 }, { t: 'Time for iodine to stop turning blue-black / s ± 10', cs: 5 }], ['1', '2', '3', '4', '5']],
       rows: D.i.temps.slice(0, 2).map(function (t, i) { return [t.toFixed(1)].concat(D.i.trials[i]); }).concat([[{ t: '… 40.0, 50.0 and 60.0 °C', cs: 6 }]]),
       cls: 'dt--mini'
@@ -32,7 +32,7 @@
   }
   function iaProc() {
     return WUL.table({
-      caption: 'Table 2. Processed data (n = 5)',
+      caption: 'Table 2. Processed data showing the effect of temperature (20.0–60.0 °C) on the mean time, SD and mean rate of starch digestion by fungal α-amylase (n = 5).',
       head: [['Temperature / °C', 'Mean time / s', 'SD / s', 'Mean rate / 10⁻³ s⁻¹']],
       rows: D.i.temps.map(function (t, i) { return [t.toFixed(1), D.i.means[i], D.i.sds[i].toFixed(1), D.i.rates[i].toFixed(1)]; }),
       cls: 'dt--mini'
@@ -44,9 +44,9 @@
       w: 380, h: 250, pad: { l: 52, r: 12, t: 10, b: 44 },
       x: { min: 20, max: 60, step: 10, minor: 5, label: 'Temperature / °C' },
       y: { min: 0, max: 200, step: 50, minor: 5, label: 'Mean time / s' },
-      series: [{ id: 'm', pts: d.temps.map(function (t, i) { return [t, d.means[i]]; }), line: 'ruled', tone: 'lvl', err: lvl === 'g' ? null : d.sds }],
-      caption: lvl === 'g' ? 'Figure 1. Effect of temperature on the mean time for amylase to digest starch' :
-        'Figure 1. Mean time for fungal α-amylase to digest starch at 20–60 °C (n = 5; error bars = ± 1 SD)'
+      series: [{ id: 'm', pts: d.temps.map(function (t, i) { return [t, d.means[i]]; }), line: lvl === 'g' ? 'ruled' : 'smooth', tone: 'lvl', err: lvl === 'g' ? null : d.sds }],
+      caption: lvl === 'g' ? 'Figure 1. Line graph showing the effect of temperature (20–60 °C) on the mean time taken for amylase to digest starch.' :
+        'Figure 1. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).'
     });
   }
 
@@ -59,8 +59,8 @@
       { n: 'Apparatus', st: 'apparatus', tx: '10 cm³ graduated pipette · water bath · spotting tile · stopwatch · 1 % starch solution, 100 cm³', job: 'Sizes and quantities for everything.', lose: '“A pipette, some starch.”' },
       { n: 'Risk assessment', st: 'safety', tx: 'Iodine solution: irritant to eyes → wear eye protection…', job: 'Each hazard from this method, with the precaution that matches it.', lose: '“Wear a lab coat”, or “be careful”: the precaution must match a hazard.' },
       { n: 'Method', st: 'method', tx: '1. 5.0 cm³ of 1 % starch solution was measured into a test tube… 2. The tube was left in the water bath for 5 minutes to reach the temperature…', job: 'Numbered, past tense, passive voice. Detailed enough for someone else to repeat.', lose: 'No time for the mixture to reach the test temperature, so the temperature is not what the report says.' },
-      { n: 'Results table', st: 'tables', html: igTable, job: 'One ruled table: the independent variable first, then the trials, then the mean. Units in the headings only.', lose: '“180 s” written in every cell, or a mean written as 116.67 from whole-second data.' },
-      { n: 'Graph', st: 'graphs', html: function () { return graph('g'); }, job: 'Independent variable on the x-axis, small crosses, ruled point to point. The line stops at the first and last points.', lose: 'Large dots, a freehand line, or a line drawn to the origin.' },
+      { n: 'Results table', st: 'tables', html: igTable, job: 'A title above that names both variables: “Data showing the effect of … on …”. Then one ruled table: the independent variable first, then the trials, then the mean. Units in the headings only.', lose: '“180 s” written in every cell, or a mean written as 116.67 from whole-second data.' },
+      { n: 'Graph', st: 'graphs', html: function () { return graph('g'); }, job: 'Independent variable on the x-axis, small crosses, ruled point to point. A title below that starts with the type of graph and names both variables.', lose: 'Large dots, a freehand line, or a line drawn to the origin.' },
       { n: 'Data analysis', st: 'analysis', tx: 'The mean time fell from 180 s at 20 °C to a minimum of 53 s at 50 °C (a 71 % decrease), then rose to 93 s at 60 °C…', job: 'The trend, key values with units, a calculated comparison, and any anomalies. No explanation yet.', lose: '“The graph goes down and then up.”' },
       { n: 'Conclusion', st: 'conclusion', tx: 'The results support the hypothesis. The time was shortest at 50 °C because… above this temperature the active site changes shape…', job: 'Say whether the hypothesis was supported, give the evidence, then explain the biology.', lose: 'Repeating the trend without explaining it.' },
       { n: 'Evaluation', st: 'evaluation', tx: 'The end point was judged by eye every 10 s. This is a random error, which reduced the precision…', job: 'Anomalies, named errors, and an improvement for each one.', lose: '“Human error.”' }
@@ -74,7 +74,7 @@
       { n: 'Method', st: 'method', crit: 'Research design', tx: '1. 5.00 cm³ of 1.0 % starch in pH 6.0 buffer was pipetted into each of five tubes…', job: 'Specific materials and precise steps, so that it “could in principle” be repeated.', lose: '“The solution was heated to the required temperature.”', chg: 'Instrument uncertainties are stated.' },
       { n: 'Raw data', st: 'tables', crit: 'Data analysis', html: iaRaw, job: 'Every measurement, with the uncertainty in the heading. Here the uncertainty comes from the sampling interval.', lose: 'An uncertainty that cannot be true, such as ± 0.2 s when sampling every 10 s.', chg: 'Raw data gets its own table, with ± uncertainties.' },
       { n: 'Processed data', st: 'processing', crit: 'Data analysis', html: iaProc, job: 'Means, standard deviation and the rate, plus one worked example of each calculation.', lose: 'Calculations with no worked example, so the examiner cannot follow them.', chg: 'SD, a derived quantity and a worked example are new.' },
-      { n: 'Graph', st: 'graphs', crit: 'Data analysis', html: function () { return graph('i'); }, job: 'Means with error bars, and the caption says what the bars show.', lose: 'Error bars with no stated meaning.', chg: 'Error bars appear, and the caption names them.' },
+      { n: 'Graph', st: 'graphs', crit: 'Data analysis', html: function () { return graph('i'); }, job: 'Means with error bars. The title below names the type of graph and both variables, then n and what the bars show.', lose: 'Error bars with no stated meaning.', chg: 'Error bars appear, and the caption names them.' },
       { n: 'Analysis', st: 'analysis', crit: 'Data analysis', tx: 'The SD bars at 40, 50 and 60 °C do not overlap, which suggests the minimum at 50 °C is not due to chance…', job: 'Trend and key values, plus what the uncertainty allows you to claim. A statistical test is optional.', lose: 'Claiming a difference where the error bars overlap.', chg: 'Uncertainty now shapes the claim.' },
       { n: 'Conclusion', st: 'conclusion', crit: 'Conclusion', tx: 'The rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹)… This is close to the 55 °C optimum reported for free *A. oryzae* α-amylase (Raviyan et al. 5464).', job: 'Answer the research question with processed data and its uncertainty, then compare with published science.', lose: '“This agrees with the literature”: which literature, and how closely?', chg: 'Answer the question first. A comparison with a published value is required.' },
       { n: 'Evaluation', st: 'evaluation', crit: 'Evaluation', tx: 'The largest weakness was the 10 s sampling interval, because it is larger than the SD at 40 °C and 50 °C… Smaller: the bath drifted by ± 0.5 °C…', job: 'Specific weaknesses, their relative impact (which mattered most), and a realistic improvement for each.', lose: 'A general list: “small sample, human error, time”.', chg: 'New: rank the weaknesses. Extensions earn nothing.' },

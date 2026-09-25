@@ -28,7 +28,7 @@
     x: { min: 0, max: 1, step: 0.2, minor: 4, label: 'Concentration of sucrose / mol dm⁻³' },
     y: { min: -30, max: 20, step: 5, minor: 5, label: 'Change in mass / %', fmt: minus },
     series: [{ id: 'p', pts: POTATO, mark: 'x', line: 'best' }],
-    caption: 'Figure 1. Mean percentage change in mass of potato cylinders after 24 hours (n = 5 at each concentration). Straight line of best fit: r = −0.99, R² = 0.99.'
+    caption: 'Figure 1. Line graph showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 24 hours (n = 5), with a straight line of best fit (r = −0.99, R² = 0.99).'
   };
 
   WUL.station({
@@ -62,7 +62,7 @@
       { type: 'steps', title: 'A worked t-test',
         intro: 'The IB amylase data, five trials at each temperature. Press Next step.',
         stage: { table: {
-          caption: 'Table 1. A two-tailed t-test on the time for fungal α-amylase to digest starch (n = 5)',
+          caption: 'Table 1. Processed data showing the effect of temperature (40.0 and 50.0 °C) on the time taken for fungal α-amylase to digest starch, with a two-tailed t-test (n = 5).',
           head: [['', '40 °C', '50 °C']],
           rows: [
             ['Null hypothesis', { t: 'No difference between the two mean times', cs: 2, el: 'h0' }],
@@ -94,7 +94,7 @@
 
       { type: 'table', title: 'A worked chi-squared test',
         spec: {
-          caption: 'Table 2. Woodlice in a choice chamber after 10 minutes',
+          caption: 'Table 2. Raw and processed data showing the effect of humidity (damp or dry side) on the number of woodlice on each side of a choice chamber after 10 minutes (n = 40), with a chi-squared test.',
           head: [['', 'Damp side', 'Dry side', 'Total']],
           rows: [
             ['Observed count (O)', '32', '8', '40'],

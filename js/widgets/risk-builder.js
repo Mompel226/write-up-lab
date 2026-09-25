@@ -36,7 +36,7 @@
   var WATCH = { id: 'watch', t: 'The stopwatch', real: false, why: 'A stopwatch cannot cause harm in this method.' };
 
   var PRACS = [
-    { name: 'Amylase and starch',
+    { name: 'Amylase and starch', inv: 'the effect of temperature (20–60 °C) on the time taken for amylase to digest starch',
       blurb: 'Starch and amylase are mixed in a water bath at 20–60 °C. Every 10 s, a drop is tested with iodine solution on a spotting tile.',
       items: [
         { id: 'iodine', t: 'Iodine solution, 0.01 mol dm⁻³', real: true, why: 'It can irritate the eyes, and it stains skin.',
@@ -62,8 +62,8 @@
         { t: 'Saliva was used as the source of amylase, with written consent.', why: 'Not allowed at IB: no body fluids of any kind, not even your own.' }
       ] },
 
-    { name: 'Catalase and hydrogen peroxide',
-      blurb: 'Pieces of liver or potato are added to hydrogen peroxide solution. The oxygen released is collected and measured.',
+    { name: 'Catalase and hydrogen peroxide', inv: 'the effect of hydrogen peroxide concentration on the volume of oxygen released by catalase in ',
+      blurb: 'Pieces of liver or potato are added to hydrogen peroxide solutions of different concentrations, up to 6 %. The oxygen released is collected and measured.',
       tissues: ['liver', 'potato'],
       items: [
         { id: 'h2o2', t: 'Hydrogen peroxide solution, 6 %', real: true, why: 'An irritant: it can damage the eyes and irritate the skin.',
@@ -100,7 +100,7 @@
         ]
       } },
 
-    { name: 'Beetroot membranes and temperature',
+    { name: 'Beetroot membranes and temperature', inv: 'the effect of temperature (20–70 °C) on the leakage of red pigment from beetroot discs',
       blurb: 'Beetroot discs are held in hot water baths from 20 to 70 °C. The red pigment that leaks from the discs is measured with a colorimeter.',
       items: [
         { id: 'hot', t: 'Water baths at up to 70 °C', real: true, why: 'Hot water can scald the skin.',
@@ -372,9 +372,9 @@
     function stage4() {
       var box = h('section', { class: 'wd-panel wd-risk-builder__stage', 'aria-label': 'Your risk assessment' });
       box.appendChild(heading(IB ? 4 : 3, 'Your risk assessment'));
-      var name = P().name + (P().tissues ? ' (' + tissue + ')' : '');
+      var inv = P().inv + (P().tissues ? tissue : '');
       var spec = {
-        caption: 'Table 1. Risk assessment: ' + name.toLowerCase().replace(/^./, function (c) { return c.toUpperCase(); }),
+        caption: 'Table 1. Risk assessment for the investigation of ' + inv + '.',
         cls: 'wd-risk-builder__t',
         head: [IB ? ['Hazard', 'Risk', 'Control measure', 'Emergency action'] : ['Hazard', 'Risk', 'Precaution']],
         rows: realHere().map(function (it) {

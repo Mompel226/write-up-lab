@@ -8,7 +8,7 @@
 
   /* the path from raw data to the answer, drawn from the running example */
   var PATH = {
-    caption: 'Table 1. The time for starch to disappear at five temperatures (five trials), with the rate calculated from each mean',
+    caption: 'Table 1. Raw and processed data showing the effect of temperature (20.0–60.0 °C) on the time taken for fungal α-amylase to digest starch, with the rate calculated from each mean (n = 5).',
     head: [['Temperature / °C ± 0.5', 'Times of the five trials / s ± 10', 'Mean time / s', 'Rate / 10⁻³ s⁻¹']],
     rows: idx.map(function (k) {
       return [

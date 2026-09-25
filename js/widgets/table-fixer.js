@@ -4,8 +4,8 @@
    one of the fixes: the right one repairs the table in place (green)
    and says why; a wrong one says why not and keeps the fault.
 
-   Three tables: amylase and temperature (WUL.data.amylase), pondweed
-   and lamp distance, potato cylinders in sucrose solutions.
+   Four tables: amylase and temperature (WUL.data.amylase), catalase drawn
+   as a maths table, pondweed and lamp distance, potato cylinders in sucrose solutions.
    At IB level (WUL.level() 'i' or 'e') each table is the IB version:
    raw-data or processed-data tables, with uncertainty faults.
 
@@ -13,6 +13,8 @@
      cap   caption cell
      head  header rows; rows  body rows (first cell = independent variable)
      order {f, bad:[row order while broken]}   ivLast: fault id (IV column shown last while broken)
+     flip  {f, corner:[across, down], across:[…], rows:[[label, …]…]}: while fault f is unfixed the table is
+           drawn turned round, maths-style, with a diagonal corner; fixed, it is head + rows
      faults {id: {q, opts:[{t, ok, why}], rule, note}}
    A cell: 'text' | {t, rs, cs} | {f:faultId, bad, good, t, rs, cs, ph, drop}
      bad/good: the text while broken / once fixed (t = the same text in both)
@@ -62,7 +64,7 @@
     /* ===== A. Amylase and temperature ===== */
     var ag = A.g, ai = A.i;
     var aG = {
-      cap: X('title', 'Results', 'Table 1. The effect of temperature on the time taken for amylase to digest starch'),
+      cap: X('title', 'Results', 'Table 1. Data showing the effect of temperature (20–60 °C) on the time taken for amylase to digest starch.'),
       head: [
         [X('ivh', 'Temp', 'Temperature / °C', { rs: 2 }), X('dvh', 'Time for starch to disappear', 'Time for starch to disappear / s', { cs: 4 })],
         TRIAL3.concat(['Mean'])
@@ -79,11 +81,11 @@
       faults: {
         title: { q: 'What should the title be?',
           opts: [
-            { t: 'Table 1. The effect of temperature on the time taken for amylase to digest starch', ok: true, why: 'A numbered title, above the table, that names both variables.' },
+            { t: 'Table 1. Data showing the effect of temperature (20–60 °C) on the time taken for amylase to digest starch.', ok: true, why: 'Numbered, above the table. “Data showing the effect of”, then both variables and the range.' },
             { t: 'Results table', why: 'This says nothing about what was changed or what was measured.' },
-            { t: 'Temperature and time', why: 'Closer, but time for what? Use “The effect of … on …”.' }
+            { t: 'Table 1. The effect of temperature on the time taken for amylase to digest starch', why: 'Nearly. Start the same way every time: Table 1. Data showing the effect of … on …' }
           ],
-          rule: 'A numbered title above the table: “Table 1. The effect of … on …”.' },
+          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         ivh: { q: 'What should this heading say?',
           opts: [
             { t: 'Temperature / °C', ok: true, why: 'The quantity in full, a solidus, then the unit.' },
@@ -123,7 +125,7 @@
     };
 
     var aI = {
-      cap: X('title', 'Table 1. Results', 'Table 1. Raw data: the time for fungal α-amylase to digest starch at five temperatures (n = 5)'),
+      cap: X('title', 'Table 1. Results', 'Table 1. Raw data showing the effect of temperature (20.0–60.0 °C) on the time taken for fungal α-amylase to digest starch (n = 5).'),
       head: [
         [X('ivh', 'Temp / °C', 'Temperature / °C ± 0.5', { rs: 2 }),
          X('pm', 'Time for starch to disappear / s ± 0.01', 'Time for starch to disappear / s ± 10', { cs: 5 }),
@@ -140,11 +142,11 @@
       faults: {
         title: { q: 'What should the title be?',
           opts: [
-            { t: 'Table 1. Raw data: the time for fungal α-amylase to digest starch at five temperatures (n = 5)', ok: true, why: 'It says the table holds raw data, names the system and both variables, and gives n.' },
+            { t: 'Table 1. Raw data showing the effect of temperature (20.0–60.0 °C) on the time taken for fungal α-amylase to digest starch (n = 5).', ok: true, why: 'It says the table holds raw data, names both variables with the range, names the enzyme, and gives n.' },
             { t: 'Table 1. Amylase results', why: 'Which amylase, which variables, and how many trials? Say all three.' },
-            { t: 'Table 1. Raw data', why: 'A good start. Now name the system, both variables and n.' }
+            { t: 'Table 1. Raw data', why: 'A good start. Now add “showing the effect of …”, with both variables and n.' }
           ],
-          rule: 'An IB title says raw or processed, names the system and both variables, and gives n.' },
+          rule: 'Our rule for every IB table title: “Table 1. Raw data showing the effect of [independent variable, with its range] on [dependent variable] (n = …).”' },
         ivh: { q: 'What should this heading say?',
           opts: [
             { t: 'Temperature / °C ± 0.5', ok: true, why: 'The quantity in full, its unit, and the thermometer’s uncertainty.' },
@@ -197,7 +199,7 @@
       ],
       rule: 'The independent variable goes in the first column.' };
     var bG = {
-      cap: X('title', '', 'Table 1. The effect of lamp distance on the volume of gas released by pondweed in 5 minutes', { ph: '(no title)' }),
+      cap: X('title', '', 'Table 1. Data showing the effect of lamp distance (10–50 cm) on the volume of gas released by pondweed in 5 minutes.', { ph: '(no title)' }),
       head: [
         [X('ivpos', null, null, { t: 'Distance of lamp from pondweed / cm', rs: 2 }), X('dvh', 'Volume / cm³', 'Volume of gas collected in 5 min / cm³', { cs: 4 })],
         TRIAL3.concat(['Mean'])
@@ -216,11 +218,11 @@
       faults: {
         title: { q: 'This table has no title. Which one is right?',
           opts: [
-            { t: 'Table 1. The effect of lamp distance on the volume of gas released by pondweed in 5 minutes', ok: true, why: 'Numbered, above the table, and it names both variables and the organism.' },
+            { t: 'Table 1. Data showing the effect of lamp distance (10–50 cm) on the volume of gas released by pondweed in 5 minutes.', ok: true, why: 'Numbered, above the table. It names both variables, the range and the organism.' },
             { t: 'Photosynthesis', why: 'A topic, not a title. Say what was changed and what was measured.' },
             { t: 'Table 1. Pondweed', why: 'Name both variables: lamp distance and volume of gas.' }
           ],
-          rule: 'A numbered title above the table: “Table 1. The effect of … on …”.' },
+          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         ivpos: bIVPOS,
         order: ORDER('distance'),
         dvh: { q: '“Volume” of what, and over what time?',
@@ -241,7 +243,7 @@
       }
     };
     var bI = {
-      cap: X('title', 'Table 1. Results', 'Table 1. Raw data: the volume of gas released by *Elodea* in 5 min at five lamp distances (n = 5)'),
+      cap: X('title', 'Table 1. Results', 'Table 1. Raw data showing the effect of lamp distance (10.0–50.0 cm) on the volume of gas released by *Elodea* in 5 min (n = 5).'),
       head: [
         [X('ivpos', null, null, { t: 'Distance of lamp from pondweed / cm ± 0.1', rs: 2 }), X('pm', 'Volume of gas collected in 5 min / cm³', 'Volume of gas collected in 5 min / cm³ ± 0.1', { cs: 5 })],
         TRIAL5.slice()
@@ -261,11 +263,11 @@
       faults: {
         title: { q: 'What should the title be?',
           opts: [
-            { t: 'Table 1. Raw data: the volume of gas released by *Elodea* in 5 min at five lamp distances (n = 5)', ok: true, why: 'It says the table holds raw data, names the organism and both variables, and gives n.' },
+            { t: 'Table 1. Raw data showing the effect of lamp distance (10.0–50.0 cm) on the volume of gas released by *Elodea* in 5 min (n = 5).', ok: true, why: 'It says the table holds raw data, names both variables with the range, names the organism, and gives n.' },
             { t: 'Table 1. Pondweed data', why: 'Which pondweed, which variables, and how many trials? Say all three.' },
-            { t: 'Table 1. Raw data', why: 'A good start. Now name the organism, both variables and n.' }
+            { t: 'Table 1. Raw data', why: 'A good start. Now add “showing the effect of …”, with both variables and n.' }
           ],
-          rule: 'An IB title says raw or processed, names the system and both variables, and gives n.' },
+          rule: 'Our rule for every IB table title: “Table 1. Raw data showing the effect of [independent variable, with its range] on [dependent variable] (n = …).”' },
         pm: { q: 'This raw-data heading has no uncertainty. The syringe is marked every 0.2 cm³, and each volume was read to the nearest 0.1 cm³. Which heading is right?',
           opts: [
             { t: 'Volume of gas collected in 5 min / cm³ ± 0.1', ok: true, why: 'Half of the 0.2 cm³ division: each reading is within 0.1 cm³.' },
@@ -283,7 +285,7 @@
     var cRows = [['0.0', '2.50', '2.71', '+0.21', '+8.4'], ['0.2', '2.48', '2.58', '+0.10', '+4.0'], ['0.4', '2.52', '2.49', '−0.03', '−1.2'],
                  ['0.6', '2.49', '2.28', '−0.21', '−8.4'], ['0.8', '2.51', '2.21', '−0.30', '−12.0'], ['1.0', '2.50', '2.15', '−0.35', '−14.0']];
     var cG = {
-      cap: X('title', 'Osmosis', 'Table 1. The effect of sucrose concentration on the percentage change in mass of potato cylinders'),
+      cap: X('title', 'Osmosis', 'Table 1. Data showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mass of potato cylinders.'),
       head: [[X('ivh', 'Sucrose', 'Concentration of sucrose solution / mol dm⁻³'), X('twin', 'Mass / g', 'Initial mass / g'), X('twin', 'Mass / g', 'Final mass / g'), 'Change in mass / g', 'Percentage change in mass / %']],
       rows: cRows.map(function (row, r) {
         var c = row.slice();
@@ -295,11 +297,11 @@
       faults: {
         title: { q: 'What should the title be?',
           opts: [
-            { t: 'Table 1. The effect of sucrose concentration on the percentage change in mass of potato cylinders', ok: true, why: 'Numbered, above the table, and it names both variables and the tissue.' },
+            { t: 'Table 1. Data showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mass of potato cylinders.', ok: true, why: 'Numbered, above the table. It names both variables, the range and the tissue.' },
             { t: 'Osmosis in potatoes', why: 'That is the topic. Name both variables.' },
             { t: 'Table 1. Potato masses', why: 'Name the independent variable too: sucrose concentration.' }
           ],
-          rule: 'A numbered title above the table: “Table 1. The effect of … on …”.' },
+          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         ivh: { q: 'What should this heading say?',
           opts: [
             { t: 'Concentration of sucrose solution / mol dm⁻³', ok: true, why: 'It names the property, concentration, and gives its unit.' },
@@ -332,7 +334,7 @@
       }
     };
     var cI = {
-      cap: X('title', 'Table 2. Mean percentage change in mass', 'Table 2. Processed data: the mean percentage change in mass of potato cylinders after 60 min in sucrose solutions (n = 3)'),
+      cap: X('title', 'Table 2. Mean percentage change in mass', 'Table 2. Processed data showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 60 min (n = 3).'),
       head: [['Concentration of sucrose solution / mol dm⁻³', X('pmcalc', 'Mean percentage change in mass / % ± 0.01', 'Mean percentage change in mass / %'), 'Standard deviation / %']],
       rows: [
         [X('water', 'water', '0.0'), '+8.2', '0.42'],
@@ -345,11 +347,11 @@
       faults: {
         title: { q: 'What should the title be?',
           opts: [
-            { t: 'Table 2. Processed data: the mean percentage change in mass of potato cylinders after 60 min in sucrose solutions (n = 3)', ok: true, why: 'It says the table holds processed data, names the tissue and both variables, and gives n.' },
+            { t: 'Table 2. Processed data showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 60 min (n = 3).', ok: true, why: 'It says the table holds processed data, names both variables with the range, names the tissue, and gives n.' },
             { t: 'Table 2. Results', why: 'Say what was processed, what was changed, and how many cylinders each mean is based on.' },
-            { t: 'Table 2. Processed data', why: 'A good start. Now say what was processed, and give n.' }
+            { t: 'Table 2. Processed data', why: 'A good start. Now add “showing the effect of …”, with both variables and n.' }
           ],
-          rule: 'An IB title says raw or processed, names the system and both variables, and gives n.' },
+          rule: 'Our rule for every IB table title: “Table 2. Processed data showing the effect of [independent variable, with its range] on [dependent variable] (n = …).”' },
         pmcalc: { q: 'This column is calculated. Does ± 0.01 belong in its heading?',
           opts: [
             { t: 'No: remove it. The standard deviation column shows the spread.', ok: true, why: 'The balance’s ± 0.01 g does not apply to a calculated percentage. Here the SD column shows the spread.' },
@@ -382,8 +384,58 @@
       }
     };
 
+    /* ===== B. Catalase, drawn as a maths table (turned round, with a diagonal corner) =====
+       Potato discs in hydrogen peroxide; oxygen collected for 30 s. Means checked: 2.2, 4.1, 6.1, 7.7, 8.7. */
+    var dD = [1, 2, 3, 4, 5];
+    var d3 = [['2.1', '2.4', '2.0', '2.2'], ['4.2', '3.9', '4.2', '4.1'], ['6.0', '6.3', '6.1', '6.1'], ['7.6', '7.9', '7.7', '7.7'], ['8.7', '8.9', '8.6', '8.7']];
+    function col(k) { return d3.map(function (r) { return r[k]; }); }
+    var FLIP = function (ib) {
+      return { q: 'This is a maths table: the concentrations run across the top, and a diagonal line splits the corner. What should change?',
+        opts: [
+          { t: 'Turn it round: concentration down the first column, then one column for each trial' + (ib ? '' : ' and the mean'), ok: true, why: 'In biology, the independent variable runs down the first column, and every column has its own heading with its unit. The volume of oxygen now has a heading too.' },
+          { t: 'Keep the layout, but rub out the diagonal line', why: 'The concentrations would still run across the top. Turn the table round.' },
+          { t: 'Keep it: the numbers are all there', why: 'The numbers are there, but nothing says what they measure, or in what unit. Turn the table round, and give each column a heading.' }
+        ],
+        rule: 'The independent variable runs down the first column, never across the top. No diagonal corner: every column has its own heading.' };
+    };
+    var dG = {
+      cap: X('title', '', 'Table 1. Data showing the effect of hydrogen peroxide concentration (1–5 %) on the volume of oxygen released by catalase in potato in 30 s.', { ph: '(no title)' }),
+      flip: { f: 'flip', corner: ['Concentration / %', 'Trial'], across: dD.map(String),
+        rows: [['1'].concat(col(0)), ['2'].concat(col(1)), ['3'].concat(col(2)), ['Mean'].concat(col(3))] },
+      head: [[{ t: 'Concentration of hydrogen peroxide / %', rs: 2 }, { t: 'Volume of oxygen collected in 30 s / cm³', cs: 4 }], TRIAL3.concat(['Mean'])],
+      rows: dD.map(function (d, r) { return [String(d)].concat(d3[r]); }),
+      faults: {
+        title: { q: 'This table has no title. Which one is right?',
+          opts: [
+            { t: 'Table 1. Data showing the effect of hydrogen peroxide concentration (1–5 %) on the volume of oxygen released by catalase in potato in 30 s.', ok: true, why: 'Numbered, above the table. It names both variables, the range and the enzyme.' },
+            { t: 'Catalase', why: 'A topic, not a title. Say what was changed and what was measured.' },
+            { t: 'Table 1. Hydrogen peroxide and oxygen', why: 'It names two substances, not the two variables. Use: Data showing the effect of … on …' }
+          ],
+          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
+        flip: FLIP(false)
+      }
+    };
+    var dI = {
+      cap: X('title', 'Table 1. Catalase results', 'Table 1. Raw data showing the effect of hydrogen peroxide concentration (1.0–5.0 %) on the volume of oxygen released by catalase in potato in 30 s (n = 3).'),
+      flip: { f: 'flip', corner: ['Concentration / %', 'Trial'], across: dD.map(function (d) { return d.toFixed(1); }),
+        rows: [['1'].concat(col(0)), ['2'].concat(col(1)), ['3'].concat(col(2))] },
+      head: [[{ t: 'Concentration of hydrogen peroxide / %', rs: 2 }, { t: 'Volume of oxygen collected in 30 s / cm³ ± 0.1', cs: 3 }], TRIAL3.slice()],
+      rows: dD.map(function (d, r) { return [d.toFixed(1)].concat(d3[r].slice(0, 3)); }),
+      faults: {
+        title: { q: 'What should the title be?',
+          opts: [
+            { t: 'Table 1. Raw data showing the effect of hydrogen peroxide concentration (1.0–5.0 %) on the volume of oxygen released by catalase in potato in 30 s (n = 3).', ok: true, why: 'It says the table holds raw data, names both variables with the range, names the enzyme, and gives n.' },
+            { t: 'Table 1. Catalase results', why: 'Which variables, and how many trials? Say both.' },
+            { t: 'Table 1. Raw data', why: 'A good start. Now add “showing the effect of …”, with both variables and n.' }
+          ],
+          rule: 'Our rule for every IB table title: “Table 1. Raw data showing the effect of [independent variable, with its range] on [dependent variable] (n = …).”' },
+        flip: FLIP(true)
+      }
+    };
+
     return [
       { id: 'amylase', name: 'Amylase and temperature', g: aG, i: aI },
+      { id: 'catalase', name: 'Catalase and hydrogen peroxide: a maths table', g: dG, i: dI },
       { id: 'pondweed', name: 'Pondweed and lamp distance', g: bG, i: bI },
       { id: 'potato', name: 'Potato cylinders in sucrose solutions', g: cG, i: cI }
     ];
@@ -437,6 +489,7 @@
       var v = V();
       var t = h('table', { class: 'dt ' + P + '__table' });
       var cap = cell('caption', v.cap); if (cap) t.appendChild(cap);
+      if (v.flip && !st.fixed[v.flip.f]) return flipped(t, v.flip);
       var ivLast = v.ivLast && !st.fixed[v.ivLast];
       var thead = h('thead');
       v.head.forEach(function (row, ri) {
@@ -456,6 +509,30 @@
         var tr = h('tr');
         cells.forEach(function (c) { var n = cell('td', c); if (n) tr.appendChild(n); });
         tb.appendChild(tr);
+      });
+      t.appendChild(tb);
+      return t;
+    }
+
+    /* the maths layout: the independent variable across the top, a diagonal corner, labels down the side */
+    function flipped(t, fl) {
+      var thead = h('thead'), tr = h('tr');
+      var corner = h('th', { class: 'dt-diag' + (st.open === fl.f ? ' ' + P + '__cell--open' : '') });
+      var b = h('button', { type: 'button', class: P + '__f ' + P + '__f--diag', 'data-f': fl.f, 'data-src': fl.corner[0] + ' ╲ ' + fl.corner[1],
+        'aria-expanded': st.open === fl.f ? 'true' : 'false', 'aria-controls': uid + '-panel',
+        'aria-label': 'A corner split by a diagonal line: ' + fl.corner[0] + ' across the top, ' + fl.corner[1] + ' down the side. Possible fault: tap to fix.' });
+      b.innerHTML = WUL.diagCell(fl.corner);
+      corner.appendChild(b);
+      tr.appendChild(corner);
+      fl.across.forEach(function (x) { tr.appendChild(h('th', { html: md(String(x), { inline: true }) })); });
+      thead.appendChild(tr);
+      t.appendChild(thead);
+      var tb = h('tbody');
+      fl.rows.forEach(function (r) {
+        var row = h('tr');
+        row.appendChild(h('th', { html: md(String(r[0]), { inline: true }) }));
+        r.slice(1).forEach(function (c) { row.appendChild(h('td', { html: md(String(c), { inline: true }) })); });
+        tb.appendChild(row);
       });
       t.appendChild(tb);
       return t;
@@ -487,7 +564,7 @@
         var b = e.target.closest('.' + P + '__f'); if (!b) return;
         var f = b.getAttribute('data-f');
         st.open = f; st.msg = null;
-        st.src = b.hasAttribute('data-blank') ? b.getAttribute('data-blank') : b.textContent.trim();
+        st.src = b.hasAttribute('data-src') ? b.getAttribute('data-src') : b.hasAttribute('data-blank') ? b.getAttribute('data-blank') : b.textContent.trim();
         draw('.' + P + '__opt:not([disabled])');
       });
 
@@ -579,6 +656,9 @@
     '.wd-table-fixer__table td,.wd-table-fixer__table th{padding:8px 10px;transition:background-color .35s}',
     '.wd-table-fixer__f{appearance:none;-webkit-appearance:none;background:none;border:0;margin:0;padding:3px 4px;min-height:30px;font:inherit;color:inherit;cursor:pointer;border-radius:3px;text-decoration:underline wavy var(--red);text-decoration-thickness:1.4px;text-underline-offset:4px;text-align:inherit;line-height:1.35}',
     '.wd-table-fixer__f:hover{background:var(--red-wash)}',
+    '.wd-table-fixer__f.wd-table-fixer__f--diag{position:absolute;inset:0;width:100%;height:100%;padding:0;border-radius:0;text-decoration:none}',
+    '.wd-table-fixer__f--diag span{text-decoration:underline wavy var(--red);text-decoration-thickness:1.4px;text-underline-offset:4px}',
+    '.wd-table-fixer__table th.dt-diag{padding:0}',
     '.wd-table-fixer__f[aria-expanded="true"]{background:var(--red-wash);box-shadow:0 0 0 2px var(--red)}',
     '.wd-table-fixer__f--blank{min-width:3.2em;border:1.5px dashed var(--red);text-decoration:none;color:var(--red);font-weight:700}',
     '.wd-table-fixer__ph{font:italic 400 .95rem/1.3 var(--serif);color:var(--red)}',

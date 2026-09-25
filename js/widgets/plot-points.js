@@ -20,7 +20,7 @@
     { id: 'best', name: 'A straight line of best fit' },
     { id: 'origin', name: 'A line to the origin' }
   ];
-  var VERDICT = { best: '✔ Best here', ok: '✔ Also accepted', no: '✘ Loses the mark', poor: '✘ Not suitable' };
+  var VERDICT = { best: '✔ Best here', ok: '✔ Also accepted', no: '✘ Loses the mark', poor: '✘ Not suitable', ask: '✘ Only if the question asks' };
 
   /* Each grid has square small squares: the plot width and height are in the same ratio as the
      number of small squares along each axis. */
@@ -28,20 +28,20 @@
     var A = WUL.data.amylase, L = WUL.level(), D = L === 'g' ? A.g : A.i;
     return [
       { id: 'amylase', name: 'Amylase',
-        caption: L === 'g' ? 'Table 1. Amylase and starch (mean of three trials)' : 'Table 2. Fungal α-amylase and starch (n = 5)',
+        caption: L === 'g' ? 'Table 1. Data showing the effect of temperature (20–60 °C) on the mean time taken for amylase to digest starch.' : 'Table 2. Processed data showing the effect of temperature (20–60 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5).',
         xh: 'Temperature / °C', yh: 'Mean time / s', xs: D.temps, ys: D.means, fx: String, fy: String,
         spec: { w: 504, h: 354, pad: { l: 64, r: 20, t: 16, b: 58 },
           x: { min: 0, max: 60, step: 10, minor: 5, label: 'Temperature / °C' },
           y: { min: 0, max: 200, step: 50, minor: 5, label: 'Mean time / s' } },
         origin: 'extend',
         joins: {
-          ruled: { v: 'best', t: 'Cambridge advises ruled lines from point to point unless a line of best fit is asked for. The line starts at 20 °C and stops at 60 °C.' },
-          smooth: { v: 'ok', t: 'The points lie on a clear curve, so one thin, smooth curve through them is also accepted. It is harder to draw well than ruled lines.', ib: 'At IB, do not quote R² for a curve drawn like this.' },
+          ruled: { v: 'ok', t: 'Accepted, but ruled lines suggest the time changes in straight lines between temperatures, and they put the optimum exactly on 50 °C.', g: { v: 'best', t: 'Cambridge advises ruled lines from point to point unless a line of best fit is asked for. The line starts at 20 °C and stops at 60 °C.' } },
+          smooth: { v: 'best', t: 'Biology predicts this shape: the rate rises to an optimum, then falls as the enzyme denatures. One thin, smooth curve through the trend shows it best.', ib: 'Do not quote R² for a curve you draw by hand.', g: { v: 'ok', t: 'The points lie on a clear curve, so one thin, smooth curve through them is also accepted. It is harder to draw well than ruled lines.' } },
           best: { v: 'no', t: 'The times fall and then rise again, so no straight line fits them. A straight line hides the minimum at 50 °C.' },
           origin: { v: 'no', t: 'No result was taken at 0 °C, so a line to the origin shows data that do not exist. Examiners report this as the most common graph error.' }
         } },
       { id: 'potato', name: 'Potato and sucrose',
-        caption: 'Table 1. Potato cylinders in sucrose solution',
+        caption: 'Table 1. ' + (L === 'g' ? 'Data' : 'Processed data') + ' showing the effect of sucrose concentration (0.0–0.5 mol dm⁻³) on the percentage change in mass of potato cylinders.',
         xh: 'Concentration of sucrose / mol dm⁻³', yh: 'Change in mass / %',
         xs: [0, 0.1, 0.2, 0.3, 0.4, 0.5], ys: [12.4, 7.1, 2.6, -2.2, -6.8, -11.3],
         fx: function (v) { return v.toFixed(1); }, fy: signed,
@@ -50,13 +50,13 @@
           y: { min: -15, max: 15, step: 5, minor: 5, label: 'Change in mass / %', fmt: minus } },
         zero: true, origin: 'forced',
         joins: {
-          ruled: { v: 'ok', t: 'Ruled lines from point to point are always accepted.' },
+          ruled: { v: 'ok', t: 'Ruled lines from point to point are always accepted.', g: { v: 'best', t: 'At IGCSE, join the points point to point with a ruler, unless the question asks for a line of best fit.' } },
           smooth: { v: 'poor', t: 'The points lie close to a straight line. A curve through every point adds bends that the trend does not have.' },
-          best: { v: 'best', t: 'The points lie close to a straight line, so one ruled line of best fit shows the trend. Where it crosses 0 % is the concentration at which the mass does not change.', ib: 'At IB, this fitted straight line is where R² belongs.' },
+          best: { v: 'best', g: { v: 'ask', t: 'The points lie close to a straight line, so a line of best fit would suit them. At IGCSE, draw one only when the question asks for it.' }, t: 'The points lie close to a straight line, so one ruled line of best fit shows the trend. Where it crosses 0 % is the concentration at which the mass does not change.', ib: 'At IB, this fitted straight line is where R² belongs.' },
           origin: { v: 'no', t: 'This line is forced through (0, 0). But at 0.0 mol dm⁻³ the mass increased by 12.4 %, so the origin is not a result.' }
         } },
       { id: 'pondweed', name: 'Pondweed and light',
-        caption: 'Table 1. Pondweed at six light intensities (mean of three trials)',
+        caption: 'Table 1. ' + (L === 'g' ? 'Data' : 'Processed data') + ' showing the effect of light intensity (500–3000 lux) on the mean number of bubbles released by pondweed per minute.',
         xh: 'Light intensity / lux', yh: 'Rate / bubbles per minute',
         xs: [500, 1000, 1500, 2000, 2500, 3000], ys: [6, 12, 17, 20, 22, 23], fx: String, fy: String,
         spec: { w: 474, h: 399, pad: { l: 64, r: 20, t: 16, b: 58 },
@@ -64,8 +64,8 @@
           y: { min: 0, max: 25, step: 5, minor: 5, label: 'Rate / bubbles per minute' } },
         origin: 'extend',
         joins: {
-          ruled: { v: 'ok', t: 'Ruled lines from point to point are always accepted.' },
-          smooth: { v: 'best', t: 'The rate rises and then reaches a plateau, so the points clearly lie on a curve. Draw one thin, smooth curve through them.' },
+          ruled: { v: 'ok', t: 'Ruled lines from point to point are always accepted.', g: { v: 'best', t: 'At IGCSE, join the points point to point with a ruler, unless the question asks for a curve of best fit.' } },
+          smooth: { v: 'best', t: 'The rate rises and then reaches a plateau, so the points clearly lie on a curve. Draw one thin, smooth curve through them.', g: { v: 'ok', t: 'The points lie on a clear curve, so one thin, smooth curve through them is also accepted. It must be smooth: never sketchy or freehand.' } },
           best: { v: 'no', t: 'The rate reaches a plateau at high light intensity. A straight line misses that pattern.' },
           origin: { v: 'no', t: 'No result was taken at 0 lux. The line must start at the first point, 500 lux.' }
         } }
@@ -104,13 +104,13 @@
     '.wd-plot-points__jopt:hover{border-color:var(--ink-3)}' +
     '.wd-plot-points__jopt[aria-pressed="true"]{border-color:var(--lvl);background:var(--lvl-wash)}' +
     '.wd-plot-points__jopt.v-best,.wd-plot-points__jopt.v-ok{border-color:var(--green)}' +
-    '.wd-plot-points__jopt.v-no,.wd-plot-points__jopt.v-poor{border-color:var(--red)}' +
+    '.wd-plot-points__jopt.v-no,.wd-plot-points__jopt.v-poor,.wd-plot-points__jopt.v-ask{border-color:var(--red)}' +
     '.wd-plot-points__verdict{padding:10px 14px;border-radius:var(--r);font-size:.97rem;line-height:1.5}' +
     '.wd-plot-points__verdict.v-best,.wd-plot-points__verdict.v-ok{background:var(--green-wash)}' +
-    '.wd-plot-points__verdict.v-no,.wd-plot-points__verdict.v-poor{background:var(--red-wash)}' +
+    '.wd-plot-points__verdict.v-no,.wd-plot-points__verdict.v-poor,.wd-plot-points__verdict.v-ask{background:var(--red-wash)}' +
     '.wd-plot-points__verdict b{margin-right:4px}' +
     '.wd-plot-points__verdict.v-best b,.wd-plot-points__verdict.v-ok b{color:var(--green)}' +
-    '.wd-plot-points__verdict.v-no b,.wd-plot-points__verdict.v-poor b{color:var(--red)}' +
+    '.wd-plot-points__verdict.v-no b,.wd-plot-points__verdict.v-poor b,.wd-plot-points__verdict.v-ask b{color:var(--red)}' +
     '@media (max-width:560px){.wd-plot-points.wd-panel{padding:12px 8px}}' +
     '@media (max-width:700px){.wd-plot-points__main{grid-template-columns:1fr;grid-template-areas:"t" "g" "c"}.wd-plot-points__side table.dt{width:100%}}';
 
@@ -336,6 +336,7 @@
         b.addEventListener('click', function () {
           join = j.id; draw();
           var J = ds.joins[j.id];
+          if (L === 'g' && J.g) J = Object.assign({}, J, J.g);
           opts.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
           b.classList.add('v-' + J.v);
           out.innerHTML = '<div class="wd-plot-points__verdict v-' + J.v + '"><b>' + esc(VERDICT[J.v]) + '.</b> ' + md(J.t, { inline: true }) + (J.ib && L !== 'g' ? ' ' + md(J.ib, { inline: true }) : '') + '</div>';
