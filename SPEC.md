@@ -274,6 +274,11 @@ No `max-width` in `ch` on text inside a box or a page column (step text, intros,
 home lede). A short measure left white space beside the words and he read it as broken. Only the big home heading
 keeps its 17ch, for its shape.
 
+## Header and footer (Daniel, 26 Sep 2026)
+The header carries "← Biology Hub" (https://nlcsbiology.com/biology-hub/, same tab). The footer never repeats "Made by":
+the name is in the header once. It says "Something wrong, or a suggestion? Please contact me:" + the work address,
+then what the site is checked against, then the licences.
+
 ## Writing rules (Daniel checks every word)
 0. **The reader IS the student** (Daniel, 24 Sep 2026). Speak to them as "you". Never write about "a student",
    "students" or "the learner" as if a teacher were reading. Simple words, plain headings, no clever or showy
