@@ -197,6 +197,13 @@ each leads to; "counting does not always mean χ²"; the IB's D3.2.14 use of "di
 `measured variable`, `discrete variable` (stats) and `continuous variable`, `categorical variable` (graphs), and
 linked from the "Choose the right test" table. Pop-ups close on a WIDTH change only (a phone's toolbar changes height).
 
+## "Two-tailed" is explained where it is used (Daniel, 25 Sep 2026)
+The worked t-test has a step "Two tails: either direction" before "Find p"; a grid "Two tails or one?" follows it
+(WUL.tailsSvg: t distribution, df = 8, critical t 2.31 two-tailed / 1.86 one-tailed, checked in R). The keyword
+`two-tailed test` (fig: 'tails') links every mention: How to report a test, the red pen, the IA and EE models,
+Find your test. The two-tailed test IS the normal t-test (=T.TEST(…, 2, …); R's default); one-tailed only when the
+direction was predicted before collecting data.
+
 ## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
 - No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
 - Overlap: "the graph **alone** cannot show a difference" + the test's p-value. NEVER "these data do not show a

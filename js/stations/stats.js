@@ -53,10 +53,10 @@
 
       { type: 'anatomy', title: 'How to report a test',
         intro: 'A test does not prove anything. It says how often chance alone would give a difference this large. Report it in four parts.',
-        model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.} {2:A two-tailed t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
+        model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.} {2:A [[two-tailed|two-tailed test]] t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
         parts: [
           { n: 1, name: 'The null hypothesis', note: 'What “no effect” would look like. State it before the test.' },
-          { n: 2, name: 'The test', note: 'Its name. Two-tailed if a difference in either direction was possible.' },
+          { n: 2, name: 'The test', note: 'Its name. [[Two-tailed|two-tailed test]]: a difference in either direction counts. That is the normal choice.' },
           { n: 3, name: 'The numbers', note: 'The value, the degrees of freedom (df) and p.' },
           { n: 4, name: 'The meaning', note: 'One sentence in words, with the means and their units.' }
         ] },
@@ -83,8 +83,14 @@
           { title: 'Find the two standard deviations', show: ['sd-1', 'sd-2'], text: 'Both are 5.5 s. Their spreads are similar, which this t-test needs. Keep the unrounded value: SD² = 30 exactly.' },
           { title: 'Calculate t', show: ['t'], text: 't = difference in means ÷ √(SD₁²/n₁ + SD₂²/n₂). The larger t is, the less likely it is that chance alone gave the difference.' },
           { title: 'Find the degrees of freedom', show: ['df'], text: 'For two groups, df = n₁ + n₂ − 2 = 5 + 5 − 2 = 8.' },
+          { title: 'Two tails: either direction', show: [], focus: ['h0'], text: 'The null hypothesis says “no difference”. A real difference could go either way: 50 °C could be faster, or slower, than 40 °C. So a large t at __either__ end, or tail, of the chance results counts. That makes the test **two-tailed**. It is the normal t-test: spreadsheets and R do it unless you ask for something else.' },
           { title: 'Find p, and decide', show: ['p', 'dec'], text: 'In a spreadsheet, =T.TEST(B2:B6, C2:C6, 2, 2) gives p directly. The first 2 means two tails. The second 2 means two separate groups with similar spreads. With a table of critical values: for df = 8, t must be above 2.31 for p < 0.05. Here t is 5.77.' }
         ] },
+
+      { type: 'grid2', title: 'Two tails or one?', items: [
+        { label: 'Two-tailed: the normal t-test', tone: 'g', v: { html: WUL.tailsSvg('two') }, note: 'Asks: is there a difference, __in either direction__? The 5 % of rarest chance results is split, 2.5 % in each tail. For df = 8, t must pass 2.31. Use this one.' },
+        { label: 'One-tailed', v: { html: WUL.tailsSvg('one') }, note: 'Asks: is 50 °C faster, __only__? All 5 % sits in one tail, so the bar is lower: 1.86. Allowed only if you predicted the direction before collecting any data, and a difference the other way would not count. Rarely used in an IA.' }
+      ] },
 
       { type: 'rules', title: 'What p < 0.05 means', items: [
         '__p < 0.05__ means: if the [[null hypothesis]] were true, a difference at least this large would happen by chance less than 5 % of the time.',
@@ -139,7 +145,7 @@
           c: { label: 'wrong meaning', why: 'p < 0.05 means: if there were no real difference, a difference this large would happen by chance less than 5 % of the time.' },
           d: { label: 'too many tests', why: 'With many tests at p = 0.05, about 1 in 20 looks significant by chance alone. Plan one comparison before you collect the data.' }
         },
-        fixed: '==The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.== A two-tailed t-test ==showed== that the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s) ==(t = 5.77, df = 8, p < 0.001)==. ==If there were no real difference, a difference this large would arise by chance less than 0.1 % of the time.== ==This one comparison was planned before the data were collected.== It tests whether the rate still rises between 40 °C and 50 °C, below the published optimum of 55 °C.',
+        fixed: '==The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.== A [[two-tailed|two-tailed test]] t-test ==showed== that the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s) ==(t = 5.77, df = 8, p < 0.001)==. ==If there were no real difference, a difference this large would arise by chance less than 0.1 % of the time.== ==This one comparison was planned before the data were collected.== It tests whether the rate still rises between 40 °C and 50 °C, below the published optimum of 55 °C.',
         fixedNote: 'The null hypothesis, the full numbers, a correct meaning of p, and one planned comparison.'
       }
     },
@@ -223,6 +229,7 @@
     ],
 
     words: [
+      { term: 'two-tailed test', forms: ['two-tailed', 'two tails', 'two-tailed t-test'], def: 'A test in which a difference in either direction counts: it looks at both ends, or tails, of the chance results. The normal choice, and the default in spreadsheets and in R.', eg: '=T.TEST(B2:B6, C2:C6, 2, 2): the first 2 means two tails.', fig: 'tails' },
       { term: 'measured variable', forms: ['measured variables', 'measurement', 'measurements'], def: 'A variable recorded as a number: measured on a scale (continuous) or counted (discrete).', eg: 'Time in s; the number of stomata in a field of view.', fig: 'data', hi: 'quant' },
       { term: 'discrete variable', forms: ['discrete variables', 'discrete', 'discrete data'], def: 'A numerical variable that can take only separate values, usually whole-number counts.', eg: 'The number of seeds in a pod: 4 or 5, never 4.5.', fig: 'data', hi: 'discrete' },
       { term: 't-test', forms: ['t-tests', 't test', "Student's t-test"], def: 'A statistical test of whether the means of two groups differ by more than chance would explain.', eg: 'Mean time at 40 °C (74 s) against 50 °C (54 s): t = 5.77.' },
