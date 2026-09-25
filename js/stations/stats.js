@@ -67,7 +67,6 @@
         { t: '__Pretend:__ temperature does nothing, so the 20 s difference is just chance. This is the [[null hypothesis]].', icon: '1' },
         { t: '__Check:__ in that pretend world, how often would chance alone give a difference as big as 20 s? That number is the **p-value**. Here p = 0.0004: 4 times in 10,000. (The worked t-test below shows how it is found.)', icon: '2' },
         { t: '__Decide:__ almost never? Then stop pretending: the difference is [[statistically significant]]. The line is 0.05, or 5 times in 100. At 0.05 or above, keep pretending: not significant, which does not show that there is no difference.', icon: '3' },
-        { t: '__The same steps with a coin.__ Pretend it is fair. Check: 10 heads in a row happens ½ × ½ × … ten times = 1 time in 1,024 (p ≈ 0.001). Decide: almost never, so stop pretending: the coin is probably not fair. (3 heads in a row happens 1 time in 8: common, so keep pretending.)', icon: '→' },
         { t: '__To remember:__ “Small p, big news. Big p, no news.”', icon: '★' },
         { t: 'p is __never__ the chance that your hypothesis is right.', icon: '!' }
       ] },
