@@ -748,3 +748,7 @@ table.dt.dt--compact th,table.dt.dt--compact td{padding:4px 6px}
 @media (max-width:900px){.rmap{grid-template-columns:1fr;gap:16px}}
 @media (max-width:760px){.ptabs{top:calc(env(safe-area-inset-top,0px) + 96px);overflow-x:auto;flex-wrap:nowrap}}
 @media (max-width:520px){.step__h{grid-template-columns:28px minmax(0,1fr) 16px}.step__h .ibtag{grid-column:2;justify-self:start}.step__b{padding:12px 10px}.cmpbar__o{margin-left:0}}
+
+/* a link to another page of nlcsbiology.com, written [words](https://…) in a note */
+.xlink{color:inherit;font-weight:600;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.xlink:hover{text-decoration-thickness:2.5px}

@@ -147,6 +147,8 @@
     s = s.replace(/\[\?:([^\]]+?)\]/g, function (m, t) {
       return '<button type="button" class="rpm rpm--ok" data-k="">' + t + '</button>';
     });
+    /* a link to another page of nlcsbiology.com: [words](https://…), in the same tab */
+    s = s.replace(/\[([^\[\]]+?)\]\((https:\/\/[^)\s]+)\)/g, '<a class="xlink" href="$2">$1</a>');
     s = s.replace(/==(.+?)==/g, '<mark class="hl">$1</mark>');
     s = s.replace(/__(.+?)__/g, '<u>$1</u>');
     s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
