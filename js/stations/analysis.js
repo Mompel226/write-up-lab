@@ -59,8 +59,8 @@
 
     ladder: {
       g: ['The overall [[trend]], with both variables named', 'Key values, with both coordinates and units', 'One calculated comparison, and any [[anomalous results|anomalous result]]'],
-      i: ['Say whether the [[error bars|error bar]] overlap, and what that allows you to claim', 'Report a statistical test if one was done, and say what it means', 'Describe the pattern, not every point'],
-      e: ['Build a line of argument: link each finding to the research question (criterion C)', 'Choose the processing that answers the question, and say why']
+      i: ['Say whether the [[error bars|error bar]] overlap, and what that allows you to claim', 'Add your statistical test here: the null hypothesis, the test, its value, df and p, and what it means', 'Describe the pattern, not every point'],
+      e: ['Build a line of argument: link each finding to the research question (criterion C)', 'Choose the processing that answers the question, and say why', 'Put the statistics, where appropriate, inside the argument as one of its steps']
     },
 
     build: [
@@ -75,25 +75,29 @@
         ] },
 
       { type: 'anatomy', lv: 'ie', title: 'The parts of an IB analysis',
-        intro: 'The same four parts, then one more: what the uncertainty allows you to claim.',
-        model: '{1:As the temperature increased from 20.0 °C to 50.0 °C, the mean time for the starch to disappear decreased; above 50.0 °C, it increased again.} {2:The mean time fell from 178 s at 20.0 °C to a minimum of 54 s at 50.0 °C, then rose to 98 s at 60.0 °C.} {3:This is a 70 % decrease, followed by an 81 % increase. The mean rate at 50.0 °C (18.5 × 10⁻³ s⁻¹) was 3.3 times the rate at 20.0 °C.} {4:No anomalous results were identified: at each temperature, the five trials differed by no more than 20 s.} {5:The ± 1 SD error bars at 40.0, 50.0 and 60.0 °C do not overlap. A t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001, so this difference is statistically significant.}',
+        intro: 'The same four parts, then two more: what the uncertainty allows you to claim, and the statistical test.',
+        model: '{1:As the temperature increased from 20.0 °C to 50.0 °C, the mean time for the starch to disappear decreased; above 50.0 °C, it increased again.} {2:The mean time fell from 178 s at 20.0 °C to a minimum of 54 s at 50.0 °C, then rose to 98 s at 60.0 °C.} {3:This is a 70 % decrease, followed by an 81 % increase. The mean rate at 50.0 °C (18.5 × 10⁻³ s⁻¹) was 3.3 times the rate at 20.0 °C.} {4:No anomalous results were identified: at each temperature, the five trials differed by no more than 20 s.} {5:The ± 1 SD error bars at 40.0, 50.0 and 60.0 °C do not overlap.} {6:A two-tailed t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001, so the null hypothesis of no difference is rejected: the difference is statistically significant.}',
         parts: [
           { n: 1, name: 'Overall trend', note: 'Rise, fall, peak or [[plateau]], with both variables named.' },
           { n: 2, name: 'Key values', note: 'Processed data: means, with both coordinates and units.' },
           { n: 3, name: 'A calculated comparison', note: 'A [[percentage change]], a ratio or a [[gradient]].' },
           { n: 4, name: 'Anomalies', note: 'Name them, or state that there were none.' },
-          { n: 5, name: 'What the uncertainty allows', note: 'Do the [[error bars|error bar]] overlap? Report a [[t-test]] if one was done. Do not define it here.' }
+          { n: 5, name: 'What the uncertainty allows', note: 'Do the [[error bars|error bar]] overlap? Overlap is a hint, never proof.' },
+          { n: 6, name: 'The statistical test', note: 'It goes here, not in a section of its own: the [[null hypothesis]], the test, its value, df and p, and what it means. Do not define the test.' }
         ] },
 
       { type: 'anatomy', lv: 'e', title: 'Build a line of argument',
         intro: 'Criterion C (Analysis and line of argument) rewards a clear line of argument. Each step links a finding to the research question.',
-        model: '{1:The first step is to establish whether temperature changed the rate at all.} {2:It did: the mean rate rose from 5.6 × 10⁻³ s⁻¹ at 20.0 °C to 18.5 × 10⁻³ s⁻¹ at 50.0 °C, a 3.3-fold increase.} {3:Across this range, temperature therefore has a large effect.} {1:The next step is to locate the peak.} {2:The rate fell by 45 % between 50.0 and 60.0 °C, and the ± 1 SD bars at 40.0, 50.0 and 60.0 °C do not overlap.} {3:The optimum therefore lies between 40.0 and 60.0 °C.}',
+        model: '{1:The first step is to establish whether temperature changed the rate at all.} {2:It did: the mean rate rose from 5.6 × 10⁻³ s⁻¹ at 20.0 °C to 18.5 × 10⁻³ s⁻¹ at 50.0 °C, a 3.3-fold increase.} {3:Across this range, temperature therefore has a large effect.} {1:The next step is to locate the peak.} {2:The rate fell by 45 % between 50.0 and 60.0 °C, and the ± 1 SD bars at 40.0, 50.0 and 60.0 °C do not overlap.} {3:The optimum therefore lies between 40.0 and 60.0 °C.} {1:The last step is to check that the peak is not chance.} {2:A two-tailed t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001.} {3:The faster rate at 50.0 °C is therefore unlikely to be due to chance.}',
         parts: [
           { n: 1, name: 'The step in the argument', note: 'Which part of the research question this finding answers.' },
-          { n: 2, name: 'The evidence', note: 'Processed data, with its uncertainty.' },
+          { n: 2, name: 'The evidence', note: 'Processed data, with its uncertainty, and a statistical test where appropriate.' },
           { n: 3, name: 'What it shows', note: 'One sentence that adds one step to the argument. Give the full explanation in the discussion.' }
         ],
         after: 'A list of numbers with no link to the question is not an argument, even if the numbers are accurate.' },
+
+      { type: 'note', tone: 'ib', lv: 'ie', label: 'Statistics go here', title: 'No separate statistics section',
+        md: 'Your report, or your essay, has no section called Statistics. The test and its result go inside the analysis, after the error bars: one or two sentences, as in the models above. How to choose the test and report it: [Statistical tests](https://nlcsbiology.com/write-up-lab/#/part/stats).' },
 
       { type: 'callout', title: 'Describe, do not explain', label: 'Describe, do not explain', md: 'The analysis says __what__ the data show. The [[conclusion]] says __why__.' },
 
