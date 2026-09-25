@@ -223,7 +223,7 @@
      Biology examples; then which test each kind leads to, and the trap: counting is not χ². */
   /* two tails or one: the t distribution for df = 8 (the worked t-test), the 5 % of chance results shaded.
      Critical t (R: qt): two-tailed 2.306, one-tailed 1.860. The worked t = 5.77 is off the right edge. */
-  WUL.tailsSvg = function (kind) {
+  WUL.tailsSvg = function (kind, mark) {   /* mark: a t value to show (else 'our t = 5.77 →') */
     var W = 300, H = 150, x0 = 14, x1 = 286, yB = 118, yT = 22;
     function xs(t) { return x0 + (t + 4) / 8 * (x1 - x0); }
     function f(t) { return Math.pow(1 + t * t / 8, -4.5); }
@@ -242,7 +242,10 @@
     out += '<line x1="' + xs(c) + '" y1="' + yB + '" x2="' + xs(c) + '" y2="' + (yB - 44) + '" class="tails__cut"/>' + lab(xs(c), yB - 48, (kind === 'one' ? '' : '+') + c.toFixed(2).replace(/0$/, ''));
     if (kind !== 'one') out += '<line x1="' + xs(-c) + '" y1="' + yB + '" x2="' + xs(-c) + '" y2="' + (yB - 44) + '" class="tails__cut"/>' + lab(xs(-c), yB - 48, '−' + c.toFixed(2).replace(/0$/, ''));
     out += kind === 'one' ? lab(xs(3.1), yB - 10, '5 %') : lab(xs(3.2), yB - 10, '2.5 %') + lab(xs(-3.2), yB - 10, '2.5 %');
-    out += lab(xs(0), yB + 16, 't = 0: no difference') + lab(x1, 14, 'our t = 5.77 →', 'end');
+    out += lab(xs(0), yB + 16, 't = 0: no difference');
+    if (mark == null) out += lab(x1, 14, 'our t = 5.77 →', 'end');
+    else if (Math.abs(mark) <= 3.8) out += '<line x1="' + xs(mark) + '" y1="' + yB + '" x2="' + xs(mark) + '" y2="' + (yT - 2) + '" class="tails__mark"/><circle cx="' + xs(mark) + '" cy="' + (yT - 2) + '" r="4" class="tails__dot"/>' + lab(xs(mark) + 7, yT + 2, 't = ' + mark.toFixed(2), 'start');
+    else out += '<line x1="' + xs(2.75) + '" y1="' + (yB - 24) + '" x2="' + (x1 - 2) + '" y2="' + (yB - 24) + '" class="tails__mark"/><path d="M' + x1 + ' ' + (yB - 24) + ' l-7 -4 v8 z" class="tails__dot"/>' + lab(x1, 18, 't = ' + mark.toFixed(2) + ':', 'end') + lab(x1, 30, 'further out', 'end') + lab(x1, 42, 'than this edge', 'end');
     return '<svg class="tails" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + (kind === 'one' ? 'One-tailed: 5 % of chance results in one tail' : 'Two-tailed: 2.5 % of chance results in each tail') + '">' + out + '</svg>';
   };
 
@@ -253,6 +256,7 @@
           '<div class="tod__col tod__col--q is-hi"><div class="tod__h">Two-tailed<small>the normal t-test</small></div>' + WUL.tailsSvg('two') + '<p class="tails__p">A difference in <b>either</b> direction counts: 2.5&nbsp;% in each tail.</p></div>' +
           '<div class="tod__col tod__col--c"><div class="tod__h">One-tailed<small>rare in an IA</small></div>' + WUL.tailsSvg('one') + '<p class="tails__p">Only one direction counts: all 5&nbsp;% in one tail. Only if you predicted the direction before collecting any data.</p></div>' +
         '</div>' +
+        '<p class="tod__trap">If there were no real difference, chance alone would put t in the red 5&nbsp;% of the time. <b>t in the red: p &lt; 0.05, significant. t in the white: not significant.</b></p>' +
         '<p class="tod__ib">Spreadsheet: =T.TEST(range1, range2, <b>2</b>, 2): the first 2 means two tails. R: t.test() is two-tailed unless you change it.</p>' +
       '</div>';
     },

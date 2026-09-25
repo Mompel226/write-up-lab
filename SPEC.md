@@ -203,6 +203,11 @@ The worked t-test has a step "Two tails: either direction" before "Find p"; a gr
 `two-tailed test` (fig: 'tails') links every mention: How to report a test, the red pen, the IA and EE models,
 Find your test. The two-tailed test IS the normal t-test (=T.TEST(…, 2, …); R's default); one-tailed only when the
 direction was predicted before collecting data.
+Then "Significant or not? Where t lands": the same curve twice, t = 1.15 in the white (50 °C times 66, 76, 66, 76,
+66 s: mean 70 v 74 s, p = 0.28, not significant) and t = 5.77 beyond the red (p = 0.0004); and a callout, "The red
+tails and p": with NO real difference, chance alone puts t in the red 5 % of the time (2.5 % at each end).
+Wording of p, always: "if there were no real difference, a difference this large would happen by chance less
+than 5 % of the time" — NEVER "a less than 5 % chance that the difference is due to chance".
 
 ## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
 - No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
