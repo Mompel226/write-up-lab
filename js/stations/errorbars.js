@@ -22,7 +22,7 @@
 
   /* the same seven values, three bars */
   var threeBars = {
-    w: 440, h: 330, pad: { l: 56, r: 12, t: 14, b: 40 }, axisBreak: true,
+    w: 440, h: 330, pad: { l: 56, r: 12, t: 14, b: 40 },
     x: { cat: ['7 values', 'Range', '± 1 SD', '± 1 SE'] },
     y: { min: 38, max: 48, step: 2, minor: 4, label: 'Height of seedling / cm' },
     series: [
@@ -31,7 +31,7 @@
       { id: 'sd', pts: [[2.5, m7]], err: [sd7], mark: 'x', line: 'none', tone: 'blue' },
       { id: 'se', pts: [[3.5, m7]], err: [se7], mark: 'x', line: 'none', tone: 'plum' }
     ],
-    caption: 'Figure 1. The heights of seven bean seedlings, and their mean (' + WUL.fix(m7, 1) + ' cm) drawn three times: range ' + WUL.fix(min7, 1) + '–' + WUL.fix(max7, 1) + ' cm; SD = ' + WUL.fix(sd7, 2) + ' cm; SE = ' + WUL.fix(se7, 2) + ' cm.'
+    caption: 'Figure 1. Dot plot showing the distribution of the heights of seven bean seedlings (n = 7), with their mean (' + WUL.fix(m7, 1) + ' cm) drawn three times: range ' + WUL.fix(min7, 1) + '–' + WUL.fix(max7, 1) + ' cm; SD = ' + WUL.fix(sd7, 2) + ' cm; SE = ' + WUL.fix(se7, 2) + ' cm.'
   };
 
   /* the amylase graph, built up step by step */
@@ -39,20 +39,20 @@
     w: 460, h: 330,
     x: { min: 20, max: 60, step: 10, minor: 5, label: 'Temperature / °C' },
     y: { min: 0, max: 200, step: 50, minor: 5, label: 'Mean time / s' },
-    series: [{ id: 'm', pts: A.i.temps.map(function (t, i) { return [t, A.i.means[i]]; }), err: A.i.sds, line: 'ruled', mark: 'x' }],
-    caption: 'Figure 2. Mean time for fungal α-amylase to digest starch at 20–60 °C (n = 5; error bars = ± 1 SD)'
+    series: [{ id: 'm', pts: A.i.temps.map(function (t, i) { return [t, A.i.means[i]]; }), err: A.i.sds, line: 'smooth', mark: 'x' }],
+    caption: 'Figure 2. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).'
   };
 
   /* two pairs, for reading overlap */
   function pairPlot(names, means, errs, y, cap) {
-    return { w: 300, h: 270, pad: { l: 58, r: 12, t: 12, b: 34 }, axisBreak: y.min > 0,
+    return { w: 300, h: 270, pad: { l: 58, r: 12, t: 12, b: 34 },
       x: { cat: names }, y: y,
       series: [{ id: 'p', pts: [[0.5, means[0]], [1.5, means[1]]], err: errs, mark: 'x', line: 'none', tone: 'blue' }],
       caption: cap };
   }
-  var soilsAD = pairPlot(['Soil A', 'Soil D'], [S.means[0], S.means[3]], [S.sds[0], S.sds[3]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'n = 10 plants per soil; error bars = ± 1 SD.');
-  var amy4050 = pairPlot(['40 °C', '50 °C'], [A.i.means[2], A.i.means[3]], [A.i.sds[2], A.i.sds[3]], { min: 40, max: 90, step: 10, minor: 5, label: 'Mean time / s' }, 'n = 5 trials; error bars = ± 1 SD.');
-  var soilsAB = pairPlot(['Soil A', 'Soil B'], [S.means[0], S.means[1]], [S.sds[0], S.sds[1]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'n = 10 plants per soil; error bars = ± 1 SD.');
+  var soilsAD = pairPlot(['Soil A', 'Soil D'], [S.means[0], S.means[3]], [S.sds[0], S.sds[3]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 3. Dot plot showing the effect of soil type (A and D) on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).');
+  var amy4050 = pairPlot(['40 °C', '50 °C'], [A.i.means[2], A.i.means[3]], [A.i.sds[2], A.i.sds[3]], { min: 40, max: 90, step: 10, minor: 5, label: 'Mean time / s' }, 'Figure 4. Dot plot showing the effect of temperature (40.0 and 50.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).');
+  var soilsAB = pairPlot(['Soil A', 'Soil B'], [S.means[0], S.means[1]], [S.sds[0], S.sds[1]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 5. Dot plot showing the effect of soil type (A and B) on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).');
 
   var KINDS = proseTable(['Bar', 'What it shows', 'When to use it'], [
     ['[[Range|range]]', 'From the lowest value to the highest. Its two arms can differ in length.', 'Fewer than about five repeats, or IGCSE work. Simple, but one unusual value makes it much longer.'],
@@ -110,7 +110,7 @@
 
       { type: 'table', title: 'Calculate them in a spreadsheet',
         spec: {
-          caption: 'Table 1. Formulas for the five trials at 40 °C, in cells B2 to F2 (70, 80, 70, 80 and 70 s)',
+          caption: 'Spreadsheet formulas for the five trials at 40 °C, in cells B2 to F2 (70, 80, 70, 80 and 70 s)',
           head: [['Result', 'Formula']],
           rows: [
             ['Mean: 74 s', '=AVERAGE(B2:F2)'],
@@ -144,7 +144,7 @@
     },
 
     traps: [
-      { bad: 'Figure 1. Mean time at each temperature.', good: 'Figure 1. … (n = 5; error bars = ± 1 SD).' },
+      { bad: 'Figure 1. Mean time at each temperature.', good: 'Figure 1. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).' },
       { bad: 'SE bars, chosen because they look smaller.', good: 'SD to show the spread of the data; SE to show how well the mean is known.' },
       { bad: 'The bars overlap, so there is a difference.', good: 'The bars overlap, so a difference cannot be claimed from this graph.' },
       { bad: 'Error bars on points that are single measurements.', good: 'Bars only on means of repeats. One value has no spread.' },
@@ -200,7 +200,7 @@
           { t: 'Soil B is significantly better.', why: '“Significantly” needs a statistical test, and here the bars overlap.' }
         ] },
       { type: 'spot', q: 'Tap the three mistakes.',
-        text: 'Figure 2. Mean time at each temperature [!a:with error bars]. [?:The bars at 40 °C and 50 °C do not overlap], [!b:which proves] that the rate was higher at 50 °C. [!c:SE bars were chosen because they are shorter].',
+        text: 'Figure 2. Line graph showing the effect of temperature on the mean time taken for fungal α-amylase to digest starch [!a:with error bars]. [?:The bars at 40 °C and 50 °C do not overlap], [!b:which proves] that the rate was higher at 50 °C. [!c:SE bars were chosen because they are shorter].',
         why: { a: 'Give n and name the kind of bar: “(n = 5; error bars = ± 1 SD)”.', b: 'A graph never proves. Write “which suggests”, and let a test decide.', c: 'Never choose a bar because it looks smaller. SD for the spread, SE for how well the mean is known.' } },
       { type: 'build', q: 'Build the sentence that earns the mark.',
         chips: ['The ± 1 SD bars for 40 °C and 50 °C', 'do not overlap,', 'so the difference is likely to be real.', 'which proves the difference.', 'look quite big,'],
@@ -224,6 +224,7 @@
 
     words: [
       { term: 'error bar', forms: ['error bars', 'uncertainty bar', 'uncertainty bars'], def: 'A line through a plotted mean that shows the spread or uncertainty of the values behind it.', eg: 'A bar from 68.5 to 79.5 s through the mean of 74 s at 40 °C.' },
+      { term: 'dot plot', forms: ['dot plots'], def: 'A graph that shows each value, or each mean, as a point above its category, with no bars and no joining line.', eg: 'The mean heights of seedlings in soils A and D, each with its SD bar.' },
       { term: 'standard deviation', forms: ['SD', 'standard deviations'], def: 'A measure of how far, typically, the values lie from their mean.', eg: 'Trials of 70, 80, 70, 80 and 70 s have an SD of 5.5 s.' },
       { term: 'standard error', forms: ['SE', 'standard errors', 'standard error of the mean'], def: 'A measure of how precisely the mean is known: the SD divided by the square root of n.', eg: 'SD 6.0 s from nine trials: SE = 6.0 ÷ √9 = 2.0 s.' },
       { term: 'range', forms: ['range of data'], def: 'The spread of repeated values, from the lowest to the highest.', eg: 'Trials of 50, 50, 60, 50 and 60 s have a range of 50–60 s.' },

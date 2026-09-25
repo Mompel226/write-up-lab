@@ -160,17 +160,27 @@
 
   /* a data table from a spec:
      {caption, head:[[cell…]…], rows:[[cell…]…], note, cls}
-     a cell is a string (markup) or {t, cs (colspan), rs (rowspan), cls, th:true} */
+     a cell is a string (markup) or {t, cs (colspan), rs (rowspan), cls, th:true}
+     {diag: [across, down]} draws a maths-style corner split by a diagonal line: only ever as a mistake */
+  /* a title never breaks inside "n = 5" or "± 1 SD" */
+  WUL.capText = function (t) { return String(t).replace(/\bn = /g, 'n\u00a0=\u00a0').replace(/± (\d)/g, '±\u00a0$1'); };
+
+  WUL.diagCell = function (d) {
+    return '<svg class="dt-diag__l" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="0" x2="100" y2="100" vector-effect="non-scaling-stroke"/></svg>' +
+      '<span class="dt-diag__a">' + md(d[0], { inline: true }) + '</span><span class="dt-diag__b">' + md(d[1], { inline: true }) + '</span>';
+  };
+
   WUL.table = function (spec) {
     function cell(c, tag) {
       if (c == null) c = '';
       if (typeof c !== 'object') c = { t: String(c) };
-      var t = c.th ? 'th' : tag;
+      var t = c.th ? 'th' : tag, cls = (c.cls || '') + (c.diag ? ' dt-diag' : '');
+      var inner = c.diag ? WUL.diagCell(c.diag) : md(c.t, { inline: true });
       return '<' + t + (c.cs ? ' colspan="' + c.cs + '"' : '') + (c.rs ? ' rowspan="' + c.rs + '"' : '') +
-        (c.cls ? ' class="' + esc(c.cls) + '"' : '') + (c.el ? ' data-el="' + esc(c.el) + '"' : '') + '>' + md(c.t, { inline: true }) + '</' + t + '>';
+        (cls ? ' class="' + esc(cls.trim()) + '"' : '') + (c.el ? ' data-el="' + esc(c.el) + '"' : '') + '>' + inner + '</' + t + '>';
     }
     var html = '<div class="tscroll"><table class="dt' + (spec.cls ? ' ' + esc(spec.cls) : '') + '">';
-    if (spec.caption) html += '<caption' + (spec.capEl ? ' data-el="' + esc(spec.capEl) + '"' : '') + '>' + md(spec.caption, { inline: true }) + '</caption>';
+    if (spec.caption) html += '<caption' + (spec.capEl ? ' data-el="' + esc(spec.capEl) + '"' : '') + '>' + md(WUL.capText(spec.caption), { inline: true }) + '</caption>';
     if (spec.head) html += '<thead>' + spec.head.map(function (r) { return '<tr>' + r.map(function (c) { return cell(c, 'th'); }).join('') + '</tr>'; }).join('') + '</thead>';
     html += '<tbody>' + (spec.rows || []).map(function (r) { return '<tr>' + r.map(function (c) { return cell(c, 'td'); }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
     if (spec.note) html += '<p class="tnote">' + md(spec.note, { inline: true }) + '</p>';

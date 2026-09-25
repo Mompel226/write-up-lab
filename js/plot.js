@@ -235,7 +235,7 @@
 
     s += '</svg>';
     var out = '<figure class="plotfig">' + s;
-    if (o.caption) out += '<figcaption data-el="caption" class="pl-cap' + (hl.indexOf('caption') >= 0 ? ' is-hl' : '') + '">' + WUL.md(o.caption, { inline: true }) + '</figcaption>';
+    if (o.caption) out += '<figcaption data-el="caption" class="pl-cap' + (hl.indexOf('caption') >= 0 ? ' is-hl' : '') + '">' + WUL.md(WUL.capText(o.caption), { inline: true }) + '</figcaption>';
     return out + '</figure>';
   };
 

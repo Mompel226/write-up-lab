@@ -43,7 +43,7 @@ WUL.station({
 
     { type: 'table', lv: 'ie', title: 'A variables table saves words',
       spec: {
-        caption: 'Table 1. Control variables and how each was controlled',
+        caption: 'Table 1. Control variables for the investigation of the effect of temperature on the time taken for fungal α-amylase to digest starch, and how each was controlled.',
         head: [['Control variable', 'Value', 'How it was kept the same', 'Why it matters']],
         rows: [
           ['Volume of starch solution', '5.00 cm³', '10 cm³ graduated pipette (± 0.05 cm³)', 'More starch takes longer to digest'],

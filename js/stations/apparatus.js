@@ -166,7 +166,7 @@
 
       { type: 'table', lv: 'ie', title: 'Every uncertainty and its source',
         spec: {
-          caption: 'Table 1. Measuring instruments and their uncertainties', cls: 'wd-table-fixer--prose',
+          caption: 'Table 1. Measuring instruments and their uncertainties for the investigation of the effect of temperature on the time taken for fungal α-amylase to digest starch.', cls: 'wd-table-fixer--prose',
           head: [['Quantity', 'Instrument', 'Uncertainty', 'Where it comes from']],
           rows: [
             ['Volume of starch solution', '10 cm³ graduated pipette', '± 0.05 cm³', 'Half the smallest division (0.1 cm³)'],

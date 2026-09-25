@@ -43,8 +43,9 @@
       { id: 'reps', t: 'The number of repeats is stated, and it is clear whether they were of the same sample or of different individuals.' }
     ]},
     { title: 'Results: the table', part: 'tables', items: [
-      { id: 'tt', t: 'A title above the table, saying what it shows.' },
-      { id: 't1', t: 'The independent variable is in the first column.' },
+      { id: 'tt', t: 'A numbered title above the table, in one pattern: “Table 1. Data showing the effect of [independent variable, with its range] on [dependent variable].”' },
+      { id: 'ttib', lv: 'ie', t: 'Each table title starts with Raw data or Processed data, and ends with n: (n = 5).' },
+      { id: 't1', t: 'The independent variable runs down the first column, not across the top row. No diagonal line in the corner: every column has its own heading.' },
       { id: 'tu', t: 'Units (and uncertainties) are in the headings only, never in the cells.' },
       { id: 'ts', t: 'Quantity and unit separated by a solidus: Temperature / °C.' },
       { id: 'tdp', t: 'The same number of decimal places all the way down each column.' },
@@ -58,13 +59,14 @@
       { id: 'gtype', t: 'The right type: a bar chart for categories (gaps), a histogram for frequencies (bars touching), a line graph or scatter graph for continuous data.' },
       { id: 'gax', t: 'Independent variable on the x-axis. Both axes labelled with the quantity and unit, and numbered.' },
       { id: 'gscale', t: 'Scales rise in even steps (1, 2, 5 or 10 per large square) and the points fill more than half the grid in both directions.' },
+      { id: 'gzero', t: 'A bar chart’s y-axis starts at 0. A line graph that starts above 0 has its first number at the corner, and no zigzag.' },
       { id: 'gpts', t: 'Points plotted as small crosses: never large dots.' },
-      { id: 'gline', lv: 'g', t: 'Points joined with ruled straight lines, or a smooth curve if the points clearly lie on one.' },
+      { id: 'gline', lv: 'g', t: 'Points joined with ruled straight lines, point to point. A line of best fit only if the question asks for one, and never both. No R².' },
       { id: 'gext', t: 'The line does not go beyond the first and last points.' },
       { id: 'gkey', t: 'A key if there is more than one set of data.' },
-      { id: 'gcap', t: 'A title that describes the graph (below it, as a figure caption, in a report).' },
-      { id: 'gerr', lv: 'ie', t: 'Error bars on every mean, and the caption says what they show (range, SD or SE).' },
-      { id: 'gfit', lv: 'ie', t: 'Means joined with ruled lines, or a line or curve of best fit only when the shape is justified. R² only for a fitted trend line.' }
+      { id: 'gcap', t: 'A numbered title below the graph, in one pattern: “Figure 1. Line graph showing the effect of [independent variable, with its range] on [dependent variable].”' },
+      { id: 'gerr', lv: 'ie', t: 'Error bars on every mean, and the title ends with n and what they show: (n = 5; error bars = ± 1 SD).' },
+      { id: 'gfit', lv: 'ie', t: 'One smooth curve or straight line of best fit through the means when biology predicts the shape (ruled lines, mean to mean, when it does not). R² only for a line from a fitted equation, never for a curve drawn by hand.' }
     ]},
     { title: 'Data analysis', part: 'analysis', items: [
       { id: 'atr', t: 'The overall trend described in words.' },

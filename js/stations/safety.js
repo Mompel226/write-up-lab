@@ -57,7 +57,7 @@ WUL.station({
 
     { type: 'table', lv: 'g', title: 'A risk assessment for amylase',
       spec: {
-        caption: 'Table 1. Hazards of the amylase and starch practical, and the precaution for each', cls: 'wd-table-fixer--prose',
+        caption: 'Table 1. Risk assessment for the investigation of the effect of temperature on the time taken for amylase to digest starch.', cls: 'wd-table-fixer--prose',
         head: [['Hazard', 'Risk', 'Precaution']],
         rows: [
           ['Iodine solution', 'Irritation if a drop splashes into an eye; stains skin', 'Eye protection worn; iodine used from a dropping bottle'],
@@ -69,7 +69,7 @@ WUL.station({
 
     { type: 'table', lv: 'ie', title: 'A four-column IB risk assessment',
       spec: {
-        caption: 'Table 1. Risk assessment for the hydrolysis of starch by fungal α-amylase', cls: 'wd-table-fixer--prose wd-table-fixer--risk4',
+        caption: 'Table 1. Risk assessment for the investigation of the effect of temperature on the time taken for fungal α-amylase to digest starch.', cls: 'wd-table-fixer--prose wd-table-fixer--risk4',
         head: [['Hazard', 'Risk', 'Control measure', 'Emergency action']],
         rows: [
           ['Iodine solution, 0.01 mol dm⁻³', 'Low: dilute, used as drops. Irritation if a drop splashes into an eye.', 'Eye protection worn; iodine used from a dropping bottle', 'Rinse the eye with running water for at least 10 minutes; tell the teacher'],

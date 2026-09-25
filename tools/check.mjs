@@ -199,6 +199,32 @@ for (const [where, s] of models) {
   if (hit) E(`${where}: model answer uses "${hit[1]}" — write it impersonally`);
 }
 
+/* titles of tables and figures: one informative pattern (SPEC.md, Daniel 25 Sep 2026).
+   Every string literal in a station, widget or the specimen that starts "Table N." or "Figure N."
+   must name what it shows. Strings holding a red-pen mark [!…] are deliberate mistakes and skipped. */
+{
+  const TYPES = '(Line graph|Bar chart|Scatter graph|Histogram|Box-and-whisker plot|Dot plot)';
+  const KIND = '(Data|Raw data|Processed data|Raw and processed data|Data and observations)';
+  const tableOk = (t) => new RegExp('^Table \\d+\\. ' + KIND + ' showing the (effect of .+ on |relationship between .+ and |distribution of )').test(t) || /^Table \d+\. .+ for the investigation of the effect of .+ on /.test(t);
+  const figOk = (t) => new RegExp('^Figure \\d+\\. ' + TYPES + ' showing the (effect of .+ on |relationship between .+ and |distribution of )').test(t);
+  const files = ['js/specimen.js', ...fs.readdirSync(path.join(ROOT, 'js/stations')).map((f) => 'js/stations/' + f), ...fs.readdirSync(path.join(ROOT, 'js/widgets')).map((f) => 'js/widgets/' + f)];
+  for (const f of files) {
+    const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    for (const m of src.matchAll(/(['"`])((?:\\.|(?!\1).)*?)\1/g)) {
+      let t = m[2].replace(/^==/, '').replace(/\\u00a0|\\u2060/g, ' ').replace(/==/g, '').trim();
+      if (!/^(Table|Figure) \d+\./.test(t)) continue;
+      if (/\[!/.test(m[2]) || /\$\{|' \+|" \+/.test(m[2])) continue;          /* a deliberate mistake, or built from parts */
+      if (/^(Table|Figure) \d+\.$/.test(t)) continue;                                /* a build chip or a frame stub */
+      const before = src.slice(Math.max(0, m.index - 40), m.index), after = src.slice(m.index + m[0].length, m.index + m[0].length + 400);
+      if (/(\bbad:|X\('title',)\s*$/.test(before)) continue;
+      if (/^\s*\+/.test(after)) continue;                                              /* the start of a title built from parts */                        /* the broken version, on purpose */
+      if (/\{\s*t:\s*$/.test(before) && !/^[^}]*\bok:\s*true/.test(after)) continue;  /* a wrong quiz option */
+      const ok = t.startsWith('Table') ? tableOk(t) : figOk(t);
+      if (!ok) E(`${f}: title does not follow the pattern — "${t.slice(0, 90)}"`);
+    }
+  }
+}
+
 /* the running examples */
 const A = WUL.data && WUL.data.amylase;
 if (A) {

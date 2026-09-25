@@ -331,6 +331,13 @@ table.dt caption{caption-side:top;text-align:left;font:italic 400 .96rem/1.4 var
 table.dt th,table.dt td{border:1.2px solid var(--ink);padding:6px 9px;text-align:center;vertical-align:middle}
 table.dt th{font-weight:600;background:var(--sheet-2)}
 table.dt.dt--mini{font-size:.72rem}
+/* the maths-style corner: two headings split by a diagonal line. Shown only as a mistake. */
+table.dt th.dt-diag{position:relative;width:11em;min-width:11em;height:5.8em;padding:0}
+.dt-diag__l{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dt-diag__l line{stroke:var(--ink);stroke-width:1.2}
+.dt-diag__a,.dt-diag__b{position:absolute;font-size:.8em;line-height:1.2;white-space:nowrap}
+.dt-diag__a{top:4px;right:5px}
+.dt-diag__b{bottom:5px;left:7px}
 table.dt.dt--mini th,table.dt.dt--mini td{padding:3px 5px;border-width:1px;border-color:var(--rule)}
 table.dt.dt--mini caption{font-size:.76rem}
 .tnote{font-size:.85rem;color:var(--ink-2);margin-top:6px}

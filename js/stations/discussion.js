@@ -19,10 +19,10 @@
     x: { min: 20, max: 70, step: 10, minor: 2, label: 'Temperature / °C' },
     y: { min: 0, max: 100, step: 20, minor: 2, label: 'Rate / % of the highest rate' },
     series: [
-      { id: 'here', pts: here, line: 'ruled', mark: 'x', tone: 'lvl', label: 'This study' },
-      { id: 'pub', pts: pub, line: 'ruled', mark: 'x', tone: 'grey', dash: true, label: 'Raviyan et al.' }
+      { id: 'here', pts: here, line: 'smooth', mark: 'x', tone: 'lvl', label: 'This study' },
+      { id: 'pub', pts: pub, line: 'smooth', mark: 'x', tone: 'grey', dash: true, label: 'Raviyan et al.' }
     ],
-    caption: 'Figure 3. Rate of starch hydrolysis by *A. oryzae* α-amylase, as a percentage of each study’s highest rate. This study: n = 5. Raviyan et al.: values read from their Figure 1, so approximate.'
+    caption: 'Figure 3. Line graph showing the effect of temperature on the rate of starch hydrolysis by *A. oryzae* α-amylase, as a percentage of each study’s highest rate (this study: n = 5; Raviyan et al.: values read from their Figure 1, so approximate).'
   };
 
   WUL.station({

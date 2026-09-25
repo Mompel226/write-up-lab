@@ -24,11 +24,11 @@
     'ticks-x': 'The x-axis scale rises in even steps.',
     'ticks-y': 'The y-axis scale rises in even steps, and the points fill more than half the grid.',
     points: 'Small crosses, each centred on its value.',
-    lines: 'Ruled lines from point to point, stopping at the first and last points.',
+    lines: 'The lines follow the points and stop at the first and last points.',
     key: 'The key names each data set.',
     bars: 'Bars of equal width, with gaps, starting at zero.',
     err: 'The error bars are named in the caption.',
-    caption: 'The caption is below the graph and says what it shows.',
+    caption: 'The title is below the graph: the type of graph, then both variables.',
     paper: 'That is the grid. Tap a label, a scale, a point, a line, a bar or the key.'
   };
 
@@ -43,12 +43,13 @@
         { k: 'key', lv: 'g', part: 'key', label: 'key?', why: 'Two data sets need a __key__. Without one, a reader cannot tell 20 °C from 30 °C. A key is a Cambridge mark point.', fixed: 'A key now names each line.' },
         { k: 'scale', part: 'ticks-y', label: 'half the grid?', why: 'The highest point is 25, but the axis runs to 60, so the points fill less than half the grid. Use __0 to 30__, in 5s.', fixed: 'The y-axis now runs from 0 to 30.' },
         { k: 'errkind', lv: 'ie', part: 'err', parts: ['caption'], label: '± what?', why: 'The caption never says what the bars show. A reader cannot tell SD from SE by looking. End the caption with __(n = 5; error bars = ± 1 SD)__.', fixed: 'The caption now names the bars: ± 1 SD.' },
-        { k: 'r2', lv: 'ie', part: 'key', parts: ['lines'], label: 'R² for a curve?', why: 'R² measures how well a __fitted trend line__ matches the data. These curves were bent through every mean, so R² shows nothing. Join the means with ruled lines, and leave R² out.', fixed: 'Ruled lines join the means, and the key has no R².' }
+        { k: 'r2', lv: 'ie', part: 'key', parts: ['lines'], label: 'R² for a curve?', why: 'R² belongs to an __equation fitted__ to the data. These curves were drawn through every mean, not fitted, so R² shows nothing. The smooth curves are right: the rate rises, then levels off. Keep them, and leave R² out.', fixed: 'The key has no R² now. The smooth curves stay.' }
       ],
       make: function (on, lv) {
         var ib = lv !== 'g';
         var xs = [500, 1000, 1500, 2000, 2500, 3000], a = [5, 9, 12, 14, 15, 15], b = [7, 13, 18, 22, 24, 25];
-        var line = on.free ? 'free' : (on.r2 ? 'smooth' : 'ruled'), mark = on.blobs ? 'blob' : 'x';
+        /* IGCSE: ruled point to point. IB: smooth curves, because the rate rises and then levels off */
+        var line = on.free ? 'free' : (ib ? 'smooth' : 'ruled'), mark = on.blobs ? 'blob' : 'x';
         var series = [];
         if (on.origin) {
           series.push({ id: 'oa', pts: [[0, 0], [xs[0], a[0]]], line: on.free ? 'free' : 'ruled', mark: 'none', part: 'origin' });
@@ -62,11 +63,11 @@
           y: on.scale ? { min: 0, max: 60, step: 10, minor: 5, label: 'Rate / bubbles per minute' } : { min: 0, max: 30, step: 5, minor: 5, label: 'Rate / bubbles per minute' },
           series: series, key: !on.key, keyAt: 'br'
         };
-        var cap = 'Figure 1. The effect of light intensity on the rate of photosynthesis of pondweed at 20\u00a0°C and 30\u00a0°C';
-        if (ib) cap += on.errkind ? ' (n\u00a0=\u00a05).' : ' (n\u00a0=\u00a05; error bars = ±\u00a01\u00a0SD).';
+        var cap = 'Figure 1. Line graph showing the effect of light intensity (500–3000 lux) on the rate of photosynthesis of pondweed at 20\u00a0°C and 30\u00a0°C';
+        cap += !ib ? '.' : on.errkind ? ' (n\u00a0=\u00a05).' : ' (n\u00a0=\u00a05; error bars = ±\u00a01\u00a0SD).';
         return { spec: spec, caption: cap };
       },
-      fine: { lines: 'Ruled lines from mean to mean, stopping at the first and last points.' } },
+      fine: { lines: 'At IGCSE, ruled lines point to point. At IB, a smooth curve through each set of means. Both stop at the first and last points.' } },
 
     { id: 'bar', name: 'Bar chart', what: 'Limpets: mean shell length on four shores',
       faults: [
@@ -74,7 +75,7 @@
         { k: 'touch', part: 'bars', label: 'no gaps?', why: 'The shores are separate categories, so the bars need __gaps__. Touching bars are for a histogram.', fixed: 'The bars now have gaps.' },
         { k: 'unit', part: 'label-y', label: 'unit?', why: 'Give the quantity and the unit: __Mean length of shell / mm__.', fixed: 'The label now reads “Mean length of shell / mm”.' },
         { k: 'nolabel', part: 'label-x', label: 'label?', why: 'Every axis needs a label. This one names the categories: __Shore__.', fixed: 'The x-axis is now labelled “Shore”.' },
-        { k: 'title', lv: 'g', part: 'title', label: 'says nothing', why: 'Titles are not a Cambridge mark point, but “Bar graph” tells the reader nothing. Write a caption __below__: Figure 2. Mean length of limpet shells on four shores.', fixed: 'A caption below now says what the graph shows.' },
+        { k: 'title', lv: 'g', part: 'title', label: 'says nothing', why: '“Bar graph” tells the reader nothing. Write the title __below__ the graph: the number, the type of graph, then both variables. __Figure 2. Bar chart showing the effect of the shore (P–S) on the mean length of limpet shells.__', fixed: 'A title below now names the type of graph and both variables.' },
         { k: 'se', lv: 'ie', part: 'err', parts: ['caption'], needs: 'cut', label: 'SE ≠ variation', why: 'The caption says the bars show the variation between shells, but SE shows how precisely each __mean__ is known. To show variation, draw __± 1 SD__.', fixed: 'The bars are now ± 1 SD, and the caption says so.', wait: 'Fix the cut axis first: the SD bars reach below 30.5 mm.' }
       ],
       make: function (on, lv) {
@@ -89,11 +90,11 @@
           bars: { touch: !!on.touch, items: labs.map(function (l, i) { return { label: l, v: m[i], err: ib ? (on.se ? se[i] : sd[i]) : null }; }) },
           title: on.title ? 'Bar graph' : null
         };
-        var cap = 'Figure 2. Mean length of limpet shells on four shores (n = 20)';
-        if (ib) cap = on.se ? 'Figure 2. Mean length of limpet shells on four shores. The error bars show the variation between shells (n = 20; error bars = ± 1 SE).' : 'Figure 2. Mean length of limpet shells on four shores (n = 20; error bars = ± 1 SD).';
+        var cap = 'Figure 2. Bar chart showing the effect of the shore (P–S) on the mean length of limpet shells.';
+        if (ib) cap = on.se ? 'Figure 2. Bar chart showing the effect of the shore (P–S) on the mean length of limpet shells. The error bars show the variation between shells (n = 20; error bars = ± 1 SE).' : 'Figure 2. Bar chart showing the effect of the shore (P–S) on the mean length of limpet shells (n = 20; error bars = ± 1 SD).';
         return { spec: spec, caption: on.title ? null : cap };
       },
-      fine: { 'ticks-x': 'Each bar is labelled with its shore.', 'ticks-y': 'The scale starts at 0 and rises in even steps of 5 mm.', err: 'SD bars show how much the shells vary, and the caption says so.', caption: 'The caption is below the graph and gives n.' } },
+      fine: { 'ticks-x': 'Each bar is labelled with its shore.', 'ticks-y': 'The scale starts at 0 and rises in even steps of 5 mm.', err: 'SD bars show how much the shells vary, and the caption says so.', caption: 'The title is below the graph, and names the type of graph and both variables.' } },
 
     { id: 'scatter', name: 'Scatter graph', what: 'Arm span and height of 15 students', pointR: 8, linesOverPoints: true,
       faults: [
@@ -101,7 +102,7 @@
         { k: 'zig', part: 'lines', label: 'dot to dot?', why: 'In a scatter graph neither variable was set, so the points are not joined in order. Draw one straight [[line of best fit]], or no line.', fixed: 'One straight line of best fit now shows the trend.' },
         { k: 'scale', part: 'ticks-y', parts: ['ticks-x'], needs: 'origin', label: 'tiny corner', why: 'The axes start at 0, so the points fill a small corner of the grid. Start near the lowest values (150 cm and 140 cm), and write those numbers at the start of each axis.', fixed: 'The axes now start at 150 cm and 140 cm, and the points fill most of the grid.', wait: 'Fix the line to the origin first: the new scale does not include 0.' },
         { k: 'unit', part: 'label-y', label: 'unit?', why: 'Give the quantity and the unit: __Arm span / cm__.', fixed: 'The label now reads “Arm span / cm”.' },
-        { k: 'title', part: 'title', label: 'says nothing', why: '“Scatter graph” tells the reader nothing. Put a caption __below__ that says what is plotted: Figure 3. Arm span against height for 15 students.', fixed: 'A caption below now says what is plotted.' }
+        { k: 'title', part: 'title', label: 'says nothing', why: '“Scatter graph” on its own tells the reader nothing. Write the title __below__ the graph: the number, the type of graph, then both variables. __Figure 3. Scatter graph showing the relationship between height and arm span in 15 students.__', fixed: 'A title below now names the type of graph and both variables.' }
       ],
       make: function (on) {
         var hts = [152, 155, 158, 160, 162, 165, 167, 169, 171, 173, 175, 177, 180, 182, 185];
@@ -117,9 +118,9 @@
           y: on.scale ? { min: 0, max: 200, step: 50, minor: 5, label: ylab } : { min: 140, max: 190, step: 10, minor: 5, label: ylab },
           series: series, title: on.title ? 'Scatter graph' : null
         };
-        return { spec: spec, caption: on.title ? null : 'Figure 3. Arm span against height for 15 students' };
+        return { spec: spec, caption: on.title ? null : 'Figure 3. Scatter graph showing the relationship between height and arm span in 15 students.' };
       },
-      fine: { points: 'Small crosses, one for each person.', lines: 'One straight line of best fit, across the range of the data only.', 'ticks-x': 'The x-axis starts at 150 cm, and its first number shows it.', 'ticks-y': 'The y-axis starts at 140 cm, and the points fill most of the grid.', caption: 'The caption says what is plotted against what.' } }
+      fine: { points: 'Small crosses, one for each person.', lines: 'One straight line of best fit, across the range of the data only.', 'ticks-x': 'The x-axis starts at 150 cm, and its first number shows it.', 'ticks-y': 'The y-axis starts at 140 cm, and the points fill most of the grid.', caption: 'The title below names the type of graph and both variables.' } }
   ];
 
   /* ---------------- tap targets, from the spec ---------------- */

@@ -127,6 +127,60 @@ Helpers: `WUL.h(tag, attrs, kids)`, `WUL.md(markup, {inline:true})`, `WUL.table(
 `{1:part}`…`{6:part}` anatomy colours · `[!k:mistake]` · `[?:fine phrase]` · blank line = new paragraph.
 Units and symbols as real characters: cm³, dm³, s⁻¹, °C, ±, ×, −, µm, α, χ².
 
+## Titles of tables and figures — ONE pattern, everywhere (Daniel, 25 Sep 2026)
+"You must lead by example": every table and graph on the site that stands for part of a report carries a
+full, informative title, in the SAME pattern, so students copy the pattern. Never "Raw data", "Results",
+"Processed data (n = 5)" or "Potato cylinders in sucrose solution" on their own.
+
+**Data tables** (title ABOVE the table):
+`Table N. <kind of data> showing the effect of <independent variable (range, unit)> on <dependent variable, and what it was measured on>.`
+- kind of data: IGCSE **Data** (one table holds the readings and the means, so there is no need to say which;
+  Daniel, 25 Sep 2026) · IB **Raw data** (Table 1) · **Processed data** (Table 2: means, SD, rates) ·
+  **Raw and processed data**. Items shown at every level use the IGCSE form.
+- IGCSE titles stop after the dependent variable; IB titles end with n (and, for figures, the error bars).
+- two measured variables: `… showing the relationship between <X> and <Y> in <organism/sample>.`
+- add `(n = 5)` or a condition at the end when it helps: `… (n = 5 at each temperature)`.
+- e.g. `Table 1. Raw data showing the effect of temperature (20.0–60.0 °C) on the time taken for fungal α-amylase to digest starch (n = 5).`
+
+**Tables that plan the investigation** (variables, instruments, risks, weaknesses):
+`Table N. <what the table lists> for the investigation of the effect of <IV> on <DV>.`
+
+**Figures** (title BELOW the graph):
+`Figure N. <type of graph> showing the effect of <IV (range, unit)> on <DV> (n = …; error bars = ± 1 SD).`
+- type of graph: **Line graph** · **Bar chart** · **Scatter graph** · **Histogram** · **Box-and-whisker plot** ·
+  **Dot plot** (means as crosses above categories, with error bars: used where a bar chart would need a cut axis).
+- scatter / correlation: `Figure N. Scatter graph showing the relationship between <X> and <Y> (n = …).`
+- histogram: `Figure N. Histogram showing the distribution of <variable> in <sample> (n = …).`
+- IB: always say what the error bars are, inside the brackets.
+
+**Rules that go with it**
+- An explanation is never the title. "Soil is a category: separate bars" goes in a note or the `why`, and the
+  graph keeps a proper figure title.
+- In a ✘ example only the mistake being taught is wrong. A wrong-graph-type example still has a proper title;
+  only a lesson ABOUT titles shows a bad title (and its fixed version shows the pattern).
+- A teaching grid that is not part of a report (e.g. "where each job goes at each level") takes a plain
+  heading, not "Table N.".
+- `node tools/check.mjs` enforces this on every literal "Table N." / "Figure N." string outside a red-pen mark.
+
+## Where axes start, and how the line is drawn (Daniel, 25 Sep 2026: "it needs to be very, very clear")
+Biology rules, taught on the Graphs page (rules block, the `axis-start` widget, wrong examples, test items):
+- **Bar chart / histogram:** the y-axis starts at 0. Always. (Cambridge's 9700 learner guide says "usually"; ours
+  is stricter because a bar is read by its length: Correll et al. 2020, Yang et al. 2021.)
+- **Line / scatter graph:** start at 0 if the points then fill more than half the grid; otherwise start at a round
+  number below the lowest value and WRITE it at the corner. 0610 syllabus p. 56: "The axes do not have to include
+  (0, 0)". An examiner report (0610 s21 Paper 51) accepts a clearly marked jump from 0, but we never draw one:
+  **no zigzag anywhere on the site** except in a ✘ example (`axisBreak` is only for mistakes).
+- **The line, IGCSE:** ruled, point to point, first point to last; a line of best fit only when the question asks
+  (0610 w23 Paper 52 examiner report); never both kinds; no R² (not in the 0610 syllabus).
+- **The line, IA/EE:** means with error bars, then ONE smooth curve or straight line of best fit through the trend
+  when biology predicts the shape: the enzyme optimum (rise, then a steep fall) gets a smooth curve, potato osmosis a
+  fitted straight line. Point to point only when no shape is expected. (Corrected 25 Sep 2026: Daniel caught
+  "point to point, as for an enzyme optimum" — biology DOES predict that shape.) R² only for a line from a fitted
+  equation (IB Tool 3; command term Draw); never for a hand-drawn curve. The optimum lies BETWEEN the tested
+  temperatures. The EE guide says nothing about graphs. Never R² = 1.000 from a polynomial through every mean.
+  IB model enzyme graphs on the site are `line: 'smooth'`; IGCSE ones are `'ruled'`. The conclusion walkthrough's
+  green/red segments stay ruled on purpose (they mark the rise and the fall).
+
 ## The running examples — `js/data/datasets.js` (use these numbers; never invent other amylase data)
 - `WUL.data.amylase` — amylase + starch; iodine sampled every **10 s**, so times are multiples of 10 s and their
   uncertainty is **± 10 s** (the sampling interval, NOT the stopwatch's 0.01 s). IGCSE: 3 trials, means

@@ -21,32 +21,32 @@
       { id: 'm', pts: pts('g', 'means'), line: 'ruled', mark: 'x', tone: 'ink' },
       { id: 'k', pts: [[20, 180], [50, 53], [60, 93]], line: 'none', mark: 'circle', tone: 'red' }
     ],
-    caption: 'Figure 1. Effect of temperature on the mean time for amylase to digest starch (n = 3)'
+    caption: 'Figure 1. Line graph showing the effect of temperature (20–60 °C) on the mean time taken for amylase to digest starch.'
   };
   var plotI = {
     w: 540, h: 360, x: X, y: Y,
     series: [
-      { id: 'm', pts: pts('i', 'means'), line: 'ruled', mark: 'x', tone: 'ink', err: A.i.sds },
+      { id: 'm', pts: pts('i', 'means'), line: 'smooth', mark: 'x', tone: 'ink', err: A.i.sds },
       { id: 'k', pts: [[20, 178], [50, 54], [60, 98]], line: 'none', mark: 'circle', tone: 'red' }
     ],
-    caption: 'Figure 1. Mean time for *A. oryzae* α-amylase to digest starch (n = 5; error bars = ± 1 SD)'
+    caption: 'Figure 1. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for *A. oryzae* α-amylase to digest starch (n = 5; error bars = ± 1 SD).'
   };
   var plotSoils = {
-    w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 }, axisBreak: true,
+    w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 },
     x: { cat: S.labels, label: 'Soil' },
     y: { min: 40, max: 47, step: 1, minor: 2, label: 'Mean height / cm' },
     series: [{ id: 's', pts: S.means.map(function (m, i) { return [i + 0.5, m]; }), err: S.sds, line: 'none', mark: 'x', tone: 'ink' }],
-    caption: 'Mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD)'
+    caption: 'Figure 2. Dot plot showing the effect of soil type on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).'
   };
   var plotAmyl = {
     w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 },
     x: { min: 20, max: 60, step: 10, minor: 2, label: 'Temperature / °C' },
     y: { min: 0, max: 200, step: 40, minor: 4, label: 'Mean time / s' },
-    series: [{ id: 'a', pts: pts('i', 'means'), err: A.i.sds, line: 'ruled', mark: 'x', tone: 'ink' }],
-    caption: 'Mean time for *A. oryzae* α-amylase to digest starch (n = 5; error bars = ± 1 SD)'
+    series: [{ id: 'a', pts: pts('i', 'means'), err: A.i.sds, line: 'smooth', mark: 'x', tone: 'ink' }],
+    caption: 'Figure 3. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for *A. oryzae* α-amylase to digest starch (n = 5; error bars = ± 1 SD).'
   };
   var pondTable = {
-    caption: 'Table 1. The effect of distance from the lamp on the number of bubbles released by pondweed',
+    caption: 'Table 1. Data showing the effect of distance from the lamp (10–50 cm) on the number of bubbles released by pondweed per minute.',
     head: [[{ t: 'Distance from lamp / cm', rs: 2 }, { t: 'Number of bubbles per minute', cs: 4 }], ['Trial 1', 'Trial 2', 'Trial 3', 'Mean']],
     rows: [['10', '48', '46', '50', '48'], ['20', '31', '33', '29', '31'], ['30', '20', '19', '21', '20'], ['40', '12', '==25== *', '14', '13'], ['50', '7', '8', '6', '7']],
     note: '* Anomalous result: excluded from the mean. A repeat gave 13, so the mean at 40 cm is (12 + 14 + 13) ÷ 3 = 13.'
@@ -243,7 +243,7 @@
           { t: '29 %', why: 'That is 53 as a percentage of 180, not the decrease.' },
           { t: '127 %', why: '127 s is the difference. Divide it by the starting value, then multiply by 100.' }
         ] },
-      { type: 'choose', q: 'Which result in this table is anomalous?', show: { table: { caption: 'Table 1. Bubbles released by pondweed per minute', head: [['Distance / cm', 'Trial 1', 'Trial 2', 'Trial 3']], rows: [['10', '48', '46', '50'], ['20', '31', '33', '29'], ['30', '20', '19', '21'], ['40', '12', '25', '14'], ['50', '7', '8', '6']] } },
+      { type: 'choose', q: 'Which result in this table is anomalous?', show: { table: { caption: 'Table 1. Data showing the effect of distance from the lamp (10–50 cm) on the number of bubbles released by pondweed per minute.', head: [['Distance / cm', 'Trial 1', 'Trial 2', 'Trial 3']], rows: [['10', '48', '46', '50'], ['20', '31', '33', '29'], ['30', '20', '19', '21'], ['40', '12', '25', '14'], ['50', '7', '8', '6']] } },
         opts: [
           { t: '25 bubbles per minute at 40 cm', ok: true, why: 'The other two trials at 40 cm gave 12 and 14, and 25 is higher than every trial at 30 cm. It does not fit the trend.' },
           { t: '48 bubbles per minute at 10 cm', why: 'It is the highest value, but it fits the trend: the nearer the lamp, the more bubbles.' },

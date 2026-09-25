@@ -85,7 +85,7 @@
 
       { type: 'table', title: 'An Observations column',
         spec: T({
-          caption: 'Table 1. The effect of sucrose concentration on the mass and firmness of potato cylinders',
+          caption: 'Table 1. Data and observations showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the percentage change in mass and the firmness of potato cylinders.',
           head: [['Concentration of sucrose solution / mol dm⁻³', 'Percentage change in mass / %', '==Observations==']],
           rows: potato.map(function (r) { return [r[0], r[3], r[4]]; })
         }, 'wd-table-fixer--compact'),
