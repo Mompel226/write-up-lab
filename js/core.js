@@ -245,7 +245,7 @@
           '<li><b>How many fall in each category</b> → χ²</li>' +
         '</ul>' +
         '<p class="tod__trap"><b>Careful:</b> counting does not always mean χ². Stomata counted in each field of view are numbers (discrete): compare two groups of them with a t-test. χ² counts how many individuals fall in each category.</p>' +
-        '<p class="tod__ib">The IB guide (D3.2.14) calls ABO blood group “discrete”: separate groups, with nothing in between. In statistics it is categorical (nominal).</p>' +
+        '<p class="tod__ib"><b>Two meanings of “discrete”.</b> In statistics (graphs, tests, your IA), discrete means counted numbers, and blood group is categorical. In genetics, the IB guide (D3.2.14) calls blood group a discrete variable, and Cambridge IGCSE calls it discontinuous variation: separate classes, with nothing in between. Both mean “separate”. Describing variation? Say discrete (discontinuous). Choosing a graph or a test? Say categorical.</p>' +
       '</div>';
     }
   };
