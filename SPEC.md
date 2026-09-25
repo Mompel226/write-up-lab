@@ -286,7 +286,8 @@ home lede). A short measure left white space beside the words and he read it as 
 keeps its 17ch, for its shape.
 
 ## Header and footer (Daniel, 26 Sep 2026)
-The header carries "← Biology Hub" (https://nlcsbiology.com/biology-hub/, same tab). The footer never repeats "Made by":
+The header carries "← Biology Hub" (https://nlcsbiology.com/biology-hub/, same tab) at the TOP LEFT, above the name,
+in the Bio English Lab's style (12.5 px, muted): the same place on every site that sits straight under the hub. The footer never repeats "Made by":
 the name is in the header once. It says "Something wrong, or a suggestion? Please contact me:" + the work address,
 then what the site is checked against, then the licences.
 
