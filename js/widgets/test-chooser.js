@@ -8,7 +8,8 @@
    computed and checked (see the Statistics station):
      t-test, amylase 40 vs 50 °C: t = 5.77, df = 8, p = 0.0004
      woodlice 32 : 8 against 20 : 20: χ² = 14.4, df = 1, p = 0.00015
-     species in 50 quadrats (18 / 7 / 5 / 20): χ² = 13.6, df = 1, p = 0.0002
+     heather and moss in 100 quadrats (57 / 7 / 9 / 27, Course Companion pp. 521–522):
+       χ² = 42.4 with E rounded to 1 d.p. (42.1 unrounded), df = 1, p < 0.001
      potato cylinders: r = −0.99, R² = 0.99
    Part 2: six studies; the reader picks the test and is told why.
    Nothing moves on by itself.
@@ -50,8 +51,8 @@
       say: 'Significantly more woodlice were found on the damp side than expected by chance (χ² = 14.4, df = 1, p < 0.001).',
       care: 'Use the counts themselves, never percentages. Each expected count should be at least 5.' },
     chiA: { test: 'Chi-squared test for association', why: 'You are asking whether two sets of categories are linked.',
-      h0: 'There is no association between the presence of species A and the presence of species B in a quadrat.',
-      say: 'Species A and B were found together in 18 of 50 quadrats, more often than the 11.5 expected by chance (χ² = 13.6, df = 1, p < 0.001).',
+      h0: 'Heather and moss are distributed independently: there is no association between them.',
+      say: 'Heather and moss were found together in 57 of 100 quadrats, more often than the 42.2 expected if they were independent (χ² = 42.4, df = 1, p < 0.001).',
       care: 'Count four groups: both species, only A, only B, and neither. An association does not show that one species causes the other.' },
     corr: { test: 'Correlation coefficient (r), and R² for a trend line', why: 'You measured two continuous variables together, and want the strength of the relationship.',
       h0: 'There is no correlation between the concentration of sucrose and the percentage change in mass.',

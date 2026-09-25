@@ -120,7 +120,7 @@ for (const id of WUL.stationOrder) {
       if (b.stage && b.stage.plot) ['paper', 'axis-x', 'axis-y', 'ticks-x', 'ticks-y', 'label-x', 'label-y', 'title', 'caption', 'key', 'break', 'bars', 'err-bars'].forEach((e) => els.add(e));
       if (b.stage && b.stage.plot) (b.stage.plot.series || []).forEach((se, si) => { const sid = se.id || 's' + si; ['pts-', 'line-', 'err-'].forEach((p) => els.add(p + sid)); });
       if (b.stage && b.stage.html) [...b.stage.html.matchAll(/data-el="([^"]+)"/g)].forEach((m) => els.add(m[1]));
-      (b.steps || []).forEach((st) => [...(st.show || []), ...(st.focus || [])].forEach((e) => { if (!els.has(e) && !els.has(e.replace(/-\d+$/, ''))) W(`${w}: step shows "${e}", which the stage does not have`); }));
+      (b.steps || []).forEach((st) => [...(st.show || []), ...(st.focus || [])].forEach((e) => { if (!els.has(e) && !els.has(e.replace(/-\d+$/, '')) && ![...els].some((x) => x.replace(/-\d+$/, '') === e)) W(`${w}: step shows "${e}", which the stage does not have`); }));
     }
     if (b.type === 'widget' && !fs.existsSync(path.join(ROOT, `js/widgets/${b.name}.js`))) E(`${w}: widget "${b.name}" has no file`);
     if (b.type === 'redpen') checkRedpen(w, b);
