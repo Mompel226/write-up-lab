@@ -31,9 +31,9 @@
     id: 'processing', stage: 'record', order: 2, title: 'Processing data', levels: 'gie',
     job: 'Convert the raw data into the numbers that answer the question: means, rates and percentage changes, each shown once as a worked example.',
     where: {
-      g: 'In the Mean column of the results table, with any other calculation just below the table.',
-      i: 'Between the raw-data table and the processed-data table, or just below the processed table.',
-      e: 'In the body, beside the processed tables. Never only in an appendix.'
+      g: 'Not a section of its own: inside your Results. The mean goes in the table; any other calculation goes just below it.',
+      i: 'Not a section of its own: inside your Data analysis, not the method. Show one worked example of each calculation, between the raw-data table and the processed-data table.',
+      e: 'Not a section of its own: in the body, beside the processed tables. Never only in an appendix.'
     },
 
     ladder: {

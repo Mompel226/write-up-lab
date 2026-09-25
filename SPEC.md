@@ -193,7 +193,18 @@ Biology rules, taught on the Graphs page (rules block, the `axis-start` widget, 
 Statistics keeps its own part (he likes it separate), but every place says the test goes inside the data analysis:
 the Statistics tile ("no section of its own"), the Data analysis tiles (IA and EE), the IA analysis model (part 6,
 "The statistical test"), the EE line of argument (a statistics step), a note "No separate statistics section", and
-the Statistics page's first block "Where it goes".
+the Statistics page's "Where it goes" line.
+
+## Parts that are not sections of their own say so (Daniel, 26 Sep 2026)
+A part's `where` line (shown under its title as "Where it goes") starts "Not a section of its own:" and names the
+section it sits in, whenever that is true at that level. The IA has four marked sections (Research design, Data
+analysis, Conclusion, Evaluation), so at IB: background (the introduction, the question's context), variables,
+apparatus and safety (the methodology) are inside Research design; tables, calculations, observations, graphs,
+error bars and statistics are inside Data analysis; the measurement words are used inside the evaluation.
+**Calculations go in the Data analysis, not the method** (Daniel asked; the guide's Data analysis criterion marks
+data "recorded, processed and presented" and asks that "the method of processing can be understood easily"; his
+own Unwritten Rules: "a worked example of each calculation between them"). At IGCSE, Variables, Apparatus, Risk
+assessment and Method stay headings of their own. Say it once: no separate "Where it goes" block as well.
 
 ## Types of data pop-up (Daniel, 25 Sep 2026, after his Year 7 poster "Types of data")
 A keyword can carry `fig: 'data', hi: 'continuous'|'discrete'|'quant'|'qual'|'nominal'|'ordinal'`: its pop-up then

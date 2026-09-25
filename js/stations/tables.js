@@ -87,7 +87,7 @@
     },
     where: {
       g: 'In the Results, straight after the method, before the graph.',
-      i: 'In the Data analysis section, before the graphs.',
+      i: 'Inside your Data analysis, before the graphs.',
       e: 'In the body: the processed tables and a sample of the raw data. Most of the raw data go in an appendix.'
     },
 

@@ -7,7 +7,7 @@ WUL.station({
     g: 'Name each hazard in this method, and the precaution that matches it.',
     i: 'Name the safety, ethical and environmental issues of this method, and show what you did about each one.'
   },
-  where: { g: 'After the apparatus, before the method.', i: 'In the methodology, as part of Research design.', e: 'In the methodology section.' },
+  where: { g: 'After the apparatus, before the method.', i: 'Not a section of its own: inside your methodology. Marked under Research design.', e: 'Inside your methodology section.' },
 
   ladder: {
     g: ['One [[hazard]] from __this__ method, and the precaution that matches it', 'A table of hazard, [[risk]] and precaution: good practice'],

@@ -2,7 +2,7 @@
 WUL.station({
   id: 'variables', stage: 'plan', order: 3, title: 'Variables', levels: 'gie',
   job: 'Name what you change, what you measure, and everything you keep the same. Then only one thing can affect the result.',
-  where: { g: 'Straight after the aim or question.', i: 'In the methodology, straight after the research question.', e: 'In the methodology section.' },
+  where: { g: 'Straight after the aim or question.', i: 'Not a section of its own: inside your methodology, straight after the research question. Marked under Research design.', e: 'Inside your methodology section.' },
 
   ladder: {
     g: ['Name the [[independent variable]] and the values used', 'Name the [[dependent variable]], its unit, and how it was measured', 'Every [[control variable]]: a __value__, a __method__ and a __reason__'],

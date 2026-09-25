@@ -26,7 +26,7 @@
       i: 'Give only the theory your research question needs, with sources, and say how your data will answer it.',
       e: 'Show what is already known, from good sources, and where your question fits.'
     },
-    where: { i: 'Straight after the research question, before the variables.', e: 'In the introduction, as a literature review.' },
+    where: { i: 'Not a section of its own: part of your introduction, straight after the research question. It gives the question its context, marked under Research design.', e: 'Not a section of its own: in the introduction, as a literature review.' },
 
     ladder: {
       g: [],
