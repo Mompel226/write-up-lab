@@ -97,7 +97,7 @@
     hero.innerHTML =
       '<p class="eyebrow">Lab reports · IGCSE → IB Internal Assessment → Extended Essay</p>' +
       '<h1 class="hero__h">Learn to write a lab report, <span class="hero__u">one part at a time.</span></h1>' +
-      '<p class="hero__lede">This is a full lab report. Click any part to open it. A part with a <span class="dash-demo">dashed outline</span> is added at IB.</p>' +
+      '<p class="hero__lede">This is a full lab report. Click any part to open it. A part in a <span class="dash-demo">blue dashed box</span> is added at IB; one in an <span class="dash-demo dash-demo--ee">orange dashed box</span> is only in the Extended Essay.</p>' +
       '<div class="hero__cta"><a class="btn btn--go btn--lg" href="#/start">New to lab reports? Start from zero →</a><a class="btn btn--ghost btn--lg" href="#/check">Check my report</a></div>';
     main.appendChild(hero);
     var mapWrap = h('section', { class: 'wrap rmapwrap', 'aria-label': 'A full report to explore' });
@@ -119,7 +119,7 @@
       var ul = h('ul', { class: 'map__list' });
       list.forEach(function (s) {
         var ibOnly = s.levels.indexOf('g') < 0;
-        ul.appendChild(h('li', { html: '<a class="map__a' + (ibOnly ? ' is-other' : '') + '" href="#/part/' + esc(s.id) + '"><span class="map__t">' + esc(s.title) + '</span><span class="map__m">' + lvDots(s.levels) + tick(s.id) + '</span></a>' }));
+        ul.appendChild(h('li', { html: '<a class="map__a' + (ibOnly ? ' is-other' + (s.levels.indexOf('i') < 0 ? ' is-ee' : '') : '') + '" href="#/part/' + esc(s.id) + '"><span class="map__t">' + esc(s.title) + '</span><span class="map__m">' + lvDots(s.levels) + tick(s.id) + '</span></a>' }));
       });
       col.appendChild(ul);
       grid.appendChild(col);
@@ -139,7 +139,7 @@
     var g = h('div', { class: 'tools' });
     WUL.TOOLS.forEach(function (t) {
       var ibOnly = t.lv && t.lv.indexOf('g') < 0;
-      g.appendChild(h('a', { class: 'tool' + (ibOnly ? ' is-other' : ''), href: '#/tool/' + t.name, html: '<span class="tool__icon" aria-hidden="true">' + (t.icon || '✎') + '</span><span class="tool__t">' + esc(t.title) + '</span><span class="tool__b">' + esc(t.blurb || '') + '</span>' + lvDots(t.lv) }));
+      g.appendChild(h('a', { class: 'tool' + (ibOnly ? ' is-other' + (t.lv.indexOf('i') < 0 ? ' is-ee' : '') : ''), href: '#/tool/' + t.name, html: '<span class="tool__icon" aria-hidden="true">' + (t.icon || '✎') + '</span><span class="tool__t">' + esc(t.title) + '</span><span class="tool__b">' + esc(t.blurb || '') + '</span>' + lvDots(t.lv) }));
     });
     return g;
   }

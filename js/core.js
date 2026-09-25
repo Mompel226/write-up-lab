@@ -76,7 +76,7 @@
   var LEVELS = {
     g: { id: 'g', name: 'IGCSE', long: 'IGCSE report', years: 'Years 9–11', color: 'green' },
     i: { id: 'i', name: 'IB IA', long: 'IB Internal Assessment', years: 'Years 12–13', color: 'blue' },
-    e: { id: 'e', name: 'IB EE', long: 'IB Extended Essay', years: 'Years 12–13', color: 'plum' }
+    e: { id: 'e', name: 'IB EE', long: 'IB Extended Essay', years: 'Years 12–13', color: 'ee' }
   };
   var ORDER = ['g', 'i', 'e'];
   var listeners = [];
