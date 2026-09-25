@@ -221,7 +221,41 @@
      quantitative (numerical) = discrete (counted) or continuous (measured); qualitative (categorical,
      "think of words, not numbers") = nominal (multicategory or binary) or ordinal (in order).
      Biology examples; then which test each kind leads to, and the trap: counting is not χ². */
+  /* two tails or one: the t distribution for df = 8 (the worked t-test), the 5 % of chance results shaded.
+     Critical t (R: qt): two-tailed 2.306, one-tailed 1.860. The worked t = 5.77 is off the right edge. */
+  WUL.tailsSvg = function (kind) {
+    var W = 300, H = 150, x0 = 14, x1 = 286, yB = 118, yT = 22;
+    function xs(t) { return x0 + (t + 4) / 8 * (x1 - x0); }
+    function f(t) { return Math.pow(1 + t * t / 8, -4.5); }
+    function ys(v) { return yB - (yB - yT) * v; }
+    var d = '', i, t;
+    for (i = 0; i <= 80; i++) { t = -4 + 8 * i / 80; d += (i ? ' L' : 'M') + xs(t).toFixed(1) + ' ' + ys(f(t)).toFixed(1); }
+    function area(a, b) {
+      var p = 'M' + xs(a).toFixed(1) + ' ' + yB;
+      for (var j = 0; j <= 20; j++) { var u = a + (b - a) * j / 20; p += ' L' + xs(u).toFixed(1) + ' ' + ys(f(u)).toFixed(1); }
+      return '<path d="' + p + ' L' + xs(b).toFixed(1) + ' ' + yB + ' Z" class="tails__area"/>';
+    }
+    function lab(x, y, s, a) { return '<text x="' + x.toFixed(1) + '" y="' + y + '" text-anchor="' + (a || 'middle') + '" class="tails__t">' + s + '</text>'; }
+    var c = kind === 'one' ? 1.860 : 2.306, out = '';
+    out += kind === 'one' ? area(c, 4) : area(-4, -c) + area(c, 4);
+    out += '<path d="' + d + '" class="tails__curve"/><line x1="' + x0 + '" y1="' + yB + '" x2="' + x1 + '" y2="' + yB + '" class="tails__ax"/>';
+    out += '<line x1="' + xs(c) + '" y1="' + yB + '" x2="' + xs(c) + '" y2="' + (yB - 44) + '" class="tails__cut"/>' + lab(xs(c), yB - 48, (kind === 'one' ? '' : '+') + c.toFixed(2).replace(/0$/, ''));
+    if (kind !== 'one') out += '<line x1="' + xs(-c) + '" y1="' + yB + '" x2="' + xs(-c) + '" y2="' + (yB - 44) + '" class="tails__cut"/>' + lab(xs(-c), yB - 48, '−' + c.toFixed(2).replace(/0$/, ''));
+    out += kind === 'one' ? lab(xs(3.1), yB - 10, '5 %') : lab(xs(3.2), yB - 10, '2.5 %') + lab(xs(-3.2), yB - 10, '2.5 %');
+    out += lab(xs(0), yB + 16, 't = 0: no difference') + lab(x1, 14, 'our t = 5.77 →', 'end');
+    return '<svg class="tails" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + (kind === 'one' ? 'One-tailed: 5 % of chance results in one tail' : 'Two-tailed: 2.5 % of chance results in each tail') + '">' + out + '</svg>';
+  };
+
   WUL.figs = {
+    tails: function () {
+      return '<div class="tod">' +
+        '<div class="tod__cols">' +
+          '<div class="tod__col tod__col--q is-hi"><div class="tod__h">Two-tailed<small>the normal t-test</small></div>' + WUL.tailsSvg('two') + '<p class="tails__p">A difference in <b>either</b> direction counts: 2.5&nbsp;% in each tail.</p></div>' +
+          '<div class="tod__col tod__col--c"><div class="tod__h">One-tailed<small>rare in an IA</small></div>' + WUL.tailsSvg('one') + '<p class="tails__p">Only one direction counts: all 5&nbsp;% in one tail. Only if you predicted the direction before collecting any data.</p></div>' +
+        '</div>' +
+        '<p class="tod__ib">Spreadsheet: =T.TEST(range1, range2, <b>2</b>, 2): the first 2 means two tails. R: t.test() is two-tailed unless you change it.</p>' +
+      '</div>';
+    },
     data: function (hi) {
       function kid(id, name, what, eg) {
         return '<div class="tod__k' + (hi === id ? ' is-hi' : '') + '"><b>' + name + '</b><span>' + what + '</span><i>' + eg + '</i></div>';
