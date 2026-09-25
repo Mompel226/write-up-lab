@@ -254,7 +254,7 @@
         why: 'A [[correlation]] shows that two variables change together. [[Causation|causation]] needs a controlled experiment, in which only one variable is changed.' },
 
       { type: 'note', tone: 'ib', label: 'Do it in R', title: 'Run these tests yourself, in R',
-        md: 'Every test on this page can be done in R, the free programming language scientists use to analyse data. [Learn R](https://nlcsbiology.com/learn-r/) runs real R in your browser, so you start with nothing to install. [Statistics in R](https://nlcsbiology.com/learn-r/ib.html) explains the p-value step by step, then χ², the t-test and correlation. [Starch curves in R](https://nlcsbiology.com/learn-r/starch.html) fits a calibration curve and explains what R² tells you.' },
+        md: 'Every test on this page can be done in R, the free programming language scientists use to analyse data. [Learn R](https://nlcsbiology.com/learn-r/) runs real R in your browser, with nothing installed on your computer. [Statistics in R](https://nlcsbiology.com/learn-r/ib.html) explains the p-value step by step, then χ², the t-test and correlation. [Starch curves in R](https://nlcsbiology.com/learn-r/starch.html) fits a calibration curve and explains what R² tells you.' },
 
       { type: 'note', tone: 'ib', title: 'What the IB guide asks', label: 'What the IB guide asks', md: 'Tool 3 lists “Apply the t-test” and “Apply the chi-squared test”, and asks you to “Interpret values of the correlation coefficient (r)”. D3.2.21 adds the p = 0.05 level and the null hypothesis. No criterion requires a test in every IA: use one where it answers your question.' },
 
