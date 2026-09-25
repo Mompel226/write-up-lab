@@ -218,6 +218,15 @@ Daniel: the enzyme example is enough), and "never the chance that your hypothesi
 `#/part/stats/build/pvalue` (app.js opens that step: `#/part/<id>/build/<block id>`). Never write "unlikely to be
 due to chance": write "statistically significant" or "chance alone would rarely give a difference this large".
 
+## Chi-squared has TWO worked examples (Daniel, 25 Sep 2026)
+1. A choice (goodness of fit): woodlice, 32 damp v 8 dry against 20 : 20, χ² = 14.4 (Table 2).
+2. Two species (association), the ecology test students meet first (C4.1.15): the Course Companion's heather and
+   moss (*Rhytidiadelphus squarrosus*), Caer Caradoc, 100 random quadrats, 57 / 7 / 9 / 27; E = row × column ÷
+   grand total = 42.2 / 21.8 / 23.8 / 12.2; χ² = 42.4 with E rounded, as the book and Daniel's C4.1 deck do (42.1
+   unrounded, as R's `chisq.test(…, correct = FALSE)` in Learn R); df = 1; 3.84; positive association; not a cause
+   (shade and damp under heather, trampled paths). A stepper, Table 3. Find your test's association answer uses the
+   same numbers.
+
 ## Many tests need a correction (Daniel, 25 Sep 2026)
 Wherever the lab warns against t-tests between every pair (red pen, Mistakes to avoid, Find your test), it also
 names the way out: a [[correction for multiple comparisons]]. Bonferroni, the simplest: 0.05 ÷ number of tests

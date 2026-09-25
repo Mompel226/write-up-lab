@@ -376,6 +376,7 @@ table.dt th.dt-diag{position:relative;width:11em;min-width:11em;height:5.8em;pad
 .dt-diag__b{bottom:5px;left:7px}
 table.dt.dt--mini th,table.dt.dt--mini td{padding:3px 5px;border-width:1px;border-color:var(--rule)}
 table.dt.dt--mini caption{font-size:.76rem}
+@media (max-width:520px){table.dt.dt--tight{font-size:.74rem}table.dt.dt--tight th,table.dt.dt--tight td{padding:5px 4px}table.dt.dt--tight caption{font-size:.86rem}}
 .tnote{font-size:.85rem;color:var(--ink-2);margin-top:6px}
 .g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .g2__k{font:650 .72rem/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;color:var(--ink-2)}

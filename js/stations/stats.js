@@ -107,7 +107,7 @@
         { label: 'Significant', tone: 'g', v: { html: WUL.tailsSvg('two', 5.77) }, note: 'Means of 54 s and 74 s: t = 5.77, beyond the red. p = 0.0004: __significant__.' }
       ] },
 
-      { type: 'table', title: 'A worked chi-squared test',
+      { type: 'table', title: 'A worked chi-squared test: a choice (goodness of fit)',
         spec: {
           caption: 'Table 2. Raw and processed data showing the effect of humidity (damp or dry side) on the number of woodlice on each side of a choice chamber after 10 minutes (n = 40), with a chi-squared test.',
           head: [['', 'Damp side', 'Dry side', 'Total']],
@@ -118,6 +118,36 @@
           ]
         },
         after: 'Null hypothesis: the woodlice show no preference, so 20 are expected on each side. With two categories, df = 2 − 1 = 1. For df = 1, χ² must be above 3.84 for p < 0.05. Here χ² = 14.4, so the null hypothesis is rejected (p < 0.001).' },
+
+      { type: 'steps', title: 'A worked chi-squared test: two species (association)',
+        intro: 'The other use of χ²: are two species found together more often than chance? This is the ecology test (C4.1.15). The data are the Course Companion’s: heather and a moss in 100 random quadrats. Press Next step.',
+        always: ['o-1', 'o-2', 'o-3', 'o-4'],
+        stage: { table: {
+          cls: 'dt--tight',
+          caption: 'Table 3. Raw and processed data showing the distribution of heather (*Calluna vulgaris*) and a moss (*Rhytidiadelphus squarrosus*) in 100 random quadrats on Caer Caradoc, England, with a chi-squared test for association.',
+          head: [['', 'Heather present', 'Heather absent', 'Row total']],
+          rows: [
+            ['Hypotheses', { t: 'H₀: heather and moss are distributed independently. H₁: they are associated.', cs: 3, el: 'h0' }],
+            ['Moss present: observed (O)', { t: '57', el: 'o-1' }, { t: '7', el: 'o-2' }, { t: '64', el: 'tot-1' }],
+            ['Moss absent: observed (O)', { t: '9', el: 'o-3' }, { t: '27', el: 'o-4' }, { t: '36', el: 'tot-2' }],
+            ['Column total', { t: '66', el: 'tot-3' }, { t: '34', el: 'tot-4' }, { t: '100', el: 'tot-5' }],
+            ['Moss present: expected (E)', { t: '64 × 66 ÷ 100 = 42.2', el: 'e-1' }, { t: '64 × 34 ÷ 100 = 21.8', el: 'e-2' }, ''],
+            ['Moss absent: expected (E)', { t: '36 × 66 ÷ 100 = 23.8', el: 'e-3' }, { t: '36 × 34 ÷ 100 = 12.2', el: 'e-4' }, ''],
+            ['χ² = Σ (O − E)² ÷ E', { t: '5.19 + 10.05 + 9.20 + 17.95 = 42.4', cs: 3, el: 'chi' }],
+            ['df', { t: '(2 − 1) × (2 − 1) = 1', cs: 3, el: 'df' }],
+            ['Decision', { t: '42.4 > 3.84: the null hypothesis is rejected (p < 0.001)', cs: 3, el: 'dec' }]
+          ]
+        } },
+        steps: [
+          { title: 'State the hypotheses', show: ['h0'], text: 'H₀: heather and moss are distributed independently, so finding one tells you nothing about the other. H₁: the two species are associated.' },
+          { title: 'Count the four groups', show: ['tot'], focus: ['o', 'tot'], text: 'Ask two questions of each quadrat: heather? moss? That sorts the 100 quadrats into four groups: both (57), moss only (7), heather only (9) and neither (27). Then add the row and column totals.' },
+          { title: 'Calculate the expected counts', show: ['e'], text: 'If H₀ is true, heather is as common in the moss quadrats as everywhere else. Heather grows in 66 of the 100 quadrats, so 66 % of the 64 moss quadrats should have it: 64 × 66 ÷ 100 = 42.2. For every cell: row total × column total ÷ grand total. Each E must be at least 5.' },
+          { title: 'Compare O with E', show: [], focus: ['o-1', 'e-1', 'o-4', 'e-4'], text: 'Both species: 57 observed, 42.2 expected. Neither: 27 observed, 12.2 expected. One species alone: fewer than expected. So the two are found together more often than chance predicts. Is the gap too big for chance?' },
+          { title: 'Calculate χ²', show: ['chi'], text: 'For each cell, (O − E)² ÷ E. Squaring stops the + and − gaps cancelling out. Dividing by E compares each gap with its expected size. Add the four: χ² = 42.4. (A spreadsheet or R keeps E unrounded and gives 42.1.)' },
+          { title: 'Find the degrees of freedom', show: ['df'], text: 'df = (rows − 1) × (columns − 1) = (2 − 1) × (2 − 1) = 1. Once the totals are fixed, one count decides the other three.' },
+          { title: 'Decide', show: ['dec'], text: 'For df = 1, χ² must be above 3.84 for p < 0.05. Here χ² = 42.4, so H₀ is rejected: heather and moss are significantly associated. The association is positive: they are found together more often than expected.' },
+          { title: 'What it does not show', show: [], focus: ['dec'], text: 'An association is not a cause. The moss may need the shade and damp under the heather, or both may avoid the paths trampled by walkers. Only an experiment, such as removing the heather, could test a cause.' }
+        ] },
 
       { type: 'plot', title: 'Correlation and R²', spec: potato,
         after: 'r = −0.99: a strong negative [[correlation]]. R² = 0.99: the straight line explains 99 % of the variation in the change in mass. Use R² only with a fitted trend line.' },
@@ -240,7 +270,7 @@
       { term: 'measured variable', forms: ['measured variables', 'measurement', 'measurements'], def: 'A variable recorded as a number: measured on a scale (continuous) or counted (discrete).', eg: 'Time in s; the number of stomata in a field of view.', fig: 'data', hi: 'quant' },
       { term: 'discrete variable', forms: ['discrete variables', 'discrete', 'discrete data'], def: 'A numerical variable that can take only separate values, usually whole-number counts.', eg: 'The number of seeds in a pod: 4 or 5, never 4.5.', fig: 'data', hi: 'discrete' },
       { term: 't-test', forms: ['t-tests', 't test', "Student's t-test"], def: 'A statistical test of whether the means of two groups differ by more than chance would explain. Its value, t, is the difference divided by the size of difference that chance alone typically makes.', eg: 'Mean time at 40 °C (74 s) against 50 °C (54 s): t = 5.77.' },
-      { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected.', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected.' },
+      { term: 'chi-squared test', forms: ['chi-squared', 'chi-squared tests', 'chi-square test', 'χ² test'], def: 'A statistical test that compares observed counts in categories with the counts expected. It has two uses: a choice or a ratio (goodness of fit), and two species found together (association).', eg: 'Woodlice: 32 damp and 8 dry, against 20 and 20 expected. Heather and moss together in 57 of 100 quadrats, against 42.2 expected.' },
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },
       { term: 'p-value', forms: ['p value', 'p-values'], def: 'Pretend there is no real difference: p is how often chance alone would then give a difference as big as yours. Below 0.05: significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
       { term: 'correction for multiple comparisons', forms: ['corrections for multiple comparisons', 'multiple comparisons', 'Bonferroni correction'], def: 'A stricter line for p when you run several tests on the same data, so a false “significant” result stays rare. The simplest is the Bonferroni correction: divide 0.05 by the number of tests. With 10 tests, each p must be below 0.005.' },
@@ -260,6 +290,6 @@
         cite: 'Whitlock, Michael C., and Dolph Schluter. *The Analysis of Biological Data*. 3rd ed., Macmillan Learning, 2020.' }
     ],
 
-    sources: ['IB Biology guide (2025), Tool 3, pp. 30–31', 'IB Biology guide (2025), D3.2.21, C4.1.15 and C2.2.4', 'IB Extended essay guide (first assessment 2027), guidance for the sciences']
+    sources: ['IB Biology guide (2025), Tool 3, pp. 30–31', 'IB Biology guide (2025), D3.2.21, C4.1.15 and C2.2.4', 'IB Extended essay guide (first assessment 2027), guidance for the sciences', 'Allott, A. and Mindorff, D. (2023) Biology Course Companion, Oxford University Press, pp. 521–522: the heather and moss chi-squared test']
   });
 })(window.WUL);
