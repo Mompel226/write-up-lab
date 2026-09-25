@@ -218,6 +218,12 @@ Daniel: the enzyme example is enough), and "never the chance that your hypothesi
 `#/part/stats/build/pvalue` (app.js opens that step: `#/part/<id>/build/<block id>`). Never write "unlikely to be
 due to chance": write "statistically significant" or "chance alone would rarely give a difference this large".
 
+## Many tests need a correction (Daniel, 25 Sep 2026)
+Wherever the lab warns against t-tests between every pair (red pen, Mistakes to avoid, Find your test), it also
+names the way out: a [[correction for multiple comparisons]]. Bonferroni, the simplest: 0.05 ÷ number of tests
+(10 pairs of five temperatures: each p below 0.005). Learn R's shelf shows `pairwise.t.test(…, "bonferroni")`,
+which multiplies each p instead, so it is still compared with 0.05.
+
 ## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
 - No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
 - Overlap: "the graph **alone** cannot show a difference" + the test's p-value. NEVER "these data do not show a
@@ -293,7 +299,7 @@ keeps its 17ch, for its shape.
 - graphs: line graph, bar chart, histogram, scatter graph, line of best fit, extrapolate, interpolate, key,
   continuous variable, categorical variable, axis, scale
 - errorbars: error bar, standard deviation, standard error, range (of data), interquartile range, spread
-- stats: t-test, chi-squared test, null hypothesis, p-value, correlation coefficient, coefficient of determination,
+- stats: t-test, chi-squared test, null hypothesis, p-value, correction for multiple comparisons, correlation coefficient, coefficient of determination,
   statistically significant, correlation, causation
 - analysis: trend, anomalous result, gradient, plateau
 - conclusion: conclusion, published value, justify

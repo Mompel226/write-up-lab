@@ -60,7 +60,7 @@
     many: { test: 'Plan one comparison, then use a t-test', why: 'Testing every pair makes a false “significant” result likely: at p < 0.05, about 1 test in 20 looks significant by chance alone.',
       h0: 'There is no difference between the mean time at 40 °C and at 50 °C. This one pair was chosen before the data were collected.',
       say: 'A t-test between 40 °C and 50 °C, planned before the data were collected, gave t = 5.77, df = 8, p < 0.001.',
-      care: 'To compare three or more groups in one test, scientists use ANOVA. It is beyond the IB course. For a trend across the whole range, the graph with its error bars is the main evidence.' }
+      care: 'To test several pairs, apply a [[correction for multiple comparisons]]: with 10 tests, each p must be below 0.005 (0.05 ÷ 10). To compare three or more groups in one test, scientists use ANOVA. It is beyond the IB course. For a trend across the whole range, the graph with its error bars is the main evidence.' }
   };
 
   /* ---------- part 2: practice ---------- */
