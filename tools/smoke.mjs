@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-/* tools/smoke.mjs — render stations in headless Chrome at every level and report problems.
+/* tools/smoke.mjs — render stations in headless Chrome and report problems. Each part is loaded with ?lv=g, i and
+   e, but a part page ignores ?lv (every step is drawn at its own level), so the three loads are the same page: every
+   Learn step is drawn (all=1); the red pen and Test yourself only at their first level.
    usage: node tools/smoke.mjs [station ids…]     (no ids = every station; needs the server on :8830)
    Checks: no script error while drawing (body[data-errors]), a page heading, no "missing" tool,
-   no "Unknown block", and that a station meant for that level shows at least Build it and Test yourself. */
+   no "Unknown block", and that a station meant for that level shows at least the Learn tab (id build) and Test yourself. */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -32,7 +34,7 @@ for (const id of ids) {
     if (!/class="phead__h"/.test(dom)) probs.push('no page heading');
     const miss = (dom.match(/class="missing"/g) || []).length; if (miss) probs.push(`${miss} missing/failed tool or block`);
     if (lv.includes(l)) {
-      if (!/id="build"/.test(dom)) probs.push('no Build it section');
+      if (!/id="build"/.test(dom)) probs.push('no Learn section');
       if (!/id="test"/.test(dom)) probs.push('no Test yourself section');
     }
     if (probs.length) { bad++; console.log(`✘  ${id} @${l}: ${probs.join('; ')}`); }

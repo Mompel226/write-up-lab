@@ -1,5 +1,5 @@
 /* station: report — what a lab report is, the order of its parts at each level, and the scientific voice.
-   The parts match the specimen report on the front page (js/specimen.js) exactly. */
+   The parts match the report on the home page (WUL.reportMap in js/specimen.js) exactly. */
 (function (WUL) {
   'use strict';
 

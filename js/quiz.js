@@ -1,7 +1,8 @@
 /* ============================================================
    quiz.js — "Test yourself" and the flashcards.
 
-   WUL.quiz(host, questions, {id, title, onDone})
+   WUL.quiz(host, questions, {id, next, onDone})
+   next() returns the "next part" link node; onDone(got, total) is called at the end.
    One question at a time. Nothing asks for free writing, so every
    answer is marked by the page.
 

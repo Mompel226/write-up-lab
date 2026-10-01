@@ -1,5 +1,5 @@
 /* ============================================================
-   blocks.js — the building blocks a station's "Build it" section is
+   blocks.js — the building blocks a station's Learn tab (id build) is
    made of, plus the red pen and the walkthrough (stepper).
 
    WUL.block(spec) → a DOM node.  spec.type is one of:

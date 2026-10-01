@@ -19,14 +19,40 @@
   var h = WUL.h, md = WUL.md, esc = WUL.esc;
   var main = document.getElementById('main');
 
-  /* the route in, per level (station ids, in order) */
+  /* the route in, per level (station ids, in order). Every station with IGCSE content is on the IGCSE route:
+     Observations and Academic integrity joined it on 1 Oct 2026 (Daniel; the circulation lab sends IGCSE pupils
+     to part/integrity). */
   WUL.ROUTE = {
-    g: ['report', 'variables', 'question', 'hypothesis', 'apparatus', 'safety', 'method', 'tables', 'processing', 'graphs', 'analysis', 'conclusion', 'evaluation', 'measurement', 'sources'],
+    g: ['report', 'variables', 'question', 'hypothesis', 'apparatus', 'safety', 'method', 'tables', 'processing', 'observations', 'graphs', 'analysis', 'conclusion', 'evaluation', 'measurement', 'sources', 'integrity'],
     i: ['report', 'question', 'background', 'variables', 'hypothesis', 'apparatus', 'safety', 'method', 'tables', 'processing', 'observations', 'graphs', 'errorbars', 'stats', 'analysis', 'conclusion', 'evaluation', 'measurement', 'sources', 'format', 'integrity'],
     e: ['report', 'question', 'background', 'variables', 'hypothesis', 'apparatus', 'safety', 'method', 'tables', 'processing', 'observations', 'graphs', 'errorbars', 'stats', 'analysis', 'discussion', 'conclusion', 'evaluation', 'measurement', 'sources', 'format', 'integrity', 'reflection']
   };
 
   function prog(id) { return (WUL.store.get('prog', {})[id]) || {}; }
+  /* A part's questions: one set per level where the sets differ ({l, ls, qs}). PAGES.part draws them, and
+     quiz.js saves each set's score under qid(): the bare id for the set the part shows first, id + '.' + l
+     for another. progAt(id, l) is what a reader at level l has done: the part seen (bare id) and the best
+     score of THEIR level's set (30 Sep 2026: an IB reader's scores were saved but never shown, and Start from
+     zero took its ticks and its next part from the IGCSE set). */
+  function questionSets(s) {
+    var sets = [];
+    ['g', 'i', 'e'].filter(function (l) { return s.levels.indexOf(l) >= 0; }).forEach(function (l) {
+      var qs = (s.test || []).filter(function (q) { return WUL.shows(q.lv, l); });
+      if (!qs.length) return;
+      var same = sets.filter(function (x) { return x.qs.length === qs.length && x.qs.every(function (q, k) { return q === qs[k]; }); })[0];
+      if (same) { same.ls.push(l); return; }
+      sets.push({ l: l, ls: [l], qs: qs });
+    });
+    return sets;
+  }
+  function qid(s, x) { return s.id + (x.l === s.levels.charAt(0) ? '' : '.' + x.l); }
+  function progAt(id, l) {
+    var s = WUL.stations[id], p = prog(id);
+    var x = s && l ? questionSets(s).filter(function (y) { return y.ls.indexOf(l) >= 0; })[0] : null;
+    if (!x || qid(s, x) === id) return p;
+    var q = prog(qid(s, x));
+    return { seen: p.seen, best: q.best, tries: q.tries, last: q.last };
+  }
   function seen(id) { var p = WUL.store.get('prog', {}); p[id] = p[id] || {}; if (!p[id].seen) { p[id].seen = Date.now(); WUL.store.set('prog', p); } }
   function stationsByStage(stage) {
     return WUL.stationOrder.map(function (id) { return WUL.stations[id]; }).filter(function (s) { return s.stage === stage; })
@@ -37,8 +63,8 @@
     return '<span class="dots" aria-label="' + ['g', 'i', 'e'].filter(function (l) { return lv.indexOf(l) >= 0; }).map(function (l) { return WUL.LEVELS[l].name; }).join(', ') + '">' +
       ['g', 'i', 'e'].map(function (l) { return '<i class="' + (lv.indexOf(l) >= 0 ? 'on-' + l : '') + '"></i>'; }).join('') + '</span>';
   }
-  function tick(id) {
-    var p = prog(id);
+  function tick(id, l) {
+    var p = progAt(id, l);
     if (p.best >= 0.999) return '<span class="tick tick--full">✔</span>';
     if (p.best != null) return '<span class="tick tick--part">' + Math.round(p.best * 100) + '%</span>';
     if (p.seen) return '<span class="tick tick--seen">•</span>';
@@ -126,7 +152,7 @@
       var ul = h('ul', { class: 'map__list' });
       list.forEach(function (s) {
         var ibOnly = s.levels.indexOf('g') < 0;
-        ul.appendChild(h('li', { html: '<a class="map__a' + (ibOnly ? ' is-other' + (s.levels.indexOf('i') < 0 ? ' is-ee' : '') : '') + '" href="#/part/' + esc(s.id) + '"><span class="map__t">' + esc(s.title) + '</span><span class="map__m">' + lvDots(s.levels) + tick(s.id) + '</span></a>' }));
+        ul.appendChild(h('li', { html: '<a class="map__a' + (ibOnly ? ' is-other' + (s.levels.indexOf('i') < 0 ? ' is-ee' : '') : '') + '" href="#/part/' + esc(s.id) + '"><span class="map__t">' + esc(s.title) + '</span><span class="map__m">' + lvDots(s.levels) + tick(s.id, WUL.level()) + '</span></a>' }));
       });
       col.appendChild(ul);
       grid.appendChild(col);
@@ -333,14 +359,7 @@
     }
 
     /* TEST — a question set per level, when the sets differ */
-    var sets = [];
-    levels.forEach(function (l) {
-      var qs = (s.test || []).filter(function (q) { return WUL.shows(q.lv, l); });
-      if (!qs.length) return;
-      var same = sets.filter(function (x) { return x.qs.length === qs.length && x.qs.every(function (q, k) { return q === qs[k]; }); })[0];
-      if (same) { same.ls.push(l); return; }
-      sets.push({ l: l, ls: [l], qs: qs });
-    });
+    var sets = questionSets(s);
     if (sets.length) {
       var qc = chapter('test', sets[0].qs.length);
       var qHost = h('div');
@@ -353,7 +372,7 @@
         qHost.innerHTML = '';
         var hh = h('div', { class: 'lvscope-' + x.l }); qHost.appendChild(hh);
         WUL.withLevel(x.l, function () {
-          WUL.quiz(hh, x.qs, { id: s.id + (x.l === base ? '' : '.' + x.l), next: function () { return nextLink(s.id, 'btn btn--go'); } });
+          WUL.quiz(hh, x.qs, { id: qid(s, x), next: function () { return nextLink(s.id, 'btn btn--go'); } });
         });
       }
       if (sets.length > 1) {
@@ -423,16 +442,16 @@
     var L = WUL.level();
     var R = WUL.ROUTE[L].filter(function (id) { return WUL.stations[id]; });
     var w = h('section', { class: 'wrap routepg' });
-    var firstUndone = R.filter(function (id) { return !(prog(id).best >= 0.999); })[0] || R[0];
+    var firstUndone = R.filter(function (id) { return !(progAt(id, L).best >= 0.999); })[0] || R[0];
     w.innerHTML = '<p class="eyebrow">Start from zero</p><h1 class="phead__h">Your route through a report</h1>' +
       '<p class="phead__job">Do the parts in this order. Each part takes about ten minutes. Read <u>Learn</u>, do the <u>Red pen</u>, then <u>Test yourself</u>. Your progress stays on this device.</p>';
     w.appendChild(h('div', { class: 'pchap__lv' }, [h('span', { class: 'wd-k', text: 'I am writing' }), levelTabs(['g', 'i', 'e'], L, function (l) { WUL.store.set('level', l); route(); })]));
     if (firstUndone) w.appendChild(h('p', { html: '<a class="btn btn--go btn--lg" href="#/part/' + firstUndone + '">' + (prog(R[0]).seen ? 'Carry on: ' : 'Begin: ') + esc(WUL.stations[firstUndone].title) + ' →</a>' }));
     var ol = h('ol', { class: 'trail' });
     R.forEach(function (id, k) {
-      var s = WUL.stations[id], p = prog(id);
+      var s = WUL.stations[id], p = progAt(id, L);
       ol.appendChild(h('li', { class: 'trail__i' + (p.best >= 0.999 ? ' is-done' : p.seen ? ' is-seen' : '') + (id === firstUndone ? ' is-next' : ''), html:
-        '<a href="#/part/' + id + '"><span class="trail__n">' + (k + 1) + '</span><span class="trail__t"><b>' + esc(s.title) + (s.levels.indexOf('g') < 0 ? ' ' + ibTag(s.levels) : '') + '</b><span>' + md(WUL.pick(s.job, L), { inline: true }) + '</span></span>' + tick(id) + '</a>' }));
+        '<a href="#/part/' + id + '"><span class="trail__n">' + (k + 1) + '</span><span class="trail__t"><b>' + esc(s.title) + (s.levels.indexOf('g') < 0 ? ' ' + ibTag(s.levels) : '') + '</b><span>' + md(WUL.pick(s.job, L), { inline: true }) + '</span></span>' + tick(id, L) + '</a>' }));
     });
     w.appendChild(ol);
     main.appendChild(w);

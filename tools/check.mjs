@@ -13,7 +13,8 @@
      every sort item in a real group, build answers made of real chips,
      spot questions with a reason for every mistake
    · every red pen: a note for every mark, a mark for every note
-   · every [[keyword]] anywhere resolves to a definition
+   · every [[keyword]] anywhere resolves to a definition: station content, and every string
+     literal in the tools, the specimen, the page code and the data files
    · no keyword defined twice with different wording
    · model answers contain no I / we / my / our
    · the running-example data: every mean and SD recomputed
@@ -135,7 +136,7 @@ for (const id of WUL.stationOrder) {
   (s.words || []).forEach((w, i) => { if (!w.term || !w.def) E(`${at}.words[${i}]: needs term and def`); lvOk(`${at}.words`, w.lv); markup.push([`${at}.words`, w.def]); if (w.eg) markup.push([`${at}.words`, w.eg]); });
   (s.further || []).forEach((f, i) => { if (!f.title || !f.md) E(`${at}.further[${i}]: needs title and md`); markup.push([`${at}.further`, f.md]); });
   const nTests = (s.test || []).length;
-  if (nTests < 4) W(`${at}: only ${nTests} test questions (aim for 6–10)`);
+  if (nTests < 4) W(`${at}: only ${nTests} test questions (aim for 7–10)`);
 }
 
 function checkRedpen(w, rp) {
@@ -190,6 +191,31 @@ for (const [where, s] of markup) {
   for (const m of String(s ?? '').matchAll(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g)) {
     const key = (m[2] || m[1]).trim();
     if (!WUL.wordKey(key)) E(`${where}: keyword [[${m[0].slice(2, -2)}]] has no definition in any station`);
+  }
+}
+/* keywords in the code the data pass above does not reach: the tools (js/widgets/), the specimen report, the
+   page code and the data files, and every station string the pass does not collect (step titles, a
+   question's own why …). Only string literals are read — a nested array such as [['Soil', …]] is not a
+   keyword — and each is read the way the page reads it, escapes and all. Found on 30 Sep 2026: the test
+   chooser's [[normal distribution|normal]] had its two halves the wrong way round, and its pop-up said
+   "No definition yet" to every student. */
+{
+  const said = new Set(errs.map((e) => (e.match(/keyword (\[\[.*?\]\])/) || [])[1]).filter(Boolean));
+  const list = (dir) => fs.readdirSync(path.join(ROOT, dir)).filter((f) => f.endsWith('.js')).sort().map((f) => dir + '/' + f);
+  const files = ['js/core.js', 'js/app.js', 'js/specimen.js', 'js/blocks.js', 'js/quiz.js', 'js/plot.js', ...list('js/data'), ...list('js/widgets'), ...list('js/stations')];
+  for (const f of files) {
+    const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    for (const m of src.matchAll(/(['"`])((?:\\.|(?!\1).)*?)\1/g)) {
+      if (m[2].indexOf('[[') < 0) continue;
+      let t = m[2];
+      if (m[1] !== '`') { try { t = vm.runInNewContext(m[1] + m[2] + m[1]); } catch (e) { /* keep it as written */ } }
+      for (const k of String(t).matchAll(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g)) {
+        const key = (k[2] || k[1]).trim();
+        if (/\$\{|['"] ?\+/.test(k[0]) || WUL.wordKey(key) || said.has(k[0])) continue;   /* built from parts; defined; already named */
+        said.add(k[0]);
+        E(`${f}:${src.slice(0, m.index).split('\n').length}: keyword ${k[0]} has no definition in any station`);
+      }
+    }
   }
 }
 /* model answers are impersonal */

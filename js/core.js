@@ -79,20 +79,12 @@
     e: { id: 'e', name: 'IB EE', long: 'IB Extended Essay', years: 'Years 12–13', color: 'ee' }
   };
   var ORDER = ['g', 'i', 'e'];
-  var listeners = [];
   WUL.LEVELS = LEVELS; WUL.LEVEL_ORDER = ORDER;
   /* the level a page is being drawn at. Pages set it for the moment they draw a block
      (WUL.withLevel), so a tool placed inside an "At IB" panel behaves as the IB version. */
   var override = null;
   WUL.level = function () { if (override) return override; var l = WUL.store.get('level', 'g'); return LEVELS[l] ? l : 'g'; };
   WUL.withLevel = function (l, fn) { var prev = override; override = LEVELS[l] ? l : prev; try { return fn(); } finally { override = prev; } };
-  WUL.setLevel = function (l) {
-    if (!LEVELS[l] || l === WUL.level()) return;
-    WUL.store.set('level', l);
-    document.documentElement.setAttribute('data-level', l);
-    listeners.forEach(function (f) { try { f(l); } catch (e) { console.error(e); } });
-  };
-  WUL.onLevel = function (f) { listeners.push(f); };
   /* ?lv=i in the address sets the level (for links a teacher shares, and for testing) */
   try {
     var q = new URLSearchParams(global.location.search).get('lv');

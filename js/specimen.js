@@ -1,8 +1,8 @@
 /* ============================================================
-   specimen.js — the report on the front page. One experiment
-   (amylase and temperature) written up three times: IGCSE, IB IA,
-   IB EE. Point at a part; its job, where marks go, and a door into
-   that part's station open beside it.
+   specimen.js — the running example, amylase and temperature,
+   written as IGCSE / IB IA / IB EE parts (the data P), and
+   WUL.reportMap, the home page: ONE report (IGCSE) as two pages of
+   parts, each opening in place with how the IB IA and EE change it.
 
    THE DATA IS THE SITE'S RUNNING EXAMPLE — see js/data/datasets.js.
    Iodine is sampled every 10 s, so every time is a multiple of 10 s
@@ -94,74 +94,6 @@
       { n: 'Appendices', st: 'format', crit: 'not read', tx: 'Appendix 1: the full raw data (5 trials at each of 5 temperatures)', job: 'Allowed, but examiners are not required to read appendices.', lose: 'Anything the argument needs, placed here.', chg: 'New.' }
     ]}
   };
-  WUL.SPECIMEN = P;
-
-  WUL.specimen = function (host) {
-    host.innerHTML = '';
-    var L = WUL.level(), sel = 0;
-    var bench = h('div', { class: 'bench' });
-    var left = h('div', { class: 'bench__l' });
-    var sheet = h('div', { class: 'spec sheet' });
-    var rpf = h('div', { class: 'spec__rpf' });
-    var panel = h('aside', { class: 'spec__panel', 'aria-live': 'polite' });
-    left.appendChild(sheet); left.appendChild(rpf);
-    bench.appendChild(left); bench.appendChild(panel);
-    host.appendChild(bench);
-
-    function draw() {
-      var S = P[L];
-      sheet.innerHTML = '<div class="spec__h"><span class="spec__name">' + esc(S.name) + '</span><span class="spec__len">' + esc(S.len) + '</span></div>';
-      var list = h('div', { class: 'spec__parts' });
-      S.parts.forEach(function (p, i) {
-        var b = h('button', { type: 'button', class: 'spec__part', 'data-i': i, 'aria-pressed': i === sel ? 'true' : 'false' });
-        b.innerHTML = '<span class="spec__pl"><span class="spec__pn">' + esc(p.n) + '</span>' + (p.crit ? '<span class="spec__crit">' + esc(p.crit) + '</span>' : '') + '</span>' +
-          (p.html ? '<span class="spec__vis">' + p.html() + '</span>' : '<span class="spec__tx">' + md(p.tx, { inline: true }) + '</span>');
-        list.appendChild(b);
-      });
-      sheet.appendChild(list);
-      rpf.innerHTML = L === 'e' ? '<div class="spec__rpfk">Uploaded separately · Reflection and Progress Form</div><p>Three reflection sessions, the last one a <b>viva voce</b>, then one statement of up to 500 words. It is the <u>only</u> evidence for criterion E (Reflection, 4 marks). Criteria A–D judge the essay as a whole, so the tags on the sheet show where each one mostly lives.</p>' : '';
-      rpf.hidden = L !== 'e';
-      paint();
-    }
-    function paint() {
-      var S = P[L], p = S.parts[sel], st = WUL.stations[p.st];
-      sheet.querySelectorAll('.spec__part').forEach(function (b, i) { b.setAttribute('aria-pressed', i === sel ? 'true' : 'false'); });
-      panel.innerHTML = '<div class="spec__pk">' + esc(S.name) + (p.crit ? ' · ' + esc(p.crit) : '') + '</div>' +
-        '<h3 class="spec__pt">' + esc(p.n) + '</h3>' +
-        '<dl><dt>Its job</dt><dd>' + md(p.job, { inline: true }) + '</dd>' +
-        '<dt>Where marks are lost</dt><dd class="lose">' + md(p.lose, { inline: true }) + '</dd>' +
-        (p.chg ? '<dt>What changed from the level below</dt><dd>' + md(p.chg, { inline: true }) + '</dd>' : '') + '</dl>' +
-        (st ? '<a class="btn btn--go" href="#/part/' + esc(p.st) + '">Learn to write it →</a>' : '<span class="muted">This part is being written.</span>');
-      place();
-    }
-    /* on a phone the explanation opens under the part that was tapped; on a wide screen it sits beside the sheet */
-    function narrow() { return window.innerWidth < 980; }
-    function place() {
-      if (narrow()) {
-        var b = sheet.querySelector('.spec__part[data-i="' + sel + '"]');
-        if (b && b.nextSibling !== panel) b.parentNode.insertBefore(panel, b.nextSibling);
-        panel.classList.add('spec__panel--in');
-      } else if (panel.parentNode !== bench) {
-        bench.appendChild(panel); panel.classList.remove('spec__panel--in');
-      }
-    }
-    window.addEventListener('resize', function () { if (host.isConnected) place(); });
-    sheet.addEventListener('click', function (e) {
-      if (e.target.closest('.kw')) return;
-      var b = e.target.closest('.spec__part'); if (!b) return;
-      sel = +b.getAttribute('data-i'); paint();
-      if (narrow()) panel.scrollIntoView({ behavior: WUL.reduced() ? 'auto' : 'smooth', block: 'nearest' });
-    });
-    WUL.onLevel(function (l) {
-      if (!host.isConnected) return;
-      var name = P[L].parts[sel].n; L = l;
-      var idx = P[L].parts.findIndex(function (p) { return p.n === name; });
-      sel = idx >= 0 ? idx : Math.min(sel, P[L].parts.length - 1);
-      draw();
-    });
-    draw();
-  };
-
   /* ============================================================
      WUL.reportMap — the home page. ONE report (IGCSE) laid out as two
      pages. Each part is a small tile; click it and it opens in place:

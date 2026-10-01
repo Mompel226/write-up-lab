@@ -5,7 +5,7 @@ then an IB Extended Essay — **one part at a time**. Built for Dr Daniel Mompel
 NLCS Jeju. **The students are Korean and learn in English**: short sentences, one idea each, the examined word
 rather than the everyday one, visual examples wherever something can be shown.
 
-Read first: `docs/lab-reports/BRIEF.md` (what is decided, and the corrections to Daniel's documents),
+Read first: `docs/lab-reports/BRIEF.md` (Phase 1 history; its corrections to Daniel's documents still hold),
 `docs/lab-reports/RESEARCH-cambridge.md` and `docs/lab-reports/RESEARCH-ib.md` (the facts, with page
 numbers), and Daniel's own guides in `docs/lab-reports/source-text/` (his voice and examples — but where the
 BRIEF lists a correction, the correction wins). The IB Biology guide's full text is
@@ -15,14 +15,18 @@ BRIEF lists a correction, the correction wins). The IB Biology guide's full text
 density and tone.
 
 ## Files — who owns what
-- Core (do NOT edit; report what you need in your final message): `index.html`, `css/app.css`, `js/core.js`,
-  `js/plot.js`, `js/blocks.js`, `js/quiz.js`, `js/app.js`, `js/specimen.js`, `js/data/*`.
-- You own only the station files and widget files named in your brief. Each file already exists as a stub and is
-  already loaded by `index.html`.
+- Core files (`index.html`, `css/app.css`, `js/core.js`, `js/plot.js`, `js/blocks.js`, `js/quiz.js`, `js/app.js`,
+  `js/specimen.js`, `js/data/*`) are shared by every station. Change them only with `node tools/check.mjs` and
+  `node tools/smoke.mjs` over ALL stations afterwards.
+- Each station is one file in `js/stations/`, each tool one file in `js/widgets/`; a new one also needs its
+  `<script>` line in `index.html`. A new station also takes its place in `WUL.ROUTE` (`js/app.js`, the order of
+  Start from zero) for every level it has: every part with IGCSE content is on the IGCSE route (Observations and
+  Academic integrity joined it on 1 Oct 2026, Daniel's choice).
 - A widget may add its own CSS with `WUL.css('<widget-name>', '…css…')`. Class names must start with
   `wd-<widget-name>` (e.g. `.wd-graph-doctor__grid`). Use the CSS variables from `css/app.css` (`--ink`, `--ink-2`,
-  `--ink-3`, `--sheet`, `--sheet-2`, `--edge`, `--rule`, `--red`, `--red-wash`, `--green`, `--green-wash`,
-  `--blue`, `--plum`, `--lvl`, `--lvl-wash`, `--hl`, `--hl-soft`, `--p1…--p6`, `--serif`, `--sans`, `--mono`,
+  `--ink-3`, `--sheet`, `--sheet-2`, `--edge`, `--rule`, `--rule-2`, `--red`, `--red-2`, `--red-wash`, `--green`,
+  `--green-wash`, `--blue`, `--blue-wash`, `--plum`, `--plum-wash`, `--ee`, `--ee-wash`, `--amber`, `--amber-wash`,
+  `--lvl`, `--lvl-wash`, `--hl`, `--hl-soft`, `--p1…--p6`, `--p1k…--p6k`, `--serif`, `--sans`, `--mono`,
   `--hand`, `--r`, `--shadow`, `--shadow-sm`) so light and dark themes both work. Reusable classes: `.sheet`,
   `.sheet--vis`, `.btn`, `.btn--go`, `.btn--ghost`, `.seg` (segmented buttons with aria-pressed), `.wd-panel`,
   `.wd-row`, `.wd-k`, `.wd-out`, `.chip`, `.chips`, `.fb .fb--ok/.fb--no`, `.hint`, `table.dt`.
@@ -41,10 +45,12 @@ short plain `title`: it becomes the step's name. The home page is the report its
 open in place (`WUL.reportMap` in `js/specimen.js`), each with "How the IB IA / IB EE changes this".
 The notes below on `lv` still hold: they decide which steps are IB steps.
 
-`g` IGCSE (Years 9–11) · `i` IB Internal Assessment · `e` IB Extended Essay. The reader picks one in the top bar;
-`WUL.level()` returns it. Any content item may carry `lv:'gie'` / `'ie'` / `'g'` … (absent = every level).
-`job`, `where`, `redpen`, `frames`, `buildTitle` may be per-level objects `{g:…, i:…, e:…}`; the reader gets
-their level's value or the nearest lower one.
+`g` IGCSE (Years 9–11) · `i` IB Internal Assessment · `e` IB Extended Essay. There is no top-bar switch. On a part
+page every step, red pen and question set is drawn at its own level (`WUL.withLevel`), and `WUL.level()` returns that
+level. Elsewhere `WUL.level()` is the reader's choice from the "I am writing" switch on Start from zero and the
+Checklist, the Level switch on a tool page, or `?lv=`. Any content item may carry `lv:'gie'` / `'ie'` / `'g'` …
+(absent = every level). `job`, `where`, `redpen`, `frames` may be per-level objects `{g:…, i:…, e:…}`; the reader
+gets their level's value or the nearest lower one.
 
 ## A station
 ```js
@@ -144,7 +150,8 @@ full, informative title, in the SAME pattern, so students copy the pattern. Neve
 `Table N. <kind of data> showing the effect of <independent variable (range, unit)> on <dependent variable, and what it was measured on>.`
 - kind of data: IGCSE **Data** (one table holds the readings and the means, so there is no need to say which;
   Daniel, 25 Sep 2026) · IB **Raw data** (Table 1) · **Processed data** (Table 2: means, SD, rates) ·
-  **Raw and processed data**. Items shown at every level use the IGCSE form.
+  **Raw and processed data** · **Data and observations** (a table that holds readings and qualitative
+  observations, e.g. `observations.js`). Items shown at every level use the IGCSE form.
 - IGCSE titles stop after the dependent variable; IB titles end with n (and, for figures, the error bars).
 - two measured variables: `… showing the relationship between <X> and <Y> in <organism/sample>.`
 - add `(n = 5)` or a condition at the end when it helps: `… (n = 5 at each temperature)`.
@@ -356,17 +363,20 @@ then what the site is checked against, then the licences.
 - integrity: academic integrity, plagiarism, collusion, collaboration, malpractice, paraphrase
 - reflection: Reflection and Progress Form, viva voce, reflective statement, Researcher's reflection space
 
-## Check your work — required before you report
-1. `node tools/check.mjs` (from `labs/write-up-lab/`) must print `✔ all checks passed`. Warnings about another
-   agent's station are not yours; errors in yours are.
-2. A local server runs at `http://127.0.0.1:8830/labs/write-up-lab/index.html` (it serves the whole Biology Hub
-   folder). `?lv=g|i|e` before the `#` sets the level, e.g. `index.html?lv=i#/part/tables`.
-   - `node tools/smoke.mjs <station-id> [more ids]` renders each station at all three levels in headless Chrome
-     and reports script errors, missing tools and empty sections. It must pass.
-   - Then LOOK at your pages. Screenshot with
-     `/private/tmp/claude-503/-Users-NLCS-Library-CloudStorage-OneDrive-Personal-NLCS-CCA-BioCoders-Claude/d13bf587-264f-4c2e-aadc-b94c7ee1c461/scratchpad/shot.sh "<url>" <out.png> <width> <height>`
-     at 1440 × 4000 and at 390 × 6000, and read the PNGs. Save screenshots in that scratchpad folder, never in
-     the site. Fix what looks wrong: clipped text, overflow at 390 px, crossed label lines, a graph that is not
-     to scale, a legend that covers data. Tools that need tapping: drive them with the Browser tools
-     (`mcp__Claude_Browser__*`, the pane is already open at that server) and confirm each button does what it says.
+## Check your work — required before you commit
+1. `node tools/check.mjs` (from `labs/write-up-lab/`) must print `✔ all checks passed`. A warning about a station
+   you did not change still deserves a look; an error in yours must be fixed.
+2. Start a static server yourself, from the Biology Hub folder:
+   `python3 -m http.server 8830 --bind 127.0.0.1` (smoke.mjs expects :8830). `?lv=g|i|e` before the `#` sets the
+   level used by Start from zero, the Checklist and the tool pages; part pages ignore it (each step is drawn at
+   its own level).
+   - `node tools/smoke.mjs <station-id> [more ids]` renders each station in headless Chrome, with every Learn step
+     open, and reports script errors, missing tools and empty sections. It loads each part with `?lv=g`, `i` and
+     `e`, but a part page ignores `?lv`, so the three loads are the same page: the red pen and Test yourself are
+     checked at their first level only. It must pass.
+   - Then LOOK at your pages: headless Chrome `--screenshot --window-size=W,H` (or the Browser pane opened with
+     navigate) at 1440 × 4000 and at 390 × 6000, and read the PNGs. Save screenshots in your own scratchpad,
+     never in the site. Fix what looks wrong: clipped text, overflow at 390 px, crossed label lines, a graph that
+     is not to scale, a legend that covers data. Tools that need tapping: drive them in the Browser pane and
+     confirm each button does what it says.
 3. Read your own text once more against the Writing rules.
