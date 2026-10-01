@@ -424,7 +424,7 @@
     drawForm(); drawOut();
   });
 
-  /* WUL.tool lives in app.js, which loads after the widget files: queue the entry if it is not there yet */
+  /* WUL.tool is defined in js/core.js, which index.html loads first; the push is only a fallback */
   var TOOL = { name: NAME, title: 'Build a reference', blurb: 'Complete the boxes to build a colour-coded MLA 9 entry and its in-text citation.', station: 'sources', lv: 'gie', icon: '❝' };
   if (WUL.tool) WUL.tool(TOOL); else (WUL.TOOLS = WUL.TOOLS || []).push(TOOL);
 })(window.WUL);

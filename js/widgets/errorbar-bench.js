@@ -21,7 +21,7 @@
   var h = WUL.h, md = WUL.md, esc = WUL.esc;
   var NAME = 'errorbar-bench', C = 'wd-errorbar-bench';
 
-  /* WUL.tool lives in app.js, which loads after the widgets; push straight onto the list if it is not there yet */
+  /* WUL.tool is defined in js/core.js, which index.html loads first; the push is only a fallback */
   var TOOL = { name: NAME, title: 'Error-bar bench', blurb: 'Move seven values and watch the range, SD and SE bars change.', station: 'errorbars', lv: 'ie', icon: '±' };
   if (WUL.tool) WUL.tool(TOOL); else (WUL.TOOLS = WUL.TOOLS || []).push(TOOL);
 

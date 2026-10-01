@@ -216,7 +216,7 @@
     drawMode();
   });
 
-  /* WUL.tool lives in app.js, which loads after the widget files: queue the entry if it is not there yet */
+  /* WUL.tool is defined in js/core.js, which index.html loads first; the push is only a fallback */
   var TOOL = { name: NAME, title: 'Word budget', blurb: 'Share 3,000 or 4,000 words between the sections, and see what does not count.', station: 'format', lv: 'ie', icon: '≡' };
   if (WUL.tool) WUL.tool(TOOL); else (WUL.TOOLS = WUL.TOOLS || []).push(TOOL);
 })(window.WUL);

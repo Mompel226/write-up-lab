@@ -16,9 +16,9 @@ Made by **Dr Daniel Mompel Riera**, NLCS Jeju.
 - **Learn each part.** Every part has its own page in tabs: Learn (short steps you open one at a time,
   with the IB steps marked) · Red pen on a weak example · Mistakes to avoid · Test yourself · Keywords.
   A "Compare" bar shows how the part changes from IGCSE to the IA and the EE.
-- **Practise on tools**: build a table, plot points on graph paper, find the faults in a graph, see error bars
-  change as the data change, choose a statistical test, build a research question, a risk assessment and a
-  reference.
+- **Practise on tools**: build a table, choose the right kind of graph, plot points on graph paper, find the
+  faults in a graph, see error bars change as the data change, choose a statistical test, share out an IA or EE
+  word count, and build a research question, a risk assessment and a reference.
 - **Start from zero** — a route through the parts in order, for a student who has forgotten everything.
 - **Check my report** — the checklist for their level, ticked against their own report.
 
@@ -41,7 +41,8 @@ says so.
   every highlighted keyword has a meaning, every red-pen mark has an explanation, model answers are written
   impersonally, and the example data are recomputed. `node tools/check.mjs --stamp` also refreshes the
   version stamps.
-- `node tools/smoke.mjs` opens every part at every level in a headless browser and reports any error.
+- `node tools/smoke.mjs` opens every part in a headless browser, with every Learn step open, and reports any
+  error (the red pen and Test yourself are checked at their first level).
 - The answers to the self-tests are in the page. This site teaches; it does not grade.
 
 </details>
