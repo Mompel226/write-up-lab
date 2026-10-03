@@ -107,7 +107,7 @@
     { page: 1, id: 'question', st: 'question', name: 'Title and question', kind: 'lines', g: ['Title', 'Aim or question'], i: 'Research question in context', e: 'Title page' },
     { page: 1, id: 'background', st: 'background', lv: 'ie', name: 'Background', kind: 'lines', i: 'Background', e: 'Introduction and literature' },
     { page: 1, id: 'hypothesis', st: 'hypothesis', name: 'Hypothesis', kind: 'lines', g: 'Hypothesis',
-      iTxt: 'A hypothesis is optional in the IA: it is not in the four criteria. If you write one, answer the research question first in the conclusion, then add one sentence about the hypothesis.',
+      iTxt: 'A hypothesis is optional in the IA: it is not in the four criteria. If you write one, the conclusion still answers the research question with processed data; a sentence on the hypothesis may follow.',
       eTxt: 'Science essays usually test a hypothesis. A result that does not support it is just as valid.' },
     { page: 1, id: 'variables', st: 'variables', name: 'Variables', kind: 'lines', g: 'Variables', i: 'Methodological choices',
       eTxt: 'Justify each choice from published research or from a pilot run.' },

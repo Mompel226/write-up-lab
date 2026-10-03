@@ -114,8 +114,7 @@ WUL.station({
     { bad: 'A URL pasted into the list.', good: 'Author, title, website, date, URL and the access date.' },
     { bad: 'Citing only the sentences you quoted.', good: 'Citing paraphrases, images and data too.' },
     { bad: 'A list with one MLA entry and one Harvard entry.', good: 'One style, used consistently.' },
-    { bad: 'A textbook in the list that is never cited in the text.', good: 'Works Cited lists only what the text cites.' },
-    { bad: 'An AI tool’s paragraph with no citation.', good: 'Quoted, and cited with the prompt and the date it was generated.', lv: 'ie' }
+    { bad: 'A textbook in the list that is never cited in the text.', good: 'Works Cited lists only what the text cites.' }
   ],
 
   test: [

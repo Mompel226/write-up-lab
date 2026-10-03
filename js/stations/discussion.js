@@ -47,7 +47,7 @@
             ['Compare with published research', '{2:Conclusion} (good practice)', '{2:Conclusion} (required)', '{3:Discussion}, in detail'],
             ['Explain agreements and discrepancies', 'Not expected', '{2:Conclusion}, briefly', '{3:Discussion}'],
             ['Weaknesses and their impact', '{4:Evaluation}', '{4:Evaluation}', '{4:Evaluation}, marked with the discussion'],
-            ['Answer the question', '{2:Conclusion}, with the hypothesis', '{2:Conclusion}: the research question first', '{2:Conclusion}, briefly'],
+            ['Answer the question', '{2:Conclusion}, with the hypothesis', '{2:Conclusion}: the answer to the research question', '{2:Conclusion}, briefly'],
             ['A section called “Discussion”?', 'No', 'No', '{3:Yes}']
           ]
         },
@@ -100,7 +100,7 @@
 
     redpen: {
       e: {
-        title: 'An EE discussion. Five phrases would lose marks.',
+        title: 'An EE discussion. Five phrases need the red pen.',
         body: '[!a:The results were as expected.]\n\nThe optimum was 50 °C.\n\n[!b:This agrees with the literature.]\n\nAt 60 °C, the rate was lower than in other studies.\n\n[!c:This was due to human error.]\n\n[!d:At 20 °C the mean was 178 s.] At 30 °C it was 118 s, and at 40 °C it was 74 s.\n\n[!e:This proves the collision theory.]',
         notes: {
           a: { label: 'what does it mean?', why: 'Expected by whom? Say which finding, and what it shows: the peak near 50 °C shows that faster collisions outweighed denaturation up to that temperature.' },
@@ -115,11 +115,9 @@
     },
 
     traps: [
-      { bad: 'The results agreed with the literature.', good: 'Raviyan et al. report 55 °C (5464); the data here place the optimum between 40.0 and 60.0 °C.' },
       { bad: 'The rate at 60 °C was different because of human error.', good: 'A possible reason: the enzyme was held at 60 °C before the reaction, so some was denatured.' },
       { bad: 'Every mean from the results table, again.', good: 'Say what the numbers mean. The table already gives them.' },
-      { bad: 'Only the sources that agree are mentioned.', good: 'A balanced discussion includes the result that disagrees, and a reason for it.' },
-      { bad: 'This proves the collision theory.', good: 'This is consistent with more frequent successful collisions at higher temperatures.' }
+      { bad: 'Only the sources that agree are mentioned.', good: 'A balanced discussion includes the source that disagrees, and a possible reason.' }
     ],
 
     test: [

@@ -786,3 +786,72 @@ table.dt.dt--compact th,table.dt.dt--compact td{padding:4px 6px}
 /* a link to another page of nlcsbiology.com, written [words](https://…) in a note */
 .xlink{color:inherit;font-weight:600;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
 .xlink:hover{text-decoration-thickness:2.5px}
+
+/* ---------- signing in and homework (3 Oct 2026) ----------
+   The sign-in sits at the right of the top line, beside "← Biology Hub", so the main row keeps its shape.
+   Homework colours are the labs' key (Bio English's #B45309 for part done = --ee here): red not started, orange part done,
+   green done; the words always say it too. */
+.upbar{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:30px}
+.who{display:flex;align-items:center;justify-content:flex-end;min-width:0}
+.who__btn{min-height:32px;display:flex;align-items:center}
+.who__btn[hidden],.who__card[hidden]{display:none}   /* display:flex above would beat the hidden attribute */
+.who__card{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:4px 10px;font:500 12.5px/1.3 var(--sans);color:var(--ink-2)}
+.who__card b{color:var(--ink);font-weight:650}
+.who__sync{font:500 11px/1.2 var(--mono);color:var(--ink-3)}
+.who__hw,.who__t{font:600 12px/1 var(--sans);color:var(--ink);text-decoration:none;border:1px solid var(--rule);border-radius:999px;padding:5px 10px;background:var(--sheet)}
+.who__hw{border-color:color-mix(in srgb,var(--red) 45%,var(--rule))}
+.who__hw:hover,.who__t:hover{border-color:var(--ink-2)}
+.who__out{appearance:none;background:none;border:1px solid var(--rule);color:var(--ink-2);border-radius:999px;padding:5px 10px;font:500 12px/1 var(--sans);cursor:pointer}
+.who__out:hover{border-color:var(--ink-2);color:var(--ink)}
+@media (max-width:560px){.who__sync{display:none}.who__name{display:none}}
+
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);max-width:min(560px,calc(100% - 32px));background:var(--ink);color:var(--paper);font:500 .9rem/1.4 var(--sans);padding:12px 16px;border-radius:var(--r);box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
+.toast.is-on{opacity:1;transform:translate(-50%,0)}
+
+.hwdot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline;flex:none}
+.hwdot--none{background:var(--red)}
+.hwdot--partly{background:var(--ee)}
+.hwdot--done{background:var(--green)}
+.hwpill{display:inline-block;font:650 .74rem/1 var(--sans);letter-spacing:.01em;padding:4px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.hwpill--none{color:var(--red);background:var(--red-wash)}
+.hwpill--partly{color:var(--ee);background:var(--ee-wash)}
+.hwpill--done{color:var(--green);background:var(--green-wash)}
+.hwkey{font:500 .88rem/1.6 var(--sans);color:var(--ink-2)}
+.hwkey .hwdot{margin:0 4px 0 8px}
+
+.map__a.is-hw{border-left:4px solid var(--c-hw,var(--red))}
+.map__a.is-hw--partly{--c-hw:var(--ee)}
+.map__a.is-hw--done{--c-hw:var(--green)}
+
+.hwbox{margin-top:8px;margin-bottom:8px}
+.hwbox__h{font:650 1.2rem/1.3 var(--sans);margin:0 0 4px}
+.hwbox__p{margin:0 0 10px;color:var(--ink-2)}
+.hwrow{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:12px 14px;margin-bottom:8px;background:var(--sheet);border:1px solid var(--edge);border-left:4px solid var(--red);border-radius:var(--r);color:var(--ink);text-decoration:none;box-shadow:var(--shadow-sm)}
+.hwrow:hover{border-color:var(--ink-3)}
+.hwrow__due,.hwrow__n{font:500 .86rem/1.3 var(--sans);color:var(--ink-2)}
+
+.hwbanwrap{margin-top:4px;margin-bottom:6px}
+.hwban>*{margin:0}
+.hwban{background:var(--sheet);border:1px solid var(--edge);border-radius:var(--r);padding:12px 16px;box-shadow:var(--shadow-sm)}
+.hwban__k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font:600 .9rem/1.3 var(--sans);color:var(--ink)}
+.hwban__p{margin-top:6px !important;color:var(--ink)}
+.hwlist{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+.hwlist li{font:500 .9rem/1.4 var(--sans);color:var(--ink-2);padding-left:22px;position:relative}
+.hwlist li::before{content:"";position:absolute;left:4px;top:.45em;width:9px;height:9px;border-radius:50%;border:2px solid var(--ink-3)}
+.hwlist li.is-ok::before{background:var(--green);border-color:var(--green)}
+.hwlist b{color:var(--ink);font-weight:650;margin-right:4px}
+.hwalso{margin:8px 0 0;font:500 .84rem/1.45 var(--sans);color:var(--ink-3)}
+.hwalso b{font-weight:600;color:var(--ink-2)}
+
+.hwpg{padding-top:22px;padding-bottom:40px}
+.hwparts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px;margin-top:14px}
+.hwpart{background:var(--sheet);border:1px solid var(--edge);border-top:4px solid var(--red);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.hwpart--partly{border-top-color:var(--ee)}
+.hwpart--done{border-top-color:var(--green)}
+.hwpart__h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font:650 1.05rem/1.3 var(--sans);margin:0}
+.hwpart__h a{color:var(--ink);text-decoration:none}
+.hwpart__h a:hover{text-decoration:underline;text-underline-offset:3px}
+.hwpart__p{margin:8px 0 0;color:var(--ink)}
+.hwpart__go{margin:12px 0 0;margin-top:auto;padding-top:12px}
+
+.seg--lv .seg--hw[aria-pressed="true"]{color:var(--red);background:var(--red-wash);box-shadow:inset 0 -2px 0 var(--red)}

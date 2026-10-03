@@ -1,6 +1,7 @@
 /* station: evaluation — errors from the method, their impact, and matched improvements.
    Corrections respected (BRIEF.md): a ± 2 °C fluctuation is RANDOM; a constant offset is systematic;
-   extensions earn nothing in the 2025 IA; the top IA band asks for RELATIVE impact (rank the weaknesses).
+   extensions are not in the 2025 IA criteria; the top IA band asks for RELATIVE impact (rank the weaknesses). The ranking
+   and relative impact are IA-only (lv 'i'): EE criterion D asks for strengths and limitations, explained (audit, 3 Oct 2026).
    Numbers (WUL.data.amylase, IB): SD 8.4 / 8.4 / 5.5 / 5.5 / 8.4 s; sampling interval 10 s > 5.5 s.
    Steepest part of the curve: 178 → 118 s over 10 °C = 6 s per °C, so ± 0.5 °C changes a time by ≤ ± 3 s,
    less than every SD. Means at 40 and 50 °C differ by 20 s = two sampling intervals.
@@ -21,7 +22,7 @@
 
     ladder: {
       g: ['Say whether there were any [[anomalous results|anomalous result]]', 'Name each [[random error]] and [[systematic error]] that came from the method', 'Match each error with an [[improvement]]: what, how and where'],
-      i: ['Explain what each [[weakness]] and [[limitation]] did to the data', 'Rank them: the [[relative impact]]', 'Realistic improvements, matched to the weaknesses. [[Extensions|extension]] earn nothing'],
+      i: ['Explain what each [[weakness]] and [[limitation]] did to the data', 'Rank them: the [[relative impact]]', 'Realistic improvements, matched to the weaknesses. [[Extensions|extension]] are not in the IA criteria'],
       e: ['[[Evaluate|evaluation]] the method __and__ the sources', 'Strengths as well as limitations, each one explained']
     },
 
@@ -48,7 +49,7 @@
           { n: 2, name: 'A random error, linked to precision', note: 'A step in the method that made the results scatter.' },
           { n: 3, name: 'A systematic error, linked to accuracy', note: 'Something that shifted every result the same way. Repeating does not help.' },
           { n: 4, name: 'The matching improvement', note: 'What to change, how, and where in the method.' },
-          { n: 5, name: 'An extension', note: 'A new question to investigate. Fine in a school report; in the IB IA it earns nothing.' }
+          { n: 5, name: 'An extension', note: 'A new question to investigate. Fine in a school report; the IB IA criteria do not ask for one.' }
         ] },
 
       { type: 'callout', title: 'Three things for every error', label: 'Every error needs three things', md: 'The __step__ that caused it, what it __did__ to the results, and an __improvement__ that matches it.' },
@@ -59,7 +60,7 @@
         'A [[systematic error]] shifts every result the same way. It reduces [[accuracy]]. Repeating does __not__ help.',
         'A fluctuation (± 2 °C, higher then lower) is random. A constant offset (always 2 °C high) is systematic.',
         '“The stopwatch was not accurate” is rarely the real problem: it reads to 0.01 s. Find the real limit.',
-        { t: 'At IB, compare the size of each weakness with the [[standard deviation]] and with the effect you measured.', lv: 'ie' }
+        { t: 'In the IA, compare the size of each weakness with the [[standard deviation]] and with the effect you measured.', lv: 'i' }
       ] },
 
       { type: 'compare', title: 'Never write “human error”',
@@ -85,7 +86,7 @@
           { label: 'Limitations: how widely the conclusion applies', tone: 'e', v: '__Range of the data:__ 20.0–60.0 °C in 10.0 °C steps, so the optimum lies somewhere between 40.0 and 60.0 °C.\n\n__Confines of the system:__ one batch of *A. oryzae* α-amylase, at pH 6.0.\n\n__Assumptions:__ that each mixture stayed at the bath temperature for the whole reaction.', note: 'The three kinds of limitation named in the IB clarifications.' }
         ] },
 
-      { type: 'table', lv: 'ie', title: 'Rank the weaknesses',
+      { type: 'table', lv: 'i', title: 'Rank the weaknesses',
         spec: {
           caption: 'Weaknesses, ranked by impact', cls: 'wd-evaluation-prose',
           head: [['Weakness, largest first', 'What it did to the data', 'Random or systematic?', 'Size compared with the SD', 'Could it change the conclusion?', 'Improvement']],
@@ -99,7 +100,7 @@
         },
         after: 'Rank each weakness with three questions. How large is it, compared with the SD and the effect? In which direction does it move the data? Could it change the conclusion?' },
 
-      { type: 'anatomy', lv: 'ie', title: 'A model IA evaluation',
+      { type: 'anatomy', lv: 'i', title: 'A model IA evaluation',
         intro: 'The largest weakness first, explained in full; the smaller ones briefly. Tap a colour.',
         model: '{1:The largest weakness was the 10 s sampling interval: each time was recorded up to 10 s after the true end point.} {2:This is larger than the SD at 40.0 and 50.0 °C (5.5 s), so the spread at these temperatures mostly reflects the sampling, not the enzyme.} {3:Differences near the optimum, for example between 45 and 50 °C, are likely to be smaller than 10 s and could not be detected, so this weakness limits how precisely the optimum can be located.} {4:Following the colour with a colorimeter, which gives a reading every second, would reduce this uncertainty to about 1 s.}\n\n{5:The other weaknesses had a smaller impact. The dial read 2.0 °C high, a systematic error that made every temperature 2.0 °C lower than recorded; this is less than the 10.0 °C interval, so the answer stands. The bath drifted by ± 0.5 °C, a random error that changed each time by at most ± 3 s, less than every SD.}\n\n{6:Only one batch of amylase was tested, so the conclusion applies to this preparation; a second batch would show whether it can be generalised.}',
         parts: [
@@ -159,13 +160,13 @@
           c: { label: 'generic', why: 'It could be pasted into any report. “Generic” weaknesses are the 1–2 band.' },
           d: { label: 'which? how much?', why: 'Name it and compare its size with the SD: the 10 s sampling interval is larger than the 5.5 s SD at 40.0 and 50.0 °C.' },
           e: { label: 'rank them', why: 'Say which weakness mattered most, and whether it could change the conclusion. That is the relative impact.' },
-          f: { label: 'extension', why: 'Extensions earn nothing in the 2025 criteria. Use the words for improvements to this method.' }
+          f: { label: 'extension', why: 'Extensions are not in the 2025 criteria. Use the words for improvements to this method.' }
         },
         fixed: 'The ==largest weakness was the 10 s sampling interval==: it is larger than the SD at 40.0 and 50.0 °C (5.5 s), so it limits how precisely the optimum can be located. A ==colorimeter reading every second== would reduce it to about 1 s. The ==bath drift of ± 0.5 °C had a smaller impact==: it changed each time by at most ± 3 s, less than every SD. ==Only one batch of amylase== was used, so the conclusion applies to this preparation only.',
         fixedNote: 'Each weakness is now specific, its size is compared with the SD, and the weaknesses are ranked.'
       },
       e: {
-        title: 'An EE evaluation. Four phrases would lose marks.',
+        title: 'An EE evaluation. Four phrases need the red pen.',
         body: '[!a:The method was good.]\n\n[!b:There were some errors.]\n\n[!c:The websites were reliable.]\n\n[!d:More repeats should be done.]',
         notes: {
           a: { label: 'why?', why: 'Explain the strength: five trials at each temperature, and SD bars around the peak that do not overlap.' },
@@ -183,8 +184,9 @@
       { bad: 'The water bath fluctuated by ± 2 °C: a systematic error.', good: 'A fluctuation is random. Only a constant offset is systematic.' },
       { bad: 'Repeat the experiment to make it more accurate.', good: 'Repeats cannot fix a systematic error. To improve accuracy, check the dial against a thermometer.' },
       { bad: 'Use better equipment.', good: 'Use a colorimeter that reads every second, instead of sampling every 10 s.' },
-      { bad: 'Limitations: small sample, time, human error.', good: 'Rank specific weaknesses by their impact on the conclusion.', lv: 'ie' },
-      { bad: 'The effect of pH could be investigated next.', good: 'In the IA, extensions earn nothing. Improve the method you used.', lv: 'i' }
+      { bad: 'Limitations: small sample, time, human error.', good: 'Specific weaknesses, with the relative impact of each explained: which matters most, and why.', lv: 'i' },
+      { bad: 'Limitations of the method only.', good: 'Strengths and limitations of the method and of the sources, each explained.', lv: 'e' },
+      { bad: 'The effect of pH could be investigated next.', good: 'Extensions are not in the IA criteria. Suggest realistic improvements to the method used.', lv: 'i' }
     ],
 
     test: [
@@ -228,7 +230,7 @@
           { t: 'It shifts every result the same way.', why: 'It makes some results higher and some lower.' }
         ],
         why: 'A fluctuation is random: it reduces precision, and repeats help.' },
-      { type: 'order', lv: 'ie', q: 'Rank these weaknesses of the amylase IA, from the largest impact on the conclusion to the smallest.',
+      { type: 'order', lv: 'i', q: 'Rank these weaknesses of the amylase IA, from the largest impact on the conclusion to the smallest.',
         items: [
           'Iodine sampled every 10 s (10 s: larger than the 5.5 s SD)',
           'Bath dial reading 2.0 °C high (every temperature 2.0 °C lower than recorded)',
@@ -243,10 +245,10 @@
           { t: 'The iodine was sampled every 10 s.', why: 'A weakness in the precision of measurement.' },
           { t: 'The SD at 60.0 °C was 8.4 s.', why: 'A weakness: variation in the data.' }
         ] },
-      { type: 'choose', lv: 'ie', q: 'Which improvement earns credit in the IA?',
+      { type: 'choose', lv: 'i', q: 'Which improvement does the IA ask for?',
         opts: [
           { t: 'Follow the colour with a colorimeter that reads every second, to reduce the largest uncertainty: the 10 s sampling interval.', ok: true, why: 'Realistic, specific, and matched to the weakness that mattered most.' },
-          { t: 'Investigate the effect of pH next.', why: 'An extension: it earns nothing in the 2025 criteria.' },
+          { t: 'Investigate the effect of pH next.', why: 'An extension: the 2025 criteria do not ask for one.' },
           { t: 'Use a better laboratory.', why: 'Not realistic, and not linked to any weakness.' },
           { t: 'Repeat the experiment more times.', why: 'No number and no weakness: repeats would not fix the 10 s sampling interval.' }
         ] },
@@ -266,7 +268,7 @@
       { term: 'weakness', forms: ['weaknesses'], def: 'A problem in the method: in the control of variables, the precision of measurement, or the variation in the data.', eg: 'The iodine was sampled only every 10 s.' },
       { term: 'limitation', forms: ['limitations'], def: 'A limit on how widely the conclusion applies: the range of the data, the system, or the assumptions.', eg: 'One batch of amylase, tested from 20 to 60 °C.' },
       { term: 'improvement', forms: ['improvements'], def: 'A realistic change to the method that reduces a named weakness.', eg: 'A colorimeter that reads every second, instead of sampling every 10 s.' },
-      { term: 'relative impact', forms: [], lv: 'ie', def: 'How much each weakness affects the conclusion, compared with the others.', eg: 'The 10 s sampling interval mattered more than the ± 0.5 °C drift.' },
+      { term: 'relative impact', forms: [], lv: 'i', def: 'How much each weakness affects the conclusion, compared with the others.', eg: 'The 10 s sampling interval mattered more than the ± 0.5 °C drift.' },
       { term: 'extension', forms: ['extensions'], def: 'A new investigation suggested by the results, such as testing another variable.', eg: 'The effect of pH on the rate at 50 °C.' }
     ],
 

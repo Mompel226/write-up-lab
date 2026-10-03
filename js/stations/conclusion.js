@@ -56,7 +56,7 @@
 
     ladder: {
       g: ['Say whether the results __support__ the [[hypothesis]]', 'Give the key values as evidence', 'Explain the biology with the exact terms', 'Good practice: compare with a [[published value]]'],
-      i: ['Answer the [[research question]] first, in its own words', 'Use [[processed data]] and its uncertainty', '[[Justify]] the answer with a cited published value: which source, and how close', 'One line on the hypothesis is allowed, but it earns nothing alone'],
+      i: ['Answer the [[research question]], in its own words', 'Use [[processed data]] and its uncertainty', '[[Justify]] the answer with a cited published value: which source, and how close', 'A sentence on the hypothesis may follow'],
       e: ['A short [[synthesis]] that answers the research question', 'Drawn from the discussion: no new data, no new argument', 'Shorter than an IA conclusion, because the discussion already gives the detail']
     },
 
@@ -114,7 +114,7 @@
           { n: 2, name: 'The evidence, with its uncertainty', note: 'Processed data (means, rates, SD), and what the error bars allow you to claim.' },
           { n: 3, name: 'The biology', note: 'Exact terms: kinetic energy, successful collisions, enzyme–substrate complex, active site, tertiary structure, denatured.' },
           { n: 4, name: 'The comparison, cited', note: 'Which source, and how close. The citation must be traceable.' },
-          { n: 5, name: 'One line on the hypothesis', note: 'Allowed, and last. It earns nothing alone.' }
+          { n: 5, name: 'A sentence on the hypothesis', note: 'Optional. The criterion asks for the answer to the research question.' }
         ],
         after: 'Works Cited entry: ' + CITE },
 
@@ -122,21 +122,21 @@
         md: 'Top band (5–6): the conclusion is “justified” and “fully consistent with the analysis presented”, and it is “justified through relevant comparison to the accepted scientific context”.\n\n“Fully consistent” requires “the interpretation of processed data including associated uncertainties”. Citations must be “sufficiently detailed to allow these sources to be traceable”.' },
 
       { type: 'note', tone: 'ib', lv: 'i', title: 'The hypothesis at IB', label: 'At IB: and the hypothesis?',
-        md: 'You may add one sentence on the hypothesis, after the answer. The IB lists “Evaluate hypotheses” as a skill, but the criterion rewards the answer to the __research question__. So the hypothesis sentence earns nothing alone, and it never replaces the answer.' },
+        md: 'You may add a sentence on the hypothesis. The IB lists “Evaluate hypotheses” as a skill, but the Conclusion criterion assesses how well the report answers the __research question__. So the hypothesis sentence never replaces that answer.' },
 
       { type: 'compare', lv: 'ie', title: 'Name the source and the value',
         bad: 'This agrees with the literature.',
         good: 'Raviyan et al. report an optimum of 55 °C for α-amylase from *A. oryzae* (5464), inside the 40.0–60.0 °C range found here.',
-        badLabel: 'Earns nothing', goodLabel: 'Traceable and numerical',
+        badLabel: 'Cannot be checked', goodLabel: 'Traceable and numerical',
         why: 'The first names no source and no number, so nobody can check it. The second names the source, the page and the value, and says how close it is.' },
 
       { type: 'rules', title: 'Use the exact words', items: [
         'Data __support__ a hypothesis. They never “prove” it.',
         'Enzymes are not alive. They are __denatured__, never “killed”.',
         'Name the process: kinetic energy, successful collisions, enzyme–substrate complexes, active site, denatured.',
-        { t: 'Answer the research question __first__, with processed data and its uncertainty.', lv: 'ie' },
+        { t: 'Answer the research question with processed data and its uncertainty.', lv: 'ie' },
         { t: 'Where [[error bars|error bar]] overlap, say that the graph __alone__ cannot separate the conditions, and report the test that decides.', lv: 'ie' },
-        { t: 'Keep weaknesses and limitations for the [[evaluation]].', lv: 'ie' }
+        { t: 'Keep weaknesses and limitations for the [[evaluation]].', lv: 'i' }
       ] },
 
       { type: 'frames', lv: 'g', title: 'Sentences for your conclusion', items: [
@@ -176,10 +176,10 @@
         fixedNote: 'It now gives the answer, the evidence and the biology, in exact terms.'
       },
       i: {
-        title: 'An IA conclusion. Five phrases would keep it out of the top band.',
+        title: 'An IA conclusion. Five phrases need the red pen.',
         body: '[!a:The hypothesis was correct.]\n\n[!b:Amylase works best at 50 °C.]\n\n[!c:The reaction was fastest there.]\n\n[!d:This agrees with the literature.]\n\n[!e:Human error made it unreliable.]',
         notes: {
-          a: { label: 'answer the RQ first', why: 'Open with the answer to the research question. One line on the hypothesis may come last, but it earns nothing alone.' },
+          a: { label: 'answer the RQ', why: 'Answer the research question, with processed data. A sentence on the hypothesis may follow, but it never replaces the answer.' },
           b: { label: 'which amylase?', why: 'Name the system and the range: α-amylase from *A. oryzae*, between 20.0 and 60.0 °C. Amylases from other organisms have other optima.' },
           c: { label: 'numbers? SD?', why: 'Use processed data with its uncertainty: a mean rate of 18.5 × 10⁻³ s⁻¹ at 50.0 °C (mean time 54 s, SD 5.5 s), and the SD bars do not overlap.' },
           d: { label: 'which? how close?', why: 'Name the source and compare the numbers: Raviyan et al. report 55 °C (5464), inside the 40.0–60.0 °C range found here.' },
@@ -189,12 +189,12 @@
         fixedNote: 'The answer comes first, with processed data and its uncertainty, and the comparison is traceable. Limitations go in the evaluation.'
       },
       e: {
-        title: 'An EE conclusion. Four phrases would lose marks.',
+        title: 'An EE conclusion. Four phrases need the red pen.',
         body: '[!a:At 20.0 °C the mean was 178 s.] At 30.0 °C it was 118 s, at 40.0 °C 74 s, at 50.0 °C 54 s and at 60.0 °C 98 s.\n\n[!b:This proves] that temperature affects amylase.\n\n[!c:Calcium ions may also matter.]\n\n[!d:All amylases work best at 50 °C.]',
         notes: {
           a: { label: 'a repeat of the results', why: 'The results section has these numbers. A conclusion combines the findings into one answer.' },
           b: { label: 'proves?', why: 'Data support or show; they do not prove. Answer the question: “to what extent”.' },
-          c: { label: 'new argument', why: 'A new idea at the end has no evidence behind it. It belongs in the discussion, or nowhere.' },
+          c: { label: 'new argument', why: 'A new idea at the end has no evidence behind it. Name it as an unresolved question, or discuss it in the body.' },
           d: { label: 'all amylases?', why: 'One enzyme from one species was tested. Keep the answer to that system.' }
         },
         fixed: '==Temperature has a large effect on the rate of starch hydrolysis by *A. oryzae* α-amylase, but only up to an optimum between 40.0 and 60.0 °C==. Below the optimum, the gain in successful collisions outweighs denaturation; above it, ==denaturation outweighs the gain==. This optimum ==agrees with the 55 °C reported by Raviyan et al.==',
@@ -207,8 +207,7 @@
       { bad: 'The enzyme was killed at 60 °C.', good: 'Some of the amylase was denatured: its active site changed shape.' },
       { bad: 'It was fastest at 50 °C because that is the best temperature.', good: '…because the molecules had more kinetic energy, so more successful collisions occurred.' },
       { bad: 'This agrees with the literature.', good: 'Raviyan et al. report 55 °C (5464): inside the 40.0–60.0 °C range found here.' },
-      { bad: 'The results may be unreliable because of human error.', good: 'Keep weaknesses for the evaluation. The conclusion answers the question.', lv: 'ie' },
-      { bad: 'All amylases work best at 50 °C.', good: 'The optimum of this *A. oryzae* α-amylase lies between 40.0 and 60.0 °C.', lv: 'ie' }
+      { bad: 'All amylases work best at 50 °C.', good: 'This amylase digested the starch fastest at 50 °C, of the temperatures tested.' }
     ],
 
     test: [
@@ -251,10 +250,10 @@
           { t: 'Only one batch of amylase was used.', bin: 1, why: 'A limitation of the method.' },
           { t: 'A colorimeter would give a reading every second.', bin: 1, why: 'An improvement belongs in the evaluation.' }
         ] },
-      { type: 'choose', lv: 'ie', q: 'The research question: “How does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by *A. oryzae* α-amylase?” Which first sentence is best?',
+      { type: 'choose', lv: 'ie', q: 'The research question: “How does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by *A. oryzae* α-amylase?” Which sentence answers it?',
         opts: [
-          { t: 'Within 20.0–60.0 °C, the rate was highest at 50.0 °C, so the optimum lies between 40.0 and 60.0 °C.', ok: true, why: 'It answers the question in its own words, first.' },
-          { t: 'The hypothesis was supported.', why: 'Allowed later, in one line, but it does not answer the research question.' },
+          { t: 'Within 20.0–60.0 °C, the rate was highest at 50.0 °C, so the optimum lies between 40.0 and 60.0 °C.', ok: true, why: 'It answers the question in its own words.' },
+          { t: 'The hypothesis was supported.', why: 'Allowed, but it does not answer the research question.' },
           { t: 'Enzymes are affected by temperature.', why: 'Too general: it could end any enzyme report.' },
           { t: 'There were several errors in the method.', why: 'Errors belong in the evaluation.' }
         ] },

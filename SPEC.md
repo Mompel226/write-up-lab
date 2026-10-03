@@ -31,6 +31,55 @@ density and tone.
   `.sheet--vis`, `.btn`, `.btn--go`, `.btn--ghost`, `.seg` (segmented buttons with aria-pressed), `.wd-panel`,
   `.wd-row`, `.wd-k`, `.wd-out`, `.chip`, `.chips`, `.fb .fb--ok/.fb--no`, `.hint`, `table.dt`.
 
+- Signing in, saving and homework (3 Oct 2026): `js/track.js` (what a pupil did in each part, and
+  `WUL.partsManifest()`), `js/account.js` (sign-in, saving to the labs' Apps Script, homework), `js/config.js`
+  (the script's address and the Google client id, by hand), `js/signin.js` (a COPY of `labs-shared/signin.js`, made
+  by `check.mjs --stamp`: never edit it here) and `data/parts.json` (written by `check.mjs --stamp`). See
+  "Saving and homework" below.
+
+## Saving and homework (Daniel, 3 Oct 2026)
+"When I set homework, this is also something I can set, and that is tracked in the spreadsheet." A teacher sets
+**whole parts** (never a step inside one) from the labs' teacher page, beside lab stations and Bio English sets.
+- **One standard for everyone, no level to choose**: "they have to do all of the questions, even the IB, because even
+  if they're IGCSE students, it's important for them to understand what they need to do at IB level." A part is
+  FINISHED when every red pen it has is done (each level's version: every mistake found) and every question in its
+  test is answered (all levels together; an answer shown after three tries counts as answered, not as right first
+  time). What finishing takes is the part's `units` in `data/parts.json`: its red-pen marks plus its questions.
+- **Recorded, shown to the teacher, never needed**: Learn steps opened, Mistakes to avoid opened, Go further panels
+  opened. **Never recorded**: keyword cards ("swapping the cards might be very misguiding": a pupil who knows a word
+  does not turn its card) and time of any kind.
+- Each part's record carries its fingerprint `v` (`WUL.partV`: its questions' prompts, options and answers, and its
+  red pens' mark keys; never a `why`). Rewording a question or changing which option is right, or adding or removing
+  a red-pen mark, starts that part again for everybody, here and in the spreadsheet; a better `why`, a new Learn
+  step or a trap does not. After any change, `node tools/check.mjs --stamp` rewrites `data/parts.json`; push it with
+  the change, or the spreadsheet scores against the old list.
+- A homework part shows a banner (what finishing takes, and where the pupil is) and its Test yourself opens on a
+  **Homework** set: every question not yet answered, from every level, IB ones tagged. The home page lists the
+  homework; `#/hw/<id>` is the page the Classroom post links to. Colours are the labs' key: red not started, orange
+  part done (`--ee`, Bio English's #B45309), green done; the words always say it too.
+- Saving follows the labs (memory labs-save-on-their-own): two minutes after the last change, at once when a
+  homework part is finished, when the page is left, and at sign-in (the records come back first, then this
+  browser's work goes). A second account on the same computer never gets the first one's work.
+- The server side is the labs script (`hubs/biology-hub/apps-script/Code.gs`, "WRITE-UP LAB"): `writeup.save`,
+  `writeup.mine`, the tab "📝 Write-Up Lab". Its scorer counts exactly what `WUL.partState` counts: change both.
+
+## IB items in "Mistakes to avoid" (Daniel, 3 Oct 2026)
+"Really check your IB examples to ensure that they actually align with the IB, and that the already existing
+examples for IGCSE would already be enough … you're being too picky … trust what the IA and EE guides say." Checked
+that day against the IB Biology guide (2025) and the EE guide (2027), item by item. The rules that came out of it:
+- An item is marked IB only when the IB guide asks for MORE than the IGCSE answer gives. A rule true at every level
+  (no "prove", no "human error", no over-generalising) has no `lv` and uses the IGCSE wording.
+- Never demand what the guides do not ask. Uncertainties: the ± value with its unit, to an appropriate precision
+  (Tool 3). Never "say where it comes from" (half a division, the last digit): teach how to work it out, never ask
+  the pupil to write it. A cover page is "not needed", never a mistake. "To what extent" is one way to ask a question.
+- No mark claims the guides do not make: not "would keep it out of the top band", "earns nothing", "earns the mark".
+  An IB red pen's title says "N phrases need the red pen".
+- IA-only items are `lv: 'i'` (relative impact, ranking weaknesses, group raw data, extensions); EE-only `lv: 'e'`.
+  The EE conclusion "notes any limitations and unresolved questions" (EE guide Figure 16): never tell an EE pupil to
+  keep limitations out of the conclusion.
+- The hypothesis at IB: the conclusion answers the research question with processed data; a sentence on the
+  hypothesis may follow. Never "first" or "earns nothing alone" (the guide says neither; Daniel, 3 Oct 2026).
+
 ## Levels — ONE report, not three (Daniel, 24 Sep 2026)
 Level colours: IGCSE green `--green`, IB IA blue `--blue`, IB EE burnt orange `--ee` (#B45309). EE was purple until
 25 Sep 2026: at dot size it could not be told from blue. `--plum` is now only a data colour (SE bars in graphs).
@@ -326,9 +375,10 @@ then what the site is checked against, then the licences.
 8. **Visual first.** Tables and graphs must be SHOWN (WUL.table / WUL.plot), not described. Examples short.
    Highlight the parts that matter with `==…==` or anatomy colours.
 9. **Corrections to respect** (from BRIEF.md): a ±2 °C fluctuation is RANDOM error (an offset is systematic);
-   control measure = what reduces the risk, emergency action = what to do if it happens; at IB answer the RQ
-   first — one line on the hypothesis is allowed ("evaluate hypotheses" is an IB skill) but earns nothing alone;
-   IB Evaluation 5–6 = RELATIVE impact (rank the weaknesses); extensions earn nothing in the 2025 IA;
+   control measure = what reduces the risk, emergency action = what to do if it happens; at IB the conclusion
+   answers the RQ with processed data; a sentence on the hypothesis may follow ("evaluate hypotheses" is an IB skill),
+   never "first" or "earns nothing alone": the guide says neither (Daniel, 3 Oct 2026);
+   IB Evaluation 5–6 = RELATIVE impact (rank the weaknesses); extensions are not in the 2025 IA criteria;
    Cambridge: > half the grid (not ¾), crosses or encircled dots (large dots penalised), axes need not start at 0,
    titles are good practice but never a 0610 mark, a key IS a mark; best-fit lines are allowed at IB (Tool 3) when
    the shape is justified, never beyond the data; R² only for a fitted trend line; no confidence intervals (not in
@@ -379,4 +429,5 @@ then what the site is checked against, then the licences.
      never in the site. Fix what looks wrong: clipped text, overflow at 390 px, crossed label lines, a graph that
      is not to scale, a legend that covers data. Tools that need tapping: drive them in the Browser pane and
      confirm each button does what it says.
-3. Read your own text once more against the Writing rules.
+3. If you touched the page code, signing in, saving or homework: `node tools/account.mjs` (same server) must pass.
+4. Read your own text once more against the Writing rules.

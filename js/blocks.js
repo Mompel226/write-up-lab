@@ -226,11 +226,14 @@
   /* ---------- the red pen ----------
      { title, intro, body: markup | {table} | {plot}, notes:{k:{label, why}}, fixed: same kinds, fixedNote }
      Text and tables: marks are written [!k:phrase] in the markup.
-     Graphs: notes carry el:'label-y' — the ring is drawn round that part of the SVG. */
-  WUL.redpen = function (host, rp) {
+     Graphs: notes carry el:'label-y' — the ring is drawn round that part of the SVG.
+     opts (3 Oct 2026, homework): found, the keys this pupil found before (drawn found); onFind(k), told of each new one. */
+  WUL.redpen = function (host, rp, opts) {
     host.innerHTML = '';
+    opts = opts || {};
     var keys = Object.keys(rp.notes || {});
     var found = {};
+    (opts.found || []).forEach(function (k) { if (rp.notes && rp.notes[k]) found[k] = 1; });
     var wrap = h('div', { class: 'redpen' });
     var head = h('div', { class: 'redpen__bar' });
     var count = h('span', { class: 'redpen__count' });
@@ -306,6 +309,7 @@
     }
     function hit(k, el) {
       if (!k) return;
+      if (!found[k] && opts.onFind) { try { opts.onFind(k); } catch (e) {} }
       found[k] = 1;
       sheet.querySelectorAll('.is-active').forEach(function (x) { x.classList.remove('is-active'); });
       sheet.querySelectorAll('[data-k="' + k + '"]').forEach(function (x) { x.classList.add('is-found', 'is-active'); });

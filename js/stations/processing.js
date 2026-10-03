@@ -151,7 +151,7 @@
         fixedNote: 'The mean matches the raw data, and the rate has its unit. The change has a direction. No value is dropped without a reason.'
       },
       i: {
-        title: 'An IA processing section. Five things would keep it out of the top band.',
+        title: 'An IA processing section. Five things need the red pen.',
         body: 'Table 2 shows the processed data. [!tf-a:The means were calculated in Excel.]\n\nRate at 60.0 °C = 1 ÷ 98 = [!tf-b:0.0102].\n\nStandard deviation at 20.0 °C = [!tf-c:8.36660027] s.\n\n[!tf-d:There were no outliers.]\n\n[!tf-e:The mean times were also converted into minutes and into hours.]',
         notes: {
           'tf-a': { label: 'show one!', why: 'Give one worked example of each calculation: mean at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s. Then write “repeated for all temperatures”.' },
@@ -170,7 +170,7 @@
       { bad: 'Rate = 0.0085', good: 'Rate = 0.0085 s⁻¹. A rate always has a “per time” unit.' },
       { bad: '% change = (2.49 − 2.28) ÷ 2.28 × 100 = 9.2 %', good: '(2.28 − 2.49) ÷ 2.49 × 100 = −8.4 %: new minus original, divided by the original.' },
       { bad: '1.2 cm³ was ignored.', good: '1.2 cm³ was excluded from the mean because the syringe leaked. It stays in the table.' },
-      { bad: 'The means were calculated in Excel.', good: 'Mean at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s. Repeated for all.', lv: 'ie' },
+      { bad: 'Rates calculated in a spreadsheet, with no calculation shown.', good: 'Rate = 1 ÷ mean time = 1 ÷ 178 s = 0.0056 s⁻¹. Repeated for all temperatures.', lv: 'ie' },
       { bad: 'The times were converted to minutes, hours and days.', good: 'Only the processing that helps answer the research question.', lv: 'ie' }
     ],
 

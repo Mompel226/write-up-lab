@@ -37,7 +37,7 @@
       pt(2, '<b>To what extent does temperature affect the rate of starch hydrolysis by α-amylase from <i>Aspergillus oryzae</i>?</b>', true) +
       pt(3, 'Subject: Biology', true) +
       pt(4, 'Word count: 3,940', true) +
-      '<div style="margin-top:auto;font:500 .72rem/1.3 var(--sans);color:var(--ink-3)">No names anywhere</div>' +
+      '<div style="margin-top:auto;font:500 .72rem/1.3 var(--sans);color:var(--ink-3)">No student, supervisor or school name</div>' +
     '</div>' +
     '<div style="flex:1 1 220px;max-width:300px;' + PAPER + '">' +
       pt(5, '<b style="font:650 .9rem/1.3 var(--serif)">Contents</b>', true) +
@@ -56,13 +56,13 @@
 
     ladder: {
       g: [],
-      i: ['At the start: the title, your [[candidate code]], group members’ codes and the [[word count]]', 'No more than 3,000 words; tables and calculations do not count', 'No cover page and no contents page'],
+      i: ['At the start: the title, your [[candidate code]], group members’ codes and the [[word count]]', 'No more than 3,000 words; tables and calculations do not count', 'A cover page and a contents page are not needed'],
       e: ['A [[title page]] with no names, and a contents page', '12-point font, 1.5 line spacing, numbered pages', '4,000 words: examiners do not read beyond the limit', 'Appendices allowed, but examiners need not read them']
     },
 
     build: [
       { type: 'anatomy', lv: 'i', title: 'The first page of an IA',
-        intro: 'No cover page. Four details go at the top of page 1. Tap a colour to find each one.',
+        intro: 'A cover page is not needed. Four details go at the top of page 1. Tap a colour to find each one.',
         model: { html: IA_PAGE },
         parts: [
           { n: 1, name: 'The title', note: 'Names the variables and the system.' },
@@ -153,12 +153,11 @@
 
     traps: [
       { bad: 'Word count: about 3,000.', good: 'Word count: 2,870.', lv: 'i' },
-      { bad: 'A cover page and a contents page for the IA.', good: 'Title, candidate codes and word count at the top of page 1.', lv: 'i' },
+      { bad: 'A cover page, but no candidate code or word count.', good: 'At the start: title, candidate code(s) and number of words. A cover page is not needed.', lv: 'i' },
       { bad: 'Means calculated in long sentences.', good: 'Means in a table, with one worked example. Neither counts towards the limit.' },
-      { bad: 'A background of 900 words.', good: 'A focused background, and real space for the evaluation: 6 of the 24 marks.', lv: 'i' },
-      { bad: 'Your name on the title page.', good: 'Your student code only. No names anywhere.', lv: 'e' },
-      { bad: 'The key graph in an appendix.', good: 'The key graph in the body. Only the full raw data can go in an appendix.', lv: 'e' },
-      { bad: 'Research question: Temperature affects amylase.', good: 'A question: “To what extent does temperature affect…?”', lv: 'e' }
+      { bad: 'Most of the 3,000 words spent before the results.', good: 'Conclusion and evaluation are 12 of the 24 marks: leave words for them.', lv: 'i' },
+      { bad: 'Your name on the title page.', good: 'Your student code. No student, supervisor or school name anywhere in the file.', lv: 'e' },
+      { bad: 'The key graph in an appendix.', good: 'The key graph in the body. Examiners are not required to read appendices.', lv: 'e' }
     ],
 
     test: [
@@ -208,7 +207,7 @@
           { t: 'It takes words the evaluation needs, and the evaluation is worth a quarter of the marks.', ok: true, why: 'All four criteria are worth 6 marks. A long background leaves too little for the conclusion and the evaluation.' },
           { t: 'Backgrounds do not count, so it is wasted.', why: 'The background counts towards the limit.' },
           { t: 'Examiners only read the first 500 words.', why: 'No such rule exists.' },
-          { t: 'It is not a problem: more theory always earns more.', why: 'Only theory that is directly relevant to the question earns credit.' }
+          { t: 'It is not a problem: more theory always earns more.', why: 'The guide asks for background theory of direct relevance, not more of it.' }
         ] },
       { type: 'choose', lv: 'i', q: 'How many drafts does your teacher read and comment on?',
         opts: [
@@ -230,8 +229,8 @@
           { t: 'The research question', ok: true },
           { t: 'The subject', ok: true },
           { t: 'The word count', ok: true },
-          { t: 'Your name', why: 'No names anywhere in the file.' },
-          { t: 'Your supervisor’s name', why: 'No names anywhere in the file.' }
+          { t: 'Your name', why: 'No student, supervisor or school name anywhere in the file.' },
+          { t: 'Your supervisor’s name', why: 'No student, supervisor or school name anywhere in the file.' }
         ],
         why: 'Student code, research question, subject and word count.' },
       { type: 'choose', lv: 'e', q: 'You put a key graph in an appendix. What is the risk?',

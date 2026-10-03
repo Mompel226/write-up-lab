@@ -268,7 +268,7 @@
 
     redpen: {
       i: {
-        title: 'An IA analysis. Five phrases would lose marks.',
+        title: 'An IA analysis. Five phrases need the red pen.',
         body: '[!e:A t-test was carried out on the data.] It [!a:proved] that the mean time at 50 °C was shorter than at 40 °C [!b:(t = 5.77)]. [!c:So there is a 95 % chance that the hypothesis is correct.] [!d:t-tests were also run between all ten pairs of temperatures, and the most different pair was reported.]',
         notes: {
           e: { label: 'H₀?', why: 'Say what was compared, and state the null hypothesis: there is no difference between the mean time at 40 °C and at 50 °C.' },

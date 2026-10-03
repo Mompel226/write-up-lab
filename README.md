@@ -22,7 +22,14 @@ Made by **Dr Daniel Mompel Riera**, NLCS Jeju.
 - **Start from zero** — a route through the parts in order, for a student who has forgotten everything.
 - **Check my report** — the checklist for their level, ticked against their own report.
 
-Progress and ticks stay on the student's device. Nothing is sent anywhere.
+- **Homework** — a teacher can set whole parts as homework from the labs' teacher page. A part is finished when
+  every red pen in it is done (each version: IGCSE, IB IA, IB EE) and every question is answered, the IB ones too.
+  The homework page and each part show what is left.
+
+Progress and ticks stay on the student's device. A student who signs in with their school Google account also
+has their work saved for their teacher: the red-pen mistakes found, the questions answered (and which were right
+first time), the Learn steps, Mistakes to avoid and Go further opened. Keyword cards and time are never recorded.
+The checklist ticks stay on the device.
 
 ## Checked against
 
@@ -43,6 +50,11 @@ says so.
   version stamps.
 - `node tools/smoke.mjs` opens every part in a headless browser, with every Learn step open, and reports any
   error (the red pen and Test yourself are checked at their first level).
+- `node tools/account.mjs` checks signing in, saving and homework in a headless browser, against a fake Google
+  sign-in and a fake teacher's script: nothing real is signed in to or written.
+- `node tools/check.mjs --stamp` also writes `data/parts.json`, the list of parts (and what finishing each takes)
+  that the teacher's spreadsheet scores homework against, and copies the shared sign-in (`labs-shared/signin.js`).
+  Saving goes to the labs' Apps Script, the same one as the Biology Hub's labs and Bio English Lab (`js/config.js`).
 - The answers to the self-tests are in the page. This site teaches; it does not grade.
 
 </details>

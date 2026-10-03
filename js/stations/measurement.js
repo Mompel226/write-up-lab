@@ -221,7 +221,7 @@
         fixedNote: 'Every word now names the right idea, and each error is named and classified.'
       },
       i: {
-        title: 'An IA evaluation. Five phrases would lose marks.',
+        title: 'An IA evaluation. Five phrases need the red pen.',
         body: 'Each seedling was measured five times, [!a:so n = 5]. [!b:The five measurements made the results reliable for all bean plants.] The balance read 0.3 g with nothing on it; [!c:taking more repeats reduced this error]. [!d:The results were accurate, because the standard deviation was small.] [!e:The method was reproducible, because it was repeated three times.]',
         notes: {
           a: { label: 'n = 1', why: 'Five measurements of one seedling are technical replicates: n = 1. n counts different individuals.' },

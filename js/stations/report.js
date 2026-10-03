@@ -143,8 +143,7 @@
       { bad: 'Some acid was added.', good: '5.0 cm³ of 1.0 mol dm⁻³ HCl was added.' },
       { bad: 'The rate went up.', good: 'The rate increased.' },
       { bad: 'Heat the tube for 5 minutes.', good: 'The tube was heated for 5 min. A report is not a set of instructions.' },
-      { bad: 'This was a sensible result.', good: 'The mean time was 53 s at 50 °C.' },
-      { bad: 'An IA that starts with a cover page and a contents page.', good: 'The title, candidate code(s) and word count at the top of page 1.', lv: 'i' }
+      { bad: 'This was a sensible result.', good: 'The mean time was 53 s at 50 °C.' }
     ],
 
     test: [
