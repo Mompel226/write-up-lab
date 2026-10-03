@@ -27,7 +27,7 @@
 
     ladder: {
       g: ['“If … then … because …”, with a biological reason', 'A [[prediction]] of the __shape__ of the graph, not only its direction'],
-      i: ['Optional: the hypothesis is not in the IA criteria', 'A [[sketch graph]] of the predicted shape helps', 'In the conclusion, answer the research question first; then one line on the hypothesis'],
+      i: ['Optional: the hypothesis is not in the IA criteria', 'A [[sketch graph]] of the predicted shape helps', 'In the conclusion, answer the research question with processed data; a sentence on the hypothesis may follow'],
       e: ['A hypothesis that the data could show to be false, built from the literature', 'Results that do not support it are as valid as results that do']
     },
 
@@ -102,7 +102,7 @@
         'The reason is biology: kinetic energy, collisions, the active site, denaturation. Never “heat speeds things up”.',
         'Enzymes are not alive. They are __denatured__; they do not “die”.',
         'A hypothesis is never “proved”. The data __support__ it, or do __not support__ it.',
-        { t: 'In the conclusion, answer the research question first. Then one line on the hypothesis.', lv: 'ie' }
+        { t: 'In the conclusion, answer the research question with processed data. A sentence on the hypothesis may follow.', lv: 'ie' }
       ] },
 
       { type: 'frames', title: 'Sentence frames for a hypothesis', items: [
@@ -136,10 +136,10 @@
           'tf-a': { label: 'which amylase?', why: '37 °C is the value for __human__ salivary amylase. For α-amylase from *Aspergillus oryzae*, predict near 55 °C, and give the source (Raviyan et al. 5464).' },
           'tf-b': { label: 'why?', why: 'Give the mechanism: hydrogen and ionic bonds in the tertiary structure break, the active site changes shape, and the enzyme is denatured.' },
           'tf-c': { label: 'not a sketch', why: 'A sketch graph is drawn __before__ the data, with labelled but unscaled axes. A graph of the results is not a prediction.' },
-          'tf-d': { label: 'RQ first! “correct”?', why: 'Answer the research question with data first: the rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹). Then one line: the hypothesis was __supported__.' }
+          'tf-d': { label: 'the RQ? “correct”?', why: 'Answer the research question with data: the rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹). A sentence on the hypothesis may follow: the hypothesis was __supported__.' }
         },
         fixed: 'Hypothesis: if the temperature is increased from 20.0 to 60.0 °C, the rate of hydrolysis by fungal α-amylase will increase ==to a maximum near 55 °C (Raviyan et al. 5464)==, then ==fall steeply, because hydrogen and ionic bonds in the tertiary structure break, the active site changes shape and the enzyme is denatured==. ==A sketch graph with labelled, unscaled axes shows the predicted shape.==\n\nConclusion: ==The mean rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹).== The hypothesis was ==supported==.',
-        fixedNote: 'The prediction fits the enzyme that was used. The sketch comes before the data. The conclusion answers the question before the hypothesis.'
+        fixedNote: 'The prediction fits the enzyme that was used. The sketch comes before the data. The conclusion answers the research question with data, and says whether the hypothesis was supported.'
       }
     },
 
@@ -149,7 +149,7 @@
       { bad: 'The enzyme dies above 50 °C.', good: 'The enzyme is __denatured__: the active site changes shape.' },
       { bad: 'The hypothesis was proved.', good: 'The data __supported__ the hypothesis.' },
       { bad: 'The optimum will be 37 °C. (for a fungal enzyme)', good: 'Near 55 °C: the published value for α-amylase from *Aspergillus oryzae*.', lv: 'ie' },
-      { bad: 'A conclusion that starts with the hypothesis.', good: 'Answer the research question with data first; one line on the hypothesis after.', lv: 'ie' }
+      { bad: 'A conclusion that judges the hypothesis but never answers the research question.', good: 'The research question answered with processed data. A sentence on the hypothesis may follow.', lv: 'ie' }
     ],
 
     test: [
@@ -194,12 +194,12 @@
           { t: 'Only if it has a sketch graph.', why: 'Sketch graphs are not credited in plans either.' },
           { t: 'Only if it uses “If … then … because …”.', why: 'The structure is good practice, but plans do not credit predictions.' }
         ] },
-      { type: 'choose', lv: 'ie', q: 'At IB, where does the hypothesis belong in the conclusion?',
+      { type: 'choose', lv: 'ie', q: 'At IB, what must the conclusion do with the research question and the hypothesis?',
         opts: [
-          { t: 'After the research question has been answered with data: one line on whether it was supported.', ok: true, why: 'The criteria reward answering the research question.' },
-          { t: 'First, before any data.', why: 'Answer the research question first.' },
-          { t: 'Nowhere: the IB does not allow hypotheses.', why: '“Evaluate hypotheses” is an IB skill. It is allowed, but it earns nothing alone.' },
-          { t: 'Instead of the answer to the research question.', why: 'The research question must be answered, with processed data.' }
+          { t: 'Answer the research question with processed data. A sentence on whether the hypothesis was supported may follow.', ok: true, why: 'The Conclusion criterion assesses how well the report answers the research question.' },
+          { t: 'Judge the hypothesis instead of answering the research question.', why: 'The research question must be answered, with processed data.' },
+          { t: 'Leave the hypothesis out: the IB does not allow hypotheses.', why: '“Evaluate hypotheses” is an IB skill. A sentence on it is allowed.' },
+          { t: 'Repeat every mean from the results table.', why: 'The table already gives them. Use the processed data that answer the question.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'Which are features of a sketch graph?',
         opts: [

@@ -135,8 +135,7 @@
       { bad: 'The colour changed.', good: 'From 70 s, the iodine stayed orange-brown: no starch was left.' },
       { bad: 'The solution stayed clear.', good: 'Omit it, unless something depends on it.' },
       { bad: 'The potato felt weird.', good: 'The cylinder was soft and bent easily.' },
-      { bad: 'Words inside a number cell: “−8.4 (soft)”', good: 'A separate Observations column, or a note under the table.' },
-      { bad: 'Only numbers, and no observations at all.', good: 'Quantitative data supported by qualitative observations where appropriate.', lv: 'ie' }
+      { bad: 'Words inside a number cell: “−8.4 (soft)”', good: 'A separate Observations column, or a note under the table.' }
     ],
 
     test: [

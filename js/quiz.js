@@ -1,8 +1,11 @@
 /* ============================================================
    quiz.js — "Test yourself" and the flashcards.
 
-   WUL.quiz(host, questions, {id, next, onDone})
+   WUL.quiz(host, questions, {id, next, onDone, onAnswer, all})
    next() returns the "next part" link node; onDone(got, total) is called at the end.
+   onAnswer(q, letter) (3 Oct 2026, homework): 't' after a wrong check; when the question is finished,
+   'f' right at the first check, '1' right later, 's' answer shown. all: draw every question given,
+   whatever the level (the homework set holds IGCSE and IB questions together; IB ones are tagged).
    One question at a time. Nothing asks for free writing, so every
    answer is marked by the page.
 
@@ -34,7 +37,7 @@
   WUL.quiz = function (host, questions, opts) {
     opts = opts || {};
     var L = WUL.level();
-    var Q = questions.filter(function (q) { return WUL.shows(q.lv, L); });
+    var Q = opts.all ? questions.slice() : questions.filter(function (q) { return WUL.shows(q.lv, L); });
     host.innerHTML = '';
     if (!Q.length) { host.appendChild(h('p', { class: 'muted', text: 'No questions at this level yet.' })); return; }
     var box = h('div', { class: 'quiz' });
@@ -69,18 +72,21 @@
       if (i >= Q.length) return finish();
       var q = Q[order[i]], tries = 0;
       var kind = q.type || 'choose';
-      card.appendChild(h('div', { class: 'quiz__kind', text: ({ choose: 'Choose one', multi: 'Tick every correct answer', sort: 'Sort into groups', order: 'Put in order', spot: 'Tap every mistake', build: 'Build it' })[kind] || '' }));
+      var kindEl = h('div', { class: 'quiz__kind', text: ({ choose: 'Choose one', multi: 'Tick every correct answer', sort: 'Sort into groups', order: 'Put in order', spot: 'Tap every mistake', build: 'Build it' })[kind] || '' });
+      if (opts.all && q.lv && q.lv.indexOf('g') < 0 && WUL.ibTag) kindEl.insertAdjacentHTML('beforeend', ' ' + WUL.ibTag(q.lv));
+      card.appendChild(kindEl);
       card.appendChild(h('div', { class: 'quiz__q', html: md(q.q, { inline: true }) }));
       if (q.show) card.appendChild(h('div', { class: 'quiz__show sheet sheet--vis', html: WUL.visual(q.show) }));
       var area = h('div', { class: 'quiz__area' }), foot = h('div', { class: 'quiz__foot' }), fbHost = h('div', { class: 'quiz__fb', 'aria-live': 'polite' });
       card.appendChild(area); card.appendChild(fbHost); card.appendChild(foot);
-      var done = false;
-      function settle(ok) { if (firstTry[i] == null) firstTry[i] = ok && tries <= 1; }
-      function finishQ() { done = true; foot.innerHTML = ''; foot.appendChild(nextBtn()); paintProg(); }
+      var done = false, shown = false;
+      function tell(letter) { if (opts.onAnswer) { try { opts.onAnswer(q, letter); } catch (e) {} } }
+      function settle(ok) { if (firstTry[i] == null) firstTry[i] = ok && tries <= 1; if (!ok) tell('t'); }
+      function finishQ() { done = true; foot.innerHTML = ''; foot.appendChild(nextBtn()); paintProg(); tell(shown ? 's' : firstTry[i] ? 'f' : '1'); }
       function showMe(fn) {
         if (tries < SHOW_AFTER || done || foot.querySelector('.btn--show')) return;
         var b = h('button', { type: 'button', class: 'btn btn--ghost btn--show', text: 'Show me the answer' });
-        b.addEventListener('click', function () { firstTry[i] = false; fn(); finishQ(); });
+        b.addEventListener('click', function () { firstTry[i] = false; shown = true; fn(); finishQ(); });
         foot.appendChild(b);
       }
 

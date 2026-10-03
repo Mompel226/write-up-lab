@@ -77,7 +77,7 @@
     ]},
     { title: 'Conclusion', part: 'conclusion', items: [
       { id: 'chyp', lv: 'g', t: 'States whether the hypothesis was supported.' },
-      { id: 'crq', lv: 'ie', t: 'Answers the research question first, using processed data and its uncertainty.' },
+      { id: 'crq', lv: 'ie', t: 'Answers the research question, using processed data and its uncertainty.' },
       { id: 'cbio', t: 'Explains the biology behind the trend, not only the trend.' },
       { id: 'clit', t: 'Compares the result with a published value, and cites it.' }
     ]},

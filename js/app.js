@@ -7,12 +7,21 @@
      #/tools · #/tool/<n>   the tools
      #/words                every keyword
      #/check                the checklist
+     #/hw · #/hw/<id>       homework set by the teacher (account.js brings it; signed-in pupils only)
 
    ONE REPORT, NOT THREE (Daniel, 24 Sep 2026). There is no level switch in the
    top bar. Every part is shown at IGCSE first; what the IB IA and the IB EE
    change sits beside it, behind buttons marked IB IA / IB EE, so an IGCSE
    student can open it out of curiosity. Parts that exist only at IB are shown
    too, with a dashed outline.
+
+   HOMEWORK (Daniel, 3 Oct 2026). A teacher sets whole parts. A part is finished when every red
+   pen in it is done (each level's version) and every question in it is answered, IB ones too
+   (track.js). The page records Learn steps opened, red-pen mistakes found, Mistakes to avoid
+   opened, every answer and Go further opened, never keyword cards and never time; account.js
+   saves them for the teacher once the pupil signs in. A homework part shows a banner with its
+   checklist, and its Test yourself opens on a "Homework" set: every question not yet answered,
+   IGCSE and IB together.
    ============================================================ */
 (function (WUL) {
   'use strict';
@@ -54,6 +63,37 @@
     return { seen: p.seen, best: q.best, tries: q.tries, last: q.last };
   }
   function seen(id) { var p = WUL.store.get('prog', {}); p[id] = p[id] || {}; if (!p[id].seen) { p[id].seen = Date.now(); WUL.store.set('prog', p); } }
+
+  /* ---------- homework (account.js fills WUL.hw: { signedIn, loaded, list:[{id,title,due,overdue,parts:[ids]}] }) ---------- */
+  var HW_WORDS = { none: 'not started', partly: 'part done', done: 'done' };
+  function hwList() { return (WUL.hw && WUL.hw.list) || []; }
+  function hwFor(id) { return hwList().filter(function (x) { return (x.parts || []).indexOf(id) >= 0; }); }
+  /* '' when the part is not homework, else none · partly · done (the labs' red · orange · green) */
+  function hwState(id) { if (!hwFor(id).length) return ''; var st = WUL.partState(id); return st ? st.state : ''; }
+  function hwPill(st) { return st ? '<span class="hwpill hwpill--' + st + '">Homework: ' + HW_WORDS[st] + '</span>' : ''; }
+  var HW_KEY = '<p class="hwkey">Your homework parts are marked: <span class="hwdot hwdot--none"></span> red, not started; ' +
+    '<span class="hwdot hwdot--partly"></span> orange, part done; <span class="hwdot hwdot--done"></span> green, done.</p>';
+  function lvName(l) { return WUL.LEVELS[l] ? WUL.LEVELS[l].name : l; }
+  /* What finishing a part takes, in the pupil's words, and where they are. */
+  function hwNeeds(s) {
+    var rps = WUL.redpensOf(s), n = (s.test || []).length, bits = [];
+    if (rps.length) bits.push(rps.length > 1 ? 'find every mistake in each Red pen (' + rps.map(function (y) { return lvName(y.l); }).join(', ') + ')' : 'find every mistake in the Red pen');
+    if (n) bits.push('answer all ' + n + ' questions in Test yourself' + ((s.test || []).some(function (q) { return q.lv && q.lv.indexOf('g') < 0; }) && s.levels.indexOf('g') >= 0 ? ', the IB ones too' : ''));
+    return 'To finish this part, ' + bits.join(' and ') + '.';
+  }
+  function hwChecklist(s) {
+    var st = WUL.partState(s.id); if (!st) return '';
+    var ok = function (b) { return b ? ' class="is-ok"' : ''; };
+    var rp = st.redpens.map(function (y) { return (st.redpens.length > 1 ? lvName(y.l) + ' ' : '') + y.found + ' of ' + y.marks + (y.found >= y.marks ? ' ✓' : ''); }).join(' · ');
+    var rows = [];
+    if (st.redpens.length) rows.push('<li' + ok(st.redpens.every(function (y) { return y.found >= y.marks; })) + '><b>Red pen</b> ' + rp + ' mistakes found</li>');
+    if (st.total) rows.push('<li' + ok(st.answered >= st.total) + '><b>Test yourself</b> ' + st.answered + ' of ' + st.total + ' answered' + (st.answered ? ' (' + st.first + ' right first time)' : '') + '</li>');
+    var also = '<b>Learn</b> ' + st.learn + ' of ' + st.steps + ' steps opened · <b>Mistakes to avoid</b> ' + (st.traps ? 'opened' : 'not opened yet') +
+      (st.panels ? ' · <b>Go further</b> ' + st.further + ' of ' + st.panels + ' opened' : '');
+    return '<ul class="hwlist">' + rows.join('') + '</ul><p class="hwalso">Your teacher also sees: ' + also + '.</p>';
+  }
+  function hwDue(hw) { return hw.due ? 'due ' + esc(hw.due) + (hw.overdue ? ' (past its date)' : '') : 'no due date'; }
+  WUL.hwFor = hwFor; WUL.hwState = hwState;
   function stationsByStage(stage) {
     return WUL.stationOrder.map(function (id) { return WUL.stations[id]; }).filter(function (s) { return s.stage === stage; })
       .sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
@@ -97,6 +137,7 @@
     if (!s) return { page: 'home' };
     if (p[0] === 'part' && p[1]) return { page: 'part', id: p[1], tab: p[2], step: p[3] };
     if (p[0] === 'tool' && p[1]) return { page: 'tool', id: p[1] };
+    if (p[0] === 'hw') return { page: 'hw', id: p[1] ? decodeURIComponent(p[1]) : '' };
     return { page: p[0] };
   }
   var lastPart = null;
@@ -120,6 +161,21 @@
     main.focus({ preventScroll: true });
   }
   window.addEventListener('hashchange', route);
+  /* account.js calls this when the homework list or a record arrives from the teacher's spreadsheet. A part page is
+     drawn again only when its homework changed (a quiz half done must not start again); otherwise its banner is
+     repainted. */
+  var lastHwKey = '';
+  WUL.homeworkChanged = function () {
+    var r = parse(), key = JSON.stringify(hwList().map(function (x) { return [x.id, x.parts]; }));
+    var changed = key !== lastHwKey; lastHwKey = key;
+    if (r.page === 'part') { if (changed && main.querySelector('.ptabs')) { lastPart = null; route(); } else repaint(); return; }
+    if (r.page === 'home' || r.page === 'hw' || r.page === 'start' || !PAGES[r.page]) route();
+  };
+  /* what an open part page paints from the records (its banner, the Homework set's count, the red-pen ticks),
+     painted again after every change to this part's record */
+  var pagePaint = [];
+  function repaint() { pagePaint.forEach(function (fn) { try { fn(); } catch (e) {} }); }
+  WUL.onRecord(function (id) { if (id === curPart) repaint(); });
 
   var PAGES = {};
 
@@ -133,6 +189,7 @@
       '<p class="hero__lede">This is a full lab report. Click any part to open it. A part in a <span class="dash-demo">blue dashed box</span> is added at IB; one in an <span class="dash-demo dash-demo--ee">orange dashed box</span> is only in the Extended Essay.</p>' +
       '<div class="hero__cta"><a class="btn btn--go btn--lg" href="#/start">New to lab reports? Start from zero →</a><a class="btn btn--ghost btn--lg" href="#/check">Check my report</a></div>';
     main.appendChild(hero);
+    if (hwList().length) main.appendChild(hwBox());
     var mapWrap = h('section', { class: 'wrap rmapwrap', 'aria-label': 'A full report to explore' });
     main.appendChild(mapWrap);
     WUL.reportMap(mapWrap);
@@ -151,8 +208,8 @@
       col.innerHTML = '<div class="map__h"><span class="map__n" aria-hidden="true">' + stageN + '</span><span class="map__name">' + esc(sg.name) + '</span><span class="map__blurb">' + esc(sg.blurb) + '</span></div>';
       var ul = h('ul', { class: 'map__list' });
       list.forEach(function (s) {
-        var ibOnly = s.levels.indexOf('g') < 0;
-        ul.appendChild(h('li', { html: '<a class="map__a' + (ibOnly ? ' is-other' + (s.levels.indexOf('i') < 0 ? ' is-ee' : '') : '') + '" href="#/part/' + esc(s.id) + '"><span class="map__t">' + esc(s.title) + '</span><span class="map__m">' + lvDots(s.levels) + tick(s.id, WUL.level()) + '</span></a>' }));
+        var ibOnly = s.levels.indexOf('g') < 0, hs = hwState(s.id);
+        ul.appendChild(h('li', { html: '<a class="map__a' + (ibOnly ? ' is-other' + (s.levels.indexOf('i') < 0 ? ' is-ee' : '') : '') + (hs ? ' is-hw is-hw--' + hs : '') + '" href="#/part/' + esc(s.id) + '"' + (hs ? ' title="Homework: ' + HW_WORDS[hs] + '"' : '') + '><span class="map__t">' + (hs ? '<span class="hwdot hwdot--' + hs + '" aria-label="Homework: ' + HW_WORDS[hs] + '"></span>' : '') + esc(s.title) + '</span><span class="map__m">' + lvDots(s.levels) + tick(s.id, WUL.level()) + '</span></a>' }));
       });
       col.appendChild(ul);
       grid.appendChild(col);
@@ -168,6 +225,19 @@
     }
   };
 
+  /* "Your homework" on the home page: each piece, its date and how much is done */
+  function hwBox() {
+    var box = h('section', { class: 'wrap hwbox', 'aria-label': 'Your homework' });
+    box.appendChild(h('h2', { class: 'hwbox__h', text: 'Your homework' }));
+    box.appendChild(h('p', { class: 'hwbox__p', text: 'Your work is saved for your teacher as you go. There is nothing to hand in.' }));
+    hwList().forEach(function (hw) {
+      var d = 0, t = 0, fin = 0;
+      (hw.parts || []).forEach(function (id) { var st = WUL.partState(id); if (!st) return; d += st.done; t += st.units; if (st.state === 'done') fin++; });
+      box.appendChild(h('a', { class: 'hwrow', href: '#/hw/' + encodeURIComponent(hw.id), html: '<b>' + esc(hw.title) + '</b><span class="hwrow__due">' + hwDue(hw) + '</span><span class="hwrow__n">' + fin + ' of ' + (hw.parts || []).length + ' parts done</span>' }));
+    });
+    return box;
+  }
+
   function toolGrid() {
     var g = h('div', { class: 'tools' });
     WUL.TOOLS.forEach(function (t) {
@@ -182,11 +252,12 @@
     { id: 'build', name: 'Learn' }, { id: 'redpen', name: 'Red pen' }, { id: 'traps', name: 'Mistakes to avoid' },
     { id: 'test', name: 'Test yourself' }, { id: 'words', name: 'Keywords' }, { id: 'further', name: 'Go further' }
   ];
-  var FIRST_TAB = 'build';
+  var FIRST_TAB = 'build', curPart = null;
   function showTab(id) {
     var tabs = main.querySelector('.ptabs'); if (!tabs) return;
     var ok = !!main.querySelector('.pchap[data-tab="' + id + '"]');
     if (!ok) id = FIRST_TAB;
+    if (id === 'traps' && curPart) WUL.track.traps(curPart);
     tabs.querySelectorAll('a').forEach(function (a) {
       var on = a.getAttribute('data-tab') === id;
       a.classList.toggle('is-on', on);
@@ -212,6 +283,8 @@
     var s = WUL.stations[r.id];
     if (!s) { main.appendChild(h('div', { class: 'wrap', html: '<h1>Not found</h1><p><a href="#/">Back to the report</a></p>' })); return; }
     seen(s.id);
+    curPart = s.id; pagePaint = [];
+    var hws = hwFor(s.id);
     document.title = s.title + ' · Write-Up Lab';
     var base = s.levels.charAt(0);                    /* the first level this part exists at: IGCSE for most */
     var levels = ['g', 'i', 'e'].filter(function (l) { return s.levels.indexOf(l) >= 0; });
@@ -223,6 +296,20 @@
       '<p class="phead__job">' + md(WUL.pick(s.job, base), { inline: true }) + '</p>' +
       (s.where ? '<p class="phead__where"><span>Where it goes</span> ' + md(WUL.pick(s.where, base), { inline: true }) + '</p>' : '');
     main.appendChild(head);
+
+    /* homework: what finishing this part takes, and where the pupil is (repainted as they work) */
+    if (hws.length) {
+      /* the box sits inside the page column, as the other boxes do */
+      var ban = h('div', { class: 'hwban' });
+      main.appendChild(h('section', { class: 'wrap hwbanwrap', 'aria-label': 'Homework' }, [ban]));
+      var paintBanner = function () {
+        var st = hwState(s.id);
+        ban.innerHTML = '<p class="hwban__k">' + hwPill(st) + ' <span>' + esc(hws[0].title) + ' · ' + hwDue(hws[0]) + '</span></p>' +
+          '<p class="hwban__p">' + esc(hwNeeds(s)) + '</p>' + hwChecklist(s);
+      };
+      paintBanner();
+      pagePaint.push(paintBanner);
+    }
 
     /* compare the levels: one button, then the three columns side by side */
     if (s.ladder) {
@@ -301,6 +388,7 @@
         st.body.appendChild(foot);
       }
       function open(k, on) {
+        if (on) WUL.track.step(s.id, k);
         steps.forEach(function (st, j) {
           var o = on && j === k;
           if (o) fill(st, j);
@@ -328,19 +416,37 @@
     if (rpLevels.length) {
       var rpc = chapter('redpen');
       var rpHost = h('div');
+      var seg = null;
+      /* the mistakes this pupil found before are drawn found; each new one is recorded (track.js) */
+      function foundKeys(l) {
+        var x = WUL.rec(s.id), y = WUL.redpensOf(s).filter(function (v) { return v.l === l; })[0];
+        return y && x ? y.keys.filter(function (k, i) { return (x.r[l] || '').charAt(i) === '1'; }) : [];
+      }
+      /* with several versions, a version whose mistakes are all found is ticked on its button */
+      function paintRpSeg() {
+        if (!seg) return;
+        var st = WUL.partState(s.id) || { redpens: [] };
+        seg.querySelectorAll('button').forEach(function (b) {
+          var l = (b.className.match(/seg--([gie])/) || [])[1]; if (!l) return;
+          var y = st.redpens.filter(function (v) { return v.l === l; })[0];
+          b.textContent = WUL.LEVELS[l].long + (y && y.marks && y.found >= y.marks ? ' ✓' : '');
+        });
+      }
       function drawRp(l) {
         var rp = WUL.pick(s.redpen, l);
         rpHost.innerHTML = '';
         if (rp.title) rpHost.appendChild(h('p', { class: 'bintro', html: md(rp.title, { inline: true }) }));
         var hh = h('div', { class: 'lvscope-' + l }); rpHost.appendChild(hh);
-        WUL.withLevel(l, function () { WUL.redpen(hh, rp); });
+        WUL.withLevel(l, function () { WUL.redpen(hh, rp, { found: foundKeys(l), onFind: function (k) { WUL.track.redpen(s.id, l, k); paintRpSeg(); } }); });
       }
       if (rpLevels.length > 1) {
-        var seg = levelTabs(rpLevels, rpLevels[0], function (l) {
+        seg = levelTabs(rpLevels, rpLevels[0], function (l) {
           seg.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.className.indexOf('seg--' + l) >= 0 ? 'true' : 'false'); });
           drawRp(l);
         });
         rpc.appendChild(h('div', { class: 'pchap__lv' }, [h('span', { class: 'wd-k', text: 'Red pen for' }), seg]));
+        paintRpSeg();
+        pagePaint.push(paintRpSeg);
       }
       rpc.appendChild(rpHost);
       drawRp(rpLevels[0]);
@@ -360,29 +466,46 @@
 
     /* TEST — a question set per level, when the sets differ */
     var sets = questionSets(s);
+    /* homework: a set of every question not yet answered, IGCSE and IB together, offered first */
+    if (hws.length && (s.test || []).length) sets = [{ hw: true, l: s.levels.charAt(0), ls: [] }].concat(sets);
     if (sets.length) {
-      var qc = chapter('test', sets[0].qs.length);
+      var qc = chapter('test', sets[0].hw ? (s.test || []).length : sets[0].qs.length);
       var qHost = h('div');
+      function hwLeft() { return WUL.questionsLeft(s.id).length; }
       function setName(x) {
+        if (x.hw) { var n = hwLeft(); return n ? 'Homework · ' + n + ' left' : 'Homework · all answered ✓'; }
         if (x.ls.length === 3) return 'Questions';
         if (x.ls.join('') === 'ie') return 'IB questions';
         return WUL.LEVELS[x.l].long + ' questions';
       }
+      function answered(q, letter) { WUL.track.answer(s.id, q, letter); }
+      var qseg = null;
+      function paintQSeg() { if (qseg && sets[0].hw) qseg.firstChild.innerHTML = esc(setName(sets[0])); }
       function drawQ(x) {
         qHost.innerHTML = '';
         var hh = h('div', { class: 'lvscope-' + x.l }); qHost.appendChild(hh);
+        if (x.hw) {
+          /* every question still to answer; when none is left, all of them again, for practice */
+          var left = WUL.questionsLeft(s.id), qs = left.length ? left : (s.test || []).slice();
+          hh.appendChild(h('p', { class: 'bintro', text: left.length ? 'Your homework: the ' + left.length + ' question' + (left.length === 1 ? '' : 's') + ' you have not answered yet, from every level. Questions marked IB are what the IB asks.' : 'Every question in this part is answered. You can go through them all again.' }));
+          WUL.withLevel(s.levels.charAt(s.levels.length - 1), function () {
+            WUL.quiz(hh, qs, { all: true, onAnswer: answered, onDone: paintQSeg, next: function () { return nextLink(s.id, 'btn btn--go'); } });
+          });
+          return;
+        }
         WUL.withLevel(x.l, function () {
-          WUL.quiz(hh, x.qs, { id: qid(s, x), next: function () { return nextLink(s.id, 'btn btn--go'); } });
+          WUL.quiz(hh, x.qs, { id: qid(s, x), onAnswer: answered, next: function () { return nextLink(s.id, 'btn btn--go'); } });
         });
       }
       if (sets.length > 1) {
-        var qseg = h('div', { class: 'seg seg--lv', role: 'group', 'aria-label': 'Question set' });
+        qseg = h('div', { class: 'seg seg--lv', role: 'group', 'aria-label': 'Question set' });
         sets.forEach(function (x, k) {
-          var b = h('button', { type: 'button', class: 'seg--' + x.l, 'aria-pressed': k === 0 ? 'true' : 'false', html: esc(setName(x)) + ' <span class="ptabs__n">' + x.qs.length + '</span>' });
-          b.addEventListener('click', function () { qseg.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', y === b ? 'true' : 'false'); }); drawQ(x); });
+          var b = h('button', { type: 'button', class: x.hw ? 'seg--hw' : 'seg--' + x.l, 'aria-pressed': k === 0 ? 'true' : 'false', html: x.hw ? esc(setName(x)) : esc(setName(x)) + ' <span class="ptabs__n">' + x.qs.length + '</span>' });
+          b.addEventListener('click', function () { qseg.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', y === b ? 'true' : 'false'); }); paintQSeg(); drawQ(x); });
           qseg.appendChild(b);
         });
         qc.appendChild(h('div', { class: 'pchap__lv' }, [h('span', { class: 'wd-k', text: 'Choose a set' }), qseg]));
+        pagePaint.push(paintQSeg);
       }
       qc.appendChild(qHost);
       drawQ(sets[0]);
@@ -399,11 +522,13 @@
     /* GO FURTHER */
     if ((s.further || []).length) {
       var fc = chapter('further');
-      s.further.forEach(function (f) {
-        fc.appendChild(h('details', { class: 'further' }, [
+      s.further.forEach(function (f, k) {
+        var d = h('details', { class: 'further' }, [
           h('summary', { html: '<span class="further__k">Beyond the syllabus</span> ' + esc(f.title) }),
           h('div', { class: 'further__b prose', html: md(f.md, { block: true }) + (f.cite ? '<p class="further__c">Source: ' + md(f.cite, { inline: true }) + '</p>' : '') })
-        ]));
+        ]);
+        d.addEventListener('toggle', function () { if (d.open) WUL.track.further(s.id, k); });
+        fc.appendChild(d);
       });
     }
 
@@ -436,6 +561,42 @@
     return h('a', { class: cls, href: '#/part/' + nx.id, text: 'Next part: ' + nx.title + ' →' });
   }
 
+  /* ---------- homework: #/hw (all of it) and #/hw/<id> (one piece) ---------- */
+  PAGES.hw = function (r) {
+    document.title = 'Homework · Write-Up Lab';
+    var w = h('section', { class: 'wrap hwpg' });
+    main.appendChild(w);
+    var H = WUL.hw || {};
+    function say(t) { w.appendChild(h('p', { class: 'phead__job', html: t })); }
+    w.appendChild(h('p', { class: 'eyebrow', text: 'Homework' }));
+    if (!H.signedIn) { w.appendChild(h('h1', { class: 'phead__h', text: 'Your homework' })); say('Sign in with your school Google account (top right) to see your homework.'); return; }
+    if (!H.loaded) { w.appendChild(h('h1', { class: 'phead__h', text: 'Your homework' })); say('Loading your homework…'); return; }
+    var list = hwList();
+    var one = r.id ? list.filter(function (x) { return String(x.id) === String(r.id); })[0] : (list.length === 1 ? list[0] : null);
+    if (!one) {
+      w.appendChild(h('h1', { class: 'phead__h', text: 'Your homework' }));
+      if (r.id) say('This homework was not found for your account. It may be finished and past its date.');
+      if (!list.length) { say('You have no Write-Up Lab homework at the moment.'); return; }
+      w.appendChild(hwBox());
+      return;
+    }
+    w.appendChild(h('h1', { class: 'phead__h', text: one.title }));
+    say(esc(hwDue(one).replace(/^d/, 'D')) + '. Your work is saved for your teacher as you go. There is nothing to hand in.');
+    w.insertAdjacentHTML('beforeend', HW_KEY);
+    var grid = h('div', { class: 'hwparts' });
+    (one.parts || []).forEach(function (id) {
+      var s = WUL.stations[id]; if (!s) return;
+      var st = WUL.partState(id), hs = st ? st.state : 'none';
+      var card = h('article', { class: 'hwpart hwpart--' + hs });
+      card.innerHTML = '<h2 class="hwpart__h"><a href="#/part/' + esc(id) + '">' + esc(s.title) + '</a>' + hwPill(hs) + '</h2>' +
+        '<p class="hwpart__p">' + esc(hwNeeds(s)) + '</p>' + hwChecklist(s) +
+        '<p class="hwpart__go"><a class="btn btn--go" href="#/part/' + esc(id) + (st && st.done && st.redpens.every(function (y) { return y.found >= y.marks; }) ? '/test' : '') + '">' + (hs === 'done' ? 'Open it again' : hs === 'partly' ? 'Carry on' : 'Start') + ' →</a></p>';
+      grid.appendChild(card);
+    });
+    w.appendChild(grid);
+    if (list.length > 1) w.appendChild(h('p', { html: '<a href="#/hw">All your homework</a>' }));
+  };
+
   /* ---------- start from zero ---------- */
   PAGES.start = function () {
     document.title = 'Start from zero · Write-Up Lab';
@@ -444,7 +605,7 @@
     var w = h('section', { class: 'wrap routepg' });
     var firstUndone = R.filter(function (id) { return !(progAt(id, L).best >= 0.999); })[0] || R[0];
     w.innerHTML = '<p class="eyebrow">Start from zero</p><h1 class="phead__h">Your route through a report</h1>' +
-      '<p class="phead__job">Do the parts in this order. Each part takes about ten minutes. Read <u>Learn</u>, do the <u>Red pen</u>, then <u>Test yourself</u>. Your progress stays on this device.</p>';
+      '<p class="phead__job">Do the parts in this order. Each part takes about ten minutes. Read <u>Learn</u>, do the <u>Red pen</u>, then <u>Test yourself</u>. Your progress stays on this device; sign in with your school Google account and it is saved for your teacher too.</p>';
     w.appendChild(h('div', { class: 'pchap__lv' }, [h('span', { class: 'wd-k', text: 'I am writing' }), levelTabs(['g', 'i', 'e'], L, function (l) { WUL.store.set('level', l); route(); })]));
     if (firstUndone) w.appendChild(h('p', { html: '<a class="btn btn--go btn--lg" href="#/part/' + firstUndone + '">' + (prog(R[0]).seen ? 'Carry on: ' : 'Begin: ') + esc(WUL.stations[firstUndone].title) + ' →</a>' }));
     var ol = h('ol', { class: 'trail' });

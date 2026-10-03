@@ -130,7 +130,7 @@
         fixedNote: 'The title and the aim now name the independent variable and its range. They also name the dependent variable with its unit, and the system.'
       },
       i: {
-        title: 'An IA opening. Five phrases would keep it out of the top band.',
+        title: 'An IA opening. Five phrases need the red pen.',
         body: 'Research question: [!tf-a:How does temperature affect amylase activity]? Amylase is an enzyme that [!tf-b:breaks down] starch. [!tf-c:Enzymes are proteins made of amino acids joined by peptide bonds.] The optimum temperature of amylase is [!tf-d:37 °C], so [!tf-e:the results will be compared with human salivary amylase].',
         notes: {
           'tf-a': { label: 'which amylase? range?', why: 'Name the range and the system: How does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by __fungal α-amylase from *Aspergillus oryzae*__?' },
@@ -162,7 +162,7 @@
       { bad: '…affect how fast amylase works?', good: '…affect the __time, in seconds__, for amylase to digest starch?' },
       { bad: 'Independent variable: heat.', good: 'Name the quantity: __temperature__.' },
       { bad: '…by amylase?', good: '…by __fungal α-amylase from *Aspergillus oryzae*__?', lv: 'ie' },
-      { bad: 'The effect of temperature on amylase. (a statement)', good: 'To what extent does temperature (20–60 °C) affect…?', lv: 'e' }
+      { bad: 'The effect of temperature on amylase. (a statement)', good: 'A question, such as “To what extent does temperature (20–60 °C) affect…?”', lv: 'e' }
     ],
 
     test: [

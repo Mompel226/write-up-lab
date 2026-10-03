@@ -10,7 +10,7 @@ WUL.station({
   ladder: {
     g: ['Your own words; copy nothing', 'Cite every source, including a [[paraphrase]]'],
     i: ['Groups of up to three are allowed, but the question, the [[raw data]] and every word are your own', 'AI output quoted and cited, with the prompt and the date', 'Your teacher reads one draft only'],
-    e: ['Nothing reused from your IA', 'Your supervisor reads one draft; the [[viva voce]] checks that the work is yours']
+    e: ['No IA content duplicated: a substantially different angle and focus', 'Your supervisor reads one draft; the [[viva voce]] checks that the work is yours']
   },
 
   build: [
@@ -31,7 +31,7 @@ WUL.station({
       badLabel: 'Plagiarism', goodLabel: 'A paraphrase, cited',
       why: 'Changing the words does not make the idea yours: without a citation it is [[plagiarism]]. A [[paraphrase]] needs a citation, as a quotation does.' },
 
-    { type: 'compare', lv: 'ie', title: 'Collaboration or collusion?',
+    { type: 'compare', lv: 'i', title: 'Collaboration or collusion?',
       bad: 'You and two friends collect one set of data together. All three reports present the same raw data and the same method, written together.',
       good: 'You and two friends share the equipment and plan together. Each of you investigates a different variable, records separate raw data, and writes every word alone, including the method.',
       badLabel: 'Collusion', goodLabel: 'Collaboration',
@@ -41,7 +41,7 @@ WUL.station({
 
     { type: 'note', tone: 'ib', lv: 'ie', title: 'One draft only', label: 'One draft', md: 'Your teacher (IA) or supervisor (EE) reads and comments on __one draft__. They give advice, but they do not edit it. The next version you submit is final.' },
 
-    { type: 'note', tone: 'warn', lv: 'ie', title: 'The penalty for malpractice', label: 'The penalty for malpractice', md: 'The IB investigates every case of [[malpractice]], including a source missing from the bibliography. If malpractice is confirmed, the penalty can be __no grade in the subject__, and without that grade there is no diploma.' },
+    { type: 'note', tone: 'warn', lv: 'ie', title: 'The penalty for malpractice', label: 'The penalty for malpractice', md: 'The IB investigates every case of [[malpractice]], including a source missing from the bibliography. If malpractice is confirmed, the IB applies a penalty, and you risk __not being awarded your diploma__.' },
 
     { type: 'note', tone: 'house', lv: 'g', title: 'The same rules at IGCSE', md: 'Your IGCSE lab reports are class work, not exam work. The same rules apply now, so that they become habits before you start the IB.' },
 
@@ -83,9 +83,9 @@ WUL.station({
     { bad: 'Rewording a textbook sentence, with no citation.', good: 'Reworded or not, the idea is cited.' },
     { bad: 'Letting a friend copy your method.', good: 'That is collusion: you and your friend are both responsible.' },
     { bad: 'A graph from a paper, with no source in the caption.', good: 'Attribute every figure you did not make.' },
-    { bad: 'Three reports built on one shared set of raw data.', good: 'Each person in your group presents different raw data.', lv: 'ie' },
-    { bad: 'An AI tool’s paragraph, presented as your own writing.', good: 'Quoted, and cited with the prompt and the date.', lv: 'ie' },
-    { bad: 'Your IA data and text reused in your EE.', good: 'A new question, with a different approach. Nothing is reused.', lv: 'e' }
+    { bad: 'Three reports built on one shared set of raw data.', good: 'Each person in your group presents different raw data.', lv: 'i' },
+    { bad: 'An AI tool’s paragraph, presented as your own writing.', good: 'Quoted, and the AI tool cited, like any other source.' },
+    { bad: 'Your IA data and text reused in your EE.', good: 'A substantially different angle and focus. No IA content is duplicated in the EE.', lv: 'e' }
   ],
 
   test: [

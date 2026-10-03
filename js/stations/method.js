@@ -7,7 +7,7 @@ WUL.station({
   ladder: {
     g: ['Numbered steps, in the past tense and the [[passive voice]]', 'A quantity and an apparatus size in every step', 'The [[equilibration]] step, the number of repeats, and what was done with the data'],
     i: ['Specific materials and precise steps, so that it “could in principle” be repeated', 'No unnecessary or repeated detail', 'A [[pilot run]] to choose the range, the timing and the number of repeats'],
-    e: ['Justify the method, and say why other methods were rejected', 'Nothing may be reused from the IA']
+    e: ['Justify the method, and say why other methods were rejected', 'No IA content duplicated: a substantially different angle and focus']
   },
 
   build: [
@@ -74,7 +74,7 @@ WUL.station({
       md: 'A [[pilot run]] is a short trial before the real experiment. Use it to choose the range, the sampling interval and the number of repeats, and say so in the method. “Pilot methodologies” is an IB skill (Inquiry 1).' },
 
     { type: 'note', tone: 'ee', lv: 'e', label: 'For the Extended Essay', title: 'Justify an EE method',
-      md: 'Justify the method: why this technique, and why the others were rejected. For example, a colorimeter measures the starch–iodine colour as a number. The spot test depends on judging a colour by eye.\n\nNothing may be reused from the IA: a new question, and new data.' },
+      md: 'Justify the method: why this technique, and why the others were rejected. For example, a colorimeter measures the starch–iodine colour as a number. The spot test depends on judging a colour by eye.\n\nNo IA content may be duplicated in the EE: it needs a substantially different angle and focus.' },
 
     { type: 'frames', title: 'Sentence frames for a method', items: [
       '___ cm³ of ___ was measured into ___ with ___.',
@@ -118,8 +118,8 @@ WUL.station({
     { bad: 'No time for the tubes to reach the test temperature.', good: '…placed in the water bath for 5 minutes __before__ mixing.' },
     { bad: 'Some starch; a few drops of amylase.', good: '5.0 cm³ of 1.0 % starch solution; 2.0 cm³ of 1.0 % amylase.' },
     { bad: 'The experiment was repeated.', good: 'Three trials were carried out at each temperature, and a mean was calculated.' },
-    { bad: 'The apparatus list copied into every step.', good: 'Name each piece of apparatus once, where it is first used.', lv: 'ie' },
-    { bad: 'The IA method, reused in the EE.', good: 'A new question, a new method, and new data.', lv: 'e' }
+    { bad: 'The apparatus list copied again into each step.', good: 'Each step names only what it needs, with no unnecessary or repeated detail.', lv: 'ie' },
+    { bad: 'The IA method and data, copied into the EE.', good: 'A substantially different question and focus. No text, data or graphs copied from the IA.', lv: 'e' }
   ],
 
   test: [
@@ -183,7 +183,7 @@ WUL.station({
     { type: 'choose', lv: 'e', q: 'An EE methodology should also…',
       opts: [
         { t: '…explain why other methods were rejected, such as a colorimeter chosen over judging colour by eye.', ok: true, why: 'Justifying the choice of method is part of the essay’s framework.' },
-        { t: '…reuse the IA method to save time.', why: 'Nothing may be reused from the IA.' },
+        { t: '…reuse the IA method to save time.', why: 'No IA content may be duplicated in the EE.' },
         { t: '…give less detail, since only the results are read.', why: 'The method must be replicable.' },
         { t: '…be written in the first person.', why: 'Scientific writing is impersonal.' }
       ] }

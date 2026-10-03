@@ -214,7 +214,7 @@
         md: 'Table 1 holds every reading. Table 2 holds what was calculated: means, SD, rates. The IB does __not__ require two tables; it asks for processing that is clear. Two tables make each step easy to check, and no number appears twice.' },
 
       { type: 'note', tone: 'ee', lv: 'e', title: 'Raw data in an appendix',
-        md: 'Examiners are __not required to read appendices__. So the body holds every processed table. It also holds a __representative sample__ of the raw data, such as all five trials at one temperature. Tables do not count towards the 4,000 words.' },
+        md: 'Examiners are __not required to read appendices__. So the body holds every processed table. It is good practice to put a __representative sample__ of the raw data there too, such as all five trials at one temperature. Tables do not count towards the 4,000 words.' },
 
       { type: 'rules', title: 'Rules for a results table', items: [
         'A numbered title __above__ the table, always in the same pattern: “Table 1. Data showing the effect of … on …”.',
@@ -323,11 +323,10 @@
       { bad: 'Temperature | 20 °C | 30 °C | 40 °C', good: 'Temperature / °C in the heading. Numbers only below it: 20, 30, 40.' },
       { bad: 'Mean: 116.667 (the raw data are whole seconds)', good: 'Mean: 117. No more decimal places than the raw data.' },
       { bad: 'Title: “Results”', good: 'Table 1. Data showing the effect of temperature (20–60 °C) on the time taken for amylase to digest starch.' },
-      { bad: 'Table 2. Processed data (n = 5)', good: 'Table 2. Processed data showing the effect of temperature (20.0–60.0 °C) on the mean rate of starch digestion by fungal α-amylase (n = 5).', lv: 'ie' },
       { bad: 'One column holding 20, 30.0 and 40', good: '20, 30 and 40: the same decimal places all the way down.' },
       { bad: 'Temperatures across the top row, and the times along the rows below', good: 'Temperature down the first column: one row for each temperature.' },
       { bad: 'A diagonal line splitting the top-left cell into two headings', good: 'Every column has its own heading: Temperature / °C, then Time for starch to disappear / s.' },
-      { bad: 'Time / s ± 0.01 (the stopwatch’s resolution)', good: 'Time / s ± 10: the iodine was tested every 10 s.', lv: 'ie' },
+      { bad: 'Time / s ± 0.01 (the stopwatch’s resolution)', good: 'Time / s ± 10. The 10 s gap between samples, not the stopwatch, limits each time.', lv: 'ie' },
       { bad: 'Every table in the appendix, to save words', good: 'Processed tables and a sample of the raw data in the body. Tables do not count.', lv: 'e' }
     ],
 
@@ -433,11 +432,11 @@
           { t: 'Time for starch to disappear / s ± 0.2', why: 'A reaction time of about 0.2 s is tiny next to the 10 s gap between samples.' },
           { t: 'Time for starch to disappear / s, with ± 10 in every cell', why: 'The uncertainty goes once, in the heading.' }
         ] },
-      { type: 'choose', q: 'In an Extended Essay, where do most of the raw data go?', lv: 'e',
+      { type: 'choose', q: 'In an Extended Essay, which is the best place for the raw data?', lv: 'e',
         opts: [
           { t: 'In an appendix, with a representative sample in the body', ok: true, why: 'Examiners are not required to read appendices, so the body must show what was measured.' },
           { t: 'All of it in the body', why: 'Tables do not count towards the words, but hundreds of readings make the argument hard to follow.' },
-          { t: 'All of it in an appendix', why: 'Then the body shows no raw data at all, and the examiner may never see it.' },
+          { t: 'All of it in an appendix', why: 'Allowed, but examiners are not required to read appendices. A short sample in the body shows them what was measured.' },
           { t: 'Nowhere: only processed data are needed', why: 'The raw data show what was measured. Keep them, in an appendix, with a sample in the body.' }
         ] }
     ],

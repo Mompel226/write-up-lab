@@ -30,20 +30,20 @@
 
     ladder: {
       g: [],
-      i: ['Only the [[background theory]] the question needs, each fact with a [[citation]]', 'Why the question is worth asking', 'How the [[raw data]] will become the answer'],
+      i: ['Only the [[background theory]] the question needs, each idea or value from a source with a [[citation]]', 'Why the question is worth asking', 'How the [[raw data]] will become the answer'],
       e: ['A [[literature review]] from relevant, reliable sources', 'Where published results agree, where they disagree, and what is not known', 'Terms and concepts used accurately (criterion B)']
     },
 
     build: [
       { type: 'anatomy', title: 'The parts of a background section',
         intro: 'Five jobs, in about five sentences. Tap a colour to see each one.',
-        model: '{1:α-Amylase hydrolyses the α-1,4 glycosidic bonds in starch, producing maltose (Urry et al.).} {2:As temperature rises, enzyme and substrate molecules gain kinetic energy and collide more often, so more enzyme–substrate complexes form per second. Above the optimum, hydrogen and ionic bonds in the tertiary structure break, and the active site changes shape.} {3:Amylases from different organisms have different optimum temperatures (Gupta et al.). Raviyan et al. report an optimum of 55 °C for α-amylase from *Aspergillus oryzae* (5464).} {4:This enzyme is added to bread dough, so how its activity changes between 20 and 60 °C matters in baking.} {5:The mean time for iodine to stop turning blue-black was converted to a rate (1 ÷ mean time), and the temperature with the highest rate was taken as the optimum.}',
+        model: '{1:α-Amylase hydrolyses the α-1,4 glycosidic bonds in starch, producing maltose (Urry et al.).} {2:As temperature rises, enzyme and substrate molecules gain kinetic energy and collide more often, so more enzyme–substrate complexes form per second. Above the optimum, hydrogen and ionic bonds in the tertiary structure break, and the active site changes shape.} {3:Amylases from different organisms have different optimum temperatures (Gupta et al.). Raviyan et al. report an optimum of 55 °C for α-amylase from *Aspergillus oryzae* (5464).} {4:This enzyme is added to bread dough, so how its activity changes between 20 and 60 °C matters in baking.} {5:The mean time for iodine to stop turning blue-black was converted to a rate (1 ÷ mean time), and the temperature with the highest rate showed where the optimum lies.}',
         parts: [
           { n: 1, name: 'The theory the question needs', note: 'What the enzyme does, with a citation.' },
           { n: 2, name: 'The link between the variables', note: 'Why temperature should change the rate: collisions, then denaturation.' },
           { n: 3, name: 'Why this system', note: 'The published context for this exact enzyme.' },
           { n: 4, name: 'Why the question is worth asking', note: 'One sentence is enough.' },
-          { n: 5, name: 'How the raw data become the answer', note: 'Do not forget this step.' }
+          { n: 5, name: 'How the raw data become the answer', note: 'Our advice, not an IB rule: it shows how the data will answer the question.' }
         ] },
 
       { type: 'callout', title: 'The deletion test', label: 'The deletion test', md: 'If a paragraph still makes sense with the [[research question]] deleted, it is doing no work.' },
@@ -101,7 +101,7 @@
           'tf-d': { label: 'which amylase? source?', why: '37 °C is quoted for __human__ salivary amylase. Give the value for the enzyme used, with a citation.' },
           'tf-e': { label: 'how, exactly?', why: 'Say how the raw data become the answer: time → mean time → rate → the temperature with the highest rate.' }
         },
-        fixed: 'α-Amylase ==hydrolyses== the glycosidic bonds in starch, producing maltose (Urry et al.). As temperature rises, ==enzyme and substrate molecules gain kinetic energy and collide more often==, so more enzyme–substrate complexes form per second. ==Amylases from different organisms have different optimum temperatures (Gupta et al.). Raviyan et al. report an optimum of 55 °C for α-amylase from *Aspergillus oryzae* (5464).== ==The mean time for iodine to stop turning blue-black was converted to a rate (1 ÷ mean time), and the temperature with the highest rate was taken as the optimum.==',
+        fixed: 'α-Amylase ==hydrolyses== the glycosidic bonds in starch, producing maltose (Urry et al.). As temperature rises, ==enzyme and substrate molecules gain kinetic energy and collide more often==, so more enzyme–substrate complexes form per second. ==Amylases from different organisms have different optimum temperatures (Gupta et al.). Raviyan et al. report an optimum of 55 °C for α-amylase from *Aspergillus oryzae* (5464).== ==The mean time for iodine to stop turning blue-black was converted to a rate (1 ÷ mean time), and the temperature with the highest rate showed where the optimum lies.==',
         fixedNote: 'Every sentence now serves the question. Every fact from outside has a source. The path from data to answer is stated.'
       },
       e: {
@@ -120,9 +120,8 @@
 
     traps: [
       { bad: 'Two pages on enzyme structure.', good: 'Only the theory that links the independent variable to the dependent variable.' },
-      { bad: '“Temperature affects enzymes.” (no source)', good: 'Every fact you did not measure has a [[citation]].' },
-      { bad: 'A published value for a different organism.', good: 'A value for the same enzyme source, so that the conclusion compares two values for one enzyme.' },
-      { bad: 'No plan for turning the data into an answer.', good: '“The time was converted to a rate; the highest rate identified the optimum.”' },
+      { bad: '“The optimum is 55 °C.” (no source)', good: '“Raviyan et al. report an optimum of 55 °C (5464).” Every idea or value from a source is cited.' },
+      { bad: 'A published value for a different organism, used as the expected value.', good: 'A value for the same enzyme source, so that the conclusion compares two values for one enzyme.' },
       { bad: 'A review built from one textbook.', good: 'Textbooks for the basics, then reviews and research papers.', lv: 'e' }
     ],
 
@@ -146,7 +145,7 @@
         ] },
       { type: 'choose', q: 'Which sentence says how the raw data will become the answer?',
         opts: [
-          { t: 'The mean time at each temperature was converted to a rate (1 ÷ mean time), and the temperature with the highest rate was taken as the optimum.', ok: true, why: 'It names each step, from the measurement to the answer.' },
+          { t: 'The mean time at each temperature was converted to a rate (1 ÷ mean time), and the temperature with the highest rate showed where the optimum lies.', ok: true, why: 'It names each step, from the measurement to the answer.' },
           { t: 'The data were analysed.', why: 'How? This names no step.' },
           { t: 'A graph was drawn.', why: 'Of what, and what will it show?' },
           { t: 'The results proved the hypothesis.', why: 'Data never prove a hypothesis, and this says nothing about processing.' }

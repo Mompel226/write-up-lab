@@ -430,7 +430,7 @@
         fixedNote: 'Small crosses, and ruled lines that stop at 20 °C and 60 °C. A unit on the y-axis, an x-axis that fills more than half the grid, and a title below that names the type of graph and both variables.'
       },
       i: {
-        title: 'An IA graph made in a spreadsheet. Four marks would keep it out of the top band.',
+        title: 'An IA graph made in a spreadsheet. Four things need the red pen.',
         body: { plot: RP_I },
         notes: {
           a: { el: 'pts-raw1', label: 'means?', lx: 142, ly: 205, anchor: 'end', why: 'These are the 25 raw times, five at each temperature. Plot the [[processed data]]: one mean at each temperature.' },
@@ -453,8 +453,8 @@
       { bad: '0 at the corner, a zigzag, then 40, 41, 42…', good: 'Start the axis at 40 and write 40 at the corner. A bar chart starts at 0.' },
       { bad: 'A bar chart whose y-axis starts at 42.5 cm.', good: 'The bars start at 0 cm, so their lengths match the values.' },
       { bad: 'A line of best fit with R², when the question asked for a line graph.', good: 'Ruled lines, point to point. No R² at IGCSE.', lv: 'g' },
-            { bad: 'Error bars, but the caption never says what they are.', good: 'End the caption with (n = 5; error bars = ± 1 SD).', lv: 'ie' },
-      { bad: 'A spreadsheet polynomial through every mean, with R² = 1.000.', good: 'A smooth curve through the trend with no R², or a fitted straight line with its R².', lv: 'ie' }
+      { bad: 'Error bars, but the caption never says what they are.', good: 'End the caption with (n = 5; error bars = ± 1 SD).', lv: 'ie' },
+      { bad: 'A spreadsheet polynomial through every mean, with R² = 1.000.', good: 'A smooth curve through the trend, with no R². R² belongs only to a trend line fitted from an equation.', lv: 'ie' }
     ],
 
     test: [

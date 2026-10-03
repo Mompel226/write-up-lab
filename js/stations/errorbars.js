@@ -146,7 +146,7 @@
 
     redpen: {
       i: {
-        title: 'An IA results section. Five phrases would lose marks.',
+        title: 'An IA results section. Five phrases need the red pen.',
         body: 'Figure 3 shows the mean height of the seedlings in each soil [!a:with error bars]. The error bars were [!b:drawn by eye from the spread of the data]. The bars for soils A and D overlap, [!c:so soil D grows taller plants]. [!d:SE bars were used because they are shorter and look neater]. [!e:This proves that soil type affects growth].',
         notes: {
           a: { label: 'which bars?', why: 'Give n and name the kind of bar: “(n = 10; error bars = ± 1 SD)”.' },
@@ -161,13 +161,12 @@
     },
 
     traps: [
-      { bad: 'Figure 1. Mean time at each temperature.', good: 'Figure 1. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for fungal α-amylase to digest starch (n = 5; error bars = ± 1 SD).' },
+      { bad: 'A caption that ends “… to digest starch, with error bars.”', good: 'A caption that ends “… to digest starch (n = 5; error bars = ± 1 SD).”' },
       { bad: 'SE bars, chosen because they look smaller.', good: 'SD to show the spread of the data; SE to show how well the mean is known.' },
       { bad: 'The bars overlap, so there is a difference.', good: 'The bars overlap, so a difference cannot be claimed from this graph.' },
       { bad: 'The bars overlap, so there is no significant difference.', good: 'The bars overlap, so the graph alone cannot decide; a t-test gave p = 0.06, so the difference is not significant.' },
-      { bad: 'Error bars on points that are single measurements.', good: 'Bars only on means of repeats. One value has no spread.' },
-      { bad: 'Excel’s preset “Standard Deviation” error bars.', good: 'Custom error bars, from your own column of =STDEV.S values.' },
-      { bad: 'SE calculated from the rounded SD: 5.5 ÷ √5 = 2.5 s.', good: 'Use the unrounded SD: 5.477 ÷ √5 = 2.4 s. Or use a spreadsheet.' }
+      { bad: '± 1 SD bars on points that are single measurements.', good: 'An SD needs repeats. A single reading can show only its uncertainty, such as ± 10 s.' },
+      { bad: 'Excel’s preset “Standard Deviation” error bars.', good: 'Custom error bars, from your own column of =STDEV.S values.' }
     ],
 
     test: [
@@ -220,7 +219,7 @@
       { type: 'spot', q: 'Tap the three mistakes.',
         text: 'Figure 2. Line graph showing the effect of temperature on the mean time taken for fungal α-amylase to digest starch [!a:with error bars]. [?:The bars at 40 °C and 50 °C do not overlap], [!b:which proves] that the rate was higher at 50 °C. [!c:SE bars were chosen because they are shorter].',
         why: { a: 'Give n and name the kind of bar: “(n = 5; error bars = ± 1 SD)”.', b: 'A graph never proves. Write “which suggests”, and let a test decide.', c: 'Never choose a bar because it looks smaller. SD for the spread, SE for how well the mean is known.' } },
-      { type: 'build', q: 'Build the sentence that earns the mark.',
+      { type: 'build', q: 'Build the correct sentence.',
         chips: ['The ± 1 SD bars for 40 °C and 50 °C', 'do not overlap,', 'so the difference is likely to be real.', 'which proves the difference.', 'look quite big,'],
         answer: ['The ± 1 SD bars for 40 °C and 50 °C', 'do not overlap,', 'so the difference is likely to be real.'],
         why: 'It names the points and the bars, says whether they overlap, and claims only what overlap allows.' },

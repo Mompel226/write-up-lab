@@ -5,7 +5,8 @@
    or teach something wrong. Run from the site folder:
 
        node tools/check.mjs            check only
-       node tools/check.mjs --stamp    check, then stamp ?v= and version.txt
+       node tools/check.mjs --stamp    check, then stamp ?v= and version.txt, write data/parts.json
+                                       and copy labs-shared/signin.js in as js/signin.js
 
    What it checks
    · every station: required fields, known stage, known block types
@@ -19,6 +20,9 @@
    · model answers contain no I / we / my / our
    · the running-example data: every mean and SD recomputed
    · index.html loads every station and widget file that exists
+   · the parts list the teacher's spreadsheet scores homework against (WUL.partsManifest, track.js):
+     every part has something to finish; data/parts.json on disk is the one this code makes; js/signin.js
+     is the shared copy (3 Oct 2026, homework)
    ============================================================ */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -48,7 +52,7 @@ const load = (rel) => {
 };
 
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const scripts = [...html.matchAll(/<script src="([^"?]+)/g)].map((m) => m[1]);
+const scripts = [...html.matchAll(/<script src="([^"?]+)/g)].map((m) => m[1]).filter((s) => !/^https?:/.test(s));   /* Google's sign-in is not ours */
 /* index.html must list every station and widget file on disk */
 for (const dir of ['js/stations', 'js/widgets']) {
   for (const f of fs.readdirSync(path.join(ROOT, dir))) {
@@ -59,7 +63,7 @@ for (const s of scripts) if (!fs.existsSync(path.join(ROOT, s))) E(`index.html l
 
 /* load in page order, but only the data side */
 for (const s of scripts) {
-  if (/js\/(app|specimen|blocks|quiz|plot)\.js$/.test(s)) continue;   /* DOM code, not data */
+  if (/js\/(app|specimen|blocks|quiz|plot|account|signin|config)\.js$/.test(s)) continue;   /* DOM code and sign-in, not data */
   if (s.startsWith('js/widgets/')) continue;                           /* tools are checked by rendering */
   load(s);
 }
@@ -266,8 +270,32 @@ if (A) {
   });
 }
 
+/* the parts list for homework (track.js). The labs script reads data/parts.json from the live site and scores each
+   pupil against it, so it must be exactly what this code makes: a stale copy would score against old questions. */
+const PARTS = WUL.partsManifest ? WUL.partsManifest() : null;
+if (!PARTS) E('track.js did not load: no WUL.partsManifest');
+else {
+  const ids = new Set();
+  for (const p of PARTS.parts) {
+    if (ids.has(p.id)) E(`parts: ${p.id} twice`); ids.add(p.id);
+    if (!(p.units > 0)) E(`parts: ${p.id} has nothing to finish (no red pen, no questions)`);
+    if (!/^[a-z0-9-]{1,40}$/.test(p.id)) E(`parts: id "${p.id}" is not a plain id`);
+  }
+  if (PARTS.parts.length !== WUL.stationOrder.length) E(`parts: ${PARTS.parts.length} in the list, ${WUL.stationOrder.length} stations`);
+}
+const partsFile = path.join(ROOT, 'data/parts.json');
+const partsText = PARTS ? JSON.stringify(PARTS) + '\n' : '';
+const sharedSignin = path.join(ROOT, '../../labs-shared/signin.js'), ownSignin = path.join(ROOT, 'js/signin.js');
+if (!process.argv.includes('--stamp')) {
+  if (!fs.existsSync(partsFile) || fs.readFileSync(partsFile, 'utf8') !== partsText) W('data/parts.json is not the list this code makes: run node tools/check.mjs --stamp');
+  if (fs.existsSync(sharedSignin) && (!fs.existsSync(ownSignin) || fs.readFileSync(sharedSignin, 'utf8') !== fs.readFileSync(ownSignin, 'utf8'))) W('js/signin.js is not labs-shared/signin.js: run node tools/check.mjs --stamp');
+}
+
 /* stamp */
 if (process.argv.includes('--stamp') && !errs.length) {
+  fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
+  fs.writeFileSync(partsFile, partsText);
+  if (fs.existsSync(sharedSignin)) fs.copyFileSync(sharedSignin, ownSignin);
   const v = String(Date.now());
   fs.writeFileSync(path.join(ROOT, 'index.html'), html.replace(/\?v=[A-Za-z0-9]+/g, `?v=${v}`));
   fs.writeFileSync(path.join(ROOT, 'version.txt'), v + '\n');

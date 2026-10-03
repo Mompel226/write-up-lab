@@ -186,7 +186,7 @@
         fixedNote: 'The four parts are now there, in order, and the explanation has moved to the conclusion.'
       },
       i: {
-        title: 'An IA analysis. Five phrases would lose marks.',
+        title: 'An IA analysis. Five phrases need the red pen.',
         body: '[!a:At 20.0 °C the mean was 178 s.] At 30.0 °C it was 118 s, at 40.0 °C 74 s, at 50.0 °C 54 s and at 60.0 °C 98 s.\n\n[!b:The error bars show accuracy.]\n\nThe rate fell at 60.0 °C.\n\n[!c:The active site changed shape.]\n\n[!d:A t-test was done: p = 0.0004.]\n\n[!e:The data had no problems.]',
         notes: {
           a: { label: 'pattern, not every point', why: 'Listing every mean repeats the table. Give the trend, the key values and one comparison: a 70 % decrease to 54 s at 50.0 °C, then an 81 % increase.' },
@@ -201,14 +201,12 @@
     },
 
     traps: [
-      { bad: 'The graph goes down and then up.', good: 'As the temperature increased from 20 °C to 50 °C, the mean time decreased from 180 s to 53 s.', lv: 'g' },
-      { bad: 'The graph goes down and then up.', good: 'As the temperature increased from 20.0 °C to 50.0 °C, the mean time decreased from 178 s to 54 s.', lv: 'ie' },
+      { bad: 'The graph goes down and then up.', good: 'As the temperature increased from 20 °C to 50 °C, the mean time decreased from 180 s to 53 s.' },
       { bad: '…because the enzyme was denatured.', good: 'Keep every reason for the conclusion. The analysis only describes.' },
-      { bad: 'The fastest was 50.', good: 'The shortest mean time was 53 s, at 50 °C.', lv: 'g' },
-      { bad: 'The fastest was 50.', good: 'The shortest mean time was 54 s, at 50.0 °C.', lv: 'ie' },
+      { bad: 'The fastest was 50.', good: 'The shortest mean time was 53 s, at 50 °C.' },
       { bad: 'There were no problems with the data.', good: 'No anomalous results were identified: the trials differed by no more than 20 s.' },
-      { bad: 'The error bars are small, so the results are accurate.', good: 'The SD bars at 40.0 and 50.0 °C do not overlap, so the difference is probably real.', lv: 'ie' },
-      { bad: 'Five sentences, one for each mean.', good: 'The trend, the key values, one comparison and the anomalies. Then stop.', lv: 'ie' }
+      { bad: 'The error bars are small, so the results are accurate.', good: 'The SD bars are short, so the results are precise. Error bars cannot show accuracy.', lv: 'ie' },
+      { bad: 'Five sentences, one for each mean.', good: 'The trend, the key values and one comparison. The table already gives every mean.' }
     ],
 
     test: [

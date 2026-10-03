@@ -116,13 +116,13 @@
     id: 'apparatus', stage: 'plan', order: 5, title: 'Apparatus and materials', levels: 'gie',
     job: {
       g: 'List every piece of equipment and every material, with its size or quantity. Then someone else could repeat the same experiment.',
-      i: 'List every item with its size or quantity. State the uncertainty of every measuring instrument, and where it comes from.'
+      i: 'List every item with its size or quantity. State the uncertainty of every measuring instrument, with its unit.'
     },
     where: { g: 'After the variables, before the method. A list is fine.', i: 'Not a section of its own: inside your methodology, before the method. A list or a table.', e: 'Inside your methodology section, before the method.' },
 
     ladder: {
       g: ['Separate [[apparatus]] (equipment) from [[materials]] (what is consumed)', 'A size for every piece of apparatus; a volume and a concentration for every solution', 'Choose the [[measuring instrument]] whose divisions suit the volume, mass or time'],
-      i: ['State the [[uncertainty]] of every measuring instrument', 'Say where each uncertainty comes from: half a division, the last digit, or the method', 'Notice when the method, not the instrument, sets the uncertainty'],
+      i: ['State the [[uncertainty]] of every measuring instrument', 'Give every uncertainty its unit, as the value has: ± 0.5 °C, not ± 0.5', 'Notice when the method, not the instrument, sets the uncertainty'],
       e: ['Justify each instrument against the precision the question needs, often from a pilot run']
     },
 
@@ -164,24 +164,24 @@
         { label: 'Iodine tested every 10 s', v: { html: tile() }, note: 'The drop at 70 s was still blue-black; the drop at 80 s was not. The starch disappeared at some moment in those 10 s. So the time is ± 10 s, whatever the stopwatch shows.' }
       ] },
 
-      { type: 'table', lv: 'ie', title: 'Every uncertainty and its source',
+      { type: 'table', lv: 'ie', title: 'Every instrument and its uncertainty',
         spec: {
           caption: 'Table 1. Measuring instruments and their uncertainties for the investigation of the effect of temperature on the time taken for fungal α-amylase to digest starch.', cls: 'wd-table-fixer--prose',
-          head: [['Quantity', 'Instrument', 'Uncertainty', 'Where it comes from']],
+          head: [['Quantity', 'Instrument', 'Uncertainty']],
           rows: [
-            ['Volume of starch solution', '10 cm³ graduated pipette', '± 0.05 cm³', 'Half the smallest division (0.1 cm³)'],
-            ['Temperature of the water bath', 'Thermometer, 1 °C divisions', '± 0.5 °C', 'Half the smallest division'],
-            ['Mass of starch powder', 'Digital balance', '± 0.01 g', 'The last digit of the display'],
-            ['Time for the starch to disappear', 'Stopwatch; iodine tested every 10 s', '± 10 s', 'The sampling interval, not the stopwatch (0.01 s)']
+            ['Volume of starch solution', '10 cm³ graduated pipette', '± 0.05 cm³'],
+            ['Temperature of the water bath', 'Thermometer, 1 °C divisions', '± 0.5 °C'],
+            ['Mass of starch powder', 'Digital balance', '± 0.01 g'],
+            ['Time for the starch to disappear', 'Stopwatch; iodine tested every 10 s', '± 10 s']
           ]
         },
         after: 'Check the last row. The stopwatch reads to 0.01 s, but a drop was tested only every 10 s.' },
 
-      { type: 'note', tone: 'ib', label: 'What the IB guide asks', title: 'What the IB tools ask', lv: 'ie', md: 'Tool 1 asks you to measure mass, volume, time and temperature “to an appropriate level of precision”. Tool 3 asks you to “Record uncertainties in measurements as a range (±) to an appropriate level of precision”. Say where each uncertainty comes from, so that the reader of your report can check it.' },
+      { type: 'note', tone: 'ib', label: 'What the IB guide asks', title: 'What the IB tools ask', lv: 'ie', md: 'Tool 1 asks you to measure mass, volume, time and temperature “to an appropriate level of precision”. Tool 3 asks you to “Record uncertainties in measurements as a range (±) to an appropriate level of precision”. Give each uncertainty with its unit. You do not need to write how you worked it out.' },
 
       { type: 'frames', title: 'Sentence frames for apparatus', items: [
-        'The volume of ___ was measured with a ___ cm³ ___ (± ___ cm³), because its smallest division is ___.',
-        'The uncertainty of the ___ is ± ___, which is half of the smallest division.',
+        'The volume of ___ was measured with a ___ cm³ ___ (± ___ cm³).',
+        'The temperature of the water bath was measured with a thermometer (± ___ °C).',
         'Although the stopwatch reads to 0.01 s, the uncertainty in the time is ± ___ s, because ___.'
       ] }
     ],
@@ -201,17 +201,17 @@
         fixedNote: 'Two lists. Every item has its correct name, and a number, a size, or a volume and concentration.'
       },
       i: {
-        title: 'An IA methodology. Five phrases would keep it out of the top band.',
+        title: 'An IA methodology. Five phrases need the red pen.',
         body: 'The volume of starch solution was measured with [!tf-a:a pipette] [!tf-b:(± 0.1)]. The temperature was measured with a thermometer [!tf-c:(very accurate)]. The time was measured with a stopwatch [!tf-d:(± 0.01 s)], and [!tf-e:the uncertainties were too small to matter].',
         notes: {
           'tf-a': { label: 'size?', why: 'Name the instrument fully: a 10 cm³ graduated pipette.' },
-          'tf-b': { label: 'unit?', why: 'Every uncertainty needs its unit and its source. With 0.1 cm³ divisions, half a division gives ± 0.05 cm³.' },
-          'tf-c': { label: 'a number!', why: '“Accurate” is a claim, not an uncertainty. Give the value: ± 0.5 °C, half of the 1 °C division.' },
+          'tf-b': { label: 'unit?', why: 'An uncertainty needs its unit, as the value does. With 0.1 cm³ divisions, half a division gives ± 0.05 cm³.' },
+          'tf-c': { label: 'a number!', why: '“Accurate” is a claim, not an uncertainty. Give the value with its unit: ± 0.5 °C.' },
           'tf-d': { label: 'sampling!', why: 'A drop was tested only every 10 s, so the time is known to ± 10 s. The stopwatch is not the limit.' },
           'tf-e': { label: 'largest?', why: 'Consider the uncertainties. Here ± 10 s is the largest: it is bigger than the standard deviation at 40 °C and at 50 °C.' }
         },
-        fixed: 'The volume of starch solution was measured with ==a 10 cm³ graduated pipette (± 0.05 cm³, half the smallest division)==. The temperature was measured with a thermometer ==(± 0.5 °C, half of the 1 °C division)==. The time was measured with a stopwatch, but ==a drop was tested every 10 s, so each time is uncertain by ± 10 s==. ==This is the largest uncertainty: it is bigger than the standard deviation at 40 °C and at 50 °C (5.5 s).==',
-        fixedNote: 'Every instrument now has an uncertainty with a unit and a source, and the largest one is named.'
+        fixed: 'The volume of starch solution was measured with ==a 10 cm³ graduated pipette (± 0.05 cm³)==. The temperature was measured with a thermometer ==(± 0.5 °C)==. The time was measured with a stopwatch, but ==a drop was tested every 10 s, so each time is uncertain by ± 10 s==. ==This is the largest uncertainty: it is bigger than the standard deviation at 40 °C and at 50 °C (5.5 s).==',
+        fixedNote: 'Every instrument now has an uncertainty with its unit, and the largest one is named.'
       }
     },
 
@@ -221,7 +221,7 @@
       { bad: 'The volume was read at the edge, where the water touches the glass.', good: 'Read the __bottom__ of the meniscus, with your eye level with it.' },
       { bad: 'Tile plate. Measuring jug.', good: 'Spotting tile. Measuring cylinder. Use the correct names.' },
       { bad: 'Stopwatch (± 0.01 s), with iodine tested every 10 s.', good: 'Time ± 10 s: the sampling interval sets the uncertainty.', lv: 'ie' },
-      { bad: 'Thermometer: ± 0.5', good: 'Thermometer: ± 0.5 °C (half of the 1 °C division).', lv: 'ie' }
+      { bad: 'Thermometer: ± 0.5', good: 'Thermometer: ± 0.5 °C. An uncertainty has a unit, as the value does.', lv: 'ie' }
     ],
 
     test: [
@@ -278,15 +278,15 @@
         text: 'Apparatus: [!a:test tubes], a [?:10 cm³ graduated pipette], a [!b:tile plate] and [?:a thermostatically controlled water bath]. Materials: [!c:some starch].',
         why: { a: 'How many, and what size? 8 test tubes (15 cm³).', b: 'The correct name is spotting tile.', c: '“Some” is not a quantity: 100 cm³ of 1.0 % starch solution.' } },
       { type: 'build', lv: 'ie', q: 'Build the entry for the pipette in an IB apparatus list.',
-        chips: ['1 × graduated pipette,', '10 cm³,', '± 0.05 cm³', '(half of the 0.1 cm³ division)', 'which is accurate', 'some'],
-        answer: ['1 × graduated pipette,', '10 cm³,', '± 0.05 cm³', '(half of the 0.1 cm³ division)'],
-        why: 'The number, the name, the size, the uncertainty with its unit, and where the uncertainty comes from.' },
-      { type: 'choose', lv: 'ie', q: 'An IA says “Thermometer (± 0.5 °C)”. What would make this stronger?',
+        chips: ['1 × graduated pipette,', '10 cm³,', '± 0.05 cm³', '± 0.05', 'which is accurate', 'some'],
+        answer: ['1 × graduated pipette,', '10 cm³,', '± 0.05 cm³'],
+        why: 'The number, the name, the size, and the uncertainty with its unit.' },
+      { type: 'choose', lv: 'ie', q: 'An IA says “Thermometer (± 0.5)”. What is missing?',
         opts: [
-          { t: 'Saying where it comes from: half of the 1 °C division', ok: true, why: 'The reader of your report can check a number that has a source.' },
-          { t: 'Naming the company that made the thermometer', why: 'The maker does not say how the uncertainty was found.' },
-          { t: 'Adding “the thermometer was accurate”', why: '“Accurate” is a claim, not an uncertainty.' },
-          { t: 'Giving it to more decimal places: ± 0.50 °C', why: 'More decimal places add nothing. The source of the number is what is missing.' }
+          { t: 'The unit: ± 0.5 °C', ok: true, why: 'An uncertainty has a unit, as the value it belongs to does.' },
+          { t: 'The name of the company that made the thermometer', why: 'The maker does not change the uncertainty.' },
+          { t: 'The words “the thermometer was accurate”', why: '“Accurate” is a claim, not an uncertainty.' },
+          { t: 'More decimal places: ± 0.50', why: 'More decimal places add nothing. The unit is what is missing.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'A 100 cm³ measuring cylinder (± 0.5 cm³) is used to measure 25.0 cm³ and 5.0 cm³. Which is true?',
         opts: [

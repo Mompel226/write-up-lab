@@ -78,7 +78,7 @@ WUL.station({
       fixedNote: 'Every variable is now named as a quantity, and every control variable has its value, method and reason.'
     },
     i: {
-      title: 'An IA draft. Four phrases would keep it out of the top band.',
+      title: 'An IA draft. Four phrases need the red pen.',
       body: 'Temperature was varied from 20.0 to 60.0 °C [!a:because this range was used in class]. [!b:Three trials] were carried out at each temperature. The pH was controlled [!c:by keeping it the same]. [!d:Room temperature could not be controlled, so the results are unreliable.]',
       notes: {
         a: { label: 'justify!', why: 'Give a biological reason: the range spans the expected optimum of this fungal amylase and reaches the temperatures where it starts to denature.' },
