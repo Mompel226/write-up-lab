@@ -1,6 +1,6 @@
 /* station: method — numbered steps, past tense, passive voice, detailed enough to repeat. */
 WUL.station({
-  id: 'method', stage: 'plan', order: 7, title: 'Method', levels: 'gie',
+  id: 'method', keepV: { v: '1filylx', now: '7qhva6', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 7, title: 'Method', levels: 'gie',
   job: 'Write the steps so that someone else could repeat the investigation exactly.',
   where: { g: 'After the apparatus and the risk assessment.', i: 'In the methodology, after the variables and safety.', e: 'In the methodology section, with a reason for each choice.' },
 
@@ -126,9 +126,9 @@ WUL.station({
     { type: 'choose', q: 'Which step is written the way a lab report method should be?',
       opts: [
         { t: '5.0 cm³ of starch solution was measured into a test tube with a 10 cm³ graduated pipette.', ok: true, why: 'Past tense, passive, with a quantity and the apparatus size.' },
-        { t: 'Measure 5 cm³ of starch into a tube.', why: 'An instruction, like a worksheet. A report says what was done.' },
-        { t: 'I measured some starch into a tube.', why: 'First person, and no volume.' },
-        { t: 'Starch was added.', why: 'How much, to what, and with what?' }
+        { t: 'Measure 5.0 cm³ of starch solution into a test tube with a 10 cm³ graduated pipette.', why: 'An instruction, like a worksheet. A report says what was done: “…was measured”.' },
+        { t: 'The student measured about 5 cm³ of starch solution into a test tube with a pipette.', why: '“About” is not a quantity, and the pipette has no size, so no one could repeat this step exactly.' },
+        { t: 'Starch solution was added to a test tube, and then some amylase solution was added to the starch.', why: 'How much of each solution, and measured with what? Without them, the step cannot be repeated.' }
       ] },
     { type: 'build', q: 'Turn this into the passive voice: “We placed the tubes in the water bath for 5 minutes.”',
       chips: ['The tubes', 'were placed', 'in the water bath', 'for 5 minutes.', 'We placed', 'was placed'],
@@ -140,9 +140,9 @@ WUL.station({
     { type: 'choose', q: 'Why were the starch and the amylase left in the water bath for 5 minutes before they were mixed?',
       opts: [
         { t: 'So that both reached the test temperature before timing started.', ok: true, why: 'That is equilibration. Without it, the reaction starts at the wrong temperature.' },
-        { t: 'To let the enzyme start digesting the starch.', why: 'They were in separate tubes, so no reaction had started.' },
-        { t: 'To make the enzyme more active.', why: 'The aim is the correct temperature, not more activity.' },
-        { t: 'To kill any bacteria.', why: 'At 20–60 °C for 5 minutes, that is not the purpose.' }
+        { t: 'So that the amylase could start to digest the starch before timing started.', why: 'They were in separate tubes, so no reaction had started. Timing starts when they are mixed.' },
+        { t: 'So that the amylase reached its optimum temperature before mixing.', why: 'The bath is at the test temperature, and the test temperatures differ. Most of them are not the optimum.' },
+        { t: 'So that the heat killed any bacteria in both of the solutions.', why: 'At 20–60 °C for 5 minutes, that is not the purpose. The wait is for the temperature.' }
       ] },
     { type: 'spot', q: 'Tap the two phrases that need more detail.',
       text: '[?:5.0 cm³ of 1.0 % starch solution was measured into a test tube.] [!a:Some amylase] was added and the stopwatch was started. [!b:Every so often], a drop was tested with iodine solution. [?:Three trials were carried out at each temperature.]',
@@ -162,30 +162,30 @@ WUL.station({
         { t: 'The number of repeats at each temperature', ok: true },
         { t: 'How long the tubes were left to reach the temperature', ok: true },
         { t: 'The volume and concentration of each solution', ok: true },
-        { t: 'The results', why: 'The results go in the results table.' },
-        { t: 'Why enzymes have an optimum', why: 'That belongs in the background or the hypothesis.' }
+        { t: 'The times measured in each tube, and their mean', why: 'Measured values are results: they go in the results table, not the method.' },
+        { t: 'Why enzymes work fastest at their optimum temperature', why: 'That is theory: it belongs in the background or the hypothesis.' }
       ],
       why: 'The method says what was done, with enough detail to repeat it.' },
     { type: 'choose', lv: 'ie', q: 'What does the IB mean by a method that “could in principle” be repeated?',
       opts: [
         { t: 'Specific materials and precise steps, without unnecessary or repetitive information.', ok: true, why: 'Those are the words of the Research design clarifications.' },
-        { t: 'Every piece of apparatus listed again in each step.', why: 'That is the repetition the guide asks you to avoid.' },
-        { t: 'The worksheet method, copied exactly.', why: 'The method must be your own, and a worksheet gives orders, not a record.' },
-        { t: 'A method that someone else repeated and got the same results.', why: 'That is about the results. This criterion is about the description.' }
+        { t: 'The full list of apparatus, repeated in each step, so that each step can be read on its own.', why: 'That is the repetition the guide asks you to avoid: “without unnecessary or repetitive information”.' },
+        { t: 'The worksheet method, copied exactly, so that the steps match the teacher’s.', why: 'The method must be your own, and a worksheet gives orders, not a record.' },
+        { t: 'A method that another student has repeated, and that gave the same results the second time.', why: 'That is about the results being reproduced. “In principle” is about how the method is described.' }
       ] },
     { type: 'choose', lv: 'ie', q: 'A pilot run sampled drops every 30 s. At 50 °C, the starch had gone in under a minute. What should change?',
       opts: [
         { t: 'Sample every 10 s instead, so the time is known to ± 10 s, not ± 30 s.', ok: true, why: 'The sampling interval sets the uncertainty of the time.' },
-        { t: 'Do not test at 50 °C.', why: 'That is where the optimum may be: it matters most.' },
-        { t: 'Use a stopwatch that reads to 0.001 s.', why: 'The stopwatch is not the problem: the sampling interval is.' },
-        { t: 'Nothing: pilot runs are not reported.', why: 'Say what the pilot run showed. It justifies the choices.' }
+        { t: 'Remove 50 °C from the range, so no run ends within a minute.', why: '50 °C is where the optimum may be, so it matters most. Change the sampling, not the range.' },
+        { t: 'Keep sampling every 30 s, but use a stopwatch that reads to 0.001 s instead.', why: 'The stopwatch is not the problem. With a sample every 30 s, the time is still known only to ± 30 s.' },
+        { t: 'Nothing: a pilot run is practice, so its results are not reported.', why: 'Report what the pilot run showed. It justifies the choices in the method.' }
       ] },
     { type: 'choose', lv: 'e', q: 'An EE methodology should also…',
       opts: [
         { t: '…explain why other methods were rejected, such as a colorimeter chosen over judging colour by eye.', ok: true, why: 'Justifying the choice of method is part of the essay’s framework.' },
-        { t: '…reuse the IA method to save time.', why: 'No IA content may be duplicated in the EE.' },
-        { t: '…give less detail, since only the results are read.', why: 'The method must be replicable.' },
-        { t: '…be written in the first person.', why: 'Scientific writing is impersonal.' }
+        { t: '…reuse the method from the IA, with the same apparatus and steps, so that the two pieces of work support each other.', why: 'No IA content may be duplicated in the EE.' },
+        { t: '…give less detail than an IA method, since the examiner reads the results and the discussion, not the method.', why: 'The method must still be replicable, and the examiner reads it like any other section.' },
+        { t: '…present the results of each trial next to the steps, so that the reader can see what each step produced.', why: 'Results go in the results section. The methodology says what was done, and why.' }
       ] }
   ],
 

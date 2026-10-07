@@ -133,7 +133,7 @@
   '</div>'; }, ['nd', 'grp', 'spr', 'tst', 'tstf-1', 'tstf-2']);
 
   WUL.station({
-    id: 'stats', stage: 'show', order: 3, title: 'Statistical tests', levels: 'ie',
+    id: 'stats', keepV: { v: '1s1rry7', now: '189yltg', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'show', order: 3, title: 'Statistical tests', levels: 'ie',
     job: 'Use a statistical test to judge whether a difference or a relationship is likely to be real, then report it in one line.',
     where: { i: 'Not a section of its own: inside your Data analysis, after the processed data and the graphs.', e: 'Not a section of its own: inside your analysis, where statistics are appropriate.' },
 
@@ -318,16 +318,16 @@
       { type: 'choose', q: 'What is the null hypothesis for the amylase t-test?',
         opts: [
           { t: 'There is no difference between the mean time at 40 °C and at 50 °C.', ok: true, why: 'The null hypothesis always says “no difference” or “no relationship”.' },
-          { t: 'The time at 50 °C is shorter than at 40 °C.', why: 'That is the effect you expect: the alternative hypothesis.' },
-          { t: 'Amylase is denatured at 50 °C.', why: 'That is a biological claim, and 50 °C is close to this enzyme’s optimum.' },
-          { t: 'The t-test will be significant.', why: 'The null hypothesis describes no effect. It does not predict the result of the test.' }
+          { t: 'The mean time at 50 °C is shorter than the mean time at 40 °C.', why: 'That is the effect you expect: the alternative hypothesis.' },
+          { t: 'Amylase is denatured at 50 °C, so the mean time is longer there.', why: 'That is a biological claim, and 50 °C is close to this enzyme’s optimum.' },
+          { t: 'The t-test will show a significant difference between the means.', why: 'The null hypothesis describes no effect. It does not predict the result of the test.' }
         ] },
       { type: 'choose', q: 'A t-test gives p = 0.02. What does this mean?',
         opts: [
           { t: 'If there were no real difference, a difference this large would happen by chance only 2 % of the time.', ok: true, why: 'p is calculated as if the null hypothesis were true.' },
-          { t: 'There is a 98 % chance that the hypothesis is right.', why: 'p is not the probability that a hypothesis is true.' },
-          { t: 'The two means differ by 2 %.', why: 'p is a probability, not the size of the difference.' },
-          { t: 'The results are 98 % accurate.', why: 'p says nothing about accuracy.' }
+          { t: 'There is a 98 % chance that the hypothesis is right, and only a 2 % chance that it is wrong.', why: 'p is not the probability that a hypothesis is true.' },
+          { t: 'The mean of one group is 2 % larger than the mean of the other, so the difference is small and can be ignored.', why: 'p is a probability, not the size of the difference.' },
+          { t: 'The results are 98 % accurate, because only 2 % of the readings are likely to contain an error in measurement.', why: 'p says nothing about accuracy.' }
         ] },
       { type: 'choose', q: 'A t-test compares two groups of five trials. How many degrees of freedom?',
         opts: [
@@ -354,9 +354,9 @@
         show: { plot: potato },
         opts: [
           { t: 'The line explains about 99 % of the variation in the change in mass.', ok: true, why: 'R² measures how well the trend line fits the points.' },
-          { t: 'The results are 99 % accurate.', why: 'R² says nothing about accuracy. It measures how well the line fits.' },
-          { t: 'There is a 99 % chance that the hypothesis is right.', why: 'R² is not a probability.' },
-          { t: 'The line may be extended beyond 1.0 mol dm⁻³.', why: 'A good fit does not allow you to go beyond the data.' }
+          { t: 'The results are 99 % accurate, because the points lie very close to the line.', why: 'R² says nothing about accuracy. It measures how well the line fits.' },
+          { t: 'There is a 99 % chance that the hypothesis about the change in mass is right.', why: 'R² is not a probability.' },
+          { t: 'The line may be extended beyond 1.0 mol dm⁻³, as the fit is so good.', why: 'A good fit does not allow you to go beyond the data.' }
         ] }
     ],
 

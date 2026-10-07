@@ -53,7 +53,7 @@
   };
 
   WUL.station({
-    id: 'analysis', stage: 'sense', order: 1, title: 'Data analysis', levels: 'gie',
+    id: 'analysis', keepV: { v: 'pvxtkw', now: 'wiiqp0', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'sense', order: 1, title: 'Data analysis', levels: 'gie',
     job: { g: 'Describe the pattern in your results, with numbers. Do not explain it yet.', i: 'Describe the pattern in the processed data, and say what the uncertainties allow you to claim.', e: 'Describe each finding, and show how it helps to answer the research question.' },
     where: { g: 'After the graph, before the conclusion.', i: 'The last part of your Data analysis: after the tables, graphs and any test, before the conclusion.', e: 'In the analysis section, after the results.' },
 
@@ -221,9 +221,9 @@
       { type: 'choose', q: 'Which description fits this graph?', show: { plot: plotG },
         opts: [
           { t: 'The mean time fell from 180 s at 20 °C to a minimum of 53 s at 50 °C, then rose to 93 s at 60 °C.', ok: true, why: 'It gives the trend in both directions, with both coordinates and units.' },
-          { t: 'The mean time decreased steadily as the temperature increased.', why: 'It misses the rise above 50 °C.' },
-          { t: 'The mean time was shortest at 60 °C.', why: 'Read the graph again: the lowest point is at 50 °C.' },
-          { t: 'The mean time rose from 53 s at 20 °C to 180 s at 50 °C.', why: 'The values are swapped: 180 s is at 20 °C, and the time falls.' }
+          { t: 'The mean time fell steadily from 180 s at 20 °C to 93 s at 60 °C, so it was shortest at 60 °C.', why: 'It misses the turning point: the time was shortest, 53 s, at 50 °C, and it rose to 93 s at 60 °C.' },
+          { t: 'The mean time fell from 180 s at 20 °C to 53 s at 50 °C, then stayed close to 53 s up to 60 °C.', why: 'It misses the rise: the time did not stay near 53 s, but rose to 93 s at 60 °C.' },
+          { t: 'The mean time rose from 53 s at 20 °C to a maximum of 180 s at 50 °C, and then it fell to 93 s at 60 °C.', why: 'The values are swapped: 180 s is at 20 °C and 53 s is at 50 °C, so the time fell first, then rose.' }
         ] },
       { type: 'sort', q: 'Is each sentence a description (analysis) or an explanation (conclusion)?',
         bins: ['Description: analysis', 'Explanation: conclusion'],
@@ -268,16 +268,16 @@
       { type: 'choose', lv: 'ie', q: 'Every SD bar on this graph overlaps. Which statement is justified?', show: { plot: plotSoils },
         opts: [
           { t: 'The graph alone cannot separate the four soils: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'The difference could be due to variation between plants. Only a statistical test can decide.' },
-          { t: 'Soil D is the best soil, because its mean is highest.', why: 'Its mean is highest, but the overlap means that difference may not be real.' },
-          { t: 'The error bars are small, so the results are accurate.', why: 'SD bars show spread, not accuracy.' },
-          { t: 'Soil A reduced growth by 3 %, which is statistically significant.', why: 'Significance needs a statistical test. Overlapping bars cannot tell you the answer.' }
+          { t: 'Soil D is the best soil for growing these seedlings: every SD bar overlaps, but its mean is the highest.', why: 'Overlapping bars mean the highest mean may not be a real difference, so soil D cannot be called the best. Only a statistical test can decide.' },
+          { t: 'The SD bars show that the results are accurate, so the 1.3 cm difference between the soil means is a real effect.', why: 'SD bars show the spread of the repeats, not accuracy. Overlapping bars cannot show that a difference is real.' },
+          { t: 'Soil A reduced growth by 3 %, which is statistically significant, because the means of the soils differ by 1.3 cm.', why: 'Significance needs a statistical test. The size of a difference cannot tell you, and here the bars overlap.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'Which sentence reports a statistical test properly in an analysis?',
         opts: [
           { t: 'A t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001, so the difference is statistically significant.', ok: true, why: 'It names the test and the groups, gives t, df and p, and says what they mean.' },
-          { t: 'p = 0.0004.', why: 'No test, no groups and no meaning: a number alone is not analysis.' },
-          { t: 'The t-test proved the hypothesis.', why: 'A test does not prove anything, and the hypothesis belongs in the conclusion.' },
-          { t: 'The t-test showed that the error bars were small.', why: 'A t-test compares two means. It says nothing about the size of the error bars.' }
+          { t: 'A statistical test was done on the data in a spreadsheet, and it gave p = 0.0004, so the results are very reliable.', why: 'No test named, no groups, no t and no df, and p is not a measure of reliability. A number alone is not analysis.' },
+          { t: 'A t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001, so this test proved that the hypothesis is correct.', why: 'The statistics are right, but a test never proves a hypothesis. Whether the hypothesis is supported belongs in the conclusion.' },
+          { t: 'A t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001, so the error bars at both of the temperatures are small.', why: 'The statistics are right, but a t-test compares two means. It says nothing about the size of the error bars.' }
         ] }
     ],
 

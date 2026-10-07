@@ -2,7 +2,7 @@
    Control measure = what REDUCES the risk; emergency action = what to do IF harm happens.
    IB ethics facts: IB Sciences experimentation guidelines (2023), via docs/lab-reports/RESEARCH-ib.md. */
 WUL.station({
-  id: 'safety', stage: 'plan', order: 6, title: 'Risk, ethics and environment', levels: 'gie',
+  id: 'safety', keepV: { v: '1hxauu8', now: '11tw5m8', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 6, title: 'Risk, ethics and environment', levels: 'gie',
   job: {
     g: 'Name each hazard in this method, and the precaution that matches it.',
     i: 'Name the safety, ethical and environmental issues of this method, and show what you did about each one.'
@@ -186,23 +186,23 @@ WUL.station({
     { type: 'choose', q: 'Which safety point would earn the mark in a Paper 6 plan for the amylase experiment?',
       opts: [
         { t: 'Iodine solution can irritate the eyes, so wear eye protection.', ok: true, why: 'A hazard from this method, with the precaution that matches it.' },
-        { t: 'Wear a lab coat.', why: 'Worn in every practical: it never scores.' },
-        { t: 'Work under adult supervision.', why: 'Never credited: it does not reduce any particular risk.' },
-        { t: 'Wear gloves when using the water bath.', why: 'Gloves do not match the hazard: they do not stop a scald.' }
+        { t: 'Chemicals can be dangerous, so wear a lab coat throughout the practical.', why: 'No hazard from this method is named, and a lab coat is worn in every practical: it never scores.' },
+        { t: 'Accidents can happen in any laboratory, so work under adult supervision.', why: 'Never credited: it does not reduce any particular risk.' },
+        { t: 'Iodine solution can irritate the eyes, so do the tests in a fume cupboard.', why: 'The precaution does not match the hazard. The hazard is a splash in the eyes, so the matching precaution is eye protection. A fume cupboard is for harmful gases.' }
       ] },
     { type: 'choose', q: 'Which precaution matches the hazard “water bath at 60 °C”?',
       opts: [
         { t: 'Tubes are moved with a test-tube holder.', ok: true, why: 'It keeps hands out of the hot water.' },
-        { t: 'Wear gloves.', why: 'Thin gloves do not stop a scald, and can hold hot water against the skin.' },
-        { t: 'Wear a lab coat.', why: 'Worn in every practical: it does not match this hazard.' },
-        { t: 'Work in a fume cupboard.', why: 'A fume cupboard removes harmful gases. Hot water releases none.' }
+        { t: 'Thin gloves are worn to move the tubes.', why: 'Thin gloves do not stop a scald, and can hold hot water against the skin.' },
+        { t: 'A lab coat is worn over school clothes.', why: 'Worn in every practical: it does not match this hazard.' },
+        { t: 'The bath is kept in a fume cupboard.', why: 'A fume cupboard removes harmful gases. Hot water releases none.' }
       ] },
     { type: 'choose', q: 'What is the difference between a control measure and an emergency action?',
       opts: [
         { t: 'A control measure reduces the risk before harm happens; an emergency action is what you do if harm happens.', ok: true, why: 'Before, and after.' },
-        { t: 'A control measure is what you do after an accident; an emergency action prevents it.', why: 'This is the wrong way round.' },
-        { t: 'They are the same thing.', why: 'One reduces the risk; the other deals with harm that has already happened.' },
-        { t: 'A control measure is only for chemicals.', why: 'Hot water, glass and organisms need control measures too.' }
+        { t: 'A control measure is what you do after an accident; an emergency action reduces the risk before it happens.', why: 'The two are swapped: a control measure comes before harm, an emergency action after it.' },
+        { t: 'A control measure and an emergency action both reduce the risk before harm happens; the two names mean the same.', why: 'One reduces the risk; the other deals with harm that has already happened.' },
+        { t: 'A control measure is needed for chemicals; for hot water, glass and living organisms, an emergency action is enough.', why: 'Hot water, glass and organisms need control measures too.' }
       ] },
     { type: 'spot', q: 'Tap the two precautions that would not score.',
       text: '[!a:Wear a lab coat.] [?:Iodine solution can irritate the eyes, so eye protection was worn.] [!b:Adult supervision.] [?:The water was at 60 °C, so tubes were moved with a test-tube holder.]',
@@ -222,32 +222,32 @@ WUL.station({
     { type: 'choose', lv: 'ie', q: 'You want to test the amylase in your own saliva for your IA. What do the IB guidelines say?',
       opts: [
         { t: 'It is not allowed: no body fluids of any kind, not even your own.', ok: true, why: 'The 2023 guidelines removed the old exception for your own saliva.' },
-        { t: 'It is allowed, as long as it is your own saliva.', why: 'That exception was in the 2015 policy. It is gone.' },
-        { t: 'It is allowed with parental consent.', why: 'Consent does not change it: body fluids are not allowed.' },
-        { t: 'It is allowed if the saliva is boiled first.', why: 'Boiling would denature the amylase, and body fluids are still not allowed.' }
+        { t: 'It is allowed, as long as the saliva is your own and is collected in a clean tube.', why: 'That exception was in the 2015 policy. It is gone.' },
+        { t: 'It is not allowed, unless you and a parent give written consent first.', why: 'Consent does not change it: body fluids are not allowed, with or without consent.' },
+        { t: 'It is allowed if the saliva is boiled first to kill any microorganisms in it.', why: 'Boiling would denature the amylase, and body fluids are still not allowed.' }
       ] },
     { type: 'multi', lv: 'ie', q: 'Which microbiology investigations do the IB guidelines allow?',
       opts: [
         { t: 'A non-pathogenic yeast from a supplier, incubated at 25 °C', ok: true, why: 'A supplier non-pathogen, at 25 °C or below.' },
         { t: 'Plates that are not sealed completely, and are not opened again', ok: true, why: 'Plates are never sealed completely, and never reopened.' },
-        { t: 'Swabs taken from people’s hands', why: 'No swabs from skin or the environment.' },
-        { t: 'Testing which antibiotics a bacterium resists', why: 'No antibiotic-resistance tests.' },
-        { t: 'Incubating plates at 37 °C', why: 'Incubation is at 25 °C or below.' }
+        { t: 'Swabs from people’s hands, spread on plates and kept at 25 °C', why: 'No swabs from skin or the environment, whatever the temperature.' },
+        { t: 'Testing which antibiotics a bacterium from a supplier resists', why: 'No antibiotic-resistance tests, even with a bacterium from a supplier.' },
+        { t: 'Plates of a non-pathogenic yeast, incubated at 37 °C', why: 'Incubation is at 25 °C or below, even for a non-pathogen.' }
       ],
       why: 'IB Sciences experimentation guidelines (2023).' },
     { type: 'choose', lv: 'ie', q: 'An IA counts woodlice under logs in a wood. Which follows the IB guidelines?',
       opts: [
         { t: 'Counting them where they are, then returning each log to its place.', ok: true, why: 'Minimal impact: the habitat is left as it was found.' },
-        { t: 'Collecting them to keep in the laboratory.', why: 'Animals are observed in their natural conditions, and returned unharmed.' },
-        { t: 'Removing the logs to see better.', why: 'That damages the habitat.' },
-        { t: 'Choosing a protected nature reserve, to find more species.', why: 'Protected species and sites are avoided.' }
+        { t: 'Collecting them in a pot, then keeping them in the laboratory until the study ends.', why: 'Animals are observed in their natural conditions, and returned unharmed.' },
+        { t: 'Removing the logs from the wood, to see and count the woodlice more easily.', why: 'That damages the habitat.' },
+        { t: 'Choosing a protected nature reserve, to find more species and larger numbers.', why: 'Protected species and sites are avoided.' }
       ] },
     { type: 'choose', lv: 'ie', q: 'An IA measures heart rate after exercise in 15-year-old students. What is needed?',
       opts: [
         { t: 'Written informed consent from each student and a parent, a PAR-Q first, and the right to withdraw.', ok: true, why: 'Under 16, parental consent is needed too.' },
-        { t: 'Spoken agreement is enough.', why: 'Consent must be written.' },
-        { t: 'An energy drink, to raise the heart rate.', why: 'No substances may be given, including caffeine.' },
-        { t: 'Each student’s name recorded with their results.', why: 'Results are kept anonymous.' }
+        { t: 'Spoken agreement from each student on the day of the test, a PAR-Q first, and the right to withdraw at any time.', why: 'Consent must be written, and under 16 a parent must consent too.' },
+        { t: 'Written informed consent from each student and a parent, a PAR-Q first, and an energy drink to raise the heart rate.', why: 'No substances may be given, including caffeine.' },
+        { t: 'Written informed consent from each student and a parent, a PAR-Q first, and each student’s name recorded with the results.', why: 'Results are kept anonymous.' }
       ] }
   ],
 

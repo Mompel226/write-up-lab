@@ -21,7 +21,7 @@
   var PLATEAU = [[0, 0.2], [1, 3], [2, 5.1], [3, 6.5], [4, 7.4], [5.5, 8.1], [7.5, 8.5], [10, 8.7]];
 
   WUL.station({
-    id: 'hypothesis', stage: 'plan', order: 4, title: 'Hypothesis', levels: 'gie',
+    id: 'hypothesis', keepV: { v: '1av3x7c', now: 'v6a5b4', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 4, title: 'Hypothesis', levels: 'gie',
     job: 'Predict what will happen to the dependent variable, and the shape of the graph, with a biological reason.',
     where: { g: 'After the aim, before the method.', i: 'Inside your introduction, after the background. It is optional in the IA.', e: 'Inside the introduction, after the literature review.' },
 
@@ -156,9 +156,9 @@
       { type: 'choose', q: 'Which hypothesis has the “If … then … because …” structure and a biological reason?',
         opts: [
           { t: 'If light intensity is increased, then the rate of photosynthesis will increase to a plateau, because chlorophyll absorbs more light energy until another factor limits the rate.', ok: true, why: 'Both variables, a predicted shape, and the biology behind it.' },
-          { t: 'Light makes plants grow faster.', why: 'No structure, and growth was not measured.' },
-          { t: 'If the light is brighter, the plant will photosynthesise more, because plants like light.', why: 'Plants do not “like” anything. Name the process: light energy is absorbed by chlorophyll.' },
-          { t: 'The rate of photosynthesis depends on light.', why: 'A statement with no prediction and no reason.' }
+          { t: 'Plants grow faster in bright light than in dim light, because light gives them more energy, so the plants kept in the brightest light will grow the tallest.', why: 'No “If … then …” structure, and growth was not measured: the rate of photosynthesis was.' },
+          { t: 'If the light intensity is increased, then the plant will photosynthesise faster and faster, because plants like bright light and they grow bigger and healthier when they receive more of it.', why: 'Plants do not “like” anything. Name the process: light energy is absorbed by chlorophyll. And the rate does not keep rising: it reaches a plateau.' },
+          { t: 'The rate of photosynthesis depends on the light intensity, and this investigation will measure the rate of oxygen release at several different light intensities to test how they are related.', why: 'A statement of the aim, with no prediction and no biological reason.' }
         ] },
       { type: 'sort', q: 'What shape would you predict? Sort each one.',
         bins: ['Straight line', 'Rises to a plateau', 'Peaks at an optimum'],
@@ -190,16 +190,16 @@
       { type: 'choose', lv: 'g', q: 'Does a Cambridge IGCSE Paper 6 planning question give marks for a prediction?',
         opts: [
           { t: 'No. Plans are not credited for predictions, but a written lab report should still include one.', ok: true, why: 'Mark schemes credit variables, method, controls, repeats and safety.' },
-          { t: 'Yes, two marks.', why: 'Recent mark schemes do not credit predictions in plans.' },
-          { t: 'Only if it has a sketch graph.', why: 'Sketch graphs are not credited in plans either.' },
-          { t: 'Only if it uses “If … then … because …”.', why: 'The structure is good practice, but plans do not credit predictions.' }
+          { t: 'Yes. Two marks are given: one for the prediction and one for a reason that uses biology.', why: 'Recent mark schemes give no marks for a prediction in a plan, with or without a reason.' },
+          { t: 'No, unless the prediction includes a sketch graph that shows the shape of the results that are expected.', why: 'Plans are not credited for predictions, and sketch graphs are not credited either.' },
+          { t: 'Yes, if the prediction is written with the “If … then … because …” structure, which is what earns the mark.', why: 'The structure is good practice in a report, but plans are not credited for predictions.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'At IB, what must the conclusion do with the research question and the hypothesis?',
         opts: [
           { t: 'Answer the research question with processed data. A sentence on whether the hypothesis was supported may follow.', ok: true, why: 'The Conclusion criterion assesses how well the report answers the research question.' },
-          { t: 'Judge the hypothesis instead of answering the research question.', why: 'The research question must be answered, with processed data.' },
-          { t: 'Leave the hypothesis out: the IB does not allow hypotheses.', why: '“Evaluate hypotheses” is an IB skill. A sentence on it is allowed.' },
-          { t: 'Repeat every mean from the results table.', why: 'The table already gives them. Use the processed data that answer the question.' }
+          { t: 'Judge the hypothesis with processed data. A sentence that answers the research question is not needed.', why: 'The research question must be answered, with processed data. The sentence on the hypothesis is optional.' },
+          { t: 'Remove the hypothesis, as the IB does not allow one. Describe the raw data in the results table.', why: '“Evaluate hypotheses” is an IB skill, so a sentence on it is allowed. The answer needs processed data, not raw data.' },
+          { t: 'Repeat each mean from the results table. Then say whether each mean supports the hypothesis.', why: 'The table already gives the means. Answer the research question with the processed data.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'Which are features of a sketch graph?',
         opts: [
@@ -213,9 +213,9 @@
       { type: 'choose', lv: 'e', q: 'An EE’s results did not support its hypothesis. What does this mean?',
         opts: [
           { t: 'The result is still valid. Explain why the data differ from the prediction.', ok: true, why: 'Negative results are as valid as positive ones.' },
-          { t: 'The essay fails.', why: 'An unsupported hypothesis, well explained, is not a failure.' },
-          { t: 'Change the hypothesis so it matches the data.', why: 'That hides what happened. Keep the hypothesis, and discuss the result.' },
-          { t: 'Remove the data from the essay.', why: 'Removing data would be dishonest, and the essay would lose its evidence.' }
+          { t: 'The essay fails. A hypothesis that is not supported earns no marks.', why: 'An unsupported hypothesis, well explained, is not a failure. No criterion rewards a hypothesis for being supported.' },
+          { t: 'The hypothesis was wrong. Change it so that it matches the data.', why: 'Changing the hypothesis afterwards hides what happened. Keep it, and discuss the result.' },
+          { t: 'The data are wrong. Remove them from the essay, and use published values instead.', why: 'The data are not wrong because they disagree. Removing them would be dishonest, and the essay would lose its evidence.' }
         ] }
     ],
 

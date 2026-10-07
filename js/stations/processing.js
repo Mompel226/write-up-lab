@@ -28,7 +28,7 @@
     '</div></div>';
 
   WUL.station({
-    id: 'processing', stage: 'record', order: 2, title: 'Processing data', levels: 'gie',
+    id: 'processing', keepV: { v: '1n2liy', now: '1r2vy4e', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'record', order: 2, title: 'Processing data', levels: 'gie',
     job: 'Convert the raw data into the numbers that answer the question: means, rates and percentage changes, each shown once as a worked example.',
     where: {
       g: 'Not a section of its own: inside your Results. The mean goes in the table; any other calculation goes just below it.',
@@ -223,9 +223,9 @@
       { type: 'choose', lv: 'ie', q: 'In an IA, one trial is far from the others. What does the IB skills list ask for?',
         opts: [
           { t: 'Identify it, and justify removing it or keeping it', ok: true, why: 'The skills list says: “identify and justify the removal or inclusion of outliers”.' },
-          { t: 'Delete it without comment', why: 'Removal must be justified, in the report.' },
-          { t: 'Always keep it', why: 'A value with a known cause, such as a leak, can be removed if the reason is given.' },
-          { t: 'Replace it with the mean of the others', why: 'That invents data.' }
+          { t: 'Delete it from the data, and give no reason in the report', why: 'Removal must be justified, in the report.' },
+          { t: 'Keep it in the mean, as removing a trial is dishonest', why: 'A value with a known cause, such as a leak, can be removed if the reason is given.' },
+          { t: 'Replace it with the mean of the others, so the table is complete', why: 'That invents data. Record only what was measured.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'Which belong in the processing section of an IA?',
         opts: [

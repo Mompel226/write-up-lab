@@ -3,7 +3,7 @@
    IB Academic integrity policy (2023), appendix 6 ("The IB will not ban the use of AI software"; AI text, images and graphs
    quoted and referenced with the prompt and the date generated). */
 WUL.station({
-  id: 'integrity', stage: 'finish', order: 3, title: 'Academic integrity and AI', levels: 'gie',
+  id: 'integrity', keepV: { v: '1i6mz4a', now: '1443d5a', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'finish', order: 3, title: 'Academic integrity and AI', levels: 'gie',
   job: 'Check that every word, idea, number and image is either your own or credited to its source.',
   where: 'Everywhere: in every sentence, every figure and every number you present.',
 
@@ -111,9 +111,9 @@ WUL.station({
     { type: 'choose', q: 'What is the difference between collaboration and collusion?',
       opts: [
         { t: 'Collaboration is working together where it is allowed; collusion is helping someone submit work that is not their own.', ok: true, why: 'Sharing equipment and ideas openly is fine. Sharing the words or the data of a report is not.' },
-        { t: 'There is no difference.', why: 'One is allowed, the other is misconduct.' },
-        { t: 'Collusion is working in a group of more than three.', why: 'Group size is a separate rule. Collusion is about submitting work that is not your own.' },
-        { t: 'Collaboration means copying with permission.', why: 'Copying with permission is collusion.' }
+        { t: 'There is no difference: collaboration and collusion are two words for working together with other people on the same report.', why: 'One is allowed; the other is misconduct.' },
+        { t: 'Collaboration is working in a group of up to three; collusion is working in a group of more than three people.', why: 'Group size is a separate rule. Collusion is helping someone submit work that is not their own, in a group of any size.' },
+        { t: 'Collaboration is copying another person’s work with their permission; collusion is copying their work without their permission.', why: 'Copying with permission is collusion, and copying without permission is plagiarism.' }
       ] },
     { type: 'spot', q: 'Tap the two sentences that need a citation.',
       text: '[?:The time was recorded every 10 s.] [!a:The α-amylase of *Aspergillus oryzae* works best at a higher temperature than human salivary amylase.] [?:The mean time at 50 °C was 53 s.] [!b:Enzymes lower the activation energy of the reactions they catalyse.]',
@@ -125,9 +125,9 @@ WUL.station({
     { type: 'choose', q: 'Your partner asks to copy your method. If you agree, what is it?',
       opts: [
         { t: 'Collusion: you are helping them submit work that is not theirs.', ok: true, why: 'You and your partner are both responsible.' },
-        { t: 'Collaboration, because you agreed.', why: 'Agreement does not make copying allowed.' },
-        { t: 'Fine, if you change a few words.', why: 'Changed words are still copied work.' },
-        { t: 'Plagiarism by you only.', why: 'Your partner plagiarises; you collude.' }
+        { t: 'Collaboration: you both agreed to it, so sharing the method is allowed.', why: 'Agreement does not make copying allowed. Helping someone submit work that is not theirs is collusion.' },
+        { t: 'Allowed: your partner may copy it if they change a few of the words.', why: 'Copied work with a few words changed is still copied work, so this is still collusion.' },
+        { t: 'Plagiarism by you, because the method that is copied is your own work.', why: 'You wrote the method, so you are not the one who plagiarises. Your partner plagiarises; you collude.' }
       ] },
     { type: 'choose', lv: 'g', q: 'Your IGCSE class pools its results. What must still be your own?',
       opts: [
@@ -145,33 +145,33 @@ WUL.station({
       ] },
     { type: 'multi', lv: 'i', q: 'In an IA group of three, what must be different for each person?',
       opts: [
-        { t: 'The research question', ok: true, why: 'Each person answers a unique research question.' },
-        { t: 'The raw data presented', ok: true, why: 'No one may present the same raw data as another person in the group.' },
+        { t: 'The research question being investigated', ok: true, why: 'Each person investigates a unique research question.' },
+        { t: 'The raw data presented as the results', ok: true, why: 'Each person presents their own raw data: no one may present the same raw data as another person in the group.' },
         { t: 'Every word of the report, including the method', ok: true, why: 'Each person writes their own report alone.' },
-        { t: 'The laboratory used', why: 'Sharing a room and equipment is fine.' },
-        { t: 'The teacher', why: 'The same teacher supervises the whole group.' }
+        { t: 'The laboratory where the data are collected', why: 'The group may share a laboratory and equipment.' },
+        { t: 'The teacher who supervises the investigation', why: 'One teacher may supervise the whole group.' }
       ],
       why: 'Collaboration is on the practical work. The question, the data and the words are each person’s own.' },
     { type: 'choose', lv: 'ie', q: 'Is using an AI tool allowed?',
       opts: [
         { t: 'Yes, if its output is quoted and cited with the prompt and the date', ok: true, why: 'The IB will not ban AI tools, but AI output is never your own work.' },
-        { t: 'No, the IB bans all AI tools', why: 'The IB has said it will not ban them.' },
-        { t: 'Yes, and it need not be cited if you edit it', why: 'Edited AI text is still not your own work.' },
-        { t: 'Only to write the bibliography', why: 'Any AI output you use must be quoted and cited.' }
+        { t: 'No, because the IB treats any use of an AI tool as misconduct', why: 'The IB has said it will not ban AI tools. Using one is allowed if its output is cited.' },
+        { t: 'Yes, and it need not be cited if you edit the text it writes', why: 'Edited AI text is still not your own work, so it must be cited.' },
+        { t: 'Yes, and its output becomes your own work if you wrote the prompt', why: 'AI output is never your own work, whoever wrote the prompt.' }
       ] },
     { type: 'choose', lv: 'ie', q: 'What can confirmed malpractice lead to?',
       opts: [
         { t: 'No grade in the subject, and so no diploma', ok: true, why: 'The IB takes it seriously: the whole subject can be lost.' },
-        { t: 'A warning only', why: 'The IB investigates, and the penalty can be the whole subject grade.' },
-        { t: 'One mark lost', why: 'It is not a mark deduction.' },
-        { t: 'A lower word limit', why: 'The word limit has nothing to do with it.' }
+        { t: 'No penalty, if it was not done on purpose', why: 'The IB penalises misconduct even when it was not done on purpose. The penalty can be the whole subject grade.' },
+        { t: 'A penalty for the school, not for you', why: 'The candidate who commits malpractice is penalised, and can lose the whole subject grade.' },
+        { t: 'A penalty that your teacher decides alone', why: 'The IB decides the penalty, not the teacher, and it can be the whole subject grade.' }
       ] },
     { type: 'choose', lv: 'e', q: 'Can your IA investigation become your EE?',
       opts: [
         { t: 'No: the same work cannot count for both, and nothing may be duplicated.', ok: true, why: 'The EE needs a clearly different approach. If you reuse content, your diploma is at risk.' },
-        { t: 'Yes, if you add 1,000 words.', why: 'Length is not the point: nothing may be duplicated.' },
-        { t: 'Yes, if your supervisor agrees.', why: 'The rule is the IB’s, not the supervisor’s.' },
-        { t: 'Only the data can be reused.', why: 'No content from one submission may appear in another.' }
+        { t: 'Yes, if you add 1,000 words of new theory to the IA, so that it reaches the EE limit.', why: 'Length is not the point: nothing may be duplicated between the IA and the EE.' },
+        { t: 'Yes, if your supervisor agrees in writing that the IA can be extended into an EE.', why: 'A supervisor cannot agree to it: the rule is the IB’s, not the supervisor’s.' },
+        { t: 'Partly: the same data can be reused in the EE, as long as the words are new.', why: 'No content from one submission may appear in another, and that includes the data.' }
       ] }
   ],
 

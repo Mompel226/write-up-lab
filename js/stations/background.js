@@ -21,7 +21,7 @@
   };
 
   WUL.station({
-    id: 'background', stage: 'plan', order: 2, title: 'Background', levels: 'ie',
+    id: 'background', keepV: { v: 'qbjkv6', now: '1nytmnz', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 2, title: 'Background', levels: 'ie',
     job: {
       i: 'Give only the theory your research question needs, with sources, and say how your data will answer it.',
       e: 'Show what is already known, from good sources, and where your question fits.'
@@ -129,9 +129,9 @@
       { type: 'choose', q: 'What is the deletion test for a background section?',
         opts: [
           { t: 'If a paragraph still makes sense with the research question deleted, it is doing no work.', ok: true, why: 'Relevant theory needs the question to make sense.' },
-          { t: 'Delete any sentence without a number.', why: 'Theory often has no numbers. Relevance is the test.' },
-          { t: 'Delete the background if the report is over 3,000 words.', why: 'Some context is needed. Cut only what the question does not need.' },
-          { t: 'Delete every sentence that has a citation.', why: 'Citations are needed: they make the context traceable.' }
+          { t: 'If a paragraph has no numbers, it is doing no work for the research question.', why: 'Theory often has no numbers. Relevance to the research question is the test.' },
+          { t: 'If the report is over 3,000 words, the background is the first section to delete.', why: 'Some background is needed. Cut only what the research question does not need.' },
+          { t: 'If a paragraph cites a source, it is not your own work, so it should be deleted.', why: 'Citations are needed: they make the background traceable. Cited ideas are allowed when the source is given.' }
         ] },
       { type: 'sort', q: 'The question is: how does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by fungal α-amylase? Keep it or cut it?',
         bins: ['Keep', 'Cut'],
@@ -146,9 +146,9 @@
       { type: 'choose', q: 'Which sentence says how the raw data will become the answer?',
         opts: [
           { t: 'The mean time at each temperature was converted to a rate (1 ÷ mean time), and the temperature with the highest rate showed where the optimum lies.', ok: true, why: 'It names each step, from the measurement to the answer.' },
-          { t: 'The data were analysed.', why: 'How? This names no step.' },
-          { t: 'A graph was drawn.', why: 'Of what, and what will it show?' },
-          { t: 'The results proved the hypothesis.', why: 'Data never prove a hypothesis, and this says nothing about processing.' }
+          { t: 'The data were analysed carefully in a spreadsheet, and the results of this analysis were then used to answer the research question in full.', why: 'How were they analysed? It names no step between the measurement and the answer.' },
+          { t: 'A graph was drawn of the results at each temperature, with a title and labelled axes, so that the pattern in the data could be seen.', why: 'A graph of what, and what will it show? It names no processing step and does not say how the answer is found.' },
+          { t: 'The mean time at each temperature was calculated from the repeats, and these means proved that the hypothesis about the optimum was correct.', why: 'Data never prove a hypothesis, and it does not say how the means will give the optimum.' }
         ] },
       { type: 'spot', q: 'Tap the two sentences that would weaken this IA background.',
         text: '[?:α-Amylase hydrolyses the glycosidic bonds in starch (Urry et al.).] [!a:Enzymes were first studied a long time ago.] [?:Amylases from different organisms have different optimum temperatures (Gupta et al.).] [!b:The optimum of amylase is 37 °C.]',
@@ -162,16 +162,16 @@
           { t: 'It is part of the research question’s context, in Research design', ok: true },
           { t: 'It explains why this system and this range were chosen', ok: true },
           { t: 'It gives published values to compare with in the conclusion', ok: true },
-          { t: 'It earns marks on its own, whatever it says', why: 'No criterion gives marks for theory alone.' },
-          { t: 'Longer reports score higher', why: 'Length earns nothing, and the limit is 3,000 words.' }
+          { t: 'It earns marks on its own, whatever it says about the topic', why: 'No criterion gives marks for theory alone. Background earns credit when it supports the research question.' },
+          { t: 'It makes the report longer, and longer reports score higher', why: 'Length earns no marks, and the report has a limit of 3,000 words.' }
         ],
         why: 'Background is there to serve the question, and the conclusion.' },
       { type: 'choose', q: 'A background quotes 37 °C for “amylase”. The experiment used fungal α-amylase and found its optimum near 50 °C. What went wrong?',
         opts: [
           { t: 'The published value was for a different enzyme source: human salivary amylase.', ok: true, why: 'The result was right. The comparison was wrong.' },
-          { t: 'The experiment failed.', why: 'A result near 50 °C fits the published 55 °C for this fungal enzyme.' },
-          { t: 'The thermometer was 13 °C out.', why: 'Nothing suggests that. The published value is for a different enzyme.' },
-          { t: 'Nothing: 37 °C and 50 °C are close enough.', why: 'A 13 °C difference is large, and it has a real cause.' }
+          { t: 'The experiment gave a wrong optimum: amylase works best at 37 °C, which is body temperature.', why: 'Amylases from different organisms have different optima. A result near 50 °C fits the published 55 °C for this fungal enzyme.' },
+          { t: 'The thermometer in the water bath read 13 °C too high, so the true optimum was 37 °C.', why: 'Nothing suggests a faulty thermometer. The published value is for a different enzyme.' },
+          { t: 'The two values agree: a difference of 13 °C is small enough to ignore in a school experiment.', why: 'A 13 °C difference is large, and it has a real cause: the two values are for different enzymes.' }
         ] },
       { type: 'choose', lv: 'e', q: 'What does the EE guide require in a science essay that an IA report does not?',
         opts: [

@@ -19,7 +19,7 @@
     '</ol>';
 
   WUL.station({
-    id: 'question', stage: 'plan', order: 1, title: 'Title and research question', levels: 'gie',
+    id: 'question', keepV: { v: '16gqv48', now: 'r7oa4r', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 1, title: 'Title and research question', levels: 'gie',
     job: {
       g: 'Say exactly what was tested: a title and an aim that name what was changed and what was measured.',
       i: 'Ask one focused question, in a specific context, that your data can answer.',
@@ -169,16 +169,16 @@
       { type: 'choose', q: 'Which title names both variables and the system?',
         opts: [
           { t: 'The effect of light intensity on the rate of photosynthesis in *Elodea*', ok: true, why: 'Independent variable, dependent variable and organism: all three are named.' },
-          { t: 'Photosynthesis practical', why: 'It names no variable at all.' },
-          { t: 'Light and plants', why: 'Which property of light? Which plant? What was measured?' },
-          { t: 'Does light matter?', why: 'Nothing is named, and “matter” cannot be measured.' }
+          { t: 'The effect of light intensity on the rate of photosynthesis at 25 °C', why: 'Both variables, but no organism: which plant was used?' },
+          { t: 'The effect of light intensity on *Elodea* in a beaker of water', why: 'What was measured? The dependent variable is missing.' },
+          { t: 'The rate of photosynthesis in *Elodea*, measured by counting bubbles', why: 'What was changed? The independent variable is missing.' }
         ] },
       { type: 'choose', q: 'An aim names the independent variable with its range, and the dependent variable with its unit. Which aim does this?',
         opts: [
           { t: 'To determine how the concentration of sucrose solution, from 0.0 to 1.0 mol dm⁻³, affects the percentage change in mass of potato cylinders.', ok: true, why: 'The independent variable, its range, and a measured dependent variable are all there.' },
-          { t: 'To determine how sugar affects potato.', why: 'Which property of sugar, and what is measured?' },
-          { t: 'To determine the effect of sucrose concentration.', why: 'The effect on what? No dependent variable.' },
-          { t: 'To determine how the mass of potato changes.', why: 'What is changed on purpose? No independent variable.' }
+          { t: 'To determine how the concentration of sucrose solution affects the percentage change in mass of potato cylinders left in each solution for 30 minutes.', why: 'No range: from what concentration to what concentration?' },
+          { t: 'To determine how the concentration of sucrose solution, from 0.0 to 1.0 mol dm⁻³, affects how firm and healthy the potato cylinders look at the end.', why: 'How firm a cylinder looks has no unit, so it cannot be measured. Measure the change in mass.' },
+          { t: 'To determine how the amount of sugar added to the water affects the percentage change in mass of potato cylinders, using five different amounts.', why: '“Amount of sugar” is not the concentration and has no unit, and “five different amounts” is not a range: from what to what?' }
         ] },
       { type: 'sort', q: 'Could data answer each question? Sort them.',
         bins: ['Testable', 'Not testable'],
@@ -202,9 +202,9 @@
       { type: 'choose', q: 'Why can data not answer “What is the best temperature for enzymes?”',
         opts: [
           { t: 'It names no enzyme, no range and nothing to measure.', ok: true, why: '“Best” is not a measurement, and “enzymes” is not one system.' },
-          { t: 'It is too short.', why: 'Length is not the problem. A short question can be focused.' },
-          { t: 'It is written as a question.', why: 'Questions are fine. This one names nothing that can be measured.' },
-          { t: 'Temperature cannot be controlled.', why: 'It can: with a thermostatically controlled water bath.' }
+          { t: 'It is too short: a research question needs at least twenty words.', why: 'Length is not the problem. A short question can be focused.' },
+          { t: 'It is written as a question about enzymes, not as a statement.', why: 'Questions are fine. This one names nothing that can be measured.' },
+          { t: 'Temperature is too hard to keep steady in a school laboratory.', why: 'It can be kept steady with a thermostatically controlled water bath.' }
         ] },
       { type: 'build', q: 'Build an aim for the pondweed experiment.',
         chips: ['To determine how', 'light intensity', '(lamp 10 to 50 cm away)', 'affects the volume of gas released in 5 minutes', 'by *Elodea*.', 'light', 'how much it photosynthesises'],
@@ -213,9 +213,9 @@
       { type: 'choose', lv: 'ie', q: 'Why does the IB want the system named, and not just “amylase”?',
         opts: [
           { t: 'Amylases from different organisms have different optimum temperatures, so the comparison with published values depends on it.', ok: true, why: 'A fungal result compared with a human value would look wrong when it is right.' },
-          { t: 'Longer questions score more marks.', why: 'Length earns nothing. The system is there so the context is specific.' },
-          { t: 'The examiner needs to know which shop sold the enzyme.', why: 'What matters is the organism the enzyme came from, not the shop.' },
-          { t: 'Because amylase is a protein.', why: 'True, but that is not why the source is named.' }
+          { t: 'Amylases from different organisms act on different substrates, so the substrate chosen for the method depends on it.', why: 'All amylases hydrolyse the same substrate, starch. The system matters because the optimum temperatures differ.' },
+          { t: 'A named organism makes the research question longer, and a longer research question earns more marks under the Research design criterion.', why: 'Length earns nothing. The system is there so the context is specific.' },
+          { t: 'The examiner needs to know the name of the company that sold the amylase, because that company is the system in this investigation.', why: 'The system is the organism the enzyme came from, not the company that sold it.' }
         ] },
       { type: 'multi', lv: 'i', q: 'According to the IB guide, which belong in a research question “with context”?',
         opts: [
@@ -229,9 +229,9 @@
       { type: 'choose', lv: 'e', q: 'Which is a suitable Extended Essay research question?',
         opts: [
           { t: 'To what extent does the concentration of calcium ions (0–10 mmol dm⁻³) affect the heat stability of α-amylase from *Aspergillus oryzae*?', ok: true, why: 'One question, a named system, a range, and an answer that is not obvious.' },
-          { t: 'The effect of temperature on enzymes.', why: 'A statement, not a question, and no system is named.' },
-          { t: 'Does boiling denature amylase?', why: 'The answer is obvious: yes.' },
-          { t: 'How do temperature and pH affect amylase and catalase?', why: 'Double-barrelled: several questions at once, too many for 4,000 words.' }
+          { t: 'The effect of temperature, from 20 °C to 60 °C, on the rate at which different enzymes from a range of organisms break down their own substrates.', why: 'A statement, not a question, and no single system is named.' },
+          { t: 'Does heating α-amylase from germinating *Hordeum vulgare* seeds to 100 °C for 10 minutes denature the enzyme, so that it no longer hydrolyses starch to maltose?', why: 'The answer is obvious: yes. A suitable question has an answer that is not obvious.' },
+          { t: 'How do temperature (20–60 °C) and pH (4–9) affect the activity of α-amylase from germinating *Hordeum vulgare* seeds and of catalase from *Solanum tuberosum*?', why: 'Double-barrelled: several questions at once, too many for 4,000 words.' }
         ] }
     ],
 

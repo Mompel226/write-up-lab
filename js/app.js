@@ -570,7 +570,7 @@
     function say(t) { w.appendChild(h('p', { class: 'phead__job', html: t })); }
     w.appendChild(h('p', { class: 'eyebrow', text: 'Homework' }));
     if (!H.signedIn) { w.appendChild(h('h1', { class: 'phead__h', text: 'Your homework' })); say('Sign in with your school Google account (top right) to see your homework.'); return; }
-    if (!H.loaded) { w.appendChild(h('h1', { class: 'phead__h', text: 'Your homework' })); say('Loading your homework…'); return; }
+    if (!H.loaded) { w.appendChild(h('h1', { class: 'phead__h', text: 'Your homework' })); say(H.spent ? 'Your sign-in has expired. Sign in again with your school Google account (top right) to see your homework.' : 'Loading your homework…'); return; }
     var list = hwList();
     var one = r.id ? list.filter(function (x) { return String(x.id) === String(r.id); })[0] : (list.length === 1 ? list[0] : null);
     if (!one) {

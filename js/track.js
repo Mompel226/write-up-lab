@@ -69,7 +69,16 @@
   WUL.partV = function (s) {
     var t = (s.test || []).map(qText).join(' ## ');
     var r = WUL.redpensOf(s).map(function (x) { return x.l + ':' + x.keys.join(','); }).join(' ## ');
-    return fnv(s.id + ' @@ ' + t + ' @@ ' + r);
+    var v = fnv(s.id + ' @@ ' + t + ' @@ ' + r);
+    /* `keepV` (7 Oct 2026, the practice-questions audit): a part whose options were reworded WITHOUT changing what any
+       question asks keeps the fingerprint its records were saved under, here and in the spreadsheet (Daniel: the options
+       were rewritten so that the right one is no longer the longest, and the work pupils had done was not to be lost).
+       keepV = { v: the old fingerprint, now: the fingerprint of the wording it was declared for }. It holds only while the
+       part reads exactly as declared: reword it again and it starts again, as any rewritten part does. Written by
+       tools/keep-records.mjs after it has checked that only the options' words changed, never by hand. (Not `keep`: on a
+       question, `keep` already means "keep these options in their order".) */
+    var kp = s.keepV;
+    return kp && kp.now === v && typeof kp.v === 'string' ? kp.v : v;
   };
   /* What finishing a part takes: every red-pen mark of every version, and every question. */
   WUL.partUnits = function (s) {

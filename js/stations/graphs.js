@@ -226,7 +226,7 @@
   var Q_TOUCH = soilsBar({ w: 420, h: 280, bars: { touch: true, items: S.labels.map(function (l, i) { return { label: l, v: S.means[i] }; }) }, caption: 'Figure 2. Bar chart showing the effect of soil type on the mean height of bean seedlings after 21 days.' });
 
   WUL.station({
-    id: 'graphs', stage: 'show', order: 1, title: 'Graphs', levels: 'gie',
+    id: 'graphs', keepV: { v: '163q78g', now: '18cbuic', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'show', order: 1, title: 'Graphs', levels: 'gie',
     job: {
       g: 'Turn the results table into a picture that shows the pattern clearly.',
       i: 'Turn the processed data into a picture that shows the pattern, and how far it can be trusted.',
@@ -479,9 +479,9 @@
       { type: 'choose', q: 'The results run from 20 °C to 60 °C. Must the x-axis start at 0 °C?',
         opts: [
           { t: 'No. It may start at 20 °C, if the first number on the axis is 20.', ok: true, why: 'Cambridge accepts an axis that does not start at zero, as long as the axis shows where it starts.' },
-          { t: 'Yes. Every axis must start at 0.', why: 'Only a bar chart should start at 0 (our rule), because a bar shows its value by its length.' },
-          { t: 'No, but the first number should still be 0.', why: 'A 0 at the start of an axis that begins at 20 makes the scale uneven.' },
-          { t: 'Yes, so that the line can reach the origin.', why: 'Never draw the line to the origin, unless (0, 0) is a result.' }
+          { t: 'Yes. An axis has to start at 0; otherwise the scale of the graph is wrong.', why: 'An axis may start at 20, if its first number shows where it starts. Only a bar chart must start at 0, because a bar shows its value by its length.' },
+          { t: 'No, but write 0 at the corner, then 20, 30, 40, with 10 per square.', why: 'From 0 to 20 in one square does not match 10 per square, so the scale is uneven. Write 20 at the corner.' },
+          { t: 'Yes, so that the line can be drawn from the origin to the first point.', why: 'No result was taken at 0 °C, so the line must not go to the origin. It starts at the first point.' }
         ] },
       { type: 'choose', q: 'The highest value to plot is 180 s. The y-axis has 10 large squares. Which scale is best?',
         opts: [
@@ -493,44 +493,44 @@
       { type: 'choose', q: 'What is wrong with this graph?', show: { plot: Q_ORIGIN },
         opts: [
           { t: 'The line is drawn to the origin, where no result was taken.', ok: true, why: 'The line must start at the first point, 20 °C. This is the most common graph error in Cambridge reports.' },
-          { t: 'The x-axis should start at 20 °C.', why: 'An axis may start at 0 or at 20. Starting at 0 is fine here.' },
-          { t: 'The points should be dots.', why: 'Small crosses are the safest choice. Large dots are penalised.' },
-          { t: 'The y-axis should run to 400 s.', why: 'Then the points would fill less than half the grid.' }
+          { t: 'The x-axis should start at 20 °C, where the first result was taken.', why: 'An axis may start at 0 or at 20, so starting at 0 is fine here. The error is the line to the origin.' },
+          { t: 'The points should be large dots, so that they are easy to see.', why: 'Large dots hide the exact position and are penalised. Small crosses are the safest choice.' },
+          { t: 'The y-axis should run to 400 s, to leave space above the line.', why: 'Extra space is not needed: with the axis to 400 s, the points would fill less than half the grid.' }
         ] },
       { type: 'choose', q: 'What is wrong with this bar chart?', show: { plot: Q_TOUCH },
         opts: [
           { t: 'The bars touch, but the soils are separate categories.', ok: true, why: 'Bars for categories have gaps between them. Touching bars are for a histogram.' },
-          { t: 'The y-axis starts at 0.', why: 'That is right for a bar chart: a bar shows its value by its length.' },
-          { t: 'There is no line joining the tops of the bars.', why: 'Bars for categories are never joined by a line.' },
-          { t: 'Soil type should be on the y-axis.', why: 'Soil type is the independent variable, so it is plotted on the x-axis.' }
+          { t: 'The y-axis starts at 0, so the differences are hidden.', why: 'Starting at 0 is right for a bar chart, because a bar shows its value by its length.' },
+          { t: 'There is no line joining the tops of the bars to show the trend.', why: 'Bars for categories are never joined by a line: the soils are not a scale, so there is no trend between them.' },
+          { t: 'Soil type should be on the y-axis, and the means on the x-axis.', why: 'Soil type is the independent variable, so it goes on the x-axis, and the means go on the y-axis.' }
         ] },
       { type: 'choose', q: 'What is wrong with the y-axis of this bar chart?', show: { plot: Q_ZIG },
         opts: [
           { t: 'It jumps from 0 to 42.5 cm, so the bars are cut and the differences look far bigger than they are.', ok: true, why: 'Bar D looks more than twice as tall as bar A. The real means differ by 3 %. A bar chart starts at 0.' },
-          { t: 'Nothing: the zigzag shows that the axis was cut.', why: 'The zigzag warns the reader, but people are still misled by cut bars, even when they see the cut.' },
-          { t: 'The steps should be 1 cm, not 0.5 cm.', why: 'The steps are even. The problem is where the axis starts.' },
-          { t: 'The zigzag should be on the x-axis.', why: 'Soil is a category, so the x-axis has no scale to cut. The y-axis should start at 0.' }
+          { t: 'The axis is correct: the zigzag shows that the axis was cut, so the reader is not misled by the cut bars.', why: 'The zigzag warns the reader, but cut bars still mislead, even when the cut can be seen. A bar chart starts at 0.' },
+          { t: 'The steps should be 1 cm, not 0.5 cm, so that the scale is easier to read and to plot.', why: 'Steps of 0.5 cm are even and easy to read. The problem is where the axis starts.' },
+          { t: 'The zigzag should be on the x-axis, because the soils are the variable that was changed.', why: 'Soil type is a category, so the x-axis has no scale to cut. The y-axis should start at 0, with no zigzag.' }
         ] },
       { type: 'choose', q: 'Your mean pulse rates run from 76 to 128 beats per min. The y-axis has 7 large squares. Which scale is best?',
         opts: [
           { t: 'Start at 70, with 10 per large square, and write 70 at the corner.', ok: true, why: 'The points fill most of the grid, and the scale is even from its first number.' },
-          { t: 'Start at 0, with 20 per large square.', why: 'The points would sit in the top third of the grid: less than half.' },
-          { t: 'Write 0 at the corner, draw a zigzag, then 70, 80, 90…', why: 'The first step is not to scale, and you never need the zigzag: just start at 70.' },
-          { t: 'Start at 76, with 7.5 per large square.', why: 'Awkward steps are hard to plot. Use 1, 2 or 5 (× 10), from a round number.' }
+          { t: 'Start at 0, with 20 per large square, and write 0 at the corner.', why: 'The scale would run to 140, so the means, 76 to 128, would fill less than half the grid.' },
+          { t: 'Write 0 at the corner, then 70, 80, 90, with 10 per large square.', why: 'The first step, 0 to 70, is not to scale. Start at 70 and write 70 at the corner.' },
+          { t: 'Start at 76, with 7.5 per large square, writing 76 at the corner.', why: 'A step of 7.5 per square is awkward, and 76 is not a round number. Use 1, 2 or 5 (× 10), from a round number.' }
         ] },
       { type: 'choose', lv: 'g', q: 'An exam question says: “Plot a line graph of these results.” How do you join the points?',
         opts: [
           { t: 'Ruled straight lines, point to point, from the first point to the last.', ok: true, why: 'Examiners advise point to point unless the question asks for a line of best fit.' },
-          { t: 'A straight line of best fit, with its R².', why: 'A line of best fit was not asked for, and R² is not part of IGCSE.' },
-          { t: 'Point to point, and a line of best fit as well.', why: 'Never both kinds of line on one graph.' },
-          { t: 'A quick freehand line through the points.', why: 'A line that joins points must be ruled. Freehand lines lose the mark.' }
+          { t: 'A straight line of best fit through the points, with its R² value written beside it.', why: 'The question asks for a line graph, not a line of best fit, and R² is not part of IGCSE.' },
+          { t: 'Ruled straight lines, point to point, and a line of best fit drawn on top as well.', why: 'Never both kinds of line on one graph. Here, point to point is right, so do not add a line of best fit.' },
+          { t: 'Freehand lines from point to point, drawn carefully without a ruler.', why: 'Point to point is right, but the lines must be ruled. Freehand lines lose the mark.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'A spreadsheet draws an order-4 polynomial through your five means and reports R² = 1.000. What does this show?',
         opts: [
-          { t: 'Nothing: a curve with four bends can pass through any five points.', ok: true, why: 'R² is always 1.000 for this curve. Quote R² only for a trend line the data could have missed.' },
-          { t: 'That the data fit the theory perfectly.', why: 'The curve was bent to fit the points, not predicted by any theory.' },
-          { t: 'That the results are accurate.', why: 'R² says nothing about accuracy, and here it says nothing at all.' },
-          { t: 'That the results are repeatable.', why: 'Repeatability comes from the spread of the repeats, not from R².' }
+          { t: 'Nothing: this curve can be bent to pass through any five points.', ok: true, why: 'An order-4 curve can always be made to pass through five points, so R² is always 1.000 for it. Quote R² only for a trend line the data could have missed.' },
+          { t: 'That the data fit the theory perfectly, as R² = 1.000 is a perfect fit.', why: 'The curve was bent to fit these points, not predicted by any theory, so the perfect fit means nothing.' },
+          { t: 'That the results are accurate, as the five means lie on the curve.', why: 'Any five means would lie on this curve. R² says nothing about accuracy, and here it says nothing at all.' },
+          { t: 'That the results are repeatable, as R² compares the repeats.', why: 'R² compares the means with the curve, not the repeats. Repeatability comes from the spread of the repeats.' }
         ] },
       { type: 'order', q: 'Put the steps for drawing a line graph in order.',
         items: ['Choose the type of graph from the data', 'Draw the axes, with the independent variable on the x-axis', 'Label and number each axis: quantity / unit, even steps', 'Plot each point as a small cross', 'Join the crosses with ruled lines, from the first to the last', 'Write the caption below the graph'],
@@ -540,8 +540,8 @@
           { t: 'Axes labelled with the quantity and the unit', ok: true },
           { t: 'Every point plotted within half a small square', ok: true },
           { t: 'A key when there are two data sets', ok: true },
-          { t: 'A title above the graph', why: 'Not in the exam. In a report, the title goes below the graph, and it must say what the graph shows.' },
-          { t: 'A different colour for each line', why: 'Colour earns nothing; a key does.' }
+          { t: 'A title above the graph, saying what it shows', why: 'A title earns no mark in the exam. In a report, the title goes below the graph, and it must say what the graph shows.' },
+          { t: 'A different colour for each of the two lines', why: 'Colour earns no mark. A key that names each line does.' }
         ],
         why: 'The marks are for the axes, the scale, the plotting, the line and, with two data sets, the key.' },
       { type: 'build', lv: 'g', q: 'Build the title for the amylase graph.',
@@ -569,9 +569,9 @@
       { type: 'choose', lv: 'ie', q: 'When is it right to quote R² on an IA graph?',
         opts: [
           { t: 'For a trend line fitted to the data, such as a straight line of best fit', ok: true, why: 'The IB guide applies R² “to evaluate the fit of a trend line”.' },
-          { t: 'For five means joined with ruled lines', why: 'Ruled lines through every mean are not a fitted trend line, so there is no R².' },
-          { t: 'For a curve drawn by eye through an enzyme optimum', why: 'A curve drawn by eye is not fitted to the data, so it has no R².' },
-          { t: 'On every graph, to show that the data are good', why: 'R² on the wrong kind of line proves nothing.' }
+          { t: 'For five means joined with ruled straight lines, to show how well the lines fit', why: 'Ruled lines that join each mean are not a fitted trend line, so there is no R² to quote.' },
+          { t: 'For a curve drawn by eye, such as a smooth curve through the optimum of an enzyme', why: 'A curve drawn by eye is not calculated from the data, so it has no R².' },
+          { t: 'On each graph in the report, to show that the data are reliable and accurate', why: 'R² on the wrong kind of line proves nothing, and it never shows accuracy.' }
         ] }
     ],
 

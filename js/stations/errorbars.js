@@ -65,7 +65,7 @@
   ]);
 
   WUL.station({
-    id: 'errorbars', stage: 'show', order: 2, title: 'Error bars', levels: 'ie',
+    id: 'errorbars', keepV: { v: 'syh3ch', now: '174bpjm', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'show', order: 2, title: 'Error bars', levels: 'ie',
     job: 'Show how far each mean can be trusted: draw a bar for the spread of the repeats, and name the bar in the caption.',
     where: 'Not a section of its own: on every graph of means, with the kind of bar and n in the figure caption.',
 
@@ -173,9 +173,9 @@
       { type: 'choose', q: 'What does an error bar on a mean show?',
         opts: [
           { t: 'The spread or uncertainty of the values behind that mean', ok: true, why: 'The dot is the mean; the bar shows the spread or uncertainty of the values behind it.' },
-          { t: 'The biggest possible mistake in the experiment', why: 'It shows the spread of your repeats. A systematic error does not appear in it at all.' },
-          { t: 'The range of the independent variable', why: 'The bar is on the measured variable. It says nothing about the values of the independent variable.' },
-          { t: 'Which point is the most accurate', why: 'A short bar shows that the repeats agreed. It cannot show whether they were close to the true value.' }
+          { t: 'The largest mistake that could have been made in the whole experiment', why: 'It comes only from the spread of your repeats. A mistake that shifts every repeat, a systematic error, does not appear in it.' },
+          { t: 'The range of independent variable values tested in the experiment', why: 'The bar runs along the axis of the measured variable. It says nothing about which values of the independent variable were tested.' },
+          { t: 'The accuracy of that mean, compared with the published value', why: 'The bar comes from your own repeats. A short bar shows that they agreed, not that they match a published value.' }
         ] },
       { type: 'choose', q: 'In Figure 1, which bar is the shortest?',
         show: { plot: threeBars },
@@ -211,10 +211,10 @@
       { type: 'choose', q: 'The ± 1 SD bars for soils A and B overlap. What can you write?',
         show: { plot: soilsAB },
         opts: [
-          { t: 'The graph alone cannot show a difference between soils A and B: a statistical test is needed.', ok: true, why: 'Overlapping bars do not show a difference, and they do not rule one out. A test decides.' },
-          { t: 'Soil B gives taller seedlings than soil A.', why: 'The bars overlap, so the difference could be due to chance.' },
-          { t: 'There is no significant difference, because the bars overlap.', why: 'Significance needs a test. With more plants, bars that overlap this much can still give p < 0.05, as Figure 6 shows.' },
-          { t: 'Soil B is significantly better.', why: '“Significantly” needs a statistical test, and here the bars overlap.' }
+          { t: 'The graph alone cannot show a difference between soil A and soil B: a statistical test is needed.', ok: true, why: 'Overlapping bars do not show a difference, and they do not rule one out. A statistical test decides.' },
+          { t: 'Soil B gives taller seedlings than soil A: the mean for soil B is higher on the graph.', why: 'The bars overlap, so the difference between the means could be due to chance.' },
+          { t: 'There is no significant difference between soil A and soil B: their ± 1 SD bars overlap.', why: 'Overlap does not rule out a difference: significance needs a test. With more plants, bars that overlap this much can still give p < 0.05, as Figure 6 shows.' },
+          { t: 'Soil B is significantly better than soil A, because the mean for soil B is higher than the mean for soil A.', why: 'A higher mean is not enough: “significantly” needs a statistical test, and here the bars overlap.' }
         ] },
       { type: 'spot', q: 'Tap the three mistakes.',
         text: 'Figure 2. Line graph showing the effect of temperature on the mean time taken for fungal α-amylase to digest starch [!a:with error bars]. [?:The bars at 40 °C and 50 °C do not overlap], [!b:which proves] that the rate was higher at 50 °C. [!c:SE bars were chosen because they are shorter].',
@@ -226,16 +226,16 @@
       { type: 'choose', q: 'Excel offers preset “Standard Deviation” error bars. Why not use them?',
         opts: [
           { t: 'They are calculated from the plotted means, not from the repeats behind each mean.', ok: true, why: 'Use Custom error bars and select your own column of SDs.' },
-          { t: 'They are too short.', why: 'Length is not the problem: they measure the wrong thing.' },
-          { t: 'The IB does not allow spreadsheets.', why: 'Spreadsheets are part of Tool 2. The problem is what the preset measures.' },
-          { t: 'They only work on bar charts.', why: 'They can be added to most charts. The problem is what they measure.' }
+          { t: 'They are too short to see on most graphs, so the reader is not able to judge the spread.', why: 'Their length is not the problem. They measure the wrong thing: the spread of the means, not of the repeats.' },
+          { t: 'The IB does not allow spreadsheets in an IA, so the standard deviations are calculated by hand.', why: 'Spreadsheets are allowed: they are part of Tool 2. The problem is what the preset measures.' },
+          { t: 'They can be drawn on bar charts, not on line graphs such as the graph of the mean rates.', why: 'They can be added to line graphs too. The problem is what they measure, not the type of chart.' }
         ] },
       { type: 'choose', q: 'Do you need to memorise the formula for the standard deviation?',
         opts: [
           { t: 'No. You must use and interpret SD and SE, but the formulae need not be memorised.', ok: true, why: 'The IB Biology guide says this in D2.3.4.' },
-          { t: 'Yes, for the exam.', why: 'The guide says you are not required to memorise it.' },
-          { t: 'No, because SD is not used in Biology.', why: 'You must use SD and SE, and show them as error bars.' },
-          { t: 'Only the SE formula.', why: 'Neither formula needs to be memorised.' }
+          { t: 'Yes. You must memorise both formulae, because the exam asks you to calculate SD by hand.', why: 'The guide says you are not required to memorise them. You must be able to use and interpret SD and SE.' },
+          { t: 'No, because SD is not used in Biology: error bars always show the range of the repeats.', why: 'SD is used in Biology. You must use and interpret SD and SE, and error bars can show either.' },
+          { t: 'Only the SE formula, because SE is used for error bars and a spreadsheet calculates SD.', why: 'Neither formula needs to be memorised, and SD bars are used as well as SE bars.' }
         ] }
     ],
 

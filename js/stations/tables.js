@@ -80,7 +80,7 @@
   var ibPlain = WUL.table(ibRaw(false)) + '<div style="height:12px"></div>' + WUL.table(ibProc(false));
 
   WUL.station({
-    id: 'tables', stage: 'record', order: 1, title: 'Results tables', levels: 'gie',
+    id: 'tables', keepV: { v: 'tjff41', now: 'tr2l5r', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'record', order: 1, title: 'Results tables', levels: 'gie',
     job: {
       g: 'Record every measurement in one clear table, so a reader can check every number.',
       i: 'Record every measurement, then every calculated value, in clear tables, so a reader can check each step.'
@@ -335,9 +335,9 @@
         show: { table: { caption: 'Table 1. Data showing the effect of temperature (20–40 °C) on the mean time taken for amylase to digest starch.', head: [['Temperature', 'Mean time']], rows: [['20\u00a0°C', '180\u00a0s'], ['30\u00a0°C', '117\u00a0s'], ['40\u00a0°C', '73\u00a0s']] } },
         opts: [
           { t: 'The units are in every cell instead of in the headings.', ok: true, why: 'Write Temperature / °C and Mean time / s, then numbers only in the cells.' },
-          { t: 'The temperature should be in the last column.', why: 'The independent variable is already where it belongs: the first column.' },
-          { t: 'The means need more decimal places.', why: 'The raw data were whole seconds, so whole-second means are right.' },
-          { t: 'Nothing: it is correct.', why: 'Units in the cells lose marks. They belong in the headings.' }
+          { t: 'The temperature should go in the last column instead.', why: 'The independent variable is already where it belongs: the first column.' },
+          { t: 'The means should be given to three decimal places.', why: 'The raw data were whole seconds, so whole-second means are right.' },
+          { t: 'Nothing: each value has its unit, so the reader can check it.', why: 'Units in the cells lose marks. They belong in the headings.' }
         ] },
       { type: 'choose', q: 'This table was drawn the way you would in maths. What must change for a biology report?',
         show: { table: T({ caption: 'Table 1. Data showing the effect of distance from the lamp (10–50 cm) on the number of bubbles released by pondweed per minute.',
@@ -345,9 +345,9 @@
           rows: [[{ t: '1', th: true }, '48', '31', '20', '12', '7'], [{ t: '2', th: true }, '46', '33', '19', '14', '8'], [{ t: '3', th: true }, '50', '29', '21', '13', '6']] }, CMP) },
         opts: [
           { t: 'Turn it round: distance down the first column, then one column for each trial, each with its own heading and unit.', ok: true, why: 'The independent variable runs down the first column, and a diagonal corner is never used. The number of bubbles now gets a heading too.' },
-          { t: 'Nothing: all the numbers are there.', why: 'The numbers are there, but nothing says what they are: the number of bubbles has no heading and no unit.' },
-          { t: 'Keep the layout, but write the unit in the corner too.', why: 'The corner would then hold three things. Give every column its own heading instead.' },
-          { t: 'Write “bubbles” after every number.', why: 'Words and units go in the heading, never in the cells.' }
+          { t: 'Nothing: the numbers are complete, and the reader can see which distance and which trial each one belongs to.', why: 'The numbers are there, but nothing says what they are: the number of bubbles has no heading and no unit.' },
+          { t: 'Keep the layout, but add the unit to the corner as well, so that the corner holds the labels and the unit for the whole table.', why: 'The corner would then hold three things. Give every column its own heading instead.' },
+          { t: 'Keep the layout, but write the word “bubbles” after each number, so that each value in the table has its own unit.', why: 'Words and units go in the heading, never in the cells.' }
         ] },
       { type: 'choose', q: 'Every heading here has a quantity and a unit. What is still wrong?',
         show: { table: T({ caption: 'Table 1. Data showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the percentage change in mass of potato cylinders.',
@@ -355,9 +355,9 @@
           rows: [[{ t: 'Percentage change in mass / %', th: true }, '+8.4', '+4.0', '−1.2', '−8.4', '−12.0', '−14.0']] }, CMP) },
         opts: [
           { t: 'It is turned round: concentration should run down the first column, with the change in mass in the second column.', ok: true, why: 'In a biology table each variable gets a column, and the independent variable comes first.' },
-          { t: 'Nothing: each row has a heading and a unit.', why: 'The headings are right, but they label rows. The independent variable belongs down the first column.' },
-          { t: 'The units should be in the cells.', why: 'Units belong in the headings. The problem is the layout.' },
-          { t: 'The plus signs should be removed.', why: 'The signs show a gain or a loss of mass, so they stay.' }
+          { t: 'Nothing: each row has a heading with a quantity and a unit, so the table already follows the rules for a biology table.', why: 'The headings are right, but they label rows. The independent variable belongs down the first column.' },
+          { t: 'The units should be written in the cells, next to each value, so that each heading gives the name of the quantity without its unit.', why: 'Units belong in the headings. The problem is the layout.' },
+          { t: 'The plus signs should be removed, because a change in mass is written as a plain number without a sign in a biology table.', why: 'The signs show a gain or a loss of mass, so they stay.' }
         ] },
       { type: 'build', q: 'Build the column heading for the time the starch took to disappear.',
         chips: ['Time for starch to disappear', '/', 's', '(seconds)', 'in', 'secs'],
@@ -382,23 +382,23 @@
       { type: 'choose', q: 'Where does the title of a results table go?',
         opts: [
           { t: 'Above the table, numbered: “Table 1. Data showing the effect of … on …”', ok: true, why: 'A table’s title goes above it. A graph’s caption goes below.' },
-          { t: 'Below the table', why: 'That is where a graph’s caption goes. A table’s title goes above.' },
-          { t: 'In the first cell of the table', why: 'The first cell holds the heading of the independent variable.' },
-          { t: 'Nowhere: a table needs no title', why: 'The reader needs to know what the table shows. Every table gets a numbered title.' }
+          { t: 'Below the table, as for a graph: “Table 1. The effect of … on …”', why: 'That is where a graph’s caption goes. A table’s title goes above.' },
+          { t: 'In the first cell of the table, so that it sits with the headings', why: 'The first cell holds the heading of the independent variable.' },
+          { t: 'Nowhere: the column headings already say what the table shows', why: 'Headings name the columns, not the whole table. Every table gets a numbered title.' }
         ] },
       { type: 'choose', q: 'Which is the best title for the amylase table?',
         opts: [
           { t: 'Table 1. Data showing the effect of temperature (20–60 °C) on the time taken for amylase to digest starch.', ok: true, why: 'Number, “Data showing the effect of”, the independent variable with its range, “on”, then the dependent variable.' },
-          { t: 'Table 1. Results', why: 'It says nothing about what was changed or measured.' },
-          { t: 'Table 1. Data', why: 'It says the table holds data, but not which variables.' },
-          { t: 'Table 1. Amylase and starch', why: 'It names the enzyme and the substrate, but neither variable.' }
+          { t: 'Table 1. Results of the amylase experiment, carried out at temperatures from 20 °C to 60 °C.', why: 'It gives the independent variable and its range, but not what was measured.' },
+          { t: 'Table 1. Data showing the time taken for amylase to digest starch in each of the test tubes.', why: 'It names what was measured, but not what was changed.' },
+          { t: 'Table 1. Data showing the effect of the time taken for amylase to digest starch on temperature.', why: 'The variables are swapped: the temperature was changed, and the time was measured.' }
         ] },
       { type: 'choose', q: 'What is missing from this title? “Table 1. Data showing the time taken for amylase to digest starch.”',
         opts: [
           { t: 'The independent variable: “showing the effect of temperature (20–60 °C) on …”', ok: true, why: 'The title names what was measured, but not what was changed.' },
-          { t: 'The unit, s', why: 'Units go in the column headings, not the title.' },
-          { t: 'The word “Results”', why: '“Results” adds nothing. “Data” already says what the table holds.' },
-          { t: 'Nothing: it is complete', why: 'A reader cannot tell what was changed. Name the independent variable.' }
+          { t: 'The unit of the time: “Data showing the time taken, in s, for amylase to digest …”', why: 'Units go in the column headings, not the title.' },
+          { t: 'The word “Results”: “Table 1. Results: data showing the time taken for amylase to …”', why: '“Results” adds nothing. “Data” already says what the table holds.' },
+          { t: 'Nothing: it names the enzyme, the substrate and what was measured, so it is complete.', why: 'A reader cannot tell what was changed. Name the independent variable.' }
         ] },
       { type: 'build', lv: 'g', q: 'Build the title of the pondweed table.',
         chips: ['Table 1.', 'Data', 'showing the effect of', 'lamp distance (10–50 cm)', 'on', 'the volume of gas released by pondweed in 5 minutes.', 'Results:', 'Pondweed', 'Line graph'],
@@ -411,9 +411,9 @@
       { type: 'choose', q: 'A reading was lost: the tube was dropped. What goes in its cell?',
         opts: [
           { t: 'A dash (–), with a note under the table saying why', ok: true, why: 'The reader sees that a value is missing, and why. The mean uses the other trials.' },
-          { t: 'Leave the cell blank', why: 'A reader cannot tell a lost reading from a forgotten one.' },
-          { t: '0', why: '0 s would mean the starch disappeared at once. That is a false result.' },
-          { t: 'The mean of the other trials', why: 'That invents a reading. Record only what was measured.' }
+          { t: 'Nothing: the cell is left blank, so no false value is recorded', why: 'A reader cannot tell a lost reading from a forgotten one.' },
+          { t: 'A zero (0), as no time was measured for that tube', why: '0 s is a false result: it would mean the starch was digested instantly.' },
+          { t: 'The mean of the other trials, with a note saying it was added', why: 'That invents a reading, even with a note. Record only what was measured.' }
         ] },
       { type: 'multi', q: 'Tick every rule this table breaks.',
         show: { table: T({ head: [['Mean time / s', 'Trial 1', 'Trial 2', 'Trial 3', 'Temperature / °C']], rows: [['180', '180', '170', '190', '20'], ['117', '120', '110', '120', '30'], ['73', '70', '80', '70', '40']] }) },
@@ -435,9 +435,9 @@
       { type: 'choose', q: 'In an Extended Essay, which is the best place for the raw data?', lv: 'e',
         opts: [
           { t: 'In an appendix, with a representative sample in the body', ok: true, why: 'Examiners are not required to read appendices, so the body must show what was measured.' },
-          { t: 'All of it in the body', why: 'Tables do not count towards the words, but hundreds of readings make the argument hard to follow.' },
-          { t: 'All of it in an appendix', why: 'Allowed, but examiners are not required to read appendices. A short sample in the body shows them what was measured.' },
-          { t: 'Nowhere: only processed data are needed', why: 'The raw data show what was measured. Keep them, in an appendix, with a sample in the body.' }
+          { t: 'In the body, as an EE may not have any appendices', why: 'Appendices are allowed. Hundreds of readings in the body make the argument hard to follow.' },
+          { t: 'In an appendix, as tables in the body count as words', why: 'Tables do not count towards the words. Examiners need not read appendices, so put a sample in the body.' },
+          { t: 'Nowhere, with the means and graphs in the body instead', why: 'The raw data show what was measured, and the means come from them. Keep them in an appendix, with a sample in the body.' }
         ] }
     ],
 
