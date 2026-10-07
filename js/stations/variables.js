@@ -37,7 +37,7 @@ WUL.station({
       'The independent variable goes in the __first column__ of the table and on the __x-axis__.',
       'The dependent variable goes on the __y-axis__. Say __how__ it was measured and its __unit__.',
       'Name the property (volume, mass, concentration). Never write “amount of”.',
-      { t: 'Our rule: at least __five values__ of the independent variable, so that you can see the shape of the pattern. Exam planning questions accept fewer.' },
+      { t: 'Our rule: at least __five values__ of the independent variable, so that you can see the shape of the pattern. Exam planning questions need at least __three__, with units.' },
       { t: 'At IB, give a __reason__ for the range, the interval and the number of repeats.', lv: 'ie' }
     ] },
 
@@ -125,14 +125,14 @@ WUL.station({
       ] },
     { type: 'spot', q: 'Tap the two phrases that would lose marks.',
       text: 'Independent variable: [!a:heat]. Dependent variable: [?:time for the iodine to stop turning blue-black, in seconds]. Control variables: [!b:the same amount of starch], and [?:pH 6.0, kept with 2.0 cm³ of buffer, because amylase activity changes with pH].',
-      why: { a: 'Name the quantity: temperature, with its values.', b: '“Amount” is not a property, and there is no value, method or reason.' } },
+      why: { a: 'Name the quantity and its values, with the unit: temperature, set at 20, 30, 40, 50 and 60 °C.', b: '“Amount” is not a property, and there is no value, method or reason.' } },
     { type: 'build', q: 'Build a sentence that names the independent variable properly.',
       chips: ['The independent variable was', 'temperature,', 'set at 20, 30, 40, 50 and 60 °C', 'using a thermostatically controlled water bath.', 'heat,', 'some different temperatures'],
       answer: ['The independent variable was', 'temperature,', 'set at 20, 30, 40, 50 and 60 °C', 'using a thermostatically controlled water bath.'],
       why: 'It names the quantity, the values and how they were set.' },
     { type: 'choose', q: 'Why is “a thermostatically controlled water bath” better than “a water bath”?',
       opts: [
-        { t: 'It keeps the water at a set temperature by itself.', ok: true, why: 'Exam mark schemes credit the controlled bath, not a plain one, which slowly cools.' },
+        { t: 'It keeps the water at a set temperature by itself.', ok: true, why: 'Exam mark schemes credit a thermostatically controlled bath, not a plain one. The temperature of a plain bath drifts towards room temperature.' },
         { t: 'It heats the mixture more, so the reaction is faster.', why: 'The bath controls the temperature; it does not speed anything up by itself.' },
         { t: 'It shows the temperature, so a thermometer is no longer needed.', why: 'You should still check the temperature with a thermometer.' },
         { t: 'It holds more water, so it has room for more test tubes.', why: 'Size is not the point: holding the temperature steady is.' }

@@ -26,7 +26,7 @@
   };
 
   WUL.station({
-    id: 'discussion', keepV: { v: 'mwsr3l', now: '1ehx3y4', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'sense', order: 2, title: 'Discussion', levels: 'e',
+    id: 'discussion', keepV: { v: 'mwsr3l', now: '2u6i', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'sense', order: 2, title: 'Discussion', levels: 'e',
     job: 'Say what the findings mean, compare them with published research, and explain the agreements and the discrepancies.',
     where: 'In the Extended Essay, after the analysis and before the conclusion. An IGCSE report and an IA have no section with this name.',
 
@@ -145,8 +145,8 @@
           { t: 'Agreements with published results', ok: true },
           { t: 'Discrepancies, each with a possible reason', ok: true },
           { t: 'How strong the evidence is', ok: true },
-          { t: 'Every mean from the results table, again', why: 'The results section already gives them.' },
-          { t: 'Only the sources that agree', why: 'Omitting the source that disagrees makes the discussion unbalanced.' }
+          { t: 'A copy of the results table and its means', why: 'The results section already gives them. The discussion says what they mean.' },
+          { t: 'The apparatus and the method steps', why: 'They belong in the method. The discussion says what the findings mean, compared with published work.' }
         ],
         why: 'Criterion D asks for a balanced discussion, supported by appropriate evidence.' },
       { type: 'order', q: 'Put the parts of a discussion paragraph in order.',

@@ -53,7 +53,7 @@
   };
 
   WUL.station({
-    id: 'analysis', keepV: { v: 'pvxtkw', now: 'wiiqp0', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'sense', order: 1, title: 'Data analysis', levels: 'gie',
+    id: 'analysis', keepV: { v: 'pvxtkw', now: '1s5o9mj', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'sense', order: 1, title: 'Data analysis', levels: 'gie',
     job: { g: 'Describe the pattern in your results, with numbers. Do not explain it yet.', i: 'Describe the pattern in the processed data, and say what the uncertainties allow you to claim.', e: 'Describe each finding, and show how it helps to answer the research question.' },
     where: { g: 'After the graph, before the conclusion.', i: 'The last part of your Data analysis: after the tables, graphs and any test, before the conclusion.', e: 'In the analysis section, after the results.' },
 
@@ -250,15 +250,15 @@
           { t: '25 bubbles per minute at 40 cm', ok: true, why: 'The other two trials at 40 cm gave 12 and 14, and 25 is higher than every trial at 30 cm. It does not fit the trend.' },
           { t: '48 bubbles per minute at 10 cm', why: 'It is the highest value, but it fits the trend: the nearer the lamp, the more bubbles.' },
           { t: '6 bubbles per minute at 50 cm', why: 'It is the lowest value, but it fits the trend and agrees with the other trials.' },
-          { t: 'None of them', why: 'Look at 40 cm: one trial is about twice the other two.' }
+          { t: '21 bubbles per minute at 30 cm', why: 'It is the highest trial at 30 cm, but it is close to 20 and 19, and it fits the trend.' }
         ] },
       { type: 'multi', q: 'You decide that 25 bubbles per minute at 40 cm is anomalous. What should you do?',
         opts: [
           { t: 'Repeat that trial', ok: true, why: 'A repeat shows whether the value happens again.' },
           { t: 'Keep 25 in the raw data table', ok: true, why: 'Report every result, even one that you do not use.' },
           { t: 'State under the table that 25 was excluded from the mean, and why', ok: true, why: 'The reader of your report must be able to see what was excluded.' },
-          { t: 'Delete it, so the table looks neat', why: 'Deleting a result without saying so looks like choosing the results you want.' },
-          { t: 'Change it to 13, so it fits the trend', why: 'Changing a result is never allowed: it is falsifying data.' }
+          { t: 'Delete it from the raw data table, so that it cannot distort the mean', why: 'Keep every raw result in the table, so the reader can see it. Leave 25 out of the mean, and say so under the table.' },
+          { t: 'Include 25 in the mean, because the other two trials reduce its effect', why: 'One anomalous result distorts the mean: (12 + 25 + 14) ÷ 3 = 17, but 13 without it. Exclude it from the mean.' }
         ],
         why: 'Repeat it, report both values, and state what was excluded from the mean.' },
       { type: 'build', q: 'Build the trend sentence of a data analysis.',
@@ -269,7 +269,7 @@
         opts: [
           { t: 'The graph alone cannot separate the four soils: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'The difference could be due to variation between plants. Only a statistical test can decide.' },
           { t: 'Soil D is the best soil for growing these seedlings: every SD bar overlaps, but its mean is the highest.', why: 'Overlapping bars mean the highest mean may not be a real difference, so soil D cannot be called the best. Only a statistical test can decide.' },
-          { t: 'The SD bars show that the results are accurate, so the 1.3 cm difference between the soil means is a real effect.', why: 'SD bars show the spread of the repeats, not accuracy. Overlapping bars cannot show that a difference is real.' },
+          { t: 'The SD bars on this graph show that the results are accurate, so the 1.3 cm difference is a real effect.', why: 'SD bars show the spread of the repeats, not accuracy. Overlapping bars cannot show that a difference is real.' },
           { t: 'Soil A reduced growth by 3 %, which is statistically significant, because the means of the soils differ by 1.3 cm.', why: 'Significance needs a statistical test. The size of a difference cannot tell you, and here the bars overlap.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'Which sentence reports a statistical test properly in an analysis?',

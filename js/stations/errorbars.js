@@ -177,13 +177,13 @@
           { t: 'The range of independent variable values tested in the experiment', why: 'The bar runs along the axis of the measured variable. It says nothing about which values of the independent variable were tested.' },
           { t: 'The accuracy of that mean, compared with the published value', why: 'The bar comes from your own repeats. A short bar shows that they agreed, not that they match a published value.' }
         ] },
-      { type: 'choose', q: 'In Figure 1, which bar is the shortest?',
+      { type: 'choose', q: 'The same investigation measures 28 seedlings instead of 7. Which bar in Figure 1 would become about half as long?',
         show: { plot: threeBars },
         opts: [
-          { t: '± 1 SE', ok: true, why: 'SE = SD ÷ √n, so with more than one value it is always shorter than the SD bar.' },
-          { t: '± 1 SD', why: 'The SD is longer than the SE: it is √n times as long.' },
-          { t: 'Range', why: 'The range reaches the two most extreme values, so here it is the longest.' },
-          { t: 'They are always the same length', why: 'In Figure 1 all three come from the same values, and they differ.' }
+          { t: '± 1 SE', ok: true, why: 'SE = SD ÷ √n. Four times as many seedlings doubles √n, so the SE bar becomes about half as long.' },
+          { t: '± 1 SD', why: 'The SD shows how much the seedlings vary. More seedlings do not make them less varied, so the SD stays about the same.' },
+          { t: 'Range', why: 'More seedlings give more chances of an extreme value, so the range stays the same or becomes longer.' },
+          { t: 'All three bars', why: 'Only the SE becomes shorter as n increases. The range and the SD describe the spread of the seedlings themselves.' }
         ] },
       { type: 'sort', q: 'Which bar would you use?',
         bins: ['Range', 'SD', 'SE', 'IQR'],
@@ -213,14 +213,14 @@
         opts: [
           { t: 'The graph alone cannot show a difference between soil A and soil B: a statistical test is needed.', ok: true, why: 'Overlapping bars do not show a difference, and they do not rule one out. A statistical test decides.' },
           { t: 'Soil B gives taller seedlings than soil A: the mean for soil B is higher on the graph.', why: 'The bars overlap, so the difference between the means could be due to chance.' },
-          { t: 'There is no significant difference between soil A and soil B: their ± 1 SD bars overlap.', why: 'Overlap does not rule out a difference: significance needs a test. With more plants, bars that overlap this much can still give p < 0.05, as Figure 6 shows.' },
+          { t: 'There is no significant difference between soil A and soil B: their ± 1 SD bars overlap.', why: 'Overlap does not rule out a difference: significance needs a test. With enough plants, overlapping SD bars can still give p < 0.05, as Figure 6 shows for soils A and D.' },
           { t: 'Soil B is significantly better than soil A, because the mean for soil B is higher than the mean for soil A.', why: 'A higher mean is not enough: “significantly” needs a statistical test, and here the bars overlap.' }
         ] },
       { type: 'spot', q: 'Tap the three mistakes.',
-        text: 'Figure 2. Line graph showing the effect of temperature on the mean time taken for fungal α-amylase to digest starch [!a:with error bars]. [?:The bars at 40 °C and 50 °C do not overlap], [!b:which proves] that the rate was higher at 50 °C. [!c:SE bars were chosen because they are shorter].',
+        text: 'Figure 2. Line graph showing the effect of temperature (20.0–60.0 °C) on the mean time taken for fungal α-amylase to digest starch [!a:with error bars]. [?:The bars at 40 °C and 50 °C do not overlap], [!b:which proves] that the rate was higher at 50 °C. [!c:SE bars were chosen because they are shorter].',
         why: { a: 'Give n and name the kind of bar: “(n = 5; error bars = ± 1 SD)”.', b: 'A graph never proves. Write “which suggests”, and let a test decide.', c: 'Never choose a bar because it looks smaller. SD for the spread, SE for how well the mean is known.' } },
-      { type: 'build', q: 'Build the correct sentence.',
-        chips: ['The ± 1 SD bars for 40 °C and 50 °C', 'do not overlap,', 'so the difference is likely to be real.', 'which proves the difference.', 'look quite big,'],
+      { type: 'build', q: 'Build the sentence that Figure 4 supports.', show: { plot: amy4050 },
+        chips: ['The ± 1 SD bars for 40 °C and 50 °C', 'do not overlap,', 'so the difference is likely to be real.', 'which proves the difference.', 'overlap,'],
         answer: ['The ± 1 SD bars for 40 °C and 50 °C', 'do not overlap,', 'so the difference is likely to be real.'],
         why: 'It names the points and the bars, says whether they overlap, and claims only what overlap allows.' },
       { type: 'choose', q: 'Excel offers preset “Standard Deviation” error bars. Why not use them?',

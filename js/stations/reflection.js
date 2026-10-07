@@ -139,8 +139,8 @@
           { t: 'Yes, for science essays, where it is the lab notebook that records each experiment.', why: 'It is recommended for every essay, and required for none.' }
         ] },
       { type: 'build', q: 'Build an evaluative sentence.',
-        chips: ['The pilot run', 'showed me that', 'the sampling interval limited the precision,', 'so I now run a pilot', 'before fixing any method.', 'was fun', 'and I liked it.'],
-        answer: ['The pilot run', 'showed me that', 'the sampling interval limited the precision,', 'so I now run a pilot', 'before fixing any method.'],
+        chips: ['The pilot run', 'showed me that', 'the sampling interval limited the precision,', 'so I now run a pilot', 'before choosing a final method.', 'was fun', 'and I liked it.'],
+        answer: ['The pilot run', 'showed me that', 'the sampling interval limited the precision,', 'so I now run a pilot', 'before choosing a final method.'],
         why: 'It names what happened, what it taught, and where the lesson transfers.' }
     ],
 

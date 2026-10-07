@@ -45,7 +45,7 @@
     '<span>Uploaded separately: the Reflection and Progress Form</span>' + tag('E', C.E) + '</div>';
 
   WUL.station({
-    id: 'report', keepV: { v: '8dyy71', now: '1pll2nz', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'start', order: 1, title: 'What a lab report is', levels: 'gie',
+    id: 'report', keepV: { v: '8dyy71', now: '4tz6an', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'start', order: 1, title: 'What a lab report is', levels: 'gie',
     job: 'Learn the parts of a report and their order. Learn the scientific voice that you use in every part.',
     where: 'Everywhere: use this order and this voice in the whole report.',
 
@@ -176,16 +176,16 @@
       { type: 'choose', q: 'Why is a report written in the past tense?',
         opts: [
           { t: 'The experiment has already been done.', ok: true, why: 'A report records what happened, so it is in the past.' },
-          { t: 'It sounds more scientific.', why: 'The reason is meaning, not sound: the work is finished.' },
-          { t: 'Instructions are always in the past tense.', why: 'Instructions are in the present: “Heat the tube.” A report is not instructions.' },
-          { t: 'The examiner reads it later.', why: 'That is true of any writing. The tense shows the work is finished.' }
+          { t: 'The past tense sounds more scientific.', why: 'The reason is meaning, not sound: the work is finished.' },
+          { t: 'The passive voice needs the past tense.', why: 'The passive works in any tense: “is added”, “was added”. A report uses the past tense because the work is finished.' },
+          { t: 'The examiner reads the report later.', why: 'That is true of any writing. The tense shows the work is finished.' }
         ] },
       { type: 'choose', q: 'Which phrasal verb is standard in a method?',
         opts: [
           { t: 'Five trials were carried out at each temperature.', ok: true, why: '“Carried out” is the one standard exception. Use it sparingly.' },
           { t: 'The mass of each cylinder was written down after blotting.', why: 'Write “recorded”.' },
           { t: 'The starch solution was heated up to 40 °C in a water bath.', why: 'Write “heated to 40 °C”.' },
-          { t: 'The mean of the five trials was worked out at each temperature.', why: 'Write “calculated”.' }
+          { t: 'The mean of the trials was worked out at each temperature.', why: 'Write “calculated”.' }
         ] },
       { type: 'sort', lv: 'i', q: 'Which IA criterion does each part mostly serve?',
         bins: ['Research design', 'Data analysis', 'Conclusion', 'Evaluation'],
@@ -204,7 +204,7 @@
           { t: '6 marks each', ok: true, why: 'Research design, Data analysis, Conclusion and Evaluation are worth the same. The evaluation deserves real space.' },
           { t: 'Most for Research design', why: 'All four are equal: 6 marks each.' },
           { t: 'Most for Data analysis', why: 'All four are equal: 6 marks each.' },
-          { t: '12 for the conclusion', why: 'No criterion is worth more than another.' }
+          { t: '12 marks for Conclusion', why: 'No criterion is worth more than another.' }
         ] },
       { type: 'sort', lv: 'e', q: 'Which EE criterion does each part mostly serve?',
         bins: ['A Framework', 'B Knowledge', 'C Analysis', 'D Discussion', 'E Reflection'],

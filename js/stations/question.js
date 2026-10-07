@@ -19,7 +19,7 @@
     '</ol>';
 
   WUL.station({
-    id: 'question', keepV: { v: '16gqv48', now: 'r7oa4r', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 1, title: 'Title and research question', levels: 'gie',
+    id: 'question', keepV: { v: '16gqv48', now: '1qjapv2', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'plan', order: 1, title: 'Title and research question', levels: 'gie',
     job: {
       g: 'Say exactly what was tested: a title and an aim that name what was changed and what was measured.',
       i: 'Ask one focused question, in a specific context, that your data can answer.',
@@ -194,7 +194,7 @@
         why: { a: 'Name the quantity and its range: the concentration of sucrose solution, 0.0–1.0 mol dm⁻³.', b: 'Name what is measured: the percentage change in mass of potato cylinders.' } },
       { type: 'order', q: 'Put these questions in order, from the broadest to the most focused.',
         items: ['What affects enzymes?', 'How does temperature affect enzymes?', 'How does temperature affect amylase?', 'How does temperature (20–60 °C) affect the time taken for amylase to digest starch?'],
-        why: 'Each step adds one thing: the variable, then the enzyme, then the range and a measured dependent variable.' },
+        why: 'Each step narrows the question: first one variable, then one enzyme, then a range and a measured dependent variable.' },
       { type: 'build', q: 'Build a title that names both variables and the system.',
         chips: ['The effect of', 'light intensity', 'on the rate of photosynthesis', 'in *Elodea*', 'An experiment about', 'light', 'on plants'],
         answer: ['The effect of', 'light intensity', 'on the rate of photosynthesis', 'in *Elodea*'],
@@ -214,7 +214,7 @@
         opts: [
           { t: 'Amylases from different organisms have different optimum temperatures, so the comparison with published values depends on it.', ok: true, why: 'A fungal result compared with a human value would look wrong when it is right.' },
           { t: 'Amylases from different organisms act on different substrates, so the substrate chosen for the method depends on it.', why: 'All amylases hydrolyse the same substrate, starch. The system matters because the optimum temperatures differ.' },
-          { t: 'A named organism makes the research question longer, and a longer research question earns more marks under the Research design criterion.', why: 'Length earns nothing. The system is there so the context is specific.' },
+          { t: 'A named organism makes the research question longer, and a longer research question earns more marks under the Research design criterion.', why: 'Length earns nothing. The system is named because the optimum, and the published value it is compared with, depend on which organism the enzyme came from.' },
           { t: 'The examiner needs to know the name of the company that sold the amylase, because that company is the system in this investigation.', why: 'The system is the organism the enzyme came from, not the company that sold it.' }
         ] },
       { type: 'multi', lv: 'i', q: 'According to the IB guide, which belong in a research question “with context”?',
@@ -222,7 +222,7 @@
           { t: 'The independent and dependent variables', ok: true },
           { t: 'A concise description of the system', ok: true },
           { t: 'Background theory of direct relevance', ok: true },
-          { t: 'The make of the stopwatch', why: 'Instruments belong in the method.' },
+          { t: 'The number of repeats at each value', why: 'Repeats are a methodological consideration of Research design. They are not part of the question’s context.' },
           { t: 'Why the topic is personally interesting', why: 'Personal interest is not in the 2025 criteria.' }
         ],
         why: 'All three are in the Research design clarifications (IB Biology guide, p. 120).' },
@@ -231,7 +231,7 @@
           { t: 'To what extent does the concentration of calcium ions (0–10 mmol dm⁻³) affect the heat stability of α-amylase from *Aspergillus oryzae*?', ok: true, why: 'One question, a named system, a range, and an answer that is not obvious.' },
           { t: 'The effect of temperature, from 20 °C to 60 °C, on the rate at which different enzymes from a range of organisms break down their own substrates.', why: 'A statement, not a question, and no single system is named.' },
           { t: 'Does heating α-amylase from germinating *Hordeum vulgare* seeds to 100 °C for 10 minutes denature the enzyme, so that it no longer hydrolyses starch to maltose?', why: 'The answer is obvious: yes. A suitable question has an answer that is not obvious.' },
-          { t: 'How do temperature (20–60 °C) and pH (4–9) affect the activity of α-amylase from germinating *Hordeum vulgare* seeds and of catalase from *Solanum tuberosum*?', why: 'Double-barrelled: several questions at once, too many for 4,000 words.' }
+          { t: 'To what extent do temperature (20–60 °C) and pH (4–9) affect the activity of α-amylase from germinating *Hordeum vulgare* seeds and of catalase from *Solanum tuberosum*?', why: 'Double-barrelled: several questions at once, too many for 4,000 words.' }
         ] }
     ],
 
