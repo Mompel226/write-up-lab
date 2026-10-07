@@ -134,7 +134,7 @@
     }).join('') + '</tbody></table></div>';
 
   WUL.station({
-    id: 'measurement', stage: 'judge', order: 2, title: 'Accuracy, precision, reliability, validity', levels: 'gie',
+    id: 'measurement', keepV: { v: 'he61yl', now: '1efcynt', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'judge', order: 2, title: 'Accuracy, precision, reliability, validity', levels: 'gie',
     job: 'Use the measurement words exactly, so that every error and weakness you name is the right kind.',
     where: { g: 'Not a section of its own: words you use in your evaluation, when you judge your results and your method.', i: 'Not a section of its own: words you use in your evaluation, and wherever you discuss uncertainties.', e: 'Not a section of its own: words you use in the discussion and the evaluation.' },
 
@@ -273,16 +273,16 @@
       { type: 'choose', q: 'An exam asks: “Why were the repeats done?” Which answer earns the mark in recent Cambridge mark schemes?',
         opts: [
           { t: 'To identify anomalous results, and exclude them from the mean', ok: true, why: 'Recent mark schemes credit this answer.' },
-          { t: 'To make the results more accurate', why: 'Rejected: repeats cannot fix a systematic error.' },
-          { t: 'To reduce human error', why: '“Human error” is never credited. Name the error.' },
-          { t: 'To calculate an average', why: 'On its own, this is rejected in recent reports. Say what the mean is for.' }
+          { t: 'To make the results more accurate, so they are closer to the true value', why: 'Rejected: repeats cannot fix a systematic error, so they do not make results more accurate.' },
+          { t: 'To reduce human error, so that the results of the experiment are better', why: '“Human error” is never credited, and “better” says nothing. Name the error.' },
+          { t: 'To calculate an average, and keep the anomalous results in the mean', why: 'A mean on its own is rejected in recent reports. And an anomalous result must be excluded, or it distorts the mean.' }
         ] },
       { type: 'choose', q: 'Another class follows your method and finds the same optimum temperature. What does this show?',
         opts: [
-          { t: 'The results are reproducible.', ok: true, why: 'Different people, same method, same result: reproducible, the stronger test.' },
-          { t: 'The results are repeatable.', why: 'Repeatable means the same person repeating with the same equipment.' },
-          { t: 'The results are accurate.', why: 'Both classes could share the same systematic error.' },
-          { t: 'The results are precise.', why: 'Precision is about how close your own repeats are.' }
+          { t: 'The results are reproducible: a second class found the same optimum.', ok: true, why: 'Different people, same method, same result: that is reproducibility, the stronger test.' },
+          { t: 'The results are repeatable: the same method gave the same optimum twice.', why: 'Repeatable means the same person repeating with the same equipment. Here, different people got the result.' },
+          { t: 'The results are accurate: two classes found the same optimum temperature.', why: 'Both classes could share the same systematic error, so agreement does not show accuracy.' },
+          { t: 'The results are precise: the optimum temperature was the same in both classes.', why: 'Precision is about how close your own repeats are, not agreement with another class.' }
         ] },
       { type: 'choose', q: 'One seedling was measured five times. What is n?',
         show: { html: technical() },
@@ -307,16 +307,16 @@
       { type: 'choose', lv: 'ie', q: 'Five different seedlings are measured once each, instead of one seedling five times. What does this improve most?',
         opts: [
           { t: 'Validity: the result can support a claim about this kind of plant', ok: true, why: 'Only different individuals contain the natural variation between individuals.' },
-          { t: 'Accuracy', why: 'Neither kind of repeat fixes a systematic error.' },
-          { t: 'Precision', why: 'The spread between plants is natural variation, not imprecise measuring.' },
-          { t: 'Reproducibility', why: 'A new plant is not a new person or new apparatus.' }
+          { t: 'Accuracy: five plants reduce the systematic error of the ruler', why: 'Neither kind of repeat reduces a systematic error: the same ruler is used for every plant.' },
+          { t: 'Precision: five plants give a smaller spread than one plant measured five times', why: 'Five different plants give a larger spread, because of natural variation between individuals.' },
+          { t: 'Reproducibility: five plants show that another person would get the same result', why: 'Reproducibility needs a new person or new apparatus. A new plant is neither.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'Five measurements of the same leaf give…',
         opts: [
           { t: 'a better value for that one leaf, and nothing else.', ok: true, why: 'Technical replicates are about one sample.' },
-          { t: 'a result that holds for the whole species.', why: 'Only different individuals contain the natural variation between individuals.' },
-          { t: 'n = 5.', why: 'That is pseudoreplication: n = 1.' },
-          { t: 'a more accurate result.', why: 'A mean cancels random error, but it cannot fix a systematic error.' }
+          { t: 'a value for any leaf of that species, from five measurements.', why: 'Five measurements of one leaf say nothing about other leaves. Only different individuals contain the natural variation of the species.' },
+          { t: 'five independent samples of the leaf, so n = 5.', why: 'That is pseudoreplication. The five measurements come from one leaf, so n = 1.' },
+          { t: 'a more accurate value, free of any systematic error.', why: 'A mean cancels random error, but it cannot remove a systematic error.' }
         ] }
     ],
 

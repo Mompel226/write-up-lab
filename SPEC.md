@@ -53,6 +53,15 @@ density and tone.
   a red-pen mark, starts that part again for everybody, here and in the spreadsheet; a better `why`, a new Learn
   step or a trap does not. After any change, `node tools/check.mjs --stamp` rewrites `data/parts.json`; push it with
   the change, or the spreadsheet scores against the old list.
+- **A reword that asks the same thing keeps the records** (7 Oct 2026, the practice-questions audit: 103 questions got
+  new wrong options and 0 of 23 parts changed `v`). When only the options' words (and their `why`) change, first
+  copy `js/stations/` to `<folder>/js/stations/`, then edit, then run `node tools/keep-records.mjs --was <folder>`
+  (it reports) and again with `--write`: the part gets `keepV: { v, now }`, and `WUL.partV` gives the old `v` while
+  the part reads exactly as declared. Then `node tools/check.mjs --stamp`. Anything else (a question, which option is
+  right, the number of options, a red pen) still starts the part again: tell Daniel first. To reword a kept part
+  again, take its `keepV` out, reword, and run the tool with the files from before this edit. On a QUESTION,
+  `keep: true` means "show the options in the order written" (`js/quiz.js`); the part's mark is `keepV`. The rules
+  for every site: `Biology Hub/docs/QUESTION-STANDARD.md`.
 - A homework part shows a banner (what finishing takes, and where the pupil is) and its Test yourself opens on a
   **Homework** set: every question not yet answered, from every level, IB ones tagged. The home page lists the
   homework; `#/hw/<id>` is the page the Classroom post links to. Colours are the labs' key: red not started, orange
@@ -60,6 +69,15 @@ density and tone.
 - Saving follows the labs (memory labs-save-on-their-own): two minutes after the last change, at once when a
   homework part is finished, when the page is left, and at sign-in (the records come back first, then this
   browser's work goes). A second account on the same computer never gets the first one's work.
+- **An expired sign-in** (6 Oct 2026, Daniel: homework "saved" on the pupil's screen, "not started" in his data). Google's
+  sign-in lasts an hour. When Google will not renew it without a click, the card says "not sent yet: sign in again" in
+  red with Google's button beside it (also on a phone), a message says it once, and the homework page says to sign in
+  instead of "Loading". One press of the button (the same pupil), or a sign-in on the hub in another tab, sends
+  everything waiting. The card says "saved for your teacher ✓" only when nothing waits. Proof, from the Biology Hub
+  folder: `node tools/signin-runs-out.mjs`.
+- **The labs script's own pass** (the same evening, Daniel: synced "no matter what"): while Google's sign-in is fresh the
+  page gets a 30-day pass from the labs script (`SI.passFrom`), and `writeup.save` and `writeup.mine` carry it
+  (`sendCreds`), so a pupil signed in days ago still saves with nothing to press. "Sign in again" only with no good pass.
 - The server side is the labs script (`hubs/biology-hub/apps-script/Code.gs`, "WRITE-UP LAB"): `writeup.save`,
   `writeup.mine`, the tab "📝 Write-Up Lab". Its scorer counts exactly what `WUL.partState` counts: change both.
 
@@ -160,7 +178,9 @@ For a graph, `body:{plot:…}` and each note carries `el:'label-y'` (the plot el
 "which amylase?", "n = 1", "human error?".
 
 ### Questions (`test`) — see `js/quiz.js`. Never free writing.
-- `choose` `{q, opts:[{t, ok:true, why}, {t, why}…], show}` — exactly one right; EVERY option has a `why`.
+- `choose` `{q, opts:[{t, ok:true, why}, {t, why}…], show}` — exactly one right; EVERY option has a `why`. The options
+  are shown in a fresh order (`keep: true` shows them as written), so their length, form or a stem word must never point
+  to the right one: write the wrong ones as full and careful as it (`Biology Hub/docs/QUESTION-STANDARD.md` §3–4).
 - `multi` `{q, opts:[{t, ok, why}…], why}` — tick all that apply.
 - `sort` `{q, bins:[…], items:[{t, bin, why}…]}`
 - `order` `{q, items:[in the right order…], why}`

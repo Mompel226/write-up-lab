@@ -7,7 +7,7 @@
    · "Making a calibration curve for starch concentration", Practical Biology, © 2019 Royal Society of Biology, no author
    · Amoeba Sisters, "Enzymes (Updated)", YouTube, uploaded 28 Aug. 2016 (red pen and reference builder) */
 WUL.station({
-  id: 'sources', stage: 'finish', order: 1, title: 'Sources and referencing', levels: 'gie',
+  id: 'sources', keepV: { v: '92skd4', now: '1i4t6k', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'finish', order: 1, title: 'Sources and referencing', levels: 'gie',
   job: 'Show where every idea, number and image came from, so that a reader can find the source.',
   where: 'A short citation in the text where each source is used, and the full entry in the list at the end.',
 
@@ -128,9 +128,9 @@ WUL.station({
     { type: 'choose', q: 'In MLA, what is written in italics?',
       opts: [
         { t: 'The name of the journal, book or website', ok: true, why: 'Italics mark a whole work that stands alone.' },
-        { t: 'The title of an article or web page', why: 'A part of a larger work goes in “quotation marks”.' },
-        { t: 'The author’s name', why: 'Author names are never in italics.' },
-        { t: 'The page numbers', why: 'Page numbers are plain text.' }
+        { t: 'The title of an article or a page on a website', why: 'A part of a larger work goes in “quotation marks”.' },
+        { t: 'The author’s family name, written first', why: 'Author names are never in italics.' },
+        { t: 'The page numbers, after the letters pp.', why: 'Page numbers are plain text.' }
       ] },
     { type: 'build', q: 'Build the Works Cited entry for this textbook.',
       chips: ['Urry, Lisa A., et al.', '*Campbell Biology*.', '12th ed.,', 'Pearson,', '2020.', 'Lisa A. Urry', '“Campbell Biology.”', 'www.pearson.com'],
@@ -145,10 +145,10 @@ WUL.station({
     { type: 'multi', q: 'Which of these must be cited?',
       opts: [
         { t: 'A textbook idea you rewrote in your own words', ok: true, why: 'A paraphrase is still someone else’s idea.' },
-        { t: 'A graph copied from a website', ok: true, why: 'Images, graphs and data you did not make are attributed.' },
+        { t: 'A graph copied from a website into your report', ok: true, why: 'Images, graphs and data you did not make are attributed, wherever they are used.' },
         { t: 'A published value compared with your result', ok: true, why: 'The reader of your report must be able to trace it.' },
-        { t: 'Text written by an AI tool', ok: true, why: 'It is not your own work: quote it and cite it.' },
-        { t: 'Your own raw data', why: 'Data you measured yourself are yours.' }
+        { t: 'Text written by an AI tool for your report', ok: true, why: 'It is not your own work: quote it and cite it.' },
+        { t: 'Raw data that you measured yourself in the lab', why: 'Data you measured yourself are yours.' }
       ],
       why: 'Cite every idea, number, image and sentence that is not your own.' },
     { type: 'sort', q: 'Sort the parts of this entry into MLA’s core elements.',
@@ -164,9 +164,9 @@ WUL.station({
     { type: 'choose', lv: 'i', q: 'MLA makes the access date optional. What should an IA do?',
       opts: [
         { t: 'Give it for every online source: the IB requires it.', ok: true, why: 'Where MLA and the IB disagree, follow the IB.' },
-        { t: 'Omit it, because MLA allows that.', why: 'The IB rule is the one that is checked.' },
-        { t: 'Give it only for books.', why: 'Books are not online sources. The access date is for online sources.' },
-        { t: 'Put it in the in-text citation.', why: 'The access date goes at the end of the entry in the list.' }
+        { t: 'Omit it, since MLA is the style the IA follows.', why: 'The IB rule is the one that is checked. Where MLA and the IB disagree, follow the IB.' },
+        { t: 'Give it for books, but not for online sources.', why: 'Books are not online sources. The access date is for online sources.' },
+        { t: 'Put it in the in-text citation, after the author.', why: 'The access date goes at the end of the entry in the list.' }
       ] },
     { type: 'choose', lv: 'e', q: 'The EE guide adds two things to every web entry. Which?',
       opts: [
@@ -178,16 +178,16 @@ WUL.station({
     { type: 'choose', lv: 'ie', q: 'Two sentences in your background were written by an AI tool. What must you do?',
       opts: [
         { t: 'Quote them, and list the tool with the prompt and the date it was generated', ok: true, why: 'The IB academic integrity policy asks for quotation marks, the prompt and the date.' },
-        { t: 'Nothing, if you checked that they are true', why: 'Checking is wise, but the words are still not your own.' },
-        { t: 'Reword them, then no citation is needed', why: 'Reworded AI text is still not your own work. Cite it.' },
-        { t: 'Name the tool in the acknowledgements only', why: 'It must be quoted in the text and listed with the prompt and the date.' }
+        { t: 'Nothing, as long as you checked that both sentences are true and correct', why: 'Checking is wise, but the words are still not your own.' },
+        { t: 'Reword them in your own words, and then no citation or quotation is needed', why: 'Reworded AI text is still not your own work. Cite it.' },
+        { t: 'Name the tool in the acknowledgements at the end, with no quotation marks in the text', why: 'It must be quoted in the text and listed with the prompt and the date.' }
       ] },
     { type: 'choose', lv: 'ie', q: 'A source used in an IA is missing from the bibliography. What happens?',
       opts: [
         { t: 'It is treated as academic malpractice and investigated.', ok: true, why: 'The IA guide: omitted or improper referencing is academic malpractice.' },
-        { t: 'One mark is lost under Conclusion.', why: 'It is not a mark deduction. It is an academic integrity case.' },
-        { t: 'Nothing, if the other references are correct.', why: 'Every source must be acknowledged.' },
-        { t: 'The word count increases.', why: 'The bibliography does not count towards the words at all.' }
+        { t: 'One mark is lost under Conclusion, as the comparison is weaker.', why: 'It is not a mark deduction. It is an academic integrity case.' },
+        { t: 'Nothing, as long as the other references are correct.', why: 'Every source must be acknowledged.' },
+        { t: 'It is accepted, if the source is named in the text.', why: 'A source named in the text must also be in the bibliography. Omitted referencing is malpractice.' }
       ] }
   ],
 

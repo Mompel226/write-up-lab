@@ -26,7 +26,7 @@
   };
 
   WUL.station({
-    id: 'discussion', stage: 'sense', order: 2, title: 'Discussion', levels: 'e',
+    id: 'discussion', keepV: { v: 'mwsr3l', now: '1ehx3y4', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'sense', order: 2, title: 'Discussion', levels: 'e',
     job: 'Say what the findings mean, compare them with published research, and explain the agreements and the discrepancies.',
     where: 'In the Extended Essay, after the analysis and before the conclusion. An IGCSE report and an IA have no section with this name.',
 
@@ -155,9 +155,9 @@
       { type: 'choose', q: 'At 60 °C, the rate here fell to 55 % of its maximum. Raviyan et al. found about 74 %. What is the best possible reason to discuss?',
         opts: [
           { t: 'The amylase was held at 60 °C before the reaction, so some of it was denatured before timing began.', ok: true, why: 'A real difference in method, supported by their own finding that activity falls within 3 min at 60 °C.' },
-          { t: 'Human error.', why: 'It names no step, so it cannot be tested or discussed.' },
-          { t: 'The published value is wrong.', why: 'Possible, but you would need evidence. Look first for differences between the two methods.' },
-          { t: 'The water bath was broken.', why: 'There is no evidence for this, and a broken bath would affect every temperature.' }
+          { t: 'Human error at some point in the method made the rate at 60 °C lower here than in the paper.', why: 'It names no step, so it cannot be tested or discussed. A real difference between the two methods is a better reason.' },
+          { t: 'The published value of 74 % is wrong, because the result here was measured more carefully.', why: 'There is no evidence for this. Compare the two methods before doubting a published value.' },
+          { t: 'The water bath was broken, so the tubes at 60 °C were cooler than the temperature that was set.', why: 'There is no evidence for this. And a cooler tube, closer to the optimum, would give a higher rate, not a lower one.' }
         ] },
       { type: 'build', q: 'Build a sentence that states a discrepancy.',
         chips: ['However, at 60 °C', 'the rate here fell to 55 % of its maximum,', 'whereas Raviyan et al. report', 'about three-quarters of peak activity.', 'because of human error.', 'which proves them wrong.'],

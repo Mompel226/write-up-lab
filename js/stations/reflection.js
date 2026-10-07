@@ -29,7 +29,7 @@
     '<div style="margin:12px 0 0;border:1.5px dashed ' + P + ';border-radius:4px;padding:8px 10px;font:500 .88rem/1.4 var(--sans);color:var(--ink)">The RPF is uploaded with the essay. It is the only evidence for criterion E: Reflection, 4 marks.</div>';
 
   WUL.station({
-    id: 'reflection', stage: 'finish', order: 4, title: 'The EE reflection', levels: 'e',
+    id: 'reflection', keepV: { v: 'keto8t', now: 'px649', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'finish', order: 4, title: 'The EE reflection', levels: 'e',
     job: 'Show, in one statement of up to 500 words, how the Extended Essay changed you as a learner.',
     where: 'On the Reflection and Progress Form, uploaded separately from the essay.',
 
@@ -87,16 +87,16 @@
       { type: 'choose', q: 'How many reflection sessions are compulsory?',
         opts: [
           { t: 'Three: first, interim and final', ok: true, why: 'All three are recorded on the RPF.' },
-          { t: 'One, at the end', why: 'There are three. The last one is the viva voce.' },
-          { t: 'Two', why: 'There are three.' },
+          { t: 'One: the viva voce at the end', why: 'There are three. The viva voce is only the last one.' },
+          { t: 'Two: the first and the last', why: 'There are three: the interim session is missing.' },
           { t: 'None: they are recommended', why: 'The three sessions are mandatory. The researcher’s reflection space is the recommended part.' }
         ] },
       { type: 'choose', q: 'What is the viva voce?',
         opts: [
           { t: 'The final reflection session: a short interview with your supervisor after the essay is finished', ok: true, why: 'It celebrates the finished essay, and helps confirm the work is yours.' },
-          { t: 'An oral exam with an IB examiner', why: 'It is with your own supervisor, not an examiner.' },
-          { t: 'The first meeting, to choose a topic', why: 'That is the first reflection session.' },
-          { t: 'A presentation to your class', why: 'It is a conversation with your supervisor.' }
+          { t: 'An oral examination: a short interview with an IB examiner after the essay is submitted', why: 'It is with your own supervisor, not an examiner, and it is not an exam.' },
+          { t: 'The first reflection session: a short meeting with your supervisor to choose a topic', why: 'That is the first reflection session. The viva voce is the last one.' },
+          { t: 'A presentation of the essay to your class, with questions from the other students', why: 'It is a conversation with your supervisor, not a presentation.' }
         ] },
       { type: 'choose', q: 'What is the word limit for the reflective statement?',
         opts: [
@@ -127,16 +127,16 @@
       { type: 'choose', q: 'Which criterion does the RPF give evidence for?',
         opts: [
           { t: 'E, Reflection (4 marks), and only E', ok: true, why: 'Criterion E applies only to the reflective statement on the RPF.' },
-          { t: 'A to D', why: 'A–D judge the essay itself.' },
-          { t: 'All five criteria', why: 'Only E.' },
-          { t: 'None: it is not marked', why: 'It is the only evidence for criterion E.' }
+          { t: 'D, Discussion and evaluation (8 marks)', why: 'D is marked on the essay itself. The RPF is evidence for E only.' },
+          { t: 'A, Framework for the essay (6 marks)', why: 'A is marked on the essay itself. The RPF is evidence for E only.' },
+          { t: 'None: the RPF itself is not marked', why: 'It is the only evidence for criterion E.' }
         ] },
       { type: 'choose', q: 'Is a researcher’s reflection space compulsory?',
         opts: [
           { t: 'No. It is strongly recommended, as a record to write the statement from.', ok: true, why: 'The EE guide recommends it; it is not submitted.' },
-          { t: 'Yes, it is uploaded with the essay.', why: 'Only the essay and the RPF are uploaded.' },
-          { t: 'Yes, the examiner marks it.', why: 'The examiner marks only the essay and the statement on the RPF.' },
-          { t: 'Only for science essays.', why: 'It is recommended for every essay, and required for none.' }
+          { t: 'No. It is optional, but it is uploaded with the essay if the student keeps one.', why: 'Only the essay and the RPF are uploaded. The reflection space is never submitted.' },
+          { t: 'Yes. The examiner reads and marks it as the evidence for criterion E, Reflection.', why: 'The examiner marks only the essay and the statement on the RPF.' },
+          { t: 'Yes, for science essays, where it is the lab notebook that records each experiment.', why: 'It is recommended for every essay, and required for none.' }
         ] },
       { type: 'build', q: 'Build an evaluative sentence.',
         chips: ['The pilot run', 'showed me that', 'the sampling interval limited the precision,', 'so I now run a pilot', 'before fixing any method.', 'was fun', 'and I liked it.'],

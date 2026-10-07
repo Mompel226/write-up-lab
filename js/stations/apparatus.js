@@ -113,7 +113,7 @@
   ]);
 
   WUL.station({
-    id: 'apparatus', stage: 'plan', order: 5, title: 'Apparatus and materials', levels: 'gie',
+    id: 'apparatus', keepV: { v: 'gtaxvv', now: 'vxbm6p', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 5, title: 'Apparatus and materials', levels: 'gie',
     job: {
       g: 'List every piece of equipment and every material, with its size or quantity. Then someone else could repeat the same experiment.',
       i: 'List every item with its size or quantity. State the uncertainty of every measuring instrument, with its unit.'
@@ -291,9 +291,9 @@
       { type: 'choose', lv: 'ie', q: 'A 100 cm³ measuring cylinder (± 0.5 cm³) is used to measure 25.0 cm³ and 5.0 cm³. Which is true?',
         opts: [
           { t: 'The 5.0 cm³ has the larger uncertainty compared with its size: 10 % against 2 %.', ok: true, why: '0.5 ÷ 5.0 = 10 %; 0.5 ÷ 25.0 = 2 %. The same uncertainty matters more for a small volume.' },
-          { t: 'Both have the same uncertainty, so both are equally good.', why: 'The uncertainty is the same, but it is a much bigger part of 5.0 cm³.' },
-          { t: 'The 25.0 cm³ is worse, because it is a larger volume.', why: 'A larger volume makes the same ± 0.5 cm³ matter less.' },
-          { t: 'Neither has an uncertainty, because the cylinder is calibrated.', why: 'Calibration does not remove the uncertainty of reading the scale.' }
+          { t: 'Both have the same ± 0.5 cm³, so both have the same percentage uncertainty.', why: 'The ± 0.5 cm³ is the same, but as a percentage it is 10 % of 5.0 cm³ and only 2 % of 25.0 cm³.' },
+          { t: 'The 25.0 cm³ has the larger uncertainty, because it is the larger volume.', why: 'Both volumes have the same ± 0.5 cm³. Compared with its size, it matters less for the larger volume.' },
+          { t: 'Neither has an uncertainty, as the cylinder was calibrated by its maker.', why: 'The question gives the uncertainty: ± 0.5 cm³. Calibration does not remove the uncertainty of reading the scale.' }
         ] }
     ],
 

@@ -50,7 +50,7 @@
   };
 
   WUL.station({
-    id: 'conclusion', stage: 'sense', order: 3, title: 'Conclusion', levels: 'gie',
+    id: 'conclusion', keepV: { v: '1z03kif', now: '1jmpel2', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'sense', order: 3, title: 'Conclusion', levels: 'gie',
     job: { g: 'Say whether the hypothesis is supported, give the evidence, and explain it with biology.', i: 'Answer the research question with processed data and its uncertainty, then justify the answer against published science.', e: 'A short synthesis that answers the research question. No new evidence and no new argument.' },
     where: { g: 'After the data analysis, before the evaluation.', i: 'After the analysis, before the evaluation. It has its own criterion: Conclusion, 6 marks.', e: 'At the end of the essay, after the discussion and the evaluation.' },
 
@@ -222,9 +222,9 @@
       { type: 'choose', q: 'The hypothesis said: “As the temperature increases from 20 °C to 60 °C, the time will decrease.” Look at the graph. Which conclusion is right?', show: { plot: plotShow },
         opts: [
           { t: 'The results support the hypothesis only up to 50 °C. Above 50 °C, the time increased.', ok: true, why: 'Say how far the data support it, and where they do not.' },
-          { t: 'The results support the hypothesis fully.', why: 'Between 50 °C and 60 °C, the time increased, which the hypothesis did not predict.' },
-          { t: 'The hypothesis was wrong, so the experiment failed.', why: 'A hypothesis that is not supported is still a valid result. The experiment worked.' },
-          { t: 'No conclusion can be drawn.', why: 'The data show a clear pattern: a conclusion can be drawn.' }
+          { t: 'The results support the hypothesis fully. The time at 60 °C was shorter than the time at 20 °C.', why: 'Between 50 °C and 60 °C, the time increased, which the hypothesis did not predict. Compare each step, not just the two ends.' },
+          { t: 'The results do not support the hypothesis at all. The experiment failed and should be repeated.', why: 'The results support it up to 50 °C. A hypothesis that is not supported is still a valid result: the experiment worked.' },
+          { t: 'No conclusion can be drawn. The time fell and then rose between 20 °C and 60 °C.', why: 'The data show a clear pattern, so a conclusion can be drawn: the hypothesis is supported up to 50 °C.' }
         ] },
       { type: 'spot', q: 'Tap the three phrases that are wrong biology.',
         text: '[?:Between 20 °C and 50 °C, the molecules gained kinetic energy], so [!a:the enzyme worked harder]. [?:More enzyme–substrate complexes formed per second.] Above 50 °C, [!b:the enzyme died] because [!c:the heat melted the active site]. [?:The substrate was no longer complementary to the active site.]',
@@ -236,9 +236,9 @@
       { type: 'choose', q: 'Which sentence compares with a published value properly?',
         opts: [
           { t: 'This optimum is close to the 55 °C published for α-amylase from *A. oryzae* (Raviyan et al. 5464).', ok: true, why: 'It names the value, the enzyme and a traceable source.' },
-          { t: 'This agrees with what the internet says.', why: 'No source, no value: it cannot be checked.' },
-          { t: 'Amylase always works best at 37 °C.', why: 'No source, and amylases from different organisms have different optima.' },
-          { t: 'The textbook says enzymes denature.', why: 'It names no book and compares no number.' }
+          { t: 'This optimum is close to the value published online for *A. oryzae* amylase, so it is right.', why: 'No value and no source: “online” cannot be checked.' },
+          { t: 'This optimum is higher than the 37 °C at which amylase works best, so the result is wrong.', why: 'No source, and amylases from different organisms have different optima: 37 °C is for human amylase.' },
+          { t: 'This optimum agrees with the textbook, which says that enzymes denature at high temperatures.', why: 'It names no book and gives no value, so there is nothing to compare the optimum with.' }
         ] },
       { type: 'sort', q: 'Does each sentence belong in the conclusion or the evaluation?',
         bins: ['Conclusion', 'Evaluation'],
@@ -253,16 +253,16 @@
       { type: 'choose', lv: 'ie', q: 'The research question: “How does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by *A. oryzae* α-amylase?” Which sentence answers it?',
         opts: [
           { t: 'Within 20.0–60.0 °C, the rate was highest at 50.0 °C, so the optimum lies between 40.0 and 60.0 °C.', ok: true, why: 'It answers the question in its own words.' },
-          { t: 'The hypothesis was supported.', why: 'Allowed, but it does not answer the research question.' },
-          { t: 'Enzymes are affected by temperature.', why: 'Too general: it could end any enzyme report.' },
-          { t: 'There were several errors in the method.', why: 'Errors belong in the evaluation.' }
+          { t: 'Within 20.0–60.0 °C, the results supported the hypothesis given in the introduction, and the graph confirmed this.', why: 'Allowed as an extra sentence, but it does not answer the research question: it says nothing about how the rate changed.' },
+          { t: 'Enzymes are affected by temperature, as the theory in the background explains, so the results agree with the textbook.', why: 'Too general: it could end any enzyme report, and it gives no result from this investigation.' },
+          { t: 'There were several errors in the method, such as the timing of the end point, which made the results less precise.', why: 'Errors belong in the evaluation. This does not answer the research question.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'Every SD bar on this graph overlaps. Which conclusion is justified?', show: { plot: plotSoils },
         opts: [
           { t: 'The graph alone cannot separate the four soils: the means differ by only 1.3 cm, and every SD bar overlaps.', ok: true, why: 'Where the bars overlap, the graph alone cannot decide. Only a statistical test can.' },
-          { t: 'Soil D is the best soil for bean seedlings.', why: 'Its mean is highest, but the overlap means the difference may not be real.' },
-          { t: 'Soil type has no effect on the growth of any plant.', why: 'Too wide: one species, four soils, 21 days.' },
-          { t: 'Soil A reduced growth by 3 %.', why: 'The 3 % is within the spread of the data, so it cannot be claimed as an effect without a statistical test.' }
+          { t: 'Soil D is the best of the four soils for growing bean seedlings, because its mean is the highest of the four.', why: 'Its mean is the highest, but every SD bar overlaps, so the difference may not be real.' },
+          { t: 'Soil type has no effect on the growth of any plant species, because the SD bars of all four soils on this graph overlap.', why: 'Too wide: one species, four soils, 21 days. And overlapping bars do not show that there is no effect.' },
+          { t: 'Soil A reduced the growth of the bean seedlings by 3 %, which shows that soil type has a real effect on growth.', why: 'The 3 % is within the spread of the data, so it does not show a real effect. Only a statistical test could.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'What does the top band (5–6) of the IA Conclusion criterion need?',
         opts: [
@@ -276,9 +276,9 @@
       { type: 'choose', lv: 'e', q: 'What should an Extended Essay conclusion do?',
         opts: [
           { t: 'Combine the findings of the discussion into an answer to the research question, with no new argument', ok: true, why: 'A synthesis: the answer, built from what the essay has already argued.' },
-          { t: 'Repeat every result from the results section', why: 'The results are already there. A repeat is not a synthesis.' },
-          { t: 'Introduce a new source that supports the answer', why: 'New evidence belongs in the discussion.' },
-          { t: 'Be the longest section of the essay', why: 'In an EE, the discussion is long and the conclusion is short.' }
+          { t: 'Repeat each result from the results section, so that the reader can see each piece of evidence again in one place', why: 'The results are already in the essay. A repeat is not a synthesis.' },
+          { t: 'Introduce a new source that supports the answer, so that the essay ends with its strongest piece of evidence', why: 'New evidence belongs in the discussion. The conclusion adds no new evidence or argument.' },
+          { t: 'Be the longest section of the essay, with the answer to the research question explained in the most detail', why: 'In an EE, the discussion is the long section. The conclusion is short: it combines what the essay has already argued.' }
         ] }
     ],
 

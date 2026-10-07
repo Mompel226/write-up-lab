@@ -50,7 +50,7 @@
     '</div></div>';
 
   WUL.station({
-    id: 'format', stage: 'finish', order: 2, title: 'Format and word count', levels: 'ie',
+    id: 'format', keepV: { v: '1mcs5k3', now: '1kzicos', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'finish', order: 2, title: 'Format and word count', levels: 'ie',
     job: { i: 'Present the opening lines correctly, and keep within 3,000 words, so nothing the examiner needs is lost.', e: 'Present the title page, contents and page numbers correctly, and keep within 4,000 words: examiners stop reading at the limit.' },
     where: { i: 'The top of page 1, and the length of the whole report.', e: 'The title page, the contents page, and the whole essay.' },
 
@@ -177,9 +177,9 @@
       { type: 'choose', q: 'Why present the means in a table rather than in sentences?',
         opts: [
           { t: 'Tables do not count towards the word limit.', ok: true, why: 'The data can be shown in full, and the words are kept for explaining them.' },
-          { t: 'Tables count double.', why: 'Tables do not count at all.' },
-          { t: 'Examiners skip sentences with numbers.', why: 'They read them. A table is clearer and does not add to the word count.' },
-          { t: 'Tables need no units.', why: 'Tables need units in every heading.' }
+          { t: 'A table makes the means more accurate.', why: 'How data are presented does not change their accuracy. The reason is the word limit: tables do not count.' },
+          { t: 'Examiners skip the numbers in sentences.', why: 'Examiners read the numbers in sentences. A table is clearer and does not add to the word count.' },
+          { t: 'Tables do not need units in the headings.', why: 'Every column heading needs its unit.' }
         ] },
       { type: 'build', q: 'Build the opening lines of an IA, in order.',
         chips: ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Candidate code: abc123', 'Group members: abc124, abc125', 'Word count: 2,870', 'Contents', 'Name: Alex Kim'],
@@ -191,37 +191,37 @@
       { type: 'choose', lv: 'i', q: 'What goes at the start of an IA?',
         opts: [
           { t: 'The title, your candidate code, your group members’ codes and the word count', ok: true, why: 'These four details are listed in the IA guide.' },
-          { t: 'A cover page with your name and school', why: 'No cover page is needed, and codes are used, not names.' },
-          { t: 'A contents page', why: 'The IA guide says no contents page is needed.' },
-          { t: 'An abstract', why: 'The IA guide does not ask for an abstract.' }
+          { t: 'A cover page with your name, your school’s name and your teacher’s name', why: 'No cover page is needed, and candidate codes are used, not names.' },
+          { t: 'A contents page listing each section of the report with its page number', why: 'The IA guide does not ask for a contents page. Start with the title, the codes and the word count.' },
+          { t: 'An abstract that summarises the aim, the method and the main results', why: 'The IA guide does not ask for an abstract. Start with the title, the codes and the word count.' }
         ] },
       { type: 'choose', lv: 'i', q: 'An IA has 3,150 words. What does the IA guide say about the last 150?',
         opts: [
           { t: 'Nothing: it sets 3,000 as the maximum. So never exceed it.', ok: true, why: 'The rule is the maximum. The guide gives no rule for what happens beyond it, so do not test it.' },
-          { t: 'Only the first 3,000 are read, as in the EE.', why: 'That is the EE rule. The IA guide does not say it.' },
-          { t: 'They are allowed if the tables are small.', why: 'Tables do not count at all; the prose limit is still 3,000.' },
-          { t: 'One mark is lost for every 100 words.', why: 'No such rule exists.' }
+          { t: 'Only the first 3,000 are read, as in the EE. The rest is ignored.', why: 'That is the EE rule, for 4,000 words. The IA guide does not say it.' },
+          { t: 'They are allowed, as long as the tables in the report are small.', why: 'Tables do not count towards the limit at all, so their size changes nothing: the limit is still 3,000 words.' },
+          { t: 'One mark is lost for each 100 words above the limit.', why: 'The IA guide has no such rule. It sets 3,000 words as the maximum.' }
         ] },
       { type: 'choose', lv: 'i', q: 'Your background is 900 words. Why is that a problem?',
         opts: [
           { t: 'It takes words the evaluation needs, and the evaluation is worth a quarter of the marks.', ok: true, why: 'All four criteria are worth 6 marks. A long background leaves too little for the conclusion and the evaluation.' },
-          { t: 'Backgrounds do not count, so it is wasted.', why: 'The background counts towards the limit.' },
-          { t: 'Examiners only read the first 500 words.', why: 'No such rule exists.' },
-          { t: 'It is not a problem: more theory always earns more.', why: 'The guide asks for background theory of direct relevance, not more of it.' }
+          { t: 'The background does not count towards the 3,000 words, so the examiner does not read or mark it.', why: 'The background counts towards the 3,000-word limit, and the examiner reads it.' },
+          { t: 'Examiners stop reading a background after its first 500 words, so the other 400 words are not marked.', why: 'No such rule exists. The problem is the words it takes from the other sections.' },
+          { t: 'It is not a problem: the more theory a background has, the more marks it earns in Research design.', why: 'Research design rewards relevant theory, not more of it. A long background takes words from other sections.' }
         ] },
       { type: 'choose', lv: 'i', q: 'How many drafts does your teacher read and comment on?',
         opts: [
           { t: 'One. The next version is the final one.', ok: true, why: 'The IA guide: the teacher advises on one draft, without editing it.' },
-          { t: 'Two', why: 'One draft only.' },
-          { t: 'As many as you need', why: 'One draft only.' },
-          { t: 'None', why: 'The teacher reads and advises on one draft.' }
+          { t: 'Two. The third version is the final one.', why: 'One draft only. The teacher advises on one draft, without editing it.' },
+          { t: 'As many as you need, until it is ready.', why: 'The teacher reads and comments on one draft only.' },
+          { t: 'Zero. The teacher may not comment on any draft.', why: 'The teacher may comment on one draft, without editing it.' }
         ] },
       { type: 'choose', lv: 'e', q: 'An EE has 4,200 words. What happens?',
         opts: [
           { t: 'Examiners do not read beyond 4,000 words, so the end of the essay is not assessed.', ok: true, why: 'The conclusion comes last, so it is the first part lost.' },
-          { t: 'Nothing, if the tables are small.', why: 'Tables never count. The prose is over the limit.' },
-          { t: 'One mark is lost from criterion A.', why: 'It is worse: the part beyond the limit is not read, and this can lower the marks in every criterion.' },
-          { t: 'The supervisor must cut it.', why: 'The supervisor may not edit your essay. You must cut it.' }
+          { t: 'The essay is still marked in full, as long as its tables and graphs are small.', why: 'Tables and graphs do not count. The prose is over the limit, and the part beyond 4,000 words is not read.' },
+          { t: 'One mark is lost from criterion A, but the whole essay is still assessed.', why: 'The whole essay is not assessed: the part beyond 4,000 words is not read, and this can lower the marks in every criterion.' },
+          { t: 'The supervisor cuts the last 200 words before the essay is uploaded.', why: 'The supervisor may not edit your essay. You must cut it yourself.' }
         ] },
       { type: 'multi', lv: 'e', q: 'Which must be on the EE title page?',
         opts: [
@@ -236,16 +236,16 @@
       { type: 'choose', lv: 'e', q: 'You put a key graph in an appendix. What is the risk?',
         opts: [
           { t: 'Examiners are not required to read appendices, so it may never be seen.', ok: true, why: 'Anything the argument needs belongs in the body.' },
-          { t: 'Appendices count towards the word limit.', why: 'Graphs never count. The risk is that it is not read.' },
-          { t: 'Appendices are not allowed.', why: 'They are allowed, but examiners need not read them.' },
-          { t: 'There is no risk.', why: 'An unread graph cannot support your argument.' }
+          { t: 'Appendices count towards the limit, so the essay may be too long.', why: 'Appendices and graphs do not count towards the word limit. The risk is that the graph is not read.' },
+          { t: 'Appendices are not allowed in an EE, so the graph may lose marks.', why: 'Appendices are allowed, but examiners do not have to read them.' },
+          { t: 'There is no risk, as examiners read each appendix to check the data.', why: 'Examiners need not read appendices. An unread graph cannot support your argument.' }
         ] },
       { type: 'choose', lv: 'e', q: 'Where does page 1 start in an EE?',
         opts: [
           { t: 'On the first page after the contents page', ok: true, why: 'Page numbers are required, and they begin after the contents page.' },
-          { t: 'On the title page', why: 'The title page and the contents page are not numbered.' },
-          { t: 'On the contents page', why: 'Numbering starts after the contents page.' },
-          { t: 'Anywhere: page numbers are optional', why: 'Page numbers are required in an EE.' }
+          { t: 'On the title page, as it is the first page', why: 'The title page is not numbered, and neither is the contents page.' },
+          { t: 'On the contents page, before the introduction', why: 'The contents page is not numbered. Numbering starts on the page after it.' },
+          { t: 'Anywhere, because page numbers are optional', why: 'Page numbers are required in an EE, and they start after the contents page.' }
         ] }
     ],
 

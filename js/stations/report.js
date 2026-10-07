@@ -45,7 +45,7 @@
     '<span>Uploaded separately: the Reflection and Progress Form</span>' + tag('E', C.E) + '</div>';
 
   WUL.station({
-    id: 'report', stage: 'start', order: 1, title: 'What a lab report is', levels: 'gie',
+    id: 'report', keepV: { v: '8dyy71', now: '1pll2nz', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'start', order: 1, title: 'What a lab report is', levels: 'gie',
     job: 'Learn the parts of a report and their order. Learn the scientific voice that you use in every part.',
     where: 'Everywhere: use this order and this voice in the whole report.',
 
@@ -150,9 +150,9 @@
       { type: 'choose', q: 'Which sentence is written in the scientific voice?',
         opts: [
           { t: '5.0 cm³ of starch solution was added to the tube.', ok: true, why: 'No person, past tense, passive, and a number with a unit.' },
-          { t: 'I added 5.0 cm³ of starch solution to the tube.', why: '“I” is first person. Make the starch the subject: “…was added”.' },
-          { t: 'Add 5.0 cm³ of starch solution to the tube.', why: 'This is an instruction in the present tense. A report says what was done.' },
-          { t: 'Some starch solution was added to the tube.', why: 'The voice is right, but “some” is not a quantity.' }
+          { t: '5.0 cm³ of starch solution will be added to the tube.', why: 'That is a plan: “will be added” says what is going to happen. A report says what was done: “…was added”.' },
+          { t: 'Next, add 5.0 cm³ of starch solution to the tube.', why: 'This is an instruction in the present tense. A report says what was done.' },
+          { t: 'A small volume of starch solution was added to the tube.', why: 'The voice is right, but “a small volume” is not a quantity.' }
         ] },
       { type: 'build', q: 'Rewrite in the passive: “We placed the tubes in a water bath at 40 °C.”',
         chips: ['The tubes', 'were placed', 'in a water bath', 'at 40 °C.', 'We', 'placed', 'was placed', 'at a warm temperature.'],
@@ -183,9 +183,9 @@
       { type: 'choose', q: 'Which phrasal verb is standard in a method?',
         opts: [
           { t: 'Five trials were carried out at each temperature.', ok: true, why: '“Carried out” is the one standard exception. Use it sparingly.' },
-          { t: 'The results were written down.', why: 'Write “recorded”.' },
-          { t: 'The solution was heated up.', why: 'Write “heated to 40 °C”.' },
-          { t: 'The rate went up.', why: 'Write “increased”.' }
+          { t: 'The mass of each cylinder was written down after blotting.', why: 'Write “recorded”.' },
+          { t: 'The starch solution was heated up to 40 °C in a water bath.', why: 'Write “heated to 40 °C”.' },
+          { t: 'The mean of the five trials was worked out at each temperature.', why: 'Write “calculated”.' }
         ] },
       { type: 'sort', lv: 'i', q: 'Which IA criterion does each part mostly serve?',
         bins: ['Research design', 'Data analysis', 'Conclusion', 'Evaluation'],
@@ -220,9 +220,9 @@
       { type: 'choose', lv: 'e', q: 'The EE is marked out of 30. Which criterion is marked only on a separate form?',
         opts: [
           { t: 'E, Reflection (4 marks), on the Reflection and Progress Form', ok: true, why: 'Criteria A–D judge the essay as a whole. E judges only the reflective statement.' },
-          { t: 'D, Discussion and evaluation (8 marks)', why: 'D is marked on the essay itself.' },
-          { t: 'A, Framework (6 marks)', why: 'A is marked on the essay itself.' },
-          { t: 'None: all five are marked on the essay', why: 'E is marked only on the reflective statement, uploaded separately.' }
+          { t: 'D, Discussion and evaluation (8 marks), on the researcher’s reflection space', why: 'D is marked on the essay itself. The reflection space is not submitted.' },
+          { t: 'A, Framework (6 marks), on the outline form submitted before the essay', why: 'A is marked on the essay itself. No outline form is sent to the examiner.' },
+          { t: 'No criterion: the five criteria are each marked on the essay itself', why: 'E is marked only on the reflective statement, uploaded separately.' }
         ] }
     ],
 

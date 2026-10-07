@@ -1,6 +1,6 @@
 /* station: variables — the reference station. Every other station follows this shape (SPEC.md). */
 WUL.station({
-  id: 'variables', stage: 'plan', order: 3, title: 'Variables', levels: 'gie',
+  id: 'variables', keepV: { v: '1vdfmvy', now: '8i2ux4', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 3, title: 'Variables', levels: 'gie',
   job: 'Name what you change, what you measure, and everything you keep the same. Then only one thing can affect the result.',
   where: { g: 'Straight after the aim or question.', i: 'Not a section of its own: inside your methodology, straight after the research question. Marked under Research design.', e: 'Inside your methodology section.' },
 
@@ -112,9 +112,9 @@ WUL.station({
     { type: 'choose', q: 'Which control variable would earn the mark?',
       opts: [
         { t: 'The volume of hydrogen peroxide, 10.0 cm³, measured with a 10 cm³ measuring cylinder, because more substrate would release more oxygen.', ok: true, why: 'It has all four parts: the variable, its value, the method and the reason.' },
-        { t: 'The amount of hydrogen peroxide was kept the same.', why: '“Amount” is not a property, and there is no value, method or reason.' },
-        { t: 'The same catalase was used.', why: 'No value, method or reason.' },
-        { t: 'Everything else was kept the same.', why: 'It names no variable, so it earns nothing.' }
+        { t: 'The amount of hydrogen peroxide, kept the same by pouring it from one bottle into each tube, because more substrate would release more oxygen gas.', why: '“Amount” is not a property, and there is no value and no measuring method.' },
+        { t: 'The volume of oxygen released, measured with a 100 cm³ gas syringe and read to the nearest 1 cm³, because it shows how fast the catalase works.', why: 'That is the dependent variable: it is measured, not kept the same.' },
+        { t: 'Everything else, such as the room, the apparatus and the person doing the timing, kept the same, because in a fair test one variable is changed at a time.', why: 'It names no variable, so it earns nothing.' }
       ] },
     { type: 'choose', q: 'Where does the independent variable go in a results table?',
       opts: [
@@ -133,24 +133,24 @@ WUL.station({
     { type: 'choose', q: 'Why is “a thermostatically controlled water bath” better than “a water bath”?',
       opts: [
         { t: 'It keeps the water at a set temperature by itself.', ok: true, why: 'Exam mark schemes credit the controlled bath, not a plain one, which slowly cools.' },
-        { t: 'It makes the reaction faster.', why: 'The bath controls the temperature; it does not speed anything up by itself.' },
-        { t: 'You no longer need a thermometer.', why: 'You should still check the temperature with a thermometer.' },
-        { t: 'It is bigger.', why: 'Size is not the point: holding the temperature steady is.' }
+        { t: 'It heats the mixture more, so the reaction is faster.', why: 'The bath controls the temperature; it does not speed anything up by itself.' },
+        { t: 'It shows the temperature, so a thermometer is no longer needed.', why: 'You should still check the temperature with a thermometer.' },
+        { t: 'It holds more water, so it has room for more test tubes.', why: 'Size is not the point: holding the temperature steady is.' }
       ] },
     { type: 'choose', lv: 'ie', q: 'An IA says: “Five temperatures were used, with three trials at each.” What is missing for the top band?',
       opts: [
         { t: 'A reason for the range, the interval and the number of trials', ok: true, why: 'The top band asks for methodological considerations to be explained, not only stated.' },
-        { t: 'A longer list of apparatus', why: 'More apparatus does not justify the choices.' },
-        { t: 'The word “fair test”', why: 'Naming the idea is not the same as justifying the design.' },
-        { t: 'A graph of the pilot run', why: 'A pilot run can supply the reason, but it is the reason that earns the credit.' }
+        { t: 'A longer list of the apparatus used for the three trials', why: 'More apparatus does not justify the choices.' },
+        { t: 'The phrase “fair test”, to show that the variables were controlled', why: 'Naming the idea is not the same as justifying the design.' },
+        { t: 'A personal reason for choosing temperature as the variable', why: 'Personal interest is not in the 2025 criteria. The design choices need a reason.' }
       ] },
     { type: 'multi', lv: 'ie', q: 'Which of these are “methodological considerations” in the IB guide?',
       opts: [
         { t: 'The range and interval of the independent variable', ok: true },
         { t: 'The control variables and how each was controlled', ok: true },
         { t: 'Safety, ethical and environmental issues', ok: true },
-        { t: 'Why the topic is personally interesting', why: 'Personal interest is not in the 2025 criteria.' },
-        { t: 'The colours used on the graph', why: 'Presentation belongs to Data analysis, not Research design.' }
+        { t: 'Why the topic is personally interesting to you', why: 'Personal interest is not in the 2025 criteria.' },
+        { t: 'The colours and the scales chosen for each graph', why: 'Presentation belongs to Data analysis, not Research design.' }
       ],
       why: 'All three are listed in the Research design clarifications (IB Biology guide, p. 120).' }
   ],

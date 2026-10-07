@@ -16,7 +16,7 @@
   } catch (e) { /* no document */ }
 
   WUL.station({
-    id: 'evaluation', stage: 'judge', order: 1, title: 'Evaluation', levels: 'gie',
+    id: 'evaluation', keepV: { v: '6hczha', now: 'inncdl', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'judge', order: 1, title: 'Evaluation', levels: 'gie',
     job: { g: 'Name the errors that came from your method, say what each did to the results, and match each with an improvement.', i: 'Explain the weaknesses and limitations of your method, rank them by impact, and give a realistic improvement for each.', e: 'Judge the strengths and limitations of your method and your sources, and explain each one.' },
     where: { g: 'After the conclusion, at the end of the report.', i: 'After the conclusion. It has its own criterion: Evaluation, 6 marks.', e: 'After the discussion, or inside it. It is marked with the discussion, under criterion D.' },
 
@@ -203,9 +203,9 @@
       { type: 'choose', q: 'Which source of error would a Cambridge examiner credit?',
         opts: [
           { t: 'The end point of the iodine test was judged by eye.', ok: true, why: 'It names a step in the method that causes an error.' },
-          { t: 'Human error.', why: 'Never credited: it names no step.' },
-          { t: 'The stopwatch was not accurate.', why: 'A stopwatch reads to 0.01 s. That is not the real limit here.' },
-          { t: 'Some mistakes were made.', why: 'It names nothing, so it cannot be improved.' }
+          { t: 'Human error made some of the results less reliable.', why: 'Never credited: it names no step, so it cannot be improved.' },
+          { t: 'The stopwatch was not accurate enough to time the reaction.', why: 'A stopwatch reads to 0.01 s. That is not the real limit here: judging the end point is.' },
+          { t: 'Some mistakes were made while the experiment was being done.', why: 'It names no mistake and no step, so it cannot be improved.' }
         ] },
       { type: 'spot', q: 'Tap the two phrases that would lose marks.',
         text: '[!a:Human error] made the times vary. [?:The water-bath dial read 2 °C high, so every temperature was lower than recorded.] [!b:Repeating the experiment would fix this.] [?:The end point was judged by eye, which reduced precision.]',
@@ -217,9 +217,9 @@
       { type: 'choose', q: 'Why does repeating not help with a systematic error?',
         opts: [
           { t: 'Every repeat is shifted equally, in the same direction, so the mean is shifted too.', ok: true, why: 'The errors do not cancel: they all push the same way.' },
-          { t: 'Repeats take too long.', why: 'Time is not the reason. The errors do not cancel.' },
-          { t: 'Random errors are always bigger.', why: 'Not always, and that is not why repeats fail here.' },
-          { t: 'It does help: the mean cancels it.', why: 'A mean cancels random scatter, not a shift in one direction.' }
+          { t: 'Repeats take too long, so there is no time to do enough of them to cancel it.', why: 'Time is not the reason. However many repeats are done, the errors do not cancel.' },
+          { t: 'Random errors are always bigger, so a systematic error is hidden by the scatter.', why: 'Random errors are not always bigger, and that is not the reason: repeats fail because every repeat is shifted the same way.' },
+          { t: 'It does help: the mean of many repeats cancels a systematic error, as it does random error.', why: 'A mean cancels random scatter in both directions. A systematic error shifts every repeat in one direction, so it does not cancel.' }
         ] },
       { type: 'multi', q: 'The water-bath temperature fluctuated between 48 and 52 °C, while the dial read 50 °C. Which statements are true?',
         opts: [
@@ -241,16 +241,16 @@
       { type: 'choose', lv: 'ie', q: 'Which of these is a limitation, not a weakness?',
         opts: [
           { t: 'Only one batch of amylase was tested, so the conclusion applies to that batch.', ok: true, why: 'It limits how widely the conclusion applies: the confines of the system.' },
-          { t: 'The bath drifted by ± 0.5 °C.', why: 'A weakness in the control of variables.' },
-          { t: 'The iodine was sampled every 10 s.', why: 'A weakness in the precision of measurement.' },
-          { t: 'The SD at 60.0 °C was 8.4 s.', why: 'A weakness: variation in the data.' }
+          { t: 'The bath drifted by ± 0.5 °C, so the temperature was not kept fully constant.', why: 'A weakness: the temperature was not fully controlled. It affects the data, not how widely the conclusion applies.' },
+          { t: 'The iodine was sampled every 10 s, so each end point could be up to 10 s late.', why: 'A weakness in the precision of measurement. It affects the data, not how widely the conclusion applies.' },
+          { t: 'The SD at 60.0 °C was 8.4 s, so the times at that temperature varied between repeats.', why: 'A weakness: variation in the data. It does not limit how widely the conclusion applies.' }
         ] },
       { type: 'choose', lv: 'i', q: 'Which improvement does the IA ask for?',
         opts: [
           { t: 'Follow the colour with a colorimeter that reads every second, to reduce the largest uncertainty: the 10 s sampling interval.', ok: true, why: 'Realistic, specific, and matched to the weakness that mattered most.' },
-          { t: 'Investigate the effect of pH next.', why: 'An extension: the 2025 criteria do not ask for one.' },
-          { t: 'Use a better laboratory.', why: 'Not realistic, and not linked to any weakness.' },
-          { t: 'Repeat the experiment more times.', why: 'No number and no weakness: repeats would not fix the 10 s sampling interval.' }
+          { t: 'Investigate the effect of pH on the same enzyme in a new experiment, to extend the research question to a second independent variable.', why: 'That is an extension, a new question. The 2025 criteria ask for improvements to this method, not extensions.' },
+          { t: 'Use a better laboratory with newer and more accurate equipment, to reduce all of the sources of error in the method.', why: 'Not realistic, not specific, and not linked to any weakness of this method.' },
+          { t: 'Repeat the experiment more times at each temperature, to make the results more accurate and to remove the human error in the method.', why: 'No number and no weakness named: repeats do not make results more accurate, and they would not fix the 10 s sampling interval.' }
         ] },
       { type: 'multi', lv: 'e', q: 'In an Extended Essay, what should the evaluation cover?',
         opts: [

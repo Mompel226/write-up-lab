@@ -52,7 +52,7 @@
                 ['0.6', '2.49', '2.28', '−8.4', 'Soft; bent easily'], ['0.8', '2.51', '2.21', '−12.0', 'Very soft and limp'], ['1.0', '2.50', '2.15', '−14.0', 'Limp; surface wrinkled']];
 
   WUL.station({
-    id: 'observations', stage: 'record', order: 3, title: 'Observations', levels: 'gie',
+    id: 'observations', keepV: { v: '131snsk', now: '1t46dka', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'record', order: 3, title: 'Observations', levels: 'gie',
     job: 'Record what you see as well as what you measure: colour, cloudiness, bubbles, texture, damage. It can explain the numbers.',
     where: {
       g: 'Not a section of its own: an Observations column in your results table, or a short note under it.',
@@ -160,9 +160,9 @@
       { type: 'choose', q: 'Which observation adds something to the potato results?',
         opts: [
           { t: 'The cylinder at 1.0 mol dm⁻³ was limp and wrinkled.', ok: true, why: 'It agrees with the mass lost, and describes the tissue.' },
-          { t: 'The solutions stayed clear.', why: 'Nothing depends on it, so it adds nothing.' },
-          { t: 'The cylinders were cut with a cork borer.', why: 'That belongs in the method. It is not an observation of the result.' },
-          { t: 'The experiment was interesting.', why: 'An opinion, not an observation.' }
+          { t: 'The cylinder at 1.0 mol dm⁻³ lost water from its cells by osmosis.', why: 'That is an explanation, not an observation: osmosis cannot be seen. An observation records what was seen, such as “limp and wrinkled”.' },
+          { t: 'The cylinders were cut with a cork borer and trimmed to 3 cm.', why: 'That belongs in the method. It is not an observation of the result.' },
+          { t: 'The experiment was interesting and easy to do in one lesson.', why: 'An opinion, not an observation of the potato.' }
         ] },
       { type: 'spot', q: 'Tap the two observations that add nothing.',
         text: '[?:At 0.0 mol dm⁻³, the cylinder was firm and snapped when bent.] [!a:The experiment went well.] [?:One cylinder had a bruised, brown patch and was replaced.] [!b:The solutions stayed clear.] [?:At 1.0 mol dm⁻³, the surface was wrinkled.]',
@@ -170,23 +170,23 @@
       { type: 'choose', q: 'Why record observations of the living material?',
         opts: [
           { t: 'Individuals vary: one leaf may be damaged, one potato firmer, and this can explain a result.', ok: true, why: 'Biological material is never identical, so its differences are worth recording.' },
-          { t: 'They make the report longer.', why: 'Length earns nothing. Relevance does.' },
-          { t: 'They replace the need for repeats.', why: 'Repeats are still needed. Observations help explain the spread.' },
-          { t: 'They prove the hypothesis.', why: 'An observation can support a result, but it proves nothing alone.' }
+          { t: 'Reports are marked on length: each extra note about a leaf or a potato adds a mark.', why: 'Length earns nothing. Relevance does.' },
+          { t: 'Observations replace repeats: if each sample is described, fewer trials are needed.', why: 'Repeats are still needed. Observations help explain the spread.' },
+          { t: 'Observations prove the hypothesis: a limp potato is proof that osmosis happened.', why: 'An observation can support a result, but it proves nothing alone.' }
         ] },
       { type: 'choose', q: 'Where does an observation go?',
         opts: [
           { t: 'In an Observations column, or a short note under the table', ok: true, why: 'Beside the data it explains, but out of the number cells.' },
-          { t: 'In the number cells, next to each value', why: 'A cell of numbers holds a number only.' },
-          { t: 'Only in the conclusion', why: 'Record it with the data. The conclusion may then use it.' },
-          { t: 'Nowhere: only numbers count', why: 'Observations can explain the numbers, so record them.' }
+          { t: 'In the number cells, with each observation written next to its value', why: 'A cell of numbers holds a number only. Put the observation beside the data, not in the cells.' },
+          { t: 'In the conclusion, and not with the data, so the table stays clear', why: 'Record it with the data. The conclusion may then use it.' },
+          { t: 'Nowhere: an observation is not data, so it is not recorded', why: 'Observations can explain the numbers, so record them.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'What does the IB Biology guide say about qualitative observations in the IA?',
         opts: [
           { t: 'Quantitative data should be supported by them where appropriate.', ok: true, why: 'The guide’s words: “supported by qualitative observations where appropriate” (p. 116).' },
-          { t: 'They can replace quantitative data.', why: 'The IA must collect and analyse quantitative data.' },
-          { t: 'They are not allowed.', why: 'The skills list asks for relevant qualitative observations.' },
-          { t: 'They must fill a whole page.', why: 'Only relevant observations, where appropriate.' }
+          { t: 'Quantitative data can be replaced by them if measuring is hard.', why: 'The IA must collect and analyse quantitative data. Observations support them.' },
+          { t: 'They should be omitted from the IA, since they are not numbers.', why: 'The skills list asks for relevant qualitative observations.' },
+          { t: 'They earn marks on their own, so long lists of them are needed.', why: 'No criterion rewards a long list. Only relevant observations, where appropriate.' }
         ] }
     ],
 
