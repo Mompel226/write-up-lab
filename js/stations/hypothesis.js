@@ -21,7 +21,7 @@
   var PLATEAU = [[0, 0.2], [1, 3], [2, 5.1], [3, 6.5], [4, 7.4], [5.5, 8.1], [7.5, 8.5], [10, 8.7]];
 
   WUL.station({
-    id: 'hypothesis', keepV: { v: '1av3x7c', now: 'v6a5b4', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 4, title: 'Hypothesis', levels: 'gie',
+    id: 'hypothesis', keepV: { v: '1av3x7c', now: '1szzikw', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'plan', order: 4, title: 'Hypothesis', levels: 'gie',
     job: 'Predict what will happen to the dependent variable, and the shape of the graph, with a biological reason.',
     where: { g: 'After the aim, before the method.', i: 'Inside your introduction, after the background. It is optional in the IA.', e: 'Inside the introduction, after the literature review.' },
 
@@ -156,7 +156,7 @@
       { type: 'choose', q: 'Which hypothesis has the “If … then … because …” structure and a biological reason?',
         opts: [
           { t: 'If light intensity is increased, then the rate of photosynthesis will increase to a plateau, because chlorophyll absorbs more light energy until another factor limits the rate.', ok: true, why: 'Both variables, a predicted shape, and the biology behind it.' },
-          { t: 'Plants grow faster in bright light than in dim light, because light gives them more energy, so the plants kept in the brightest light will grow the tallest.', why: 'No “If … then …” structure, and growth was not measured: the rate of photosynthesis was.' },
+          { t: 'Plants grow faster in bright light than in dim light, because light gives them more energy, so the plants kept in the brightest light will grow the tallest.', why: 'No “If … then …” structure, and the reason is vague: name the process, such as light energy absorbed by chlorophyll for photosynthesis.' },
           { t: 'If the light intensity is increased, then the plant will photosynthesise faster and faster, because plants like bright light and they grow bigger and healthier when they receive more of it.', why: 'Plants do not “like” anything. Name the process: light energy is absorbed by chlorophyll. And the rate does not keep rising: it reaches a plateau.' },
           { t: 'The rate of photosynthesis depends on the light intensity, and this investigation will measure the rate of oxygen release at several different light intensities to test how they are related.', why: 'A statement of the aim, with no prediction and no biological reason.' }
         ] },
@@ -172,21 +172,21 @@
       { type: 'choose', q: 'Which prediction does this sketch graph show?',
         show: { plot: sketch('Substrate concentration', 'Rate of reaction', PLATEAU, 'smooth', null, { w: 320, h: 220, pad: { l: 30, r: 12, t: 12, b: 34 } }) },
         opts: [
-          { t: 'The rate rises, then reaches a plateau.', ok: true, why: 'Steep at first, then flat: saturation.' },
-          { t: 'The rate rises, then falls.', why: 'That would be an optimum curve. This one never falls.' },
+          { t: 'The rate rises, then reaches a plateau.', ok: true, why: 'Steep at first, then flat: once every active site is occupied, more substrate cannot raise the rate.' },
+          { t: 'The rate rises to an optimum, then falls.', why: 'That would be an optimum curve. This one never falls.' },
           { t: 'The substrate concentration has no effect.', why: 'No effect would be a flat line from the start.' },
-          { t: 'The rate falls steadily.', why: 'The line rises from left to right.' }
+          { t: 'The rate falls steadily as concentration rises.', why: 'The line rises from left to right.' }
         ] },
       { type: 'spot', q: 'Tap the two phrases a teacher would correct.',
         text: 'If the temperature is increased from 20 °C to 60 °C, [?:the time for the starch to be digested will decrease to a minimum], because [!a:the enzyme gets more energy and works harder]. Above the optimum, [!b:the enzyme dies].',
-        why: { a: 'Name the process: molecules gain kinetic energy, collide more often, and form more enzyme–substrate complexes per second.', b: 'Enzymes are not alive. The enzyme is denatured.' } },
+        why: { a: 'Name the process: molecules gain kinetic energy, collide more often, and form more enzyme–substrate complexes per second.', b: 'Enzymes are not alive, so they cannot die. Above the optimum, the active site changes shape, and the enzyme is denatured.' } },
       { type: 'build', q: 'Build the reason for the fall above the optimum.',
-        chips: ['Above the optimum,', 'hydrogen and ionic bonds in the tertiary structure break,', 'the active site changes shape,', 'so the substrate no longer fits.', 'the enzyme dies,', 'the enzyme gets tired.'],
+        chips: ['Above the optimum,', 'hydrogen and ionic bonds in the tertiary structure break,', 'the active site changes shape,', 'so the substrate no longer fits.', 'the enzyme dies,', 'the enzyme molecules move too fast to bind,'],
         answer: ['Above the optimum,', 'hydrogen and ionic bonds in the tertiary structure break,', 'the active site changes shape,', 'so the substrate no longer fits.'],
-        why: 'Cause, then effect: bonds break, the shape changes, the substrate no longer fits.' },
+        why: 'Cause, then effect: bonds break, the shape changes, the substrate no longer fits. Faster movement gives more collisions; the fall comes from the change in shape.' },
       { type: 'order', q: 'Put the explanation of the amylase curve in order.',
         items: ['The temperature increases.', 'Molecules gain kinetic energy.', 'Enzyme and substrate collide more often.', 'More enzyme–substrate complexes form per second.', 'Above the optimum, bonds in the tertiary structure break.', 'The active site changes shape, and the enzyme is denatured.'],
-        why: 'The first four explain the rise; the last two explain the fall.' },
+        why: 'The first four explain why the rate increases below the optimum; the last two explain why it falls above it.' },
       { type: 'choose', lv: 'g', q: 'Does a Cambridge IGCSE Paper 6 planning question give marks for a prediction?',
         opts: [
           { t: 'No. Plans are not credited for predictions, but a written lab report should still include one.', ok: true, why: 'Mark schemes credit variables, method, controls, repeats and safety.' },
@@ -199,7 +199,7 @@
           { t: 'Answer the research question with processed data. A sentence on whether the hypothesis was supported may follow.', ok: true, why: 'The Conclusion criterion assesses how well the report answers the research question.' },
           { t: 'Judge the hypothesis with processed data. A sentence that answers the research question is not needed.', why: 'The research question must be answered, with processed data. The sentence on the hypothesis is optional.' },
           { t: 'Remove the hypothesis, as the IB does not allow one. Describe the raw data in the results table.', why: '“Evaluate hypotheses” is an IB skill, so a sentence on it is allowed. The answer needs processed data, not raw data.' },
-          { t: 'Repeat each mean from the results table. Then say whether each mean supports the hypothesis.', why: 'The table already gives the means. Answer the research question with the processed data.' }
+          { t: 'Repeat each mean from the results table. Then say whether each mean supports the hypothesis.', why: 'A list of means is not an answer. Use the processed data to state the trend and answer the research question; a sentence on the hypothesis may follow.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'Which are features of a sketch graph?',
         opts: [

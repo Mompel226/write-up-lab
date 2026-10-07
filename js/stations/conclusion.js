@@ -50,7 +50,7 @@
   };
 
   WUL.station({
-    id: 'conclusion', keepV: { v: '1z03kif', now: '1jmpel2', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'sense', order: 3, title: 'Conclusion', levels: 'gie',
+    id: 'conclusion', keepV: { v: '1z03kif', now: '1sgfcwa', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'sense', order: 3, title: 'Conclusion', levels: 'gie',
     job: { g: 'Say whether the hypothesis is supported, give the evidence, and explain it with biology.', i: 'Answer the research question with processed data and its uncertainty, then justify the answer against published science.', e: 'A short synthesis that answers the research question. No new evidence and no new argument.' },
     where: { g: 'After the data analysis, before the evaluation.', i: 'After the analysis, before the evaluation. It has its own criterion: Conclusion, 6 marks.', e: 'At the end of the essay, after the discussion and the evaluation.' },
 
@@ -215,10 +215,10 @@
         items: [
           'The results support the hypothesis that the time would decrease to a minimum and then increase.',
           'The mean time was shortest at 50 °C (53 s), compared with 180 s at 20 °C and 93 s at 60 °C.',
-          'Above 50 °C, bonds in the tertiary structure broke, the active site changed shape, and some amylase was denatured.',
-          'This is close to the 55 °C published for α-amylase from *Aspergillus oryzae* (Raviyan et al. 5464).'
+          'This rise in time above 50 °C happened because bonds in the tertiary structure broke, the active site changed shape, and some amylase was denatured.',
+          'The optimum near 50 °C is close to the 55 °C published for α-amylase from *Aspergillus oryzae* (Raviyan et al. 5464).'
         ],
-        why: 'The answer, the evidence, the biology, then the comparison.' },
+        why: 'The answer, the evidence, the biology (“This rise” points back to the times), then the comparison.' },
       { type: 'choose', q: 'The hypothesis said: “As the temperature increases from 20 °C to 60 °C, the time will decrease.” Look at the graph. Which conclusion is right?', show: { plot: plotShow },
         opts: [
           { t: 'The results support the hypothesis only up to 50 °C. Above 50 °C, the time increased.', ok: true, why: 'Say how far the data support it, and where they do not.' },
@@ -247,7 +247,7 @@
           { t: 'Raviyan et al. report an optimum of 55 °C.', bin: 0, why: 'The comparison with published science belongs in the conclusion.' },
           { t: 'Above the optimum, the active site changed shape.', bin: 0, why: 'The biology that explains the answer.' },
           { t: 'The iodine was sampled only every 10 s.', bin: 1, why: 'A weakness of the method.' },
-          { t: 'Only one batch of amylase was used.', bin: 1, why: 'A limitation of the method.' },
+          { t: 'Only one batch of amylase was used.', bin: 1, why: 'A weakness of the method: variation between batches was not tested. It is explained in the evaluation.' },
           { t: 'A colorimeter would give a reading every second.', bin: 1, why: 'An improvement belongs in the evaluation.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'The research question: “How does temperature (20.0–60.0 °C) affect the rate of starch hydrolysis by *A. oryzae* α-amylase?” Which sentence answers it?',
@@ -269,8 +269,8 @@
           { t: 'A conclusion relevant to the research question', ok: true },
           { t: 'Interpretation of processed data, including its uncertainties', ok: true },
           { t: 'A comparison with the accepted scientific context, cited so it can be traced', ok: true },
-          { t: 'A judgement on whether the hypothesis was right', why: 'Allowed, but it is not in the descriptor.' },
-          { t: 'A list of the method’s weaknesses', why: 'Weaknesses are marked by the Evaluation criterion.' }
+          { t: 'A sentence saying whether the results support the hypothesis', why: 'Allowed, but it is not in the descriptor or its clarifications.' },
+          { t: 'A list of the method’s weaknesses, with an improvement for each', why: 'Weaknesses and improvements are marked by the Evaluation criterion.' }
         ],
         why: 'The three parts of the 5–6 descriptor and its clarifications (IB Biology guide, p. 122).' },
       { type: 'choose', lv: 'e', q: 'What should an Extended Essay conclusion do?',

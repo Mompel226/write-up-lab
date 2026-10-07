@@ -7,7 +7,7 @@
    · "Making a calibration curve for starch concentration", Practical Biology, © 2019 Royal Society of Biology, no author
    · Amoeba Sisters, "Enzymes (Updated)", YouTube, uploaded 28 Aug. 2016 (red pen and reference builder) */
 WUL.station({
-  id: 'sources', keepV: { v: '92skd4', now: '1i4t6k', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'finish', order: 1, title: 'Sources and referencing', levels: 'gie',
+  id: 'sources', keepV: { v: '92skd4', now: '10fzt6s', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'finish', order: 1, title: 'Sources and referencing', levels: 'gie',
   job: 'Show where every idea, number and image came from, so that a reader can find the source.',
   where: 'A short citation in the text where each source is used, and the full entry in the list at the end.',
 
@@ -138,7 +138,7 @@ WUL.station({
       why: 'Author (surname first), the title in italics, the edition, the publisher, the year.' },
     { type: 'order', q: 'Put the parts of this web-page entry in MLA order.',
       items: ['Clark, Mary Ann, et al.', '“6.5 Enzymes.”', '*Biology 2e*,', 'OpenStax,', '28 Mar. 2018,', 'openstax.org/books/biology-2e/pages/6-5-enzymes.', 'Accessed 23 Sept. 2026.'],
-      why: 'Author, title of the page, the container (the website), the publisher, the date, the location, then the access date.' },
+      why: 'Author, title of the section, the container (the online book), the publisher, the date, the location, then the access date.' },
     { type: 'spot', q: 'Tap the three citations that are wrong.',
       text: 'Error bars mean nothing unless the legend says what they show [?:(Cumming et al. 8)]. Enzymes lower the activation energy of the reactions they catalyse [!a:(openstax.org/books/biology-2e)]. The starch was measured with a published calibration method [!b:(Anonymous)]. Standard deviation bars show how the data are spread [!c:(Cumming, 2007)].',
       why: { a: 'Never a URL in the text. Give the author: (Clark et al.).', b: '“Anonymous” is never used. With no author, give a short title: (“Making a Calibration Curve”).', c: 'Author and year is another style. In MLA: (Cumming et al. 7). Never mix two styles.' } },
@@ -173,7 +173,7 @@ WUL.station({
         { t: 'The date it was accessed and the URL', ok: true, why: 'Both are in the EE guide’s minimum list, with author, date, title and pages.' },
         { t: 'The number of words and the language', why: 'Neither is a referencing requirement.' },
         { t: 'The name of the search engine used', why: 'A search engine is not the source.' },
-        { t: 'A summary of the page', why: 'That would be an annotated bibliography, which is not required.' }
+        { t: 'A short summary of what the page says', why: 'That would be an annotated bibliography, which is not required.' }
       ] },
     { type: 'choose', lv: 'ie', q: 'Two sentences in your background were written by an AI tool. What must you do?',
       opts: [

@@ -125,8 +125,8 @@ WUL.station({
   test: [
     { type: 'choose', q: 'Which step is written the way a lab report method should be?',
       opts: [
-        { t: '5.0 cm³ of starch solution was measured into a test tube with a 10 cm³ graduated pipette.', ok: true, why: 'Past tense, passive, with a quantity and the apparatus size.' },
-        { t: 'Measure 5.0 cm³ of starch solution into a test tube with a 10 cm³ graduated pipette.', why: 'An instruction, like a worksheet. A report says what was done: “…was measured”.' },
+        { t: '5.0 cm³ of 1.0 % starch solution was measured into a test tube with a 10 cm³ graduated pipette.', ok: true, why: 'Past tense, passive, with a volume, a concentration and the apparatus size.' },
+        { t: 'Measure 5.0 cm³ of 1.0 % starch solution into a test tube with a 10 cm³ graduated pipette.', why: 'An instruction, like a worksheet. A report says what was done: “…was measured”.' },
         { t: 'The student measured about 5 cm³ of starch solution into a test tube with a pipette.', why: '“About” is not a quantity, and the pipette has no size, so no one could repeat this step exactly.' },
         { t: 'Starch solution was added to a test tube, and then some amylase solution was added to the starch.', why: 'How much of each solution, and measured with what? Without them, the step cannot be repeated.' }
       ] },
@@ -135,7 +135,7 @@ WUL.station({
       answer: ['The tubes', 'were placed', 'in the water bath', 'for 5 minutes.'],
       why: 'The tubes, which were acted on, become the subject. “Were” agrees with the plural “tubes”.' },
     { type: 'order', q: 'Put the amylase method in order.',
-      items: ['5.0 cm³ of 1.0 % starch solution was measured into a test tube.', 'The starch and the amylase were placed in a water bath at 30 °C for 5 minutes.', 'The amylase was added to the starch, and the stopwatch was started.', 'Every 10 s, one drop of the mixture was tested with iodine solution.', 'The time was recorded when the iodine no longer turned blue-black.', 'Steps 1 to 5 were performed three times at each temperature.'],
+      items: ['5.0 cm³ of 1.0 % starch solution and 2.0 cm³ of 1.0 % amylase were measured into separate test tubes.', 'Both tubes were placed in a water bath at the test temperature for 5 minutes.', 'The amylase was added to the starch, and the stopwatch was started.', 'Every 10 s, one drop of the mixture was tested with iodine solution.', 'The time was recorded when the iodine no longer turned blue-black.', 'Steps 1 to 5 were performed three times at each of 20, 30, 40, 50 and 60 °C, and a mean was calculated.'],
       why: 'Measure, equilibrate, mix and start the clock, sample, stop, repeat.' },
     { type: 'choose', q: 'Why were the starch and the amylase left in the water bath for 5 minutes before they were mixed?',
       opts: [
@@ -145,7 +145,7 @@ WUL.station({
         { t: 'So that the heat killed any bacteria in both of the solutions.', why: 'At 20–60 °C for 5 minutes, that is not the purpose. The wait is for the temperature.' }
       ] },
     { type: 'spot', q: 'Tap the two phrases that need more detail.',
-      text: '[?:5.0 cm³ of 1.0 % starch solution was measured into a test tube.] [!a:Some amylase] was added and the stopwatch was started. [!b:Every so often], a drop was tested with iodine solution. [?:Three trials were carried out at each temperature.]',
+      text: '[?:5.0 cm³ of 1.0 % starch solution was measured into a test tube with a 10 cm³ graduated pipette.] [!a:Some amylase] was added and the stopwatch was started. [!b:Every so often], a drop was tested with iodine solution. [?:Three trials were carried out at each of 20, 30, 40, 50 and 60 °C, and a mean was calculated.]',
       why: { a: 'Give the volume and concentration: 2.0 cm³ of 1.0 % amylase.', b: 'Give the interval: every 10 s.' } },
     { type: 'sort', q: 'Precise enough to repeat, or too vague? Sort each phrase.',
       bins: ['Precise', 'Too vague'],
@@ -162,18 +162,18 @@ WUL.station({
         { t: 'The number of repeats at each temperature', ok: true },
         { t: 'How long the tubes were left to reach the temperature', ok: true },
         { t: 'The volume and concentration of each solution', ok: true },
-        { t: 'The times measured in each tube, and their mean', why: 'Measured values are results: they go in the results table, not the method.' },
+        { t: 'The times measured in each tube, and their mean', why: 'Measured times and the means calculated from them are results: they go in the results table. The method says only that a mean was calculated.' },
         { t: 'Why enzymes work fastest at their optimum temperature', why: 'That is theory: it belongs in the background or the hypothesis.' }
       ],
       why: 'The method says what was done, with enough detail to repeat it.' },
     { type: 'choose', lv: 'ie', q: 'What does the IB mean by a method that “could in principle” be repeated?',
       opts: [
-        { t: 'Specific materials and precise steps, without unnecessary or repetitive information.', ok: true, why: 'Those are the words of the Research design clarifications.' },
-        { t: 'The full list of apparatus, repeated in each step, so that each step can be read on its own.', why: 'That is the repetition the guide asks you to avoid: “without unnecessary or repetitive information”.' },
+        { t: 'Specific materials and precise steps, without unnecessary or repetitive information.', ok: true, why: 'The guide asks for specific materials and precise steps, with no unnecessary or repetitive information. This lets a reader repeat the investigation from the description alone.' },
+        { t: 'The full list of apparatus, repeated in each step, so that each step can be read on its own.', why: 'Repeating the apparatus list in each step is the “unnecessary or repetitive information” that the guide asks you to avoid.' },
         { t: 'The worksheet method, copied exactly, so that the steps match the teacher’s.', why: 'The method must be your own, and a worksheet gives orders, not a record.' },
         { t: 'A method that another student has repeated, and that gave the same results the second time.', why: 'That is about the results being reproduced. “In principle” is about how the method is described.' }
       ] },
-    { type: 'choose', lv: 'ie', q: 'A pilot run sampled drops every 30 s. At 50 °C, the starch had gone in under a minute. What should change?',
+    { type: 'choose', lv: 'ie', q: 'A pilot run sampled drops every 30 s. At 50 °C, all the starch was digested in less than one minute. What should change?',
       opts: [
         { t: 'Sample every 10 s instead, so the time is known to ± 10 s, not ± 30 s.', ok: true, why: 'The sampling interval sets the uncertainty of the time.' },
         { t: 'Remove 50 °C from the range, so no run ends within a minute.', why: '50 °C is where the optimum may be, so it matters most. Change the sampling, not the range.' },

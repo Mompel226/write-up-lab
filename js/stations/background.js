@@ -21,7 +21,7 @@
   };
 
   WUL.station({
-    id: 'background', keepV: { v: 'qbjkv6', now: '1nytmnz', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 2, title: 'Background', levels: 'ie',
+    id: 'background', keepV: { v: 'qbjkv6', now: '1oixrrj', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'plan', order: 2, title: 'Background', levels: 'ie',
     job: {
       i: 'Give only the theory your research question needs, with sources, and say how your data will answer it.',
       e: 'Show what is already known, from good sources, and where your question fits.'
@@ -156,7 +156,7 @@
       { type: 'build', q: 'Build a background sentence with a citation.',
         chips: ['Amylases from different organisms', 'have different optimum temperatures', '(Gupta et al.).', 'are all the same', '(Wikipedia).'],
         answer: ['Amylases from different organisms', 'have different optimum temperatures', '(Gupta et al.).'],
-        why: 'A claim that matters to the question, with a traceable source.' },
+        why: 'A claim that matters to the question, with a traceable source. No page is given here because the claim comes from the whole paper, not from one page.' },
       { type: 'multi', q: 'Why does an IA need background at all?',
         opts: [
           { t: 'It is part of the research question’s context, in Research design', ok: true },
@@ -168,7 +168,7 @@
         why: 'Background is there to serve the question, and the conclusion.' },
       { type: 'choose', q: 'A background quotes 37 °C for “amylase”. The experiment used fungal α-amylase and found its optimum near 50 °C. What went wrong?',
         opts: [
-          { t: 'The published value was for a different enzyme source: human salivary amylase.', ok: true, why: 'The result was right. The comparison was wrong.' },
+          { t: 'The published value was for a different enzyme source: human salivary amylase.', ok: true, why: 'A result near 50 °C fits the published 55 °C for this fungal enzyme. The comparison used a value for a different enzyme.' },
           { t: 'The experiment gave a wrong optimum: amylase works best at 37 °C, which is body temperature.', why: 'Amylases from different organisms have different optima. A result near 50 °C fits the published 55 °C for this fungal enzyme.' },
           { t: 'The thermometer in the water bath read 13 °C too high, so the true optimum was 37 °C.', why: 'Nothing suggests a faulty thermometer. The published value is for a different enzyme.' },
           { t: 'The two values agree: a difference of 13 °C is small enough to ignore in a school experiment.', why: 'A 13 °C difference is large, and it has a real cause: the two values are for different enzymes.' }
@@ -176,9 +176,9 @@
       { type: 'choose', lv: 'e', q: 'What does the EE guide require in a science essay that an IA report does not?',
         opts: [
           { t: 'A literature review', ok: true, why: 'Knowledge from relevant sources is judged in criterion B.' },
-          { t: 'A hypothesis in bold', why: 'Nothing is required in bold.' },
-          { t: 'A risk assessment on the title page', why: 'The title page holds your student code, the research question, the subject and the word count.' },
-          { t: 'Exactly three sources', why: 'No number is set. The sources must be relevant and reliable.' }
+          { t: 'A stated hypothesis', why: 'Neither guide requires a hypothesis. The EE needs a research question; a hypothesis is optional in both.' },
+          { t: 'A risk-assessment table', why: 'Neither guide asks for a risk-assessment table. Safety, ethical and environmental issues are recognised in the method.' },
+          { t: 'At least ten sources', why: 'No number of sources is set. The sources must be relevant and reliable.' }
         ] }
     ],
 

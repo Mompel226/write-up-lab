@@ -152,7 +152,7 @@
       { type: 'choose', q: 'The iodine was tested every 10 s at 50 °C. When did the starch disappear?',
         show: { html: tile(G.trials[3][2]) },
         opts: [
-          { t: '60 s', ok: true, why: 'The first sample that stayed orange-brown: no starch was left.' },
+          { t: '60 s', ok: true, why: 'The starch disappeared between 50 s and 60 s. The time recorded is the first sample that stayed orange-brown: 60 s.' },
           { t: '50 s', why: 'At 50 s the drop still turned blue-black, so starch was still there.' },
           { t: '70 s', why: 'By 70 s the starch had already gone. Record the first orange-brown sample.' },
           { t: '0 s', why: 'At 0 s all the starch was there: the drop turned blue-black.' }

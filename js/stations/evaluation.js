@@ -233,11 +233,11 @@
       { type: 'order', lv: 'i', q: 'Rank these weaknesses of the amylase IA, from the largest impact on the conclusion to the smallest.',
         items: [
           'Iodine sampled every 10 s (10 s: larger than the 5.5 s SD)',
-          'Bath dial reading 2.0 °C high (every temperature 2.0 °C lower than recorded)',
+          'Bath dial reading 1.0 °C high (at most about 6 s: close to the 5.5 s SD)',
           'Bath drift of ± 0.5 °C (at most ± 3 s: smaller than every SD)',
           'Stopwatch resolution of 0.01 s (far smaller than every SD)'
         ],
-        why: 'The sampling step is larger than the spread it measures, so it limits what can be said near the optimum. The dial moves every temperature by 2.0 °C, less than the 10.0 °C interval. The drift and the stopwatch change times far less than the SD.' },
+        why: 'Compare what each weakness does to the times with the SD. The 10 s sampling step is larger than the 5.5 s SD, so it limits what can be said near the optimum. The 1.0 °C dial error changes a time by at most about 6 s, close to the SD. The drift (at most 3 s) and the stopwatch (0.01 s) are smaller than every SD.' },
       { type: 'choose', lv: 'ie', q: 'Which of these is a limitation, not a weakness?',
         opts: [
           { t: 'Only one batch of amylase was tested, so the conclusion applies to that batch.', ok: true, why: 'It limits how widely the conclusion applies: the confines of the system.' },
@@ -254,11 +254,11 @@
         ] },
       { type: 'multi', lv: 'e', q: 'In an Extended Essay, what should the evaluation cover?',
         opts: [
-          { t: 'Strengths of the method, explained', ok: true },
-          { t: 'Limitations of the method, explained', ok: true },
-          { t: 'Strengths and limitations of the sources', ok: true },
+          { t: 'Strengths of the method, explained', why: 'An evaluation weighs strengths as well as limitations: say what the method did well, and why, such as five trials at each temperature.', ok: true },
+          { t: 'Limitations of the method, explained', why: 'Name each limitation and explain its effect on the results, such as the 10 s sampling interval hiding small differences near the optimum.', ok: true },
+          { t: 'Strengths and limitations of the sources', why: 'In an EE, the sources are evaluated too: say what makes each one strong, such as peer review, and where it differs from your work, such as another pH.', ok: true },
           { t: 'A list of weaknesses with no explanation', why: 'Criterion D asks for evaluation that is explained.' },
-          { t: 'Only the sources that agree with the results', why: 'That is not balanced.' }
+          { t: 'Only the sources that agree with the results', why: 'A balanced evaluation includes sources that disagree with your results, and explains the difference, such as another species or another pH.' }
         ],
         why: 'Criterion D: the method and the sources, strengths as well as limitations.' }
     ],

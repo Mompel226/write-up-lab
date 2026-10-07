@@ -185,9 +185,13 @@
         chips: ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Candidate code: abc123', 'Group members: abc124, abc125', 'Word count: 2,870', 'Contents', 'Name: Alex Kim'],
         answers: [
           ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Candidate code: abc123', 'Group members: abc124, abc125', 'Word count: 2,870'],
-          ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Candidate code: abc123', 'Word count: 2,870', 'Group members: abc124, abc125']
+          ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Candidate code: abc123', 'Word count: 2,870', 'Group members: abc124, abc125'],
+          ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Group members: abc124, abc125', 'Candidate code: abc123', 'Word count: 2,870'],
+          ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Group members: abc124, abc125', 'Word count: 2,870', 'Candidate code: abc123'],
+          ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Word count: 2,870', 'Candidate code: abc123', 'Group members: abc124, abc125'],
+          ['The effect of temperature on the rate of starch hydrolysis by fungal α-amylase', 'Word count: 2,870', 'Group members: abc124, abc125', 'Candidate code: abc123']
         ],
-        why: 'The title first, then the codes and the word count. No contents page, and codes instead of names.' },
+        why: 'The title first, then the codes and the word count, in any order. No contents page, and codes instead of names.' },
       { type: 'choose', lv: 'i', q: 'What goes at the start of an IA?',
         opts: [
           { t: 'The title, your candidate code, your group members’ codes and the word count', ok: true, why: 'These four details are listed in the IA guide.' },

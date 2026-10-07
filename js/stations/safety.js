@@ -2,7 +2,7 @@
    Control measure = what REDUCES the risk; emergency action = what to do IF harm happens.
    IB ethics facts: IB Sciences experimentation guidelines (2023), via docs/lab-reports/RESEARCH-ib.md. */
 WUL.station({
-  id: 'safety', keepV: { v: '1hxauu8', now: '11tw5m8', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 6, title: 'Risk, ethics and environment', levels: 'gie',
+  id: 'safety', keepV: { v: '1hxauu8', now: '1n2gfa8', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'plan', order: 6, title: 'Risk, ethics and environment', levels: 'gie',
   job: {
     g: 'Name each hazard in this method, and the precaution that matches it.',
     i: 'Name the safety, ethical and environmental issues of this method, and show what you did about each one.'
@@ -186,7 +186,7 @@ WUL.station({
     { type: 'choose', q: 'Which safety point would earn the mark in a Paper 6 plan for the amylase experiment?',
       opts: [
         { t: 'Iodine solution can irritate the eyes, so wear eye protection.', ok: true, why: 'A hazard from this method, with the precaution that matches it.' },
-        { t: 'Chemicals can be dangerous, so wear a lab coat throughout the practical.', why: 'No hazard from this method is named, and a lab coat is worn in every practical: it never scores.' },
+        { t: 'Chemicals can be dangerous, so wear a lab coat throughout the practical.', why: 'No hazard from this method is named, and a lab coat matches no particular hazard: recent mark schemes do not credit it.' },
         { t: 'Accidents can happen in any laboratory, so work under adult supervision.', why: 'Never credited: it does not reduce any particular risk.' },
         { t: 'Iodine solution can irritate the eyes, so do the tests in a fume cupboard.', why: 'The precaution does not match the hazard. The hazard is a splash in the eyes, so the matching precaution is eye protection. A fume cupboard is for harmful gases.' }
       ] },
@@ -212,7 +212,7 @@ WUL.station({
         { t: 'Hydrogen peroxide solution', ok: true, why: 'An irritant: it can damage the eyes.' },
         { t: 'Raw liver', ok: true, why: 'Raw meat can carry bacteria that cause food poisoning.' },
         { t: 'The scalpel used to cut the liver', ok: true, why: 'A sharp blade can cut the skin.' },
-        { t: 'The stopwatch', why: 'A stopwatch cannot cause harm.' },
+        { t: 'The distilled water used for dilution', why: 'Distilled water is not a hazard in this practical.' },
         { t: 'The ruler', why: 'A ruler is not a hazard.' }
       ],
       why: 'Chemicals, organisms and equipment can all be hazards.' },
@@ -238,7 +238,7 @@ WUL.station({
     { type: 'choose', lv: 'ie', q: 'An IA counts woodlice under logs in a wood. Which follows the IB guidelines?',
       opts: [
         { t: 'Counting them where they are, then returning each log to its place.', ok: true, why: 'Minimal impact: the habitat is left as it was found.' },
-        { t: 'Collecting them in a pot, then keeping them in the laboratory until the study ends.', why: 'Animals are observed in their natural conditions, and returned unharmed.' },
+        { t: 'Collecting them in a pot, then keeping them in the laboratory after the count.', why: 'Animals must be returned unharmed to where they were found. A count needs no collecting at all.' },
         { t: 'Removing the logs from the wood, to see and count the woodlice more easily.', why: 'That damages the habitat.' },
         { t: 'Choosing a protected nature reserve, to find more species and larger numbers.', why: 'Protected species and sites are avoided.' }
       ] },

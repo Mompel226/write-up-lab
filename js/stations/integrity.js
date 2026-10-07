@@ -3,7 +3,7 @@
    IB Academic integrity policy (2023), appendix 6 ("The IB will not ban the use of AI software"; AI text, images and graphs
    quoted and referenced with the prompt and the date generated). */
 WUL.station({
-  id: 'integrity', keepV: { v: '1i6mz4a', now: '1443d5a', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'finish', order: 3, title: 'Academic integrity and AI', levels: 'gie',
+  id: 'integrity', keepV: { v: '1i6mz4a', now: '1jqjtsb', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'finish', order: 3, title: 'Academic integrity and AI', levels: 'gie',
   job: 'Check that every word, idea, number and image is either your own or credited to its source.',
   where: 'Everywhere: in every sentence, every figure and every number you present.',
 
@@ -106,11 +106,11 @@ WUL.station({
         { t: 'Cite the book.', ok: true, why: 'The idea is still the author’s, so you must cite it.' },
         { t: 'Nothing: the words are now yours.', why: 'The words are yours, but the idea is not. Cite it.' },
         { t: 'Put it in quotation marks.', why: 'Quotation marks are for exact words. A paraphrase needs the citation only.' },
-        { t: 'Leave the book out of the list, to save words.', why: 'The list does not count towards the words, and every source must be in it.' }
+        { t: 'List the book at the end, but not in the text.', why: 'The list at the end is not enough. The sentence needs an in-text citation too.' }
       ] },
     { type: 'choose', q: 'What is the difference between collaboration and collusion?',
       opts: [
-        { t: 'Collaboration is working together where it is allowed; collusion is helping someone submit work that is not their own.', ok: true, why: 'Sharing equipment and ideas openly is fine. Sharing the words or the data of a report is not.' },
+        { t: 'Collaboration is working together where it is allowed; collusion is helping someone submit work that is not their own.', ok: true, why: 'Working together openly, such as sharing equipment, is fine where it is allowed. Helping someone submit your words or work as theirs is not.' },
         { t: 'There is no difference: collaboration and collusion are two words for working together with other people on the same report.', why: 'One is allowed; the other is misconduct.' },
         { t: 'Collaboration is working in a group of up to three; collusion is working in a group of more than three people.', why: 'Group size is a separate rule. Collusion is helping someone submit work that is not their own, in a group of any size.' },
         { t: 'Collaboration is copying another person’s work with their permission; collusion is copying their work without their permission.', why: 'Copying with permission is collusion, and copying without permission is plagiarism.' }
@@ -133,14 +133,14 @@ WUL.station({
       opts: [
         { t: 'Every word of your report', ok: true, why: 'Shared data are fine when your teacher allows it. The writing is yours alone.' },
         { t: 'Nothing: pooled work is shared', why: 'The data may be shared. The report is not.' },
-        { t: 'Only the title', why: 'Every word is your own.' },
-        { t: 'Only the graph', why: 'Every word, table and graph is your own work.' }
+        { t: 'Only the written conclusion', why: 'Every part is your own, from the method to the evaluation, not only the conclusion.' },
+        { t: 'All of it except the method', why: 'The method is written in your own words too. Only the data may be shared.' }
       ] },
     { type: 'choose', lv: 'i', q: 'How large may an IA group be?',
       opts: [
         { t: 'Up to three people', ok: true, why: 'Collaboration is optional; groups are no larger than three.' },
         { t: 'Up to five people', why: 'The limit is three.' },
-        { t: 'Two people only', why: 'Up to three are allowed.' },
+        { t: 'Up to two people', why: 'The limit is three, so a group of three is allowed too.' },
         { t: 'Groups are not allowed', why: 'Groups of up to three are allowed, with individual reports.' }
       ] },
     { type: 'multi', lv: 'i', q: 'In an IA group of three, what must be different for each person?',

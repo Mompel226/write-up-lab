@@ -28,7 +28,7 @@
     '</div></div>';
 
   WUL.station({
-    id: 'processing', keepV: { v: '1n2liy', now: '1r2vy4e', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'record', order: 2, title: 'Processing data', levels: 'gie',
+    id: 'processing', keepV: { v: '1n2liy', now: '1bjqe36', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'record', order: 2, title: 'Processing data', levels: 'gie',
     job: 'Convert the raw data into the numbers that answer the question: means, rates and percentage changes, each shown once as a worked example.',
     where: {
       g: 'Not a section of its own: inside your Results. The mean goes in the table; any other calculation goes just below it.',
@@ -233,7 +233,7 @@
           { t: 'The mean and standard deviation at each temperature', ok: true },
           { t: 'The rate, if the conclusion uses it', ok: true },
           { t: 'The times converted to minutes, hours and days', why: 'Not relevant to the research question.' },
-          { t: 'Every cell of the spreadsheet, typed out', why: 'One worked example of each calculation is enough.' }
+          { t: 'The whole spreadsheet, copied cell by cell', why: 'One worked example of each calculation is enough. Then write “repeated for all values”.' }
         ],
         why: 'Processing must be relevant to the research question and carried out accurately (IB Biology guide, Data analysis criterion).' }
     ],

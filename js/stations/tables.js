@@ -344,7 +344,7 @@
           head: [[{ diag: ['Distance / cm', 'Trial'] }, '10', '20', '30', '40', '50']],
           rows: [[{ t: '1', th: true }, '48', '31', '20', '12', '7'], [{ t: '2', th: true }, '46', '33', '19', '14', '8'], [{ t: '3', th: true }, '50', '29', '21', '13', '6']] }, CMP) },
         opts: [
-          { t: 'Turn it round: distance down the first column, then one column for each trial, each with its own heading and unit.', ok: true, why: 'The independent variable runs down the first column, and a diagonal corner is never used. The number of bubbles now gets a heading too.' },
+          { t: 'Swap rows and columns: distance down the first column, then a column for each trial, each with its own heading and unit.', ok: true, why: 'The independent variable runs down the first column, and a diagonal corner is never used. The number of bubbles now gets a heading too.' },
           { t: 'Nothing: the numbers are complete, and the reader can see which distance and which trial each one belongs to.', why: 'The numbers are there, but nothing says what they are: the number of bubbles has no heading and no unit.' },
           { t: 'Keep the layout, but add the unit to the corner as well, so that the corner holds the labels and the unit for the whole table.', why: 'The corner would then hold three things. Give every column its own heading instead.' },
           { t: 'Keep the layout, but write the word “bubbles” after each number, so that each value in the table has its own unit.', why: 'Words and units go in the heading, never in the cells.' }
@@ -354,7 +354,7 @@
           head: [['Concentration of sucrose solution / mol dm⁻³', '0.0', '0.2', '0.4', '0.6', '0.8', '1.0']],
           rows: [[{ t: 'Percentage change in mass / %', th: true }, '+8.4', '+4.0', '−1.2', '−8.4', '−12.0', '−14.0']] }, CMP) },
         opts: [
-          { t: 'It is turned round: concentration should run down the first column, with the change in mass in the second column.', ok: true, why: 'In a biology table each variable gets a column, and the independent variable comes first.' },
+          { t: 'The rows and columns are swapped: concentration should run down the first column, with the change in mass in the second column.', ok: true, why: 'In a biology table each variable gets a column, and the independent variable comes first.' },
           { t: 'Nothing: each row has a heading with a quantity and a unit, so the table already follows the rules for a biology table.', why: 'The headings are right, but they label rows. The independent variable belongs down the first column.' },
           { t: 'The units should be written in the cells, next to each value, so that each heading gives the name of the quantity without its unit.', why: 'Units belong in the headings. The problem is the layout.' },
           { t: 'The plus signs should be removed, because a change in mass is written as a plain number without a sign in a biology table.', why: 'The signs show a gain or a loss of mass, so they stay.' }
@@ -416,7 +416,7 @@
           { t: 'The mean of the other trials, with a note saying it was added', why: 'That invents a reading, even with a note. Record only what was measured.' }
         ] },
       { type: 'multi', q: 'Tick every rule this table breaks.',
-        show: { table: T({ head: [['Mean time / s', 'Trial 1', 'Trial 2', 'Trial 3', 'Temperature / °C']], rows: [['180', '180', '170', '190', '20'], ['117', '120', '110', '120', '30'], ['73', '70', '80', '70', '40']] }) },
+        show: { table: T({ head: [[{ t: 'Mean time / s', rs: 2 }, { t: 'Time for starch to disappear / s', cs: 3 }, { t: 'Temperature / °C', rs: 2 }], ['Trial 1', 'Trial 2', 'Trial 3']], rows: [['180', '180', '170', '190', '20'], ['117', '120', '110', '120', '30'], ['73', '70', '80', '70', '40']] }) },
         opts: [
           { t: 'The independent variable is not in the first column', ok: true, why: 'Temperature should come first.' },
           { t: 'The mean is before the trials, not after them', ok: true, why: 'The mean is calculated from the trials, so it goes on the right.' },

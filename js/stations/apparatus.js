@@ -113,7 +113,7 @@
   ]);
 
   WUL.station({
-    id: 'apparatus', keepV: { v: 'gtaxvv', now: 'vxbm6p', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 5, title: 'Apparatus and materials', levels: 'gie',
+    id: 'apparatus', keepV: { v: 'gtaxvv', now: '1wgmfgf', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'plan', order: 5, title: 'Apparatus and materials', levels: 'gie',
     job: {
       g: 'List every piece of equipment and every material, with its size or quantity. Then someone else could repeat the same experiment.',
       i: 'List every item with its size or quantity. State the uncertainty of every measuring instrument, with its unit.'
@@ -274,7 +274,7 @@
           { t: '± 0.2 s', why: 'Reaction time matters when a watch is stopped at an exact moment. Here the sampling interval is far larger.' },
           { t: 'None: the drop turned orange-brown at 80 s exactly', why: 'At 70 s it was still blue-black. The change happened somewhere in the 10 s between.' }
         ] },
-      { type: 'spot', q: 'Tap the three phrases that would lose marks in this list.',
+      { type: 'spot', q: 'Tap the three phrases a teacher would correct in this list.',
         text: 'Apparatus: [!a:test tubes], a [?:10 cm³ graduated pipette], a [!b:tile plate] and [?:a thermostatically controlled water bath]. Materials: [!c:some starch].',
         why: { a: 'How many, and what size? 8 test tubes (15 cm³).', b: 'The correct name is spotting tile.', c: '“Some” is not a quantity: 100 cm³ of 1.0 % starch solution.' } },
       { type: 'build', lv: 'ie', q: 'Build the entry for the pipette in an IB apparatus list.',
@@ -284,9 +284,9 @@
       { type: 'choose', lv: 'ie', q: 'An IA says “Thermometer (± 0.5)”. What is missing?',
         opts: [
           { t: 'The unit: ± 0.5 °C', ok: true, why: 'An uncertainty has a unit, as the value it belongs to does.' },
-          { t: 'The name of the company that made the thermometer', why: 'The maker does not change the uncertainty.' },
-          { t: 'The words “the thermometer was accurate”', why: '“Accurate” is a claim, not an uncertainty.' },
-          { t: 'More decimal places: ± 0.50', why: 'More decimal places add nothing. The unit is what is missing.' }
+          { t: 'The reading: 24.0 °C', why: 'A reading belongs in the results table, not the apparatus list. What is missing is the unit.' },
+          { t: 'The word “accurate”', why: '“Accurate” is a claim, not an uncertainty.' },
+          { t: 'More digits: ± 0.50', why: 'More decimal places add nothing. The unit is what is missing.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'A 100 cm³ measuring cylinder (± 0.5 cm³) is used to measure 25.0 cm³ and 5.0 cm³. Which is true?',
         opts: [

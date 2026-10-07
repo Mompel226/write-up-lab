@@ -226,7 +226,7 @@
   var Q_TOUCH = soilsBar({ w: 420, h: 280, bars: { touch: true, items: S.labels.map(function (l, i) { return { label: l, v: S.means[i] }; }) }, caption: 'Figure 2. Bar chart showing the effect of soil type on the mean height of bean seedlings after 21 days.' });
 
   WUL.station({
-    id: 'graphs', keepV: { v: '163q78g', now: '18cbuic', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'show', order: 1, title: 'Graphs', levels: 'gie',
+    id: 'graphs', keepV: { v: '163q78g', now: '7m4dip', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'show', order: 1, title: 'Graphs', levels: 'gie',
     job: {
       g: 'Turn the results table into a picture that shows the pattern clearly.',
       i: 'Turn the processed data into a picture that shows the pattern, and how far it can be trusted.',
@@ -479,7 +479,7 @@
       { type: 'choose', q: 'The results run from 20 °C to 60 °C. Must the x-axis start at 0 °C?',
         opts: [
           { t: 'No. It may start at 20 °C, if the first number on the axis is 20.', ok: true, why: 'Cambridge accepts an axis that does not start at zero, as long as the axis shows where it starts.' },
-          { t: 'Yes. An axis has to start at 0; otherwise the scale of the graph is wrong.', why: 'An axis may start at 20, if its first number shows where it starts. Only a bar chart must start at 0, because a bar shows its value by its length.' },
+          { t: 'Yes. An axis has to start at 0; otherwise the scale of the graph is wrong.', why: 'An axis may start at 20, if its first number shows where it starts. Only the y-axis of a bar chart or a histogram must start at 0, because a bar shows its value by its length.' },
           { t: 'No, but write 0 at the corner, then 20, 30, 40, with 10 per square.', why: 'From 0 to 20 in one square does not match 10 per square, so the scale is uneven. Write 20 at the corner.' },
           { t: 'Yes, so that the line can be drawn from the origin to the first point.', why: 'No result was taken at 0 °C, so the line must not go to the origin. It starts at the first point.' }
         ] },
@@ -537,9 +537,9 @@
         why: 'Grid and scales first, then the data, then the words below the graph.' },
       { type: 'multi', lv: 'g', q: 'Which of these can earn marks in a Cambridge IGCSE graph question?',
         opts: [
-          { t: 'Axes labelled with the quantity and the unit', ok: true },
-          { t: 'Every point plotted within half a small square', ok: true },
-          { t: 'A key when there are two data sets', ok: true },
+          { t: 'Axes labelled with the quantity and the unit', why: 'Each axis needs the quantity and its unit, as in the table heading: Mean time / s.', ok: true },
+          { t: 'Every point plotted within half a small square', why: 'The examiner checks the points against the grid: each must be within half a small square of its value.', ok: true },
+          { t: 'A key when there are two data sets', why: 'With two data sets, a key that names each line or symbol earns a mark.', ok: true },
           { t: 'A title above the graph, saying what it shows', why: 'A title earns no mark in the exam. In a report, the title goes below the graph, and it must say what the graph shows.' },
           { t: 'A different colour for each of the two lines', why: 'Colour earns no mark. A key that names each line does.' }
         ],
@@ -557,7 +557,7 @@
           { t: 'Figure 2. Bar chart showing the effect of soil type on the mean height of bean seedlings after 21 days.', ok: true, why: 'Number, type of graph, then the effect of the independent variable on the dependent variable.' },
           { t: 'Figure 2. Mean height of bean seedlings in four soils', why: 'It gives the result, but not the type of graph, and it does not say that soil type was changed.' },
           { t: 'Figure 2. Line graph showing the effect of soil type on the mean height of bean seedlings after 21 days.', why: 'Soil type is a category, so the graph is a bar chart.' },
-          { t: 'Graph of soils', why: 'No number, no type of graph, and neither variable.' }
+          { t: 'Figure 2. Histogram showing the effect of soil type on the mean height of bean seedlings after 21 days.', why: 'Soil type is a category, not ranges of a continuous variable, so the bars have gaps: a bar chart.' }
         ] },
       { type: 'choose', lv: 'ie', q: 'A caption ends: (n = 5; error bars = ± 1 SE). What do the bars show?',
         opts: [

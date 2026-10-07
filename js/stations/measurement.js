@@ -65,15 +65,15 @@
       '<ellipse cx="' + (x - lw + 3) + '" cy="' + (top + 62) + '" rx="' + (lw - 2) + '" ry="' + ((lw - 2) / 2.3).toFixed(1) + '" transform="rotate(-20 ' + (x - lw + 3) + ' ' + (top + 62) + ')" style="fill:var(--green-wash);stroke:var(--green);stroke-width:1.5"/>' +
       '<ellipse cx="' + (x + lw - 3) + '" cy="' + (top + 62) + '" rx="' + (lw - 2) + '" ry="' + ((lw - 2) / 2.3).toFixed(1) + '" transform="rotate(20 ' + (x + lw - 3) + ' ' + (top + 62) + ')" style="fill:var(--green-wash);stroke:var(--green);stroke-width:1.5"/>';
   }
-  function technical() {
+  function technical(asQuestion) {
     var base = 210, top = base - 43.1 * 3.6, s = seedling(70, base, 43.1, false);
     s += '<rect x="112" y="' + (top - 16) + '" width="14" height="' + (base - top + 16) + '" style="fill:var(--amber-wash);stroke:var(--ink);stroke-width:1.4"/>';
     for (var y = base; y > top - 14; y -= 18) s += '<line x1="112" y1="' + y + '" x2="119" y2="' + y + '" style="stroke:var(--ink);stroke-width:1.2"/>';
     s += '<line x1="72" y1="' + top + '" x2="112" y2="' + top + '" style="stroke:var(--ink-2);stroke-width:1.4;stroke-dasharray:4 4"/>';
     s += tx(150, 58, 'Measured 5 times', TXT + ';font-size:15px;font-weight:600', 'start');
     ['43.1', '43.0', '43.2', '43.1', '43.0'].forEach(function (v, i) { s += tx(150, 88 + i * 25, v + ' cm', NUM + ';font-size:15px', 'start'); });
-    s += tx(150, 232, 'n = 1', TXT + ';font-size:22px;font-weight:700', 'start');
-    return svg(300, 250, 'One seedling in a pot, measured five times with a ruler: 43.1, 43.0, 43.2, 43.1 and 43.0 cm. n = 1.', s, 340);
+    if (!asQuestion) s += tx(150, 232, 'n = 1', TXT + ';font-size:22px;font-weight:700', 'start');
+    return svg(300, 250, 'One seedling in a pot, measured five times with a ruler: 43.1, 43.0, 43.2, 43.1 and 43.0 cm.' + (asQuestion ? '' : ' n = 1.'), s, 340);
   }
   function trueReps() {
     var base = 200, s = '', H = [41.0, 44.5, 42.0, 45.5, 43.0];
@@ -134,7 +134,7 @@
     }).join('') + '</tbody></table></div>';
 
   WUL.station({
-    id: 'measurement', keepV: { v: 'he61yl', now: '1efcynt', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'judge', order: 2, title: 'Accuracy, precision, reliability, validity', levels: 'gie',
+    id: 'measurement', keepV: { v: 'he61yl', now: '1gbjo7d', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'judge', order: 2, title: 'Accuracy, precision, reliability, validity', levels: 'gie',
     job: 'Use the measurement words exactly, so that every error and weakness you name is the right kind.',
     where: { g: 'Not a section of its own: words you use in your evaluation, when you judge your results and your method.', i: 'Not a section of its own: words you use in your evaluation, and wherever you discuss uncertainties.', e: 'Not a section of its own: words you use in the discussion and the evaluation.' },
 
@@ -261,7 +261,7 @@
           { t: 'The temperature of a water bath fluctuates by about ± 2 °C', bin: 0, why: 'It rises and falls unpredictably: random.' },
           { t: 'A thermometer reads 1 °C too high at every temperature', bin: 1, why: 'Every reading is shifted the same way.' },
           { t: 'Drops from a dropping pipette vary in size', bin: 0, why: 'Some drops are bigger, some smaller, unpredictably.' },
-          { t: 'Every volume is read from the top of the meniscus', bin: 1, why: 'Every reading is too high by the same volume.' }
+          { t: 'Every volume is read from the top of the meniscus', bin: 1, why: 'Every reading is shifted the same way, by the same volume: too high on a measuring cylinder.' }
         ] },
       { type: 'choose', q: 'Three repeats agree closely: 50, 50 and 50 s. What does this show?',
         opts: [
@@ -285,16 +285,16 @@
           { t: 'The results are precise: the optimum temperature was the same in both classes.', why: 'Precision is about how close your own repeats are, not agreement with another class.' }
         ] },
       { type: 'choose', q: 'One seedling was measured five times. What is n?',
-        show: { html: technical() },
+        show: { html: technical(true) },
         opts: [
           { t: 'n = 1', ok: true, why: 'n counts different individuals. These are technical replicates of one seedling.' },
           { t: 'n = 5', why: 'Counting five measurements of one plant as five plants is pseudoreplication.' },
-          { t: 'n = 43.1', why: 'n is a count of individuals, not a measurement.' },
+          { t: 'n = 4', why: 'n counts individuals, not measurements or repeats. One seedling was measured, so n = 1.' },
           { t: 'It cannot be known', why: 'One seedling was used, so n = 1.' }
         ] },
       { type: 'spot', q: 'Tap the three phrases that would lose marks.',
-        text: 'The results were [!a:accurate because the three repeats were close]. [!b:Human error] affected the end point. [?:The water bath varied by about ± 2 °C, which is a random error.] The experiment was repeated [!c:to make it more accurate].',
-        why: { a: 'Close repeats show precision, not accuracy.', b: '“Human error” is never credited. Name the error: the end point was judged by eye.', c: 'Repeats cannot fix a systematic error. Write: to identify anomalous results, and to calculate a mean.' } },
+        text: 'The results were [!a:accurate because the three repeats were close]. [!b:Human error] affected the end point. [?:The water bath varied by about ± 2 °C, which is a random error.] The experiment was repeated [!c:to make it more accurate] [?:and to identify anomalous results].',
+        why: { a: 'Close repeats show precision, not accuracy.', b: '“Human error” is never credited. Name the error: the end point was judged by eye.', c: 'Repeats cannot fix a systematic error. “To identify anomalous results” is the reason that earns the mark.' } },
       { type: 'multi', q: 'Which questions does validity ask?',
         opts: [
           { t: 'Did only the independent variable affect the results?', ok: true, why: 'The fair test part.' },
