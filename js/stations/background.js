@@ -65,7 +65,7 @@
         ],
         always: ['iv-' + best] },
 
-      { type: 'note', tone: 'ib', label: 'It earns nothing on its own', title: 'Background earns no marks alone',
+      { type: 'note', tone: 'ib', label: 'Not a criterion of its own', title: 'Background belongs to Research design',
         md: 'No IA criterion gives marks for theory alone. Background counts as the “context” of the research question, in Research design.\n\nTheory that the question does not need only wastes words. The limit is 3,000.' },
 
       { type: 'note', tone: 'ee', lv: 'e', label: 'For the Extended Essay', title: 'A literature review is required',

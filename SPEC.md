@@ -37,6 +37,18 @@ density and tone.
   by `check.mjs --stamp`: never edit it here) and `data/parts.json` (written by `check.mjs --stamp`). See
   "Saving and homework" below.
 
+## Help for some pupils, and the redo (Daniel, 8 Oct 2026)
+- **The accommodation**, set by the teacher for a pupil (the labs script's Students tab; atlas couplings C106):
+  `writeup.mine` says `acc`, `js/account.js` keeps it in `WUL.hw.acc`, and `js/quiz.js` then shows, after the SECOND
+  wrong check of a question (a different answer from the last wrong one; a Check with nothing ticked or placed is no
+  try, and says so), why that pupil's own choices are wrong (multi: the options ticked wrongly; sort: the
+  items in a wrong group; spot: the phrases marked that are fine; order and build: the question's `why`). Never after
+  the first wrong check, never for anyone else ("if I'm a lazy student … I click, I get the explanation"). `choose`
+  explains every click already, for everyone, as before.
+- **Redo the ones you missed**: the end of a test offers the questions not right at the first check, again, as
+  practice (`opts.practice`): no `onAnswer`, no `recordScore`, no `onDone`, so nothing is recorded or sent, and the
+  homework count does not move. The redo and its "Back to all the questions" run in the set's own level. Proof: `node tools/accommodation.mjs` (server on :8830).
+
 ## Saving and homework (Daniel, 3 Oct 2026)
 "When I set homework, this is also something I can set, and that is tracked in the spreadsheet." A teacher sets
 **whole parts** (never a step inside one) from the labs' teacher page, beside lab stations and Bio English sets.
@@ -51,7 +63,9 @@ density and tone.
 - Each part's record carries its fingerprint `v` (`WUL.partV`: its questions' prompts, options and answers, and its
   red pens' mark keys; never a `why`). Rewording a question or changing which option is right, or adding or removing
   a red-pen mark, starts that part again for everybody, here and in the spreadsheet; a better `why`, a new Learn
-  step or a trap does not. After any change, `node tools/check.mjs --stamp` rewrites `data/parts.json`; push it with
+  step or a trap does not. What restarts is the letters: since 8 Oct 2026 the labs script keeps the most of the part a
+  pupil ever finished (`x`, `_wuBest_`), so homework, the tab's Parts finished and the teacher page's Write-Up view never
+  go backwards after a rewrite. After any change, `node tools/check.mjs --stamp` rewrites `data/parts.json`; push it with
   the change, or the spreadsheet scores against the old list.
 - **A reword that asks the same thing keeps the records** (7 Oct 2026, the practice-questions audit: 103 questions got
   new wrong options and 0 of 23 parts changed `v`). When only the options' words (and their `why`) change, first

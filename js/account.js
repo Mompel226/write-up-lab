@@ -194,7 +194,9 @@
       var added = 0;
       Object.keys(j.parts || {}).forEach(function (id) { if (WUL.foldRecord(id, j.parts[id])) added++; });
       if (added) toast('Your work from another computer is back.');
-      WUL.hw = { signedIn: true, loaded: true, list: (j.homework || []).filter(function (x) { return x && x.id && (x.parts || []).length; }) };
+      WUL.hw = { signedIn: true, loaded: true, list: (j.homework || []).filter(function (x) { return x && x.id && (x.parts || []).length; }),
+                 most: j.most && typeof j.most === 'object' ? j.most : {},     /* per part, what homework counts (8 Oct 2026) */
+                 acc: !!j.acc };   /* the teacher's accommodation for this pupil: help after a second wrong try (quiz.js; 8 Oct 2026) */
       paintWho();
       /* and the other way: work done in this browser before signing in has never been sent */
       if (j.onList) {
