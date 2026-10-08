@@ -69,7 +69,15 @@
   function hwList() { return (WUL.hw && WUL.hw.list) || []; }
   function hwFor(id) { return hwList().filter(function (x) { return (x.parts || []).indexOf(id) >= 0; }); }
   /* '' when the part is not homework, else none · partly · done (the labs' red · orange · green) */
-  function hwState(id) { if (!hwFor(id).length) return ''; var st = WUL.partState(id); return st ? st.state : ''; }
+  /* What homework counts for a part: the larger of this browser's count and the spreadsheet's (8 Oct 2026: `most` is the
+     best of ANY version of the part, so a part rewritten since never turns a finished homework red here while the
+     teacher's page says done). Every homework colour and count on the site reads this. */
+  function hwDone(id) {
+    var st = WUL.partState(id), s = WUL.stations[id], srv = (WUL.hw && WUL.hw.most && Number(WUL.hw.most[id])) || 0;
+    var units = st ? st.units : (s ? WUL.partUnits(s) : 0), done = Math.max(st ? st.done : 0, units ? Math.min(srv, units) : srv);
+    return { any: !!st || srv > 0, done: done, units: units, state: units && done >= units ? 'done' : (done > 0 ? 'partly' : 'none') };
+  }
+  function hwState(id) { if (!hwFor(id).length) return ''; var x = hwDone(id); return x.any ? x.state : ''; }
   function hwPill(st) { return st ? '<span class="hwpill hwpill--' + st + '">Homework: ' + HW_WORDS[st] + '</span>' : ''; }
   var HW_KEY = '<p class="hwkey">Your homework parts are marked: <span class="hwdot hwdot--none"></span> red, not started; ' +
     '<span class="hwdot hwdot--partly"></span> orange, part done; <span class="hwdot hwdot--done"></span> green, done.</p>';
@@ -232,7 +240,7 @@
     box.appendChild(h('p', { class: 'hwbox__p', text: 'Your work is saved for your teacher as you go. There is nothing to hand in.' }));
     hwList().forEach(function (hw) {
       var d = 0, t = 0, fin = 0;
-      (hw.parts || []).forEach(function (id) { var st = WUL.partState(id); if (!st) return; d += st.done; t += st.units; if (st.state === 'done') fin++; });
+      (hw.parts || []).forEach(function (id) { var x = hwDone(id); if (!x.any) return; d += x.done; t += x.units; if (x.state === 'done') fin++; });
       box.appendChild(h('a', { class: 'hwrow', href: '#/hw/' + encodeURIComponent(hw.id), html: '<b>' + esc(hw.title) + '</b><span class="hwrow__due">' + hwDue(hw) + '</span><span class="hwrow__n">' + fin + ' of ' + (hw.parts || []).length + ' parts done</span>' }));
     });
     return box;
@@ -586,7 +594,7 @@
     var grid = h('div', { class: 'hwparts' });
     (one.parts || []).forEach(function (id) {
       var s = WUL.stations[id]; if (!s) return;
-      var st = WUL.partState(id), hs = st ? st.state : 'none';
+      var st = WUL.partState(id), hs = hwDone(id).state;
       var card = h('article', { class: 'hwpart hwpart--' + hs });
       card.innerHTML = '<h2 class="hwpart__h"><a href="#/part/' + esc(id) + '">' + esc(s.title) + '</a>' + hwPill(hs) + '</h2>' +
         '<p class="hwpart__p">' + esc(hwNeeds(s)) + '</p>' + hwChecklist(s) +

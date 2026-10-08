@@ -21,11 +21,22 @@
    Marking follows the estate's rule for whole answers (sort, order,
    spot, build): right or not right, and the student's arrangement is
    kept as they left it. After three tries "Show me" appears.
+
+   Accommodation (Daniel, 8 Oct 2026): a pupil the teacher gave it (writeup.mine says acc; account.js keeps it in
+   WUL.hw.acc) sees, after their SECOND wrong check of a question, why their own choices are wrong: the options they
+   ticked that are wrong (multi), the items in a wrong group (sort), the phrases they marked that are fine (spot), or the
+   question's why (order, build). Never after the first wrong check, never for anyone else. choose explains every
+   choice already, for everyone.
+
+   Redo (Daniel, 8 Oct 2026): the end of a test offers "Redo the N you missed": the questions not right at the first
+   check, again, as practice (opts.practice): nothing is recorded, nothing is sent.
    ============================================================ */
 (function (WUL) {
   'use strict';
   var h = WUL.h, md = WUL.md, esc = WUL.esc;
-  var SHOW_AFTER = 3;
+  var SHOW_AFTER = 3, HELP_AFTER = 2;
+  function helpOn() { return !!(WUL.hw && WUL.hw.acc); }
+  function helpBox(html) { return html ? '<div class="helpbox"><p class="helpbox__h">Why</p>' + html + '</div>' : ''; }
 
   function recordScore(id, got, total) {
     if (!id) return;
@@ -37,7 +48,7 @@
   WUL.quiz = function (host, questions, opts) {
     opts = opts || {};
     var L = WUL.level();
-    var Q = opts.all ? questions.slice() : questions.filter(function (q) { return WUL.shows(q.lv, L); });
+    var Q = opts.all || opts.practice ? questions.slice() : questions.filter(function (q) { return WUL.shows(q.lv, L); });
     host.innerHTML = '';
     if (!Q.length) { host.appendChild(h('p', { class: 'muted', text: 'No questions at this level yet.' })); return; }
     var box = h('div', { class: 'quiz' });
@@ -45,6 +56,7 @@
     var prog = h('div', { class: 'quiz__prog', 'aria-hidden': 'true' });
     var num = h('div', { class: 'quiz__num' });
     top.appendChild(num); top.appendChild(prog);
+    if (opts.practice) top.appendChild(h('div', { class: 'quiz__practice', text: 'Redo · practice: your record does not change' }));
     var card = h('div', { class: 'quiz__card' });
     box.appendChild(top); box.appendChild(card);
     host.appendChild(box);
@@ -80,11 +92,19 @@
       var area = h('div', { class: 'quiz__area' }), foot = h('div', { class: 'quiz__foot' }), fbHost = h('div', { class: 'quiz__fb', 'aria-live': 'polite' });
       card.appendChild(area); card.appendChild(fbHost); card.appendChild(foot);
       var done = false, shown = false;
-      function tell(letter) { if (opts.onAnswer) { try { opts.onAnswer(q, letter); } catch (e) {} } }
+      function tell(letter) { if (opts.onAnswer && !opts.practice) { try { opts.onAnswer(q, letter); } catch (e) {} } }
+      /* the accommodation's help: only after the SECOND wrong check, only for pupils the teacher gave it. A wrong check counts
+         as a try only when the answer differs from the last wrong one (the audit, 8 Oct 2026: two presses of Check, with
+         nothing changed, reached the help) */
+      var helpTries = 0, lastWrong = null;
+      function wrongTry(sig) { if (sig !== lastWrong) { helpTries++; lastWrong = sig; } }
+      function help(html) { return !helpOn() || helpTries < HELP_AFTER ? '' : helpBox(html); }
       function settle(ok) { if (firstTry[i] == null) firstTry[i] = ok && tries <= 1; if (!ok) tell('t'); }
       function finishQ() { done = true; foot.innerHTML = ''; foot.appendChild(nextBtn()); paintProg(); tell(shown ? 's' : firstTry[i] ? 'f' : '1'); }
+      var empties = 0;      /* Checks with nothing ticked, marked or placed: they count towards "Show me" (as they always did), never
+                               as an answer, so they cost no "right first time" and send no homework letter (the verification audit) */
       function showMe(fn) {
-        if (tries < SHOW_AFTER || done || foot.querySelector('.btn--show')) return;
+        if (tries + empties < SHOW_AFTER || done || foot.querySelector('.btn--show')) return;
         var b = h('button', { type: 'button', class: 'btn btn--ghost btn--show', text: 'Show me the answer' });
         b.addEventListener('click', function () { firstTry[i] = false; shown = true; fn(); finishQ(); });
         foot.appendChild(b);
@@ -117,7 +137,21 @@
           });
           var chk = h('button', { type: 'button', class: 'btn btn--go', text: 'Check' });
           chk.addEventListener('click', function () {
-            if (done) return; tries++;
+            if (done) return;
+            var picked = [];
+            list.querySelectorAll('.opt').forEach(function (x, k) { if (x.getAttribute('aria-pressed') === 'true') picked.push(k); });
+            if (!picked.length) {                               /* no answer yet: said plainly, a step towards "Show me", nothing more */
+              empties++; fbHost.innerHTML = ''; fbHost.appendChild(feedback(false, 'Tick at least one answer first.'));
+              showMe(function () {
+                list.querySelectorAll('.opt').forEach(function (x) {
+                  x.setAttribute('aria-pressed', x._o.ok ? 'true' : 'false'); x.classList.add(x._o.ok ? 'is-ok' : 'is-dim'); x.disabled = true;
+                  if (x._o.why) x.appendChild(h('span', { class: 'opt__why', html: md(x._o.why, { inline: true }) }));
+                });
+                fbHost.innerHTML = ''; fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : ''));
+              });
+              return;
+            }
+            tries++;
             var ok = true;
             list.querySelectorAll('.opt').forEach(function (x) { if ((x.getAttribute('aria-pressed') === 'true') !== !!x._o.ok) ok = false; });
             settle(ok);
@@ -130,7 +164,13 @@
               fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : ''));
               finishQ();
             } else {
-              fbHost.appendChild(feedback(false, 'Your choices are kept as you left them. Look again: ' + (q.hint ? md(q.hint, { inline: true }) : 'which statements are always true?')));
+              wrongTry(picked.join(','));
+              var wrongTicks = [];
+              list.querySelectorAll('.opt').forEach(function (x) { if (x.getAttribute('aria-pressed') === 'true' && !x._o.ok && x._o.why) wrongTicks.push('<b>' + md(x._o.t, { inline: true }) + '</b> — ' + md(x._o.why, { inline: true })); });
+              fbHost.appendChild(feedback(false, 'Your choices are kept as you left them. Look again: ' + (q.hint ? md(q.hint, { inline: true }) : 'which statements are always true?') +
+                help(wrongTicks.length ? wrongTicks.join('<br>') : 'Every option you ticked is right: at least one more right answer is not ticked yet.')));
+            }
+            if (!ok) {
               showMe(function () {
                 list.querySelectorAll('.opt').forEach(function (x) {
                   x.setAttribute('aria-pressed', x._o.ok ? 'true' : 'false'); x.classList.add(x._o.ok ? 'is-ok' : 'is-dim'); x.disabled = true;
@@ -191,7 +231,12 @@
           settle(ok);
           fbHost.innerHTML = '';
           if (ok) { reveal(); fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : '')); finishQ(); }
-          else { fbHost.appendChild(feedback(false, 'Your answer is kept as you left it. At least one item is in the wrong group.' + (q.hint ? ' ' + md(q.hint, { inline: true }) : ''))); showMe(function () { solve(); reveal(); fbHost.innerHTML = ''; fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : '')); }); }
+          else {
+            wrongTry(Array.prototype.map.call(area.querySelectorAll('.bin'), function (b) { return Array.prototype.map.call(b.querySelectorAll('.chip'), function (c) { return c._it._k; }).sort().join('.'); }).join('|'));
+            var misplaced = [];
+            area.querySelectorAll('.bin').forEach(function (b) { var bi = +b.getAttribute('data-bin');
+              b.querySelectorAll('.chip').forEach(function (c) { if (c._it.bin !== bi && c._it.why) misplaced.push('<b>' + md(c._it.t, { inline: true }) + '</b> — ' + md(c._it.why, { inline: true })); }); });
+            fbHost.appendChild(feedback(false, 'Your answer is kept as you left it. At least one item is in the wrong group.' + (q.hint ? ' ' + md(q.hint, { inline: true }) : '') + help(misplaced.join('<br>')))); showMe(function () { solve(); reveal(); fbHost.innerHTML = ''; fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : '')); }); }
         });
         function solve() {
           area.querySelectorAll('.chip').forEach(function (c) { area.querySelector('.bin[data-bin="' + c._it.bin + '"] .bin__body').appendChild(c); });
@@ -237,8 +282,9 @@
           settle(ok); fbHost.innerHTML = '';
           if (ok) { ol.classList.add('is-ok'); ol.querySelectorAll('button').forEach(function (x) { x.disabled = true; }); fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : '')); finishQ(); }
           else {
+            wrongTry(Array.prototype.map.call(ol.children, function (li) { return li._it.k; }).join(','));
             ol.classList.add('is-no');
-            fbHost.appendChild(feedback(false, 'Your order is kept as you left it. Something is still out of place.' + (q.hint ? ' ' + md(q.hint, { inline: true }) : '')));
+            fbHost.appendChild(feedback(false, 'Your order is kept as you left it. Something is still out of place.' + (q.hint ? ' ' + md(q.hint, { inline: true }) : '') + help(q.why ? md(q.why, { inline: true }) : '')));
             showMe(function () {
               var lis = Array.prototype.slice.call(ol.children).sort(function (a, b) { return a._it.k - b._it.k; });
               lis.forEach(function (li) { ol.appendChild(li); }); ol.classList.remove('is-no'); ol.classList.add('is-ok');
@@ -276,7 +322,13 @@
           return ul;
         }
         chk4.addEventListener('click', function () {
-          if (done) return; tries++;
+          if (done) return;
+          if (!txt.querySelector('.rpm.is-picked')) {        /* no answer yet: said plainly, a step towards "Show me", nothing more */
+            empties++; fbHost.innerHTML = ''; fbHost.appendChild(feedback(false, 'Tap at least one phrase first.'));
+            showMe(function () { var ul = revealSpot(); fbHost.innerHTML = ''; fbHost.appendChild(feedback(true, 'Here they are.')); fbHost.appendChild(ul); });
+            return;
+          }
+          tries++;
           var right = 0, wrongPicks = 0;
           targets.forEach(function (t) {
             var picked = t.classList.contains('is-picked'), err = !!t.getAttribute('data-k');
@@ -286,7 +338,10 @@
           settle(ok); fbHost.innerHTML = '';
           if (ok) { var ul = revealSpot(); fbHost.appendChild(feedback(true, 'All ' + nErr + ' found.')); fbHost.appendChild(ul); finishQ(); }
           else {
-            fbHost.appendChild(feedback(false, 'You found ' + right + ' of ' + nErr + (wrongPicks ? ', and marked ' + wrongPicks + ' that ' + (wrongPicks === 1 ? 'is' : 'are') + ' fine' : '') + '. Your choices are kept.'));
+            wrongTry(Array.prototype.map.call(targets, function (t, k) { return t.classList.contains('is-picked') ? k : ''; }).join(','));
+            var fine = []; targets.forEach(function (t) { if (t.classList.contains('is-picked') && !t.getAttribute('data-k')) fine.push('“' + esc(t.textContent) + '” is fine as it is: it loses no mark.'); });
+            fbHost.appendChild(feedback(false, 'You found ' + right + ' of ' + nErr + (wrongPicks ? ', and marked ' + wrongPicks + ' that ' + (wrongPicks === 1 ? 'is' : 'are') + ' fine' : '') + '. Your choices are kept.' +
+              help(fine.length ? fine.join('<br>') : 'Every phrase you marked loses a mark. ' + (nErr - right) + ' more ' + (nErr - right === 1 ? 'is' : 'are') + ' still unmarked.')));
             showMe(function () { var ul = revealSpot(); fbHost.innerHTML = ''; fbHost.appendChild(feedback(true, 'Here they are.')); fbHost.appendChild(ul); });
           }
         });
@@ -307,15 +362,27 @@
         });
         var chk5 = h('button', { type: 'button', class: 'btn btn--go', text: 'Check' });
         chk5.addEventListener('click', function () {
-          if (done) return; tries++;
+          if (done) return;
           var got = Array.prototype.map.call(line.children, function (c) { return c.getAttribute('data-t'); });
           var answers = q.answers || [q.answer];
+          if (!got.length) {                                   /* no answer yet: said plainly, a step towards "Show me", nothing more */
+            empties++; fbHost.innerHTML = ''; fbHost.appendChild(feedback(false, 'Tap the pieces in order first.'));
+            showMe(function () {
+              pool2.innerHTML = ''; line.innerHTML = '';
+              (answers[0]).forEach(function (t) { line.appendChild(h('span', { class: 'chip is-ok', html: md(t, { inline: true }) })); });
+              line.classList.remove('is-no'); line.classList.add('is-ok');
+              fbHost.innerHTML = ''; fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : ''));
+            });
+            return;
+          }
+          tries++;
           var ok = answers.some(function (a) { return a.length === got.length && a.every(function (x, k) { return x === got[k]; }); });
           settle(ok); fbHost.innerHTML = '';
           if (ok) { line.classList.add('is-ok'); fbHost.appendChild(feedback(true, q.why ? md(q.why, { inline: true }) : '')); finishQ(); }
           else {
+            wrongTry(got.join('|'));
             line.classList.add('is-no');
-            fbHost.appendChild(feedback(false, 'Your answer is kept. Not quite.' + (q.hint ? ' ' + md(q.hint, { inline: true }) : '')));
+            fbHost.appendChild(feedback(false, 'Your answer is kept. Not quite.' + (q.hint ? ' ' + md(q.hint, { inline: true }) : '') + help(q.why ? md(q.why, { inline: true }) : '')));
             showMe(function () {
               pool2.innerHTML = ''; line.innerHTML = '';
               (answers[0]).forEach(function (t) { line.appendChild(h('span', { class: 'chip is-ok', html: md(t, { inline: true }) })); });
@@ -330,17 +397,33 @@
 
     function finish() {
       var got = firstTry.filter(Boolean).length;
-      recordScore(opts.id, got, Q.length);
+      var missed = [];
+      for (var k = 0; k < Q.length; k++) if (!firstTry[k]) missed.push(Q[order[k]]);
+      if (!opts.practice) recordScore(opts.id, got, Q.length);
       var pct = got / Q.length;
-      var msg = pct === 1 ? 'Every one right first time.' : pct >= 0.7 ? 'Good. Look again at the ones you missed.' : 'Read the red pen again, then try again.';
+      var msg = opts.practice ? (missed.length ? 'Read the why of each one you missed, then redo them again.' : 'Every one right first time this time.')
+        : pct === 1 ? 'Every one right first time.' : pct >= 0.7 ? 'Good. Look again at the ones you missed.' : 'Read the red pen again, then try again.';
       card.innerHTML = '';
-      card.appendChild(h('div', { class: 'quiz__end', html: '<div class="quiz__score"><b>' + got + '</b><span>/ ' + Q.length + '</span></div><div class="quiz__endt">right first time</div><p>' + esc(msg) + '</p>' }));
-      var again = h('button', { type: 'button', class: 'btn btn--ghost', text: 'Try again ↺' });
-      again.addEventListener('click', function () { i = 0; firstTry = []; order = WUL.shuffle(order); draw(); });
-      var row = h('div', { class: 'quiz__foot' }, [again]);
-      if (opts.next) row.appendChild(opts.next());
+      card.appendChild(h('div', { class: 'quiz__end', html: '<div class="quiz__score"><b>' + got + '</b><span>/ ' + Q.length + '</span></div><div class="quiz__endt">right first time' + (opts.practice ? ' in this redo' : '') + '</div><p>' + esc(msg) + '</p>' }));
+      var row = h('div', { class: 'quiz__foot' });
+      if (missed.length) {
+        var rd = h('button', { type: 'button', class: 'btn btn--go', text: 'Redo the ' + missed.length + ' you missed' + (opts.practice ? ' again' : '') });
+        rd.addEventListener('click', function () { WUL.withLevel(L, function () { WUL.quiz(host, missed, { practice: true, all: opts.all, back: opts.back || { q: questions, o: opts, l: L } }); }); });
+        row.appendChild(rd);
+      }
+      if (opts.practice) {
+        var bk = h('button', { type: 'button', class: 'btn btn--ghost', text: 'Back to all the questions' });
+        bk.addEventListener('click', function () { var b = opts.back; if (b) WUL.withLevel(b.l || L, function () { WUL.quiz(host, b.q, b.o); }); });
+        row.appendChild(bk);
+      } else {
+        var again = h('button', { type: 'button', class: 'btn btn--ghost', text: 'Try again ↺' });
+        again.addEventListener('click', function () { i = 0; firstTry = []; order = WUL.shuffle(order); draw(); });
+        row.appendChild(again);
+        if (opts.next) row.appendChild(opts.next());
+      }
       card.appendChild(row);
-      if (opts.onDone) opts.onDone(got, Q.length);
+      if (missed.length && !opts.practice) card.appendChild(h('p', { class: 'muted', text: 'Redo: practise again the questions you did not get right the first time. A redo does not change your record.' }));
+      if (opts.onDone && !opts.practice) opts.onDone(got, Q.length);
     }
     draw();
   };

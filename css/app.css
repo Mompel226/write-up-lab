@@ -857,3 +857,9 @@ table.dt.dt--compact th,table.dt.dt--compact td{padding:4px 6px}
 .hwpart__go{margin:12px 0 0;margin-top:auto;padding-top:12px}
 
 .seg--lv .seg--hw[aria-pressed="true"]{color:var(--red);background:var(--red-wash);box-shadow:inset 0 -2px 0 var(--red)}
+
+/* Accommodation (8 Oct 2026): after a second wrong try, why (pupils the teacher gave it only); the redo's line */
+.helpbox{margin-top:10px;padding:9px 11px;border-left:3px solid var(--blue);background:var(--blue-wash);border-radius:0 var(--r) var(--r) 0;line-height:1.5}
+.helpbox__h{margin:0 0 4px;font:600 10.5px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+.quiz__top:has(.quiz__practice){flex-wrap:wrap}
+.quiz__practice{flex-basis:100%;margin-top:6px;font:600 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}

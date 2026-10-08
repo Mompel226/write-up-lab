@@ -70,7 +70,7 @@
 
       { type: 'anatomy', title: 'Write in the scientific voice',
         intro: 'You build every sentence in a method the same way. Tap a colour to see each part.',
-        model: '{1:5.0} {2:cm³} of 1 % starch solution {3:was} {4:transferred} into each test tube.\n\nThe tubes {3:were} {4:placed} in a water bath at {1:40} {2:°C} for {1:5} {2:min}.',
+        model: '{1:5.0} {2:cm³} of 1 % starch solution {3:was} {4:transferred} into each test tube.\n\nThe tubes {3:were} {4:placed} in a thermostatically controlled water bath at {1:40} {2:°C} for {1:5} {2:min}.',
         parts: [
           { n: 1, name: 'A number', note: 'Every quantity is measured, so it has a number. Never “some” or “a bit”.' },
           { n: 2, name: 'A unit', note: 'Straight after the number: cm³, °C, min, s.' },
@@ -81,7 +81,7 @@
 
       { type: 'compare', title: 'The same step, written twice',
         bad: 'I put some starch in a tube and we heated it up in the water bath for a bit. Then I added the amylase.',
-        good: '5.0 cm³ of 1 % starch solution was placed in a test tube. The tube was left in a water bath at 40 °C for 5 min. Then 1.0 cm³ of 1 % amylase solution was added.',
+        good: '5.0 cm³ of 1 % starch solution was placed in a test tube. The tube was left in a thermostatically controlled water bath at 40 °C for 5 min. Then 1.0 cm³ of 1 % amylase solution was added.',
         badLabel: 'Everyday English', goodLabel: 'Scientific voice',
         why: 'The ✔ version names no person, uses the past tense, and gives every quantity a number and a unit.' },
 
@@ -116,7 +116,7 @@
 
       { type: 'frames', title: 'Sentences in the scientific voice', items: [
         '___ cm³ of ___ was measured into ___ using ___.',
-        'The ___ was left in a water bath at ___ °C for ___ min.',
+        'The ___ was left in a thermostatically controlled water bath at ___ °C for ___ min.',
         'The ___ increased from ___ to ___ as the ___ increased.',
         'Five trials were carried out at each ___.'
       ] }
@@ -128,12 +128,12 @@
         body: '[!tf-a:I put some starch] into a test tube.\n\n[!tf-b:We heated it up] in the water bath.\n\nThen [!tf-c:a bit of amylase] was added and the stopwatch was started.\n\nAt 60 °C [!tf-d:it went up].\n\n[!tf-e:This was a sensible result.]',
         notes: {
           'tf-a': { label: 'who? how much?', why: 'No person, and a number with a unit: __5.0 cm³ of 1 % starch solution was placed__ in a test tube.' },
-          'tf-b': { label: 'we? how hot?', why: 'Passive voice, with the value, and no phrasal verb: __the tube was left in a water bath at 60 °C for 5 min__.' },
+          'tf-b': { label: 'we? how hot?', why: 'Passive voice, with the value, and no phrasal verb: __the tube was left in a thermostatically controlled water bath at 60 °C for 5 min__.' },
           'tf-c': { label: 'how much?', why: '“A bit” is not a quantity: __1.0 cm³ of 1 % amylase solution__.' },
           'tf-d': { label: 'what went up?', why: 'Name the quantity and use the examined verb: __the mean time increased__.' },
           'tf-e': { label: 'meaningless', why: '“Sensible” tells the reader nothing. Give the values: __93 s at 60 °C, up from 53 s at 50 °C__.' }
         },
-        fixed: '==5.0 cm³ of 1 % starch solution was placed== in a test tube.\n\n==The tube was left in a water bath at 60 °C for 5 min.==\n\nThen ==1.0 cm³ of 1 % amylase solution== was added and the stopwatch was started.\n\nAt 60 °C ==the mean time increased to 93 s==, from 53 s at 50 °C.',
+        fixed: '==5.0 cm³ of 1 % starch solution was placed== in a test tube.\n\n==The tube was left in a thermostatically controlled water bath at 60 °C for 5 min.==\n\nThen ==1.0 cm³ of 1 % amylase solution== was added and the stopwatch was started.\n\nAt 60 °C ==the mean time increased to 93 s==, from 53 s at 50 °C.',
         fixedNote: 'No person, no vague word: every quantity has a number and a unit, and every verb is exact.'
       }
     },

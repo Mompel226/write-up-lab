@@ -113,7 +113,7 @@
         ] },
 
       { type: 'note', tone: 'ib', lv: 'i', title: 'What the IB criterion asks', label: 'What the IB criterion asks',
-        md: 'Top band (5–6): the report “explains the relative impact of specific methodological weaknesses or limitations”, and realistic improvements “relevant to the identified weaknesses or limitations” are explained. __Generic__ means “general to many methodologies”: a weakness that could be pasted into any report.\n\nExtensions are not in the 2025 criteria, so they earn nothing.' },
+        md: 'Top band (5–6): the report “explains the relative impact of specific methodological weaknesses or limitations”, and realistic improvements “relevant to the identified weaknesses or limitations” are explained. __Generic__ means “general to many methodologies”: a weakness that could be pasted into any report.\n\nExtensions are not in the 2025 criteria: the guide does not ask for them.' },
 
       { type: 'frames', lv: 'g', title: 'Sentences for your evaluation', items: [
         'No anomalous results were identified: ___.',

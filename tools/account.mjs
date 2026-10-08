@@ -44,7 +44,7 @@ window.__jwt = function (email, name) {
   return b({ alg: 'RS256' }) + '.' + b({ email: email, name: name, exp: Math.floor(Date.now() / 1000) + 3600 }) + '.sig';
 };`;
 const HW = { id: 'HW-TEST1', title: 'Plan your report', due: '10 Oct', overdue: false, dueAt: '2026-10-10T14:59:59Z', parts: ['variables', 'hypothesis'] };
-const srv = { calls: [], saves: [], parts: {}, onList: { 'pupil.one@nlcsjeju.kr': true, 'pupil.two@nlcsjeju.kr': true } };
+const srv = { calls: [], saves: [], parts: {}, most: {}, onList: { 'pupil.one@nlcsjeju.kr': true, 'pupil.two@nlcsjeju.kr': true } };
 function emailOf(token) { try { return JSON.parse(Buffer.from(String(token).split('.')[1], 'base64url').toString()).email; } catch (e) { return ''; } }
 function fakeScript(body) {
   const d = JSON.parse(body || '{}'), email = emailOf(d.token);
@@ -52,7 +52,7 @@ function fakeScript(body) {
   srv.calls.push({ action: d.action, email });
   if (!srv.onList[email]) return d.action === 'writeup.mine' ? { ok: true, name: '', onList: false, cls: '', parts: {}, homework: [] }
                                                             : { ok: false, why: 'not on your teacher’s class list (' + email + ')' };
-  if (d.action === 'writeup.mine') return { ok: true, name: 'Pupil', onList: true, cls: '10A', parts: srv.parts[email] || {}, homework: [HW] };
+  if (d.action === 'writeup.mine') return { ok: true, name: 'Pupil', onList: true, cls: '10A', parts: srv.parts[email] || {}, homework: [HW], most: srv.most[email] || {} };
   if (d.action === 'writeup.save') { srv.saves.push({ email, parts: d.parts }); srv.parts[email] = Object.assign({}, srv.parts[email] || {}, d.parts); return { ok: true, saved: Object.keys(d.parts || {}).length }; }
   return { ok: false, why: 'unknown' };
 }
@@ -153,6 +153,15 @@ try {
     if (v.p !== 'To finish this part, find every mistake in each Red pen (IGCSE, IB IA) and answer all ' + P.variables.questions + ' questions in Test yourself, the IB ones too.') throw new Error('says: ' + v.p);
   });
   await shot('homework-page', true);
+  /* 8 Oct 2026: a part rewritten since keeps the pupil's best on the spreadsheet (`most`); the page's colour must agree */
+  await check('a part the spreadsheet counts as done (its best, of any version) is green here too, whatever this browser holds', async () => {
+    srv.most['pupil.one@nlcsjeju.kr'] = { hypothesis: 999 };
+    await go('#/hw/HW-TEST1', true); await wait(1200);
+    const pill = await ev(() => { const c = Array.from(document.querySelectorAll('.hwpart')).find((x) => x.querySelector('.hwpart__h a').textContent === 'Hypothesis'); return c ? c.querySelector('.hwpill').className : ''; });
+    srv.most = {};
+    await go('#/hw/HW-TEST1', true); await wait(1200);
+    if (!/hwpill--done/.test(pill)) throw new Error('the page says ' + pill);
+  });
   await go('#/part/variables');
   await check('a homework part: the banner, and Test yourself opens on the Homework set of every question not answered', async () => {
     const s = await ev(() => ({ ban: (document.querySelector('.hwban') || {}).textContent || '', set: (document.querySelector('#test .seg button[aria-pressed="true"]') || {}).textContent || '' }));

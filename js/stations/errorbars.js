@@ -123,7 +123,7 @@
           { n: 2, name: 'Overlap or not', note: 'Compare the ends of the bars, not the crosses.' },
           { n: 3, name: 'What can be claimed', note: '“Likely”, or “the graph alone cannot show”, then the test. Never “proves”.' }
         ],
-        after: 'Overlap is a hint, not proof: only a statistical test can decide. “The bars are quite big” earns nothing.' },
+        after: 'Overlap is a hint, not proof: only a statistical test can decide. “The bars are quite big” is too vague: name the bars and say whether they overlap.' },
 
       { type: 'table', title: 'Calculate them in a spreadsheet',
         spec: {
