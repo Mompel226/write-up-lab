@@ -43,11 +43,12 @@
       { id: 'reps', t: 'The number of repeats is stated, and it is clear whether they were of the same sample or of different individuals.' }
     ]},
     { title: 'Results: the table', part: 'tables', items: [
-      { id: 'tt', t: 'A numbered title above the table, in one pattern: “Table 1. Data showing the effect of [independent variable, with its range] on [dependent variable].”' },
-      { id: 'ttib', lv: 'ie', t: 'Each table title starts with Raw data or Processed data, and ends with n: (n = 5).' },
+      { id: 'tt', lv: 'g', t: 'A numbered title above the table, in one pattern: “Table 1. Data showing the effect of [independent variable, with its range] on [dependent variable].”' },
+      { id: 'ttib', lv: 'ie', t: 'A numbered title above each table, in one pattern: “Table 1. Raw data showing the effect of [independent variable, with its range] on [dependent variable] (n = 5).” The processed table starts “Processed data”. When nothing was changed, as in fieldwork: “showing the relationship between … and …”.' },
       { id: 't1', t: 'The independent variable runs down the first column, not across the top row. No diagonal line in the corner: every column has its own heading.' },
       { id: 'tu', t: 'Units (and uncertainties) are in the headings only, never in the cells.' },
-      { id: 'ts', t: 'Quantity and unit separated by a solidus: Temperature / °C.' },
+      { id: 'ts', t: 'Quantity and unit separated by a solidus: Temperature / °C. A count or a pH has no unit: its name alone.' },
+      { id: 'tunc', lv: 'ie', t: 'Each raw-data heading gives the uncertainty of its measurement. A count has no measuring instrument, so no ±: a note under the table says so.' },
       { id: 'tdp', t: 'The same number of decimal places all the way down each column.' },
       { id: 'tblank', t: 'No blank cells; anything missing is explained.' },
       { id: 'tig', lv: 'g', t: 'One table: the processed columns (such as the mean) to the right of the raw data.' },
@@ -87,7 +88,7 @@
       { id: 'esys', t: 'Systematic errors named, linked to accuracy, with a way to remove them (repeating does not help).' },
       { id: 'eval', t: 'Validity: was the method suitable for the question, and what limits the conclusion?' },
       { id: 'ehuman', t: '“Human error” does not appear anywhere.' },
-      { id: 'en', t: 'Sample size is honest: five measurements of one specimen is n = 1, not n = 5.' },
+      { id: 'en', t: 'Sample size is honest: five measurements of one specimen is n = 1, not n = 5. In a transect study, n is the number of transects, not the number of quadrats.' },
       { id: 'eimp', t: 'Each improvement is tied to a specific weakness already named.' },
       { id: 'erank', lv: 'ie', t: 'The weaknesses are ranked: it says which one had the largest effect on the conclusion.' }
     ]},

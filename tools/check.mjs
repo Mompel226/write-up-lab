@@ -18,7 +18,8 @@
      literal in the tools, the specimen, the page code and the data files
    · no keyword defined twice with different wording
    · model answers contain no I / we / my / our
-   · the running-example data: every mean and SD recomputed
+   · the running-example data: every mean and SD recomputed (the amylase trials and, since 16 Oct 2026,
+     the practice shore's counts and temperatures, with the medians)
    · index.html loads every station and widget file that exists
    · the parts list the teacher's spreadsheet scores homework against (WUL.partsManifest, track.js):
      every part has something to finish; data/parts.json on disk is the one this code makes; js/signin.js
@@ -267,6 +268,28 @@ if (A) {
     if (+(sd / Math.sqrt(t.length)).toFixed(1) !== A.i.ses[i]) E(`datasets: IA SE ${i} is ${A.i.ses[i]}, trials give ${(sd / Math.sqrt(t.length)).toFixed(2)}`);
     if (+(1000 / A.i.means[i]).toFixed(1) !== A.i.rates[i]) E(`datasets: IA rate ${i} is ${A.i.rates[i]}, mean gives ${(1000 / A.i.means[i]).toFixed(2)}`);
     t.forEach((v) => { if (v % A.sampling) E(`datasets: ${v} s is not a multiple of the ${A.sampling} s sampling interval`); });
+  });
+}
+
+/* the practice shore (field data, 16 Oct 2026): every mean, SD and median recomputed, every count a whole number */
+const SH = WUL.data && WUL.data.shore;
+if (!SH) E('datasets: no WUL.data.shore (the practice field data the Results tables, Processing and Error bars parts use)');
+else {
+  const stats = (t) => {
+    const m = t.reduce((a, b) => a + b) / t.length;
+    return { m, sd: Math.sqrt(t.reduce((a, v) => a + (v - m) ** 2, 0) / (t.length - 1)), med: [...t].sort((a, b) => a - b)[(t.length - 1) / 2] };
+  };
+  SH.counts.forEach((t, i) => {
+    const r = stats(t);
+    if (+r.m.toFixed(1) !== SH.countMeans[i]) E(`datasets: shore count mean ${i} is ${SH.countMeans[i]}, the counts give ${r.m.toFixed(2)}`);
+    if (+r.sd.toFixed(2) !== SH.countSds[i]) E(`datasets: shore count SD ${i} is ${SH.countSds[i]}, the counts give ${r.sd.toFixed(3)}`);
+    if (r.med !== SH.countMedians[i]) E(`datasets: shore count median ${i} is ${SH.countMedians[i]}, the counts give ${r.med}`);
+    t.forEach((v) => { if (!Number.isInteger(v) || v < 0) E(`datasets: shore count ${v} is not a whole number of animals`); });
+  });
+  SH.temps.forEach((t, i) => {
+    const r = stats(t);
+    if (+r.m.toFixed(1) !== SH.tempMeans[i]) E(`datasets: shore temperature mean ${i} is ${SH.tempMeans[i]}, the readings give ${r.m.toFixed(2)}`);
+    if (+r.sd.toFixed(2) !== SH.tempSds[i]) E(`datasets: shore temperature SD ${i} is ${SH.tempSds[i]}, the readings give ${r.sd.toFixed(3)}`);
   });
 }
 

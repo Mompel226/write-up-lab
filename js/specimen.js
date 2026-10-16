@@ -201,6 +201,8 @@
       }
       var html = '';
       if (ib) html += '<p class="rm__added">Added at ' + (baseL === 'e' ? 'the Extended Essay' : 'IB') + '. You do not need it at IGCSE.</p>';
+      /* the report on the home page is the IGCSE one: say so, so an IB reader never takes it as theirs (16 Oct 2026) */
+      else if (diff(rg, 'i') || diff(rg, 'e')) html += '<p class="rm__added">This is the IGCSE version. How the IB IA and the IB EE change it is below.</p>';
       if (ex) html += '<div class="rm__ex">' + ex + '</div>';
       html += '<dl class="rm__dl">' + (job ? '<dt>What it does</dt><dd>' + md(job, { inline: true }) + '</dd>' : '') +
         (lose ? '<dt>Where marks are lost</dt><dd class="lose">' + md(lose, { inline: true }) + '</dd>' : '') + '</dl>';

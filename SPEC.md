@@ -112,6 +112,50 @@ that day against the IB Biology guide (2025) and the EE guide (2027), item by it
 - The hypothesis at IB: the conclusion answers the research question with processed data; a sentence on the
   hypothesis may follow. Never "first" or "earns nothing alone" (the guide says neither; Daniel, 3 Oct 2026).
 
+## IGCSE advice never reads as the IB's (Daniel, 16 Oct 2026)
+An IB pupil read the background's "Five jobs, in about five sentences" (an IGCSE, in-class figure) as the length of the
+IA background. Advice that holds only at IGCSE must say so, so an IB reader never takes it as theirs:
+- Tag it `lv: 'g'` (a build block, a rule, a trap): on a part the IB also has, the page then shows a green **IGCSE**
+  tag beside it (`js/app.js` step and trap tags, `js/blocks.js` `B.rules`). Or name the level in the words ("At IGCSE,
+  …", "Our rule for every IGCSE table title"). Give the IB counterpart beside it, tagged IB.
+- The part header shows `job` and `where` for EVERY level that differs, each with its tag (`lvLines` in `js/app.js`).
+  Until 16 Oct 2026 it showed only the first level's, so IB readers met "In the Results, straight after the method"
+  and "Say whether the hypothesis is supported".
+- An IB rule inside a rules list is drawn with its IB tag, never hidden. Until 16 Oct 2026, 25 IB rules on
+  IGCSE-first parts were invisible, so the list an IB reader saw was the IGCSE one.
+- A tool on a part with IB levels gets a Version switch (above), so the IB version is one tap away.
+- The home page report is the IGCSE one: the lede says so, and each tile says "This is the IGCSE version" above
+  "How the IB IA / IB EE changes this".
+- Never invent an IB number (a word or sentence count for one section): say what the guide says. The background is
+  the research question's context, in Research design, within the 3,000 words of the whole report.
+- Proof: `node tools/smoke.mjs` fails a part whose per-level `where` shows one line, or whose IB rules are hidden.
+
+## Field data and counts (Daniel, 16 Oct 2026)
+"If you cannot generate an IB table using the advice … then my advice is wrong." Checked by building real IB tables
+from the Y12 ecology mini IA (belt transects, counts per quadrat, probe readings); the site's examples use PRACTICE
+data only (`WUL.data.shore`), never a class's species, numbers, tables or analysis (memory never-do-the-assessment).
+- **A heading with no unit:** a count or a pH names the quantity only: "Number of periwinkles per quadrat", "pH".
+  Cambridge mark schemes ask for units only where there are units (0610/61 November 2017 Q1(a)(i): "pH and intensity /
+  minutes"; June 2023 Q1(a)(i): "number of bubbles (in 3 minutes)").
+- **No ± on a count:** a count of whole organisms has no measuring instrument, so by convention its heading has no ±,
+  and a note under the table says so. Its uncertainty comes from the method (the edge rule, hidden animals) and goes in
+  the evaluation. No IB document rules on counts: write it as the convention, never as an IB rule. A pH from a probe
+  keeps ± its last digit. The same words as the rocky-shore practical ("A count has no instrument, but two people can
+  count differently").
+- **Several measured variables:** one raw-data table for each (our rule), then ONE processed-data table with Mean |
+  Standard deviation under each variable's spanning heading; raw data first, then processed (Tables, step `field`).
+- **Field repeats:** in a transect study the transects are the repeats, n = the number of transects (not of quadrats,
+  not of groups); the quadrats along one transect are positions. Linked to `measurement.js` block `replicates` and the
+  keywords true replicate and pseudoreplication.
+- **Means of counts:** one decimal place (our rule for counts: a count has no measuring uncertainty, so 2.4 per quadrat
+  is honest); each SD one more decimal place than its mean, as everywhere.
+- **The SD worked once in full** (Processing, IB step `sd`): SD = √[ Σ(x − mean)² ÷ (n − 1) ], built from the 40 °C IB
+  trials in `WUL.data`: mean 74 s, Σ(x − mean)² = 120, 120 ÷ 4 = 30, √30 = 5.5 s; n − 1 (=STDEV.S), not n (=STDEV.P,
+  4.9 s). D2.3.4 still holds: the formula need not be memorised; the worked example shows the calculation in a report.
+- **Skewed counts** (Error bars, step `skew`): an SD larger than its mean means a ± 1 SD bar would go below zero, which
+  no count can do (3.0 − 5.61 = −2.61): the counts are skewed. Give the median and the IQR (a box-and-whisker plot) as
+  well; Tool 3 lists both.
+
 ## Levels — ONE report, not three (Daniel, 24 Sep 2026)
 Level colours: IGCSE green `--green`, IB IA blue `--blue`, IB EE burnt orange `--ee` (#B45309). EE was purple until
 25 Sep 2026: at dot size it could not be told from blue. `--plum` is now only a data colour (SE bars in graphs).
@@ -120,7 +164,8 @@ in the SAME list, the IB material marked **IB IA / IB EE** with a dashed outline
 empty box: Daniel, 25 Sep 2026), closed until clicked — so an
 IGCSE student meets it and can open it out of curiosity. A build block whose `lv` excludes `g` becomes one of
 these IB steps; red pens and question sets with their own IB version get a small IGCSE · IB IA · IB EE switch
-inside their tab. Each part's page is **tabs** (Learn · Red pen · Mistakes to avoid · Test yourself · Keywords ·
+inside their tab, and so does a tool (16 Oct 2026: a "Version" switch above any tool registered with `lv: 'gie'`,
+`js/blocks.js` `B.widget`). Each part's page is **tabs** (Learn · Red pen · Mistakes to avoid · Test yourself · Keywords ·
 Go further) and Learn is a **list of steps opened one at a time** — never one long scroll. Give every block a
 short plain `title`: it becomes the step's name. The home page is the report itself, two pages of parts you
 open in place (`WUL.reportMap` in `js/specimen.js`), each with "How the IB IA / IB EE changes this".
@@ -236,7 +281,10 @@ full, informative title, in the SAME pattern, so students copy the pattern. Neve
   **Raw and processed data** · **Data and observations** (a table that holds readings and qualitative
   observations, e.g. `observations.js`). Items shown at every level use the IGCSE form.
 - IGCSE titles stop after the dependent variable; IB titles end with n (and, for figures, the error bars).
-- two measured variables: `… showing the relationship between <X> and <Y> in <organism/sample>.`
+- two measured variables: `… showing the relationship between <X> and <Y> in <organism/sample>.` Field data, where
+  nothing was changed, use it too, with n as the number of transects: `Table 1. Raw data showing the relationship
+  between distance from the low-tide mark (0.00–8.00 m) and the number of periwinkles per quadrat on a rocky shore
+  (n = 5 transects).`
 - add `(n = 5)` or a condition at the end when it helps: `… (n = 5 at each temperature)`.
 - e.g. `Table 1. Raw data showing the effect of temperature (20.0–60.0 °C) on the time taken for fungal α-amylase to digest starch (n = 5).`
 
@@ -367,6 +415,11 @@ which multiplies each p instead, so it is still compared with 0.05.
   ×10⁻³ s⁻¹. Optimum near 50 °C. Temperature ± 0.5 °C.
 - `WUL.data.soils` — bean seedlings, 4 soils A–D, n = 10: means 43.0, 43.6, 44.0, 44.3 cm; SD 1.4, 1.6, 1.3, 1.5.
   A to D differ by 1.3 cm (3 %); the SD bars overlap. The bar-chart / truncated-axis example.
+- `WUL.data.shore` — a PRACTICE rocky shore (16 Oct 2026): five transects (n = 5), a 0.25 m² quadrat every 2.00 m
+  from the low-tide mark (± 0.01 m); periwinkles counted (whole numbers, no ±) and rock-surface temperature (probe,
+  ± 0.1 °C). Count means 2.4/7.0/13.8/10.8/3.0, SD 1.14/1.58/2.39/3.42/5.61, medians 2/7/14/10/1; temperature means
+  18.1/19.2/20.4/21.9/23.4 °C, SD 0.24/0.29/0.34/0.40/0.42. At 8.00 m the counts (0, 1, 13, 0, 1) are skewed. Made
+  up for teaching; never replace it with a class's own field data.
 - Other examples are fine (pondweed and light, potato cylinders and sucrose, catalase and hydrogen peroxide,
   yeast and sugars, woodlice and humidity with a choice chamber) — biologically correct, realistic numbers.
 
@@ -449,7 +502,8 @@ then what the site is checked against, then the licences.
 
 ## Check your work — required before you commit
 1. `node tools/check.mjs` (from `labs/write-up-lab/`) must print `✔ all checks passed`. A warning about a station
-   you did not change still deserves a look; an error in yours must be fixed.
+   you did not change still deserves a look; an error in yours must be fixed. It recomputes the amylase means and SDs
+   and, since 16 Oct 2026, the practice shore's means, SDs and medians.
 2. Start a static server yourself, from the Biology Hub folder:
    `python3 -m http.server 8830 --bind 127.0.0.1` (smoke.mjs expects :8830). `?lv=g|i|e` before the `#` sets the
    level used by Start from zero, the Checklist and the tool pages; part pages ignore it (each step is drawn at
@@ -457,7 +511,8 @@ then what the site is checked against, then the licences.
    - `node tools/smoke.mjs <station-id> [more ids]` renders each station in headless Chrome, with every Learn step
      open, and reports script errors, missing tools and empty sections. It loads each part with `?lv=g`, `i` and
      `e`, but a part page ignores `?lv`, so the three loads are the same page: the red pen and Test yourself are
-     checked at their first level only. It must pass.
+     checked at their first level only. It must pass. Since 16 Oct 2026 it also fails a part whose per-level `where`
+     shows one line, or that hides an IB rule (see "IGCSE advice never reads as the IB's").
    - Then LOOK at your pages: headless Chrome `--screenshot --window-size=W,H` (or the Browser pane opened with
      navigate) at 1440 × 4000 and at 390 × 6000, and read the PNGs. Save screenshots in your own scratchpad,
      never in the site. Fix what looks wrong: clipped text, overflow at 390 px, crossed label lines, a graph that

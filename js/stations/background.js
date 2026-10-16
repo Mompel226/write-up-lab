@@ -36,13 +36,13 @@
 
     build: [
       { type: 'anatomy', title: 'The parts of a background section',
-        intro: 'Five jobs, in about five sentences. Tap a colour to see each one.',
+        intro: 'Five jobs. The model gives each one a sentence or two, so that you can see the parts. The IB guide sets no length for the background, only 3,000 words for the whole report: give each job the space your question needs. Tap a colour to see each one.',
         model: '{1:α-Amylase hydrolyses the α-1,4 glycosidic bonds in starch, producing maltose (Urry et al.).} {2:As temperature rises, enzyme and substrate molecules gain kinetic energy and collide more often, so more enzyme–substrate complexes form per second. Above the optimum, hydrogen and ionic bonds in the tertiary structure break, and the active site changes shape.} {3:Amylases from different organisms have different optimum temperatures (Gupta et al.). Raviyan et al. report an optimum of 55 °C for α-amylase from *Aspergillus oryzae* (5464).} {4:This enzyme is added to bread dough, so how its activity changes between 20 and 60 °C matters in baking.} {5:The mean time for iodine to stop turning blue-black was converted to a rate (1 ÷ mean time), and the temperature with the highest rate showed where the optimum lies.}',
         parts: [
           { n: 1, name: 'The theory the question needs', note: 'What the enzyme does, with a citation.' },
           { n: 2, name: 'The link between the variables', note: 'Why temperature should change the rate: collisions, then denaturation.' },
           { n: 3, name: 'Why this system', note: 'The published context for this exact enzyme.' },
-          { n: 4, name: 'Why the question is worth asking', note: 'One sentence is enough.' },
+          { n: 4, name: 'Why the question is worth asking', note: 'Keep it short: why the answer matters.' },
           { n: 5, name: 'How the raw data become the answer', note: 'Our advice, not an IB rule: it shows how the data will answer the question.' }
         ] },
 

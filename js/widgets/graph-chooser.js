@@ -65,7 +65,7 @@
       { id: 'amylase', ans: 'line',
         q: 'Amylase was mixed with starch at five temperatures. The mean time for the starch to disappear was recorded.',
         table: { head: [['Temperature / °C', 'Mean time / s']], rows: D.temps.map(function (t, i) { return [String(t), String(D.means[i])]; }) },
-        why: 'Temperature is a [[continuous variable]], and its values were set. Plot each mean as a cross, ' + (L === 'g' ? 'and join the crosses with ruled lines.' : 'then draw one smooth curve through the trend: biology predicts a rise to an optimum, then a fall.'),
+        why: 'Temperature is a [[continuous variable]], and its values were set. Plot each mean as a cross, ' + (L === 'g' ? 'and, at IGCSE, join the crosses with ruled lines.' : 'then draw one smooth curve through the trend: biology predicts a rise to an optimum, then a fall.'),
         spec: { x: { min: 20, max: 60, step: 10, minor: 5, label: 'Temperature / °C' }, y: { min: 0, max: 200, step: 50, minor: 5, label: 'Mean time / s' }, series: [{ id: 'm', pts: xy(D.temps, D.means), line: L === 'g' ? 'ruled' : 'smooth' }] } },
       { id: 'holly', ans: 'hist',
         q: 'The lengths of 40 holly leaves were measured. The number of leaves in each 10 mm range was counted.',

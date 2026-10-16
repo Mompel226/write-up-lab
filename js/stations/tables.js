@@ -1,5 +1,8 @@
 /* station: tables — one of the two flagship stations. Record every measurement so a reader can check it.
-   Numbers: WUL.data.amylase (IGCSE 3 trials, IB 5 trials). Cambridge facts: RESEARCH-cambridge.md "Tables". */
+   Numbers: WUL.data.amylase (IGCSE 3 trials, IB 5 trials). Cambridge facts: RESEARCH-cambridge.md "Tables".
+   Field data (16 Oct 2026, Daniel: "if you cannot generate an IB table using the advice … my advice is wrong"):
+   WUL.data.shore, a PRACTICE shore (never a class's own data): two measured variables, one raw-data table each,
+   one processed table, transects as the repeats (n), a count with no unit and no ±. */
 (function (WUL) {
   'use strict';
   var A = WUL.data.amylase, G = A.g, I = A.i;
@@ -79,6 +82,41 @@
   var ibStage = WUL.table(ibRaw(true)) + '<div style="height:18px"></div>' + WUL.table(ibProc(true)) + calcLine;
   var ibPlain = WUL.table(ibRaw(false)) + '<div style="height:12px"></div>' + WUL.table(ibProc(false));
 
+  /* ---- field data: the practice shore, two measured variables in every quadrat ---- */
+  var SH = WUL.data.shore, TR = [1, 2, 3, 4, 5];
+  function f2(v) { return v.toFixed(2); }
+  var DIST = 'Distance from the low-tide mark / m ± 0.01';
+  var fieldCount = T({
+    caption: 'Table 1. Raw data showing the relationship between distance from the low-tide mark (0.00–8.00 m) and the number of periwinkles per quadrat on a rocky shore (n = 5 transects).', capEl: 'a-title',
+    head: [[{ t: DIST, rs: 2, el: 'a-ivh' }, { t: 'Number of periwinkles per quadrat', cs: 5, el: 'a-dvh' }],
+      TR.map(function (k) { return { t: 'Transect ' + k, el: 'a-tr-' + k }; })],
+    rows: SH.dists.map(function (d, r) {
+      return [{ t: f2(d), el: 'a-iv-' + (r + 1) }].concat(SH.counts[r].map(function (v, k) { return { t: String(v), el: 'a-raw-' + (r * 5 + k + 1) }; }));
+    })
+  }, FIT);
+  var fieldTemp = T({
+    caption: 'Table 2. Raw data showing the relationship between distance from the low-tide mark (0.00–8.00 m) and the temperature of the rock surface on a rocky shore (n = 5 transects).', capEl: 'b-title',
+    head: [[{ t: DIST, rs: 2, el: 'b-ivh' }, { t: 'Temperature of the rock surface / °C ± 0.1', cs: 5, el: 'b-dvh' }],
+      TR.map(function (k) { return { t: 'Transect ' + k, el: 'b-tr-' + k }; })],
+    rows: SH.dists.map(function (d, r) {
+      return [{ t: f2(d), el: 'b-iv-' + (r + 1) }].concat(SH.temps[r].map(function (v, k) { return { t: v.toFixed(1), el: 'b-raw-' + (r * 5 + k + 1) }; }));
+    })
+  }, FIT);
+  var fieldProc = T({
+    caption: 'Table 3. Processed data showing the relationship between distance from the low-tide mark (0.00–8.00 m) and the mean number of periwinkles per quadrat and the mean temperature of the rock surface, with their standard deviations (n = 5 transects).', capEl: 'c-title',
+    head: [[{ t: DIST, rs: 2, el: 'c-ivh' }, { t: 'Number of periwinkles per quadrat', cs: 2, el: 'c-ch' }, { t: 'Temperature of the rock surface / °C', cs: 2, el: 'c-th' }],
+      [{ t: 'Mean', el: 'c-sub-1' }, { t: 'Standard deviation', el: 'c-sub-2' }, { t: 'Mean', el: 'c-sub-3' }, { t: 'Standard deviation', el: 'c-sub-4' }]],
+    rows: SH.dists.map(function (d, r) {
+      var n = r + 1;
+      return [{ t: f2(d), el: 'c-iv-' + n }, { t: SH.countMeans[r].toFixed(1), el: 'c-cm-' + n }, { t: SH.countSds[r].toFixed(2), el: 'c-cs-' + n },
+        { t: SH.tempMeans[r].toFixed(1), el: 'c-tm-' + n }, { t: SH.tempSds[r].toFixed(2), el: 'c-ts-' + n }];
+    })
+  }, FIT);
+  var fieldStage = WUL.table(fieldCount) +
+    '<p class="tnote" data-el="a-note">Whole animals in a 0.25 m² quadrat, each counted when more than half of it was inside. A count has no measuring instrument, so no ± is given.</p>' +
+    '<div style="height:18px"></div>' + WUL.table(fieldTemp) + '<div style="height:18px"></div>' + WUL.table(fieldProc);
+  var K8 = SH.dists.length;          /* the last row, 8.00 m: the skewed counts */
+
   WUL.station({
     id: 'tables', keepV: { v: 'tjff41', now: 'tr2l5r', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'record', order: 1, title: 'Results tables', levels: 'gie',
     job: {
@@ -98,7 +136,7 @@
     },
 
     build: [
-      { type: 'steps', title: 'Build a table in 8 steps',
+      { type: 'steps', lv: 'g', title: 'Build a table in 8 steps',
         intro: 'The amylase experiment. Press __Next step__ to add one part at a time.',
         stage: { table: igcseSteps },
         steps: [
@@ -106,7 +144,7 @@
           { title: 'The independent variable goes first', text: 'It runs __down the first column__, never across the top. Its [[column heading]] is the quantity, a [[solidus]], then the unit: Temperature / °C.', show: ['iv-head'] },
           { title: 'Its values, in increasing order', text: '20, 30, 40, 50, 60. No unit beside the numbers: the heading already gives it.', show: ids('iv', 5) },
           { title: 'The dependent variable spans the time columns', text: 'One heading over all the time columns. The unit, s, is written once, here.', show: ['dv-head'] },
-          { title: 'One column for each trial', text: 'Trial 1, Trial 2, Trial 3. Repeats let you spot an [[anomalous result]].', show: ids('trial', 3) },
+          { title: 'One column for each trial', text: 'Trial 1, Trial 2, Trial 3. Repeats let you spot an [[anomalous result]]. Name each column after what was repeated: in fieldwork, Quadrat 1 or Transect 1.', show: ids('trial', 3) },
           { title: 'The raw data', text: 'Every reading, as a number only. All whole seconds, because the iodine was tested every 10 s.', show: ids('raw', 15) },
           { title: 'The mean goes on the right', text: 'It is calculated from the trials, so it comes after them. Whole seconds, like the [[raw data]].', show: ['mean-head'].concat(ids('mean', 5)) },
           { title: 'The title goes above', text: 'Number it, then name both variables: “Table 1. Data showing the effect of ==temperature (20–60 °C)== on ==the time taken for amylase to digest starch==.”', show: ['title'] }
@@ -149,10 +187,10 @@
           { n: 2, name: 'Solidus', note: 'A slash. It means “divided by”, so the numbers below are pure numbers.' },
           { n: 3, name: 'Unit', note: 'The symbol: s, °C, g, cm³. Written once, here, never in the cells.' }
         ],
-        after: 'Some books write Time (s). Cambridge papers print Time / s, so write that.' },
+        after: 'Some books write Time (s). Cambridge papers print Time / s, so write that. A count or a pH has no unit, so its heading is the quantity alone, with no solidus: “Number of bubbles in 3 minutes”, “pH” (as in the 0610 Paper 61 mark schemes of November 2017 and June 2023).' },
 
       { type: 'anatomy', lv: 'ie', title: 'The parts of a raw-data heading',
-        intro: 'At IB a raw-data heading has four parts. Tap a colour to see each one.',
+        intro: 'At IB a raw-data heading has up to four parts. Tap a colour to see each one.',
         model: { table: {
           caption: 'Part of Table 1 (trial 1 only)',
           head: [['{1:Temperature} {2:/}\u00a0{3:°C} {4:±\u00a00.5}', '{1:Time for starch to disappear} {2:/}\u00a0{3:s} {4:±\u00a010}']],
@@ -166,6 +204,16 @@
         ],
         after: 'The [[uncertainty]] comes from the method, not always from the instrument. It is written once, in the heading, never in the cells.' },
 
+      { type: 'table', lv: 'ie', title: 'Headings with no unit, or no ±',
+        spec: { cls: 'wd-table-fixer--prose',
+          head: [['What was measured', 'Its raw-data heading', 'Why']],
+          rows: [
+            ['A time, with a stopwatch, sampled every 10 s', 'Time for starch to disappear / s ± 10', 'A unit, and an uncertainty from the method.'],
+            ['pH, with a digital probe', 'pH ± 0.01', 'pH has no unit, so no solidus. The probe still has an uncertainty: ± its last digit.'],
+            ['Animals, counted in a quadrat', 'Number of periwinkles per quadrat', 'No unit and no measuring instrument, so no ± (the usual convention). Say so in a note under the table.']
+          ] },
+        after: 'A count can still be wrong: two people can count differently, and some animals hide in cracks. That is an uncertainty of the method. The same rule for the edge of the quadrat keeps counts consistent; discuss the rest in your evaluation.' },
+
       { type: 'compare', title: 'Where the unit goes',
         bad: { table: { head: [['Temperature', 'Mean time']], rows: G.temps.map(function (T, r) { return [T + '\u00a0==°C==', G.means[r] + '\u00a0==s==']; }) } },
         good: { table: { head: [['Temperature\u00a0==/\u00a0°C==', 'Mean time\u00a0==/\u00a0s==']], rows: G.temps.map(function (T, r) { return [String(T), String(G.means[r])]; }) } },
@@ -176,9 +224,9 @@
         bad: { table: T({ head: [['Temperature / °C', 'Mean time / s']], rows: [['20', '180'], ['==30.0==', '==116.7=='], ['40', '==73.33=='], ['==50.00==', '53'], ['60', '==93.3==']] }) },
         good: { table: T({ head: [['Temperature / °C', 'Mean time / s']], rows: G.temps.map(function (T, r) { return [String(T), String(G.means[r])]; }) }) },
         badLabel: 'Mixed decimal places', goodLabel: 'The same d.p. all the way down',
-        why: '20, 20.0 and 19.95 say different things: measured to the nearest 1, 0.1 and 0.01. One column, one precision: Cambridge marks this. A mean with no more [[decimal places]] than the raw data is our rule.' },
+        why: '20, 20.0 and 19.95 say different things: measured to the nearest 1, 0.1 and 0.01. One column, one precision: Cambridge marks this. A mean with no more [[decimal places]] than the raw data is our rule; a mean of counts is the exception, with one decimal place (2.4 animals per quadrat).' },
 
-      { type: 'grid2', lv: 'g', title: 'IGCSE and IB tables compared',
+      { type: 'grid2', title: 'IGCSE and IB tables compared',
         items: [
           { label: 'IGCSE: one table', tone: 'g', v: { table: igcsePlain }, note: 'Raw data and the mean together. The mean is on the right.' },
           { label: 'IB: raw data, then processed data', tone: 'i', v: { html: ibPlain }, note: 'Table 1: every reading, with ± in the headings. Table 2: what was calculated.' }
@@ -213,20 +261,37 @@
       { type: 'note', tone: 'house', lv: 'ie', title: 'Raw data, then processed data',
         md: 'Table 1 holds every reading. Table 2 holds what was calculated: means, SD, rates. The IB does __not__ require two tables; it asks for processing that is clear. Two tables make each step easy to check, and no number appears twice.' },
 
+      { type: 'steps', lv: 'ie', id: 'field', title: 'Field data: a table for each measured variable',
+        intro: 'A practice rocky shore: five transects that start at the low-tide mark, with a quadrat every 2.00 m. In each quadrat two variables were measured: the number of periwinkles and the temperature of the rock surface. Press __Next step__.',
+        stage: { html: fieldStage },
+        steps: [
+          { title: 'The position goes in the first column', text: 'Distance from the low-tide mark: where each quadrat was. Nothing was changed, but this is the variable on the x-axis, so it goes first, in increasing order.', show: ['a-ivh'].concat(ids('a-iv', 5)) },
+          { title: 'The repeats go across: the transects', text: 'Each transect is one repeat, a [[true replicate]]: Transect 1 to Transect 5. The quadrats along one transect are positions, not repeats; counting them as repeats is [[pseudoreplication]]. So n = 5, the number of transects, not the number of quadrats or of the groups that laid them.', show: ids('a-tr', 5), focus: ids('a-tr', 5) },
+          { title: 'A count: no unit, and no ±', text: 'The heading names the quantity only: Number of periwinkles per quadrat. A count has no unit and no measuring instrument, so no solidus and no ±: say so in a note under the table. Its uncertainty comes from the method (the edge of the quadrat, animals hidden in cracks): discuss that in your evaluation.', show: ['a-dvh', 'a-note'].concat(ids('a-raw', 25)), focus: ['a-dvh'] },
+          { title: 'The title: “the relationship between”', text: 'Nothing was changed, so the title says “showing the __relationship between__ … and …”, not “the effect of … on …”. It ends with n: (n = 5 transects).', show: ['a-title'], focus: ['a-title'] },
+          { title: 'A second raw-data table for the second variable', text: 'Each measured variable gets its own raw-data table (our rule). The temperature was read from a digital probe, so its heading has a unit and a ±: Temperature of the rock surface / °C ± 0.1.', show: ['b-title', 'b-ivh', 'b-dvh'].concat(ids('b-iv', 5), ids('b-tr', 5), ids('b-raw', 25)), focus: ['b-dvh'] },
+          { title: 'One processed-data table', text: 'The means and standard deviations of both variables, in one table. Each variable has a heading over its own two columns: Mean, then Standard deviation. Raw data first, then processed data: the tables are in order of the kind of data.', show: ['c-title', 'c-ivh', 'c-ch', 'c-th'].concat(ids('c-sub', 4), ids('c-iv', 5)), focus: ['c-ch', 'c-th'] },
+          { title: 'Means and standard deviations', text: 'A count has no measuring uncertainty, so a mean of counts can show one decimal place: 2.4 periwinkles per quadrat (our rule for counts). The temperatures were read to 0.1 °C, so their means are too. Each SD has one more decimal place than its mean (our rule).', show: ids('c-cm', 5).concat(ids('c-cs', 5), ids('c-tm', 5), ids('c-ts', 5)) },
+          { title: 'Read each SD beside its mean', text: 'At ' + f2(SH.dists[K8 - 1]) + ' m the SD of the counts, ' + SH.countSds[K8 - 1].toFixed(2) + ', is larger than the mean, ' + SH.countMeans[K8 - 1].toFixed(1) + ': these counts are skewed. [What to write about skewed counts](https://nlcsbiology.com/write-up-lab/#/part/errorbars/build/skew).', show: [], focus: ['c-cm-' + K8, 'c-cs-' + K8] }
+        ] },
+
       { type: 'note', tone: 'ee', lv: 'e', title: 'Raw data in an appendix',
         md: 'Examiners are __not required to read appendices__. So the body holds every processed table. It is good practice to put a __representative sample__ of the raw data there too, such as all five trials at one temperature. Tables do not count towards the 4,000 words.' },
 
       { type: 'rules', title: 'Rules for a results table', items: [
-        'A numbered title __above__ the table, always in the same pattern: “Table 1. Data showing the effect of … on …”.',
+        { t: 'A numbered title __above__ the table, always in the same pattern: “Table 1. Data showing the effect of … on …”.', lv: 'g' },
+        '“Showing the effect of … on …” when you changed the independent variable. “Showing the __relationship between__ … and …” when you changed nothing, as in fieldwork.',
         'The [[independent variable]] runs __down the first column__, in increasing order. Never across the top row.',
         'No diagonal line in the corner. Every column has its own heading.',
-        'Each [[column heading]]: quantity / unit. Time / s, not “Time” or “Time taken (secs)”.',
+        'Each [[column heading]]: quantity / unit. Time / s, not “Time” or “Time taken (secs)”. A count or a pH has no unit: its name alone, “Number of periwinkles per quadrat”, “pH”.',
         '__No units in the cells.__ Numbers only.',
         'The __same number of decimal places__ down each column.',
         'No blank cells. If a reading is lost, write a dash (–) and explain why under the table.',
         'Ruled lines, or a spreadsheet. Never freehand.',
-        { t: 'Each title starts with __Raw data__ or __Processed data__, and ends with n: (n = 5).', lv: 'ie' },
-        { t: 'Each raw-data heading gives its uncertainty: Time / s ± 10.', lv: 'ie' },
+        { t: 'A numbered title above each table. It starts with __Raw data__ or __Processed data__ and ends with n: “Table 1. Raw data showing the effect of … on … (n = 5).”', lv: 'ie' },
+        { t: 'Each raw-data heading gives the uncertainty of its measurement: Time / s ± 10. A count has no measuring instrument, so by convention no ±: say so in a note under the table.', lv: 'ie' },
+        { t: 'Several measured variables: one raw-data table for each (our rule), then one processed-data table with a Mean and a Standard deviation column under each variable.', lv: 'ie' },
+        { t: 'In a transect study the repeats are the transects: n = the number of transects. The quadrats along one transect are positions, not repeats.', lv: 'ie' },
         { t: 'One [[worked example]] of each calculation, with the numbers in it.', lv: 'ie' },
         { t: 'Our rule: each table fits on one page.', lv: 'ie' }
       ] },
@@ -239,7 +304,8 @@
       { type: 'frames', lv: 'ie', title: 'Sentence frames for IB table titles', items: [
         'Table 1. Raw data showing the effect of ___ (___–___) on ___ (n = ___).',
         'Table 2. Processed data showing the effect of ___ (___–___) on the mean ___, standard deviation and ___ (n = ___).',
-        'Table ___. Raw data showing the relationship between ___ and ___ in ___ (n = ___).'
+        'Table ___. Raw data showing the relationship between ___ and ___ in ___ (n = ___).',
+        'Table ___. Processed data showing the relationship between ___ (___–___) and the mean ___ and the mean ___, with their standard deviations (n = ___ transects).'
       ] }
     ],
 
@@ -260,7 +326,7 @@
         notes: {
           a: { label: 'title?', why: '“Results” tells the reader nothing. Number it, and name both variables: __Table 1. Data showing the effect of temperature (20–60 °C) on the time taken for amylase to digest starch.__' },
           b: { label: '“Temp”?', why: 'Write the quantity in full: __Temperature / °C__. An abbreviation makes the reader guess.' },
-          c: { label: 'unit?', why: 'Every heading of numbers needs its unit, after a solidus: __Time for starch to disappear / s__.' },
+          c: { label: 'unit?', why: 'A time has a unit, so its heading needs it, after a solidus: __Time for starch to disappear / s__.' },
           d: { label: 'no units here', why: 'The unit goes once, in the heading. Cambridge rejects a unit in any data cell: write __70__.' },
           e: { label: 'd.p.!', why: 'Every other value in the column is whole seconds, so this one is too: __117__. The same decimal places down a column is marked.' },
           blank: { label: 'blank!', why: 'A blank cell hides a reading. Record every value. If one is lost, write a dash (–) and explain why under the table.' }
@@ -421,7 +487,7 @@
           { t: 'The independent variable is not in the first column', ok: true, why: 'Temperature should come first.' },
           { t: 'The mean is before the trials, not after them', ok: true, why: 'The mean is calculated from the trials, so it goes on the right.' },
           { t: 'There is no title', ok: true, why: 'A numbered title goes above the table.' },
-          { t: 'The headings have no units', why: 'Every heading has quantity / unit.' },
+          { t: 'The headings have no units', why: 'Every heading here has quantity / unit.' },
           { t: 'The values have different decimal places', why: 'Every column is in whole numbers.' }
         ],
         why: 'Temperature first, then the trials, then the mean, and a title above.' },
@@ -445,7 +511,7 @@
       { term: 'raw data', forms: ['raw'], def: 'The measurements exactly as they were recorded, before any calculation.', eg: 'The three times at 40 °C: 70, 80 and 70 s.' },
       { term: 'processed data', forms: ['processed'], def: 'Numbers calculated from the raw data, such as a mean, a rate or a standard deviation.', eg: 'The mean time at 40 °C: 73 s.' },
       { term: 'solidus', forms: ['solidi'], def: 'The slash (/) between a quantity and its unit in a column heading.', eg: 'Time / s' },
-      { term: 'column heading', forms: ['column headings', 'heading', 'headings'], def: 'The words at the top of a column: the quantity, a solidus, then the unit.', eg: 'Temperature / °C' },
+      { term: 'column heading', forms: ['column headings', 'heading', 'headings'], def: 'The words at the top of a column: the quantity, then a solidus and the unit if it has one.', eg: 'Temperature / °C' },
       { term: 'decimal places', forms: ['decimal place', 'd.p.'], def: 'The number of digits after the decimal point. It shows how precisely a value was measured.', eg: '73.3 has one decimal place; 73 has none.' }
     ],
 

@@ -85,7 +85,7 @@
             { t: 'Results table', why: 'This says nothing about what was changed or what was measured.' },
             { t: 'Table 1. The effect of temperature on the time taken for amylase to digest starch', why: 'Nearly. Start the same way every time: Table 1. Data showing the effect of … on …' }
           ],
-          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
+          rule: 'Our rule for every IGCSE table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         ivh: { q: 'What should this heading say?',
           opts: [
             { t: 'Temperature / °C', ok: true, why: 'The quantity in full, a solidus, then the unit.' },
@@ -222,7 +222,7 @@
             { t: 'Photosynthesis', why: 'A topic, not a title. Say what was changed and what was measured.' },
             { t: 'Table 1. Pondweed', why: 'Name both variables: lamp distance and volume of gas.' }
           ],
-          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
+          rule: 'Our rule for every IGCSE table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         ivpos: bIVPOS,
         order: ORDER('distance'),
         dvh: { q: '“Volume” of what, and over what time?',
@@ -301,7 +301,7 @@
             { t: 'Osmosis in potatoes', why: 'That is the topic. Name both variables.' },
             { t: 'Table 1. Potato masses', why: 'Name the independent variable too: sucrose concentration.' }
           ],
-          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
+          rule: 'Our rule for every IGCSE table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         ivh: { q: 'What should this heading say?',
           opts: [
             { t: 'Concentration of sucrose solution / mol dm⁻³', ok: true, why: 'It names the property, concentration, and gives its unit.' },
@@ -411,7 +411,7 @@
             { t: 'Catalase', why: 'A topic, not a title. Say what was changed and what was measured.' },
             { t: 'Table 1. Hydrogen peroxide and oxygen', why: 'It names two substances, not the two variables. Use: Data showing the effect of … on …' }
           ],
-          rule: 'Our rule for every table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
+          rule: 'Our rule for every IGCSE table title: “Table 1. Data showing the effect of [independent variable] on [dependent variable].”' },
         flip: FLIP(false)
       }
     };

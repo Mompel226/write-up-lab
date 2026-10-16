@@ -109,7 +109,8 @@
     ['An analogue scale: a ruler, a thermometer, a measuring cylinder', '± half the smallest division (a common convention)', 'Thermometer with 1 °C divisions: ± 0.5 °C'],
     ['A digital display: a balance, a digital thermometer', '± the last digit', 'A balance showing 2.35 g: ± 0.01 g'],
     ['A stopwatch started and stopped by hand', 'About ± 0.2 s, from reaction time', 'The display shows 0.01 s, but a hand is slower than that'],
-    ['A method that samples at intervals', '± the sampling interval', 'Iodine tested every 10 s: ± 10 s']
+    ['A method that samples at intervals', '± the sampling interval', 'Iodine tested every 10 s: ± 10 s'],
+    ['A count of whole organisms', 'No ± (the usual convention): there is no measuring instrument', 'Limpets in a quadrat: two people can count differently, so use the same rule for the edge of the quadrat every time']
   ]);
 
   WUL.station({
@@ -157,7 +158,7 @@
         ] },
 
       { type: 'grid2', title: 'Where an uncertainty comes from', items: [
-        { label: 'Four common sources', v: { html: WHERE }, note: 'The [[resolution]] of an instrument is the smallest change it can show. It is only the starting point.' }
+        { label: 'Common sources, and counts', v: { html: WHERE }, note: 'The [[resolution]] of an instrument is the smallest change it can show. It is only the starting point.' }
       ] },
 
       { type: 'grid2', title: 'When the method sets the uncertainty', items: [
@@ -257,7 +258,7 @@
           { t: '± 0.01 g', ok: true, why: 'For a digital display the convention is ± the last digit. The display changes in steps of 0.01 g.' },
           { t: '± 0.1 g', why: 'The display shows hundredths of a gram, so its steps are 0.01 g.' },
           { t: '± 1 g', why: 'That ignores the two decimal places the display shows.' },
-          { t: 'No uncertainty: it is digital', why: 'Every measurement has an uncertainty. A digital display is still limited by its last digit.' }
+          { t: 'No uncertainty: it is digital', why: 'A reading from an instrument always has an uncertainty, and a digital display is limited by its last digit. (A count of whole organisms has no instrument, so it has no ±.)' }
         ] },
       { type: 'choose', q: 'Which instrument is best for measuring 5.0 cm³ of starch solution?',
         opts: [

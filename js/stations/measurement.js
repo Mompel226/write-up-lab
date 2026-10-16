@@ -172,12 +172,12 @@
         { label: 'Reproducible', v: 'A __different__ person, or __different__ equipment, follows the method and still obtains the same results. This is the stronger test.', note: 'Another class follows your method and finds the same optimum.' }
       ] },
 
-      { type: 'grid2', title: 'Technical and true replicates', items: [
+      { type: 'grid2', id: 'replicates', title: 'Technical and true replicates', items: [
         { label: 'Technical replicates: one seedling, five times', v: { html: technical() }, note: 'Five measurements of one seedling give a better value for that one sample, and nothing else.' },
         { label: 'True replicates: five seedlings, once each', v: { html: trueReps() }, note: 'Only different individuals contain the natural variation between individuals.' }
       ] },
 
-      { type: 'note', tone: 'warn', label: 'Warning', title: 'Avoid pseudoreplication', md: 'Measuring one seedling five times and writing n = 5 is [[pseudoreplication]]. You have one plant. Counting it as five makes a conclusion look far stronger than the evidence allows. Both kinds of repeat are useful: say which you did.' },
+      { type: 'note', tone: 'warn', label: 'Warning', title: 'Avoid pseudoreplication', md: 'Measuring one seedling five times and writing n = 5 is [[pseudoreplication]]. You have one plant. Counting it as five makes a conclusion look far stronger than the evidence allows. Both kinds of repeat are useful: say which you did.\n\nThe same on a shore: the quadrats along one transect are positions, not repeats. The transects are the true replicates, so n = the number of transects.' },
 
       { type: 'grid2', title: 'What each repeat improves', items: [
         { label: 'Each mark answers one question', v: { html: REPEATS }, note: '✓ improves it · ~ in between: repeating lets you judge it · ✗ does not improve it' }

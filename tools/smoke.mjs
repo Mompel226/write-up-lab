@@ -4,7 +4,10 @@
    Learn step is drawn (all=1); the red pen and Test yourself only at their first level.
    usage: node tools/smoke.mjs [station ids…]     (no ids = every station; needs the server on :8830)
    Checks: no script error while drawing (body[data-errors]), a page heading, no "missing" tool,
-   no "Unknown block", and that a station meant for that level shows at least the Learn tab (id build) and Test yourself. */
+   no "Unknown block", and that a station meant for that level shows at least the Learn tab (id build) and Test yourself.
+   Since 16 Oct 2026 (IGCSE advice must never be read as the IB's): a part whose "where" differs by level shows one
+   line per level in its header (phead__wl), and every IB rule inside a rules list is drawn, marked (rule--ib), never
+   hidden. Both failed on the page code from before that day. */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -37,6 +40,10 @@ for (const id of ids) {
       if (!/id="build"/.test(dom)) probs.push('no Learn section');
       if (!/id="test"/.test(dom)) probs.push('no Test yourself section');
     }
+    if (/\bwhere:\s*\{/.test(src) && !/class="phead__wl"/.test(dom)) probs.push('"where" differs by level, but the header shows one line');
+    const ibRules = [...src.matchAll(/\{\s*t:\s*'(?:[^'\\]|\\.)*'\s*,\s*(?:icon:\s*'[^']*'\s*,\s*)?lv:\s*'([gie]+)'\s*(?:,\s*icon:\s*'[^']*'\s*)?\}/g)].filter((m) => !m[1].includes('g')).length;
+    const ibDrawn = (dom.match(/class="rule rule--ib"/g) || []).length;
+    if (ibDrawn < ibRules) probs.push(`${ibRules - ibDrawn} of ${ibRules} IB rule(s) hidden from the list`);
     if (probs.length) { bad++; console.log(`✘  ${id} @${l}: ${probs.join('; ')}`); }
     else console.log(`✔  ${id} @${l}`);
   }

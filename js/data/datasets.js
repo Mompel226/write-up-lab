@@ -42,4 +42,25 @@
     sds: [1.4, 1.6, 1.3, 1.5]
     /* A to D differ by 1.3 cm out of about 43 cm: 3 %. The SD bars overlap. */
   };
+
+  /* 3. A practice rocky shore: field data (nothing is changed, so a title says "the relationship between").
+        Five belt transects up from the low-tide mark, a 0.25 m² quadrat every 2.00 m (distance ± 0.01 m).
+        Two measured variables in each quadrat: the number of periwinkles (a count of whole animals, each counted
+        when more than half of it is inside the quadrat: no unit and no instrument, so no ±) and the temperature
+        of the rock surface (a digital probe, ± 0.1 °C). The repeats are the five transects, so n = 5: the
+        quadrats along one transect are positions, not repeats.
+        PRACTICE DATA, made up for teaching (Daniel, 16 Oct 2026): never a class's own field data, species or
+        numbers (memory never-do-the-assessment). A mean of counts has 1 d.p. (our rule for counts); each SD has
+        one more d.p. than its mean. At 8.00 m the counts are skewed: SD 5.61 > mean 3.0, median 1 (errorbars.js).
+        Checked by tools/check.mjs: every mean, SD and median is recomputed. */
+  WUL.data.shore = {
+    dists: [0, 2, 4, 6, 8],                       /* distance from the low-tide mark / m */
+    counts: [[2, 4, 1, 3, 2], [6, 9, 5, 8, 7], [14, 11, 17, 12, 15], [9, 16, 7, 12, 10], [0, 1, 13, 0, 1]],
+    countMeans: [2.4, 7.0, 13.8, 10.8, 3.0],
+    countSds: [1.14, 1.58, 2.39, 3.42, 5.61],
+    countMedians: [2, 7, 14, 10, 1],
+    temps: [[17.8, 18.3, 18.0, 18.4, 18.1], [19.0, 19.6, 18.9, 19.4, 19.2], [20.3, 20.9, 20.0, 20.6, 20.4], [21.7, 22.4, 21.3, 22.0, 21.9], [23.2, 24.0, 22.9, 23.6, 23.5]],
+    tempMeans: [18.1, 19.2, 20.4, 21.9, 23.4],
+    tempSds: [0.24, 0.29, 0.34, 0.40, 0.42]
+  };
 })(window.WUL);
