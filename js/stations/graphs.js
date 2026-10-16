@@ -335,7 +335,7 @@
       { type: 'widget', title: 'Plot the points yourself', name: 'plot-points' },
 
       { type: 'rules', title: 'How to draw the line', items: [
-        '__Line graph__: join the points with ruled straight lines, __point to point__ (dot to dot).',
+        { t: '__Line graph__: join the points with ruled straight lines, __point to point__ (dot to dot).', lv: 'g' },
         'Start at the first point and stop at the last. Never go beyond them, and never to the origin unless (0, 0) is one of your results.',
         { t: 'Draw a __line of best fit__ only when the question asks for one: one thin straight line or smooth curve, with the points spread evenly on both sides.', lv: 'g' },
         { t: 'Never both kinds of line on one graph.', lv: 'g' },
@@ -393,11 +393,13 @@
         'The points fill __more than half__ the grid in both directions.',
         'A line or scatter graph may start above zero: write the first number at the corner (20, not 0). No zigzag.',
         'Small crosses (×), each within half a small square of its value.',
-        'Ruled lines from point to point, unless a line of best fit is asked for. Stop at the first and last points: never to the origin.',
+        { t: 'Ruled lines from point to point, unless a line of best fit is asked for.', lv: 'g' },
+        'Stop the line at the first and last points: never to the origin.',
         'Two data sets need a [[key]].',
         '[[Bar chart]]: bars of equal width, with gaps, and the y-axis starts at 0. [[Histogram]]: the bars touch.',
-        'The title goes __below__ the graph, always in the same pattern: “Figure 1. Line graph showing the effect of … on …”.',
-        { t: 'Plot the means with [[error bars|error bar]], and name them in the caption: (n = 5; error bars = ± 1 SD).', lv: 'ie' }
+        'The title goes __below__ the graph, always in the same pattern: “Figure 1. Line graph showing the effect of … on …”, or “showing the relationship between … and …” when you changed nothing.',
+        { t: 'Plot the means with [[error bars|error bar]], and name them in the caption: (n = 5; error bars = ± 1 SD).', lv: 'ie' },
+        { t: 'One smooth curve or straight line of best fit through the means when biology predicts the shape. Point to point only when no shape is expected.', lv: 'ie' }
       ] },
 
       { type: 'note', tone: 'igcse', lv: 'g', label: 'At IGCSE', title: 'What Cambridge marks',

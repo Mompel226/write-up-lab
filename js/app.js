@@ -127,6 +127,28 @@
     return '';
   }
   WUL.ibTag = ibTag;
+  /* the tag for any level string: 'g' → IGCSE (green), 'ie' → IB, 'i' → IB IA, 'gi' → IGCSE IB IA … */
+  function lvTag(ls) {
+    if (!ls) return '';
+    if (ls.indexOf('g') < 0) return ibTag(ls);
+    return '<span class="ibtag ibtag--g">IGCSE</span>' + (ls.length > 1 ? ' ' + ibTag(ls.replace('g', '')) : '');
+  }
+  WUL.lvTag = lvTag;
+  /* a per-level field ({g, i, e}) as one line for each different value, in the part's level order:
+     [{ ls: 'g', t }, { ls: 'ie', t }]. A plain string, or the same words at every level, is one line with no level.
+     The part page shows every line, each with its level, so IGCSE words are never read as the IB's (16 Oct 2026). */
+  function lvLines(v, levels) {
+    if (v == null) return [];
+    if (typeof v !== 'object') return [{ ls: '', t: v }];
+    var out = [];
+    levels.split('').forEach(function (l) {
+      var t = WUL.pick(v, l); if (t == null) return;
+      var last = out[out.length - 1];
+      if (last && last.t === t) last.ls += l; else out.push({ ls: l, t: t });
+    });
+    if (out.length === 1) out[0].ls = '';
+    return out;
+  }
   /* a segmented IGCSE · IB IA · IB EE control, for the pages that still need one */
   function levelTabs(levels, cur, onPick) {
     var seg = h('div', { class: 'seg seg--lv', role: 'group', 'aria-label': 'Level' });
@@ -194,7 +216,7 @@
     hero.innerHTML =
       '<p class="eyebrow">Lab reports · IGCSE → IB Internal Assessment → Extended Essay</p>' +
       '<h1 class="hero__h">Learn to write a lab report, <span class="hero__u">one part at a time.</span></h1>' +
-      '<p class="hero__lede">This is a full lab report. Click any part to open it. A part in a <span class="dash-demo">blue dashed box</span> is added at IB; one in an <span class="dash-demo dash-demo--ee">orange dashed box</span> is only in the Extended Essay.</p>' +
+      '<p class="hero__lede">This is a full lab report, written at IGCSE. Click any part to open it: each part also shows how the IB IA and the Extended Essay change it. A part in a <span class="dash-demo">blue dashed box</span> is added at IB; one in an <span class="dash-demo dash-demo--ee">orange dashed box</span> is only in the Extended Essay.</p>' +
       '<div class="hero__cta"><a class="btn btn--go btn--lg" href="#/start">New to lab reports? Start from zero →</a><a class="btn btn--ghost btn--lg" href="#/check">Check my report</a></div>';
     main.appendChild(hero);
     if (hwList().length) main.appendChild(hwBox());
@@ -298,11 +320,17 @@
     var levels = ['g', 'i', 'e'].filter(function (l) { return s.levels.indexOf(l) >= 0; });
     var stage = WUL.STAGES.filter(function (g) { return g.id === s.stage; })[0] || { name: '' };
 
+    /* what the part is for, and where it goes: one line for each level that differs, each with its level */
+    var jobs = lvLines(s.job, s.levels), wheres = lvLines(s.where, s.levels);
+    var jobLines = jobs.map(function (x, k) {
+      return '<p class="phead__job' + (k ? ' phead__job--more' : '') + '">' + (x.ls ? lvTag(x.ls) + ' ' : '') + md(x.t, { inline: true }) + '</p>';
+    }).join('');
+    var whereLines = !wheres.length ? '' : wheres.length === 1 ? '<p class="phead__where"><span>Where it goes</span> ' + md(wheres[0].t, { inline: true }) + '</p>' :
+      '<div class="phead__where"><span>Where it goes</span><ul class="phead__wl">' + wheres.map(function (x) { return '<li>' + lvTag(x.ls) + ' ' + md(x.t, { inline: true }) + '</li>'; }).join('') + '</ul></div>';
     var head = h('header', { class: 'phead wrap' });
     head.innerHTML = '<nav class="crumb"><a href="#/">Report</a><span>›</span><span>' + esc(stage.name) + '</span><span>›</span><span>' + esc(s.title) + '</span></nav>' +
       '<div class="phead__row"><h1 class="phead__h">' + esc(s.title) + '</h1>' + (base !== 'g' ? ibTag(s.levels) : lvDots(s.levels)) + '</div>' +
-      '<p class="phead__job">' + md(WUL.pick(s.job, base), { inline: true }) + '</p>' +
-      (s.where ? '<p class="phead__where"><span>Where it goes</span> ' + md(WUL.pick(s.where, base), { inline: true }) + '</p>' : '');
+      jobLines + whereLines;
     main.appendChild(head);
 
     /* homework: what finishing this part takes, and where the pupil is (repainted as they work) */
@@ -366,8 +394,10 @@
       learn.appendChild(list);
       steps.forEach(function (st, k) {
         var li = h('li', { class: 'step' + (st.extra ? ' step--ib lvscope-' + st.lv : '') });
+        /* an IB step carries its IB tag; an IGCSE-only step on a part that the IB also has carries IGCSE (16 Oct 2026) */
+        var gOnly = !st.extra && st.b.lv && !/[ie]/.test(st.b.lv) && /[ie]/.test(s.levels);
         var btn = h('button', { type: 'button', class: 'step__h', 'aria-expanded': 'false',
-          html: '<span class="step__n">' + (k + 1) + '</span><span class="step__t">' + esc(st.name) + '</span>' + (st.extra ? ibTag(st.b.lv || st.lv) : '') + '<span class="step__chev" aria-hidden="true"></span>' });
+          html: '<span class="step__n">' + (k + 1) + '</span><span class="step__t">' + esc(st.name) + '</span>' + (st.extra ? ibTag(st.b.lv || st.lv) : gOnly ? lvTag('g') : '') + '<span class="step__chev" aria-hidden="true"></span>' });
         var body = h('div', { class: 'step__b', hidden: true });
         li.appendChild(btn); li.appendChild(body);
         list.appendChild(li);
@@ -466,8 +496,8 @@
       var tc = chapter('traps', traps.length);
       var ul = h('ul', { class: 'traps' });
       traps.forEach(function (t) {
-        var ib = t.lv && t.lv.indexOf(base) < 0;
-        ul.appendChild(h('li', { class: 'trap' + (ib ? ' trap--ib' : ''), html: (ib ? '<div class="trap__tag">' + ibTag(t.lv) + '</div>' : '') + '<div class="trap__bad"><span aria-hidden="true">✘</span><span>' + md(t.bad, { inline: true }) + '</span></div>' + (t.good ? '<div class="trap__good"><span aria-hidden="true">✔</span><span>' + md(t.good, { inline: true }) + '</span></div>' : '') }));
+        var ib = t.lv && t.lv.indexOf(base) < 0, gOnly = !ib && t.lv && !/[ie]/.test(t.lv) && /[ie]/.test(s.levels);
+        ul.appendChild(h('li', { class: 'trap' + (ib ? ' trap--ib' : ''), html: (ib ? '<div class="trap__tag">' + ibTag(t.lv) + '</div>' : gOnly ? '<div class="trap__tag">' + lvTag('g') + '</div>' : '') + '<div class="trap__bad"><span aria-hidden="true">✘</span><span>' + md(t.bad, { inline: true }) + '</span></div>' + (t.good ? '<div class="trap__good"><span aria-hidden="true">✔</span><span>' + md(t.good, { inline: true }) + '</span></div>' : '') }));
       });
       tc.appendChild(ul);
     }

@@ -39,16 +39,23 @@
   };
 
   /* the key things to remember */
+  /* On a part page (ctx.station) a rule for a LATER level stays in the list, marked with its level: an IB rule
+     inside an IGCSE list is shown with its IB tag, never hidden, and an IGCSE-only rule on a part the IB also
+     has is marked IGCSE (16 Oct 2026: before, an IB reader saw only the IGCSE rules and took them as theirs). */
   B.rules = function (s, ctx) {
-    var L = ctx && ctx.level;
+    var L = ctx && ctx.level, st = ctx && ctx.station;
+    var ORDER = WUL.LEVEL_ORDER || ['g', 'i', 'e'];
+    var later = function (lv) { return !!(st && lv && L && lv.split('').some(function (l) { return ORDER.indexOf(l) > ORDER.indexOf(L); })); };
     var n = h('div', { class: 'blk-rules' });
     if (s.title) n.appendChild(h('h3', { class: 'bh', text: s.title }));
     var ul = h('ul', { class: 'rules' });
     s.items.forEach(function (it) {
       if (typeof it === 'string') it = { t: it };
-      if (!WUL.shows(it.lv, L)) return;
+      var here = WUL.shows(it.lv, L);
+      if (!here && !later(it.lv)) return;
+      var tag = !st || !WUL.lvTag ? '' : !here ? WUL.lvTag(it.lv) : (it.lv && !/[ie]/.test(it.lv) && /[ie]/.test(st.levels) ? WUL.lvTag('g') : '');
       ul.appendChild(h('li', { class: 'rule' + (it.lv && it.lv.indexOf('g') < 0 ? ' rule--ib' : '') },
-        [h('span', { class: 'rule__i', 'aria-hidden': 'true', text: it.icon || '✔' }), h('span', { class: 'rule__t', html: md(it.t, { inline: true }) })]));
+        [h('span', { class: 'rule__i', 'aria-hidden': 'true', text: it.icon || '✔' }), h('span', { class: 'rule__t', html: (tag ? tag + ' ' : '') + md(it.t, { inline: true }) })]));
     });
     n.appendChild(ul);
     return n;
@@ -164,8 +171,34 @@
     host.appendChild(body);
     var fn = WUL.widgets[s.name];
     if (!fn) { body.innerHTML = '<p class="missing">Tool “' + esc(s.name) + '” is not built yet.</p>'; return host; }
-    try { fn(body, s.opts || {}, ctx || {}); }
-    catch (e) { console.error(e); body.innerHTML = '<p class="missing">This tool failed to load.</p>'; }
+    /* On a part the IB also has, a tool with its own IB version gets a small IGCSE · IB IA · IB EE switch, as the red
+       pen and the questions have: drawn only at the part's first level, an IB reader met the IGCSE version alone
+       (16 Oct 2026). Only tools registered with an lv that includes IGCSE and the IB (WUL.tool) get one. */
+    var st = ctx && ctx.station, tool = (WUL.TOOLS || []).filter(function (t) { return t.name === s.name; })[0];
+    var ls = st && tool && tool.lv && /g/.test(tool.lv) && /[ie]/.test(tool.lv) ?
+      ['g', 'i', 'e'].filter(function (l) { return st.levels.indexOf(l) >= 0 && tool.lv.indexOf(l) >= 0; }) : [];
+    function draw(l) {
+      body.innerHTML = '';
+      try {
+        if (l) WUL.withLevel(l, function () { fn(body, s.opts || {}, Object.assign({}, ctx || {}, { level: l })); });
+        else fn(body, s.opts || {}, ctx || {});
+      } catch (e) { console.error(e); body.innerHTML = '<p class="missing">This tool failed to load.</p>'; }
+    }
+    if (ls.length > 1) {
+      var cur = ctx.level && ls.indexOf(ctx.level) >= 0 ? ctx.level : ls[0];
+      var seg = h('div', { class: 'seg seg--lv', role: 'group', 'aria-label': 'Version of this tool' });
+      ls.forEach(function (l) {
+        var b = h('button', { type: 'button', class: 'seg--' + l, 'aria-pressed': l === cur ? 'true' : 'false', text: WUL.LEVELS[l].name });
+        b.addEventListener('click', function () {
+          seg.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          body.className = 'widget lvscope-' + l;
+          draw(l);
+        });
+        seg.appendChild(b);
+      });
+      host.insertBefore(h('div', { class: 'pchap__lv' }, [h('span', { class: 'wd-k', text: 'Version' }), seg]), body);
+      draw(cur);
+    } else draw(null);
     return host;
   };
 

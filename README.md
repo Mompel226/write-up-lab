@@ -9,16 +9,18 @@ Made by **Dr Daniel Mompel Riera**, NLCS Jeju.
 
 ## What a student can do
 
-- **Explore a complete report.** The front page is one lab report (amylase and temperature), laid out as
-  two pages of parts. Click a part and it opens in place: the example, what it does, where marks are lost,
+- **Explore a complete report.** The front page is one IGCSE lab report (amylase and temperature), laid out as
+  two pages of parts. Click a part and it opens in place: the IGCSE example, what it does, where marks are lost,
   and buttons that show how the IB Internal Assessment and the Extended Essay change it. Parts that exist
   only at IB sit on the same pages with a dashed outline.
 - **Learn each part.** Every part has its own page in tabs: Learn (short steps you open one at a time,
-  with the IB steps marked) · Red pen on a weak example · Mistakes to avoid · Test yourself · Keywords.
-  A "Compare" bar shows how the part changes from IGCSE to the IA and the EE.
+  with the IB steps marked, and advice that holds only at IGCSE marked IGCSE) · Red pen on a weak example ·
+  Mistakes to avoid · Test yourself · Keywords. The top of each part says what it is for and where it goes at
+  each level, and a "Compare" bar shows how the part changes from IGCSE to the IA and the EE.
 - **Practise on tools**: build a table, choose the right kind of graph, plot points on graph paper, find the
   faults in a graph, see error bars change as the data change, choose a statistical test, share out an IA or EE
-  word count, and build a research question, a risk assessment and a reference.
+  word count, and build a research question, a risk assessment and a reference. Inside a part, a tool with an
+  IB version has a switch between its IGCSE and IB versions.
 - **Start from zero** — a route through the parts in order, for a student who has forgotten everything.
 - **Check my report** — the checklist for their level, ticked against their own report.
 
@@ -49,7 +51,8 @@ says so.
   impersonally, and the example data are recomputed. `node tools/check.mjs --stamp` also refreshes the
   version stamps.
 - `node tools/smoke.mjs` opens every part in a headless browser, with every Learn step open, and reports any
-  error (the red pen and Test yourself are checked at their first level).
+  error (the red pen and Test yourself are checked at their first level). It also fails a part that hides an
+  IB rule, or that shows only the IGCSE line of "Where it goes".
 - `node tools/account.mjs` checks signing in, saving and homework in a headless browser, against a fake Google
   sign-in and a fake teacher's script: nothing real is signed in to or written.
 - `node tools/check.mjs --stamp` also writes `data/parts.json`, the list of parts (and what finishing each takes)

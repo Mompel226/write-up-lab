@@ -117,7 +117,7 @@ WUL.station({
     { bad: 'Heat the starch to the right temperature.', good: 'The starch was held at 30 °C in a thermostatically controlled water bath for 5 minutes.' },
     { bad: 'No time for the tubes to reach the test temperature.', good: '…placed in the water bath for 5 minutes __before__ mixing.' },
     { bad: 'Some starch; a few drops of amylase.', good: '5.0 cm³ of 1.0 % starch solution; 2.0 cm³ of 1.0 % amylase.' },
-    { bad: 'The experiment was repeated.', good: 'Three trials were carried out at each temperature, and a mean was calculated.' },
+    { bad: 'The experiment was repeated.', good: 'Five trials were carried out at each temperature, and a mean was calculated.' },
     { bad: 'The apparatus list copied again into each step.', good: 'Each step names only what it needs, with no unnecessary or repeated detail.', lv: 'ie' },
     { bad: 'The IA method and data, copied into the EE.', good: 'A substantially different question and focus. No text, data or graphs copied from the IA.', lv: 'e' }
   ],

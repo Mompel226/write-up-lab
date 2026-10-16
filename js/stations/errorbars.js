@@ -5,7 +5,9 @@
      soils A and D (n = 10): SD bars 41.6–44.4 and 42.8–45.8 overlap; SE bars 42.6–43.4 and 43.8–44.8 do not;
      a t-test gives t = 2.00, df = 18, p = 0.060 (the "Go further" panel).
      the same means and SDs with 30 plants per soil: t = 3.47, df = 58, p = 0.001 (checked in R, 25 Sep 2026):
-     identical SD bars, a different verdict. That is why overlap never decides (Cumming et al. 2007). */
+     identical SD bars, a different verdict. That is why overlap never decides (Cumming et al. 2007).
+     skewed counts (16 Oct 2026): WUL.data.shore at 8.00 m, 0, 1, 13, 0, 1 periwinkles: mean 3.0, SD 5.61, median 1;
+     mean − 1 SD = −2.61, below zero, which no count can be. PRACTICE data, never a class's own field data. */
 (function (WUL) {
   'use strict';
   /* inline markup; ± is kept on the same line as its number */
@@ -57,11 +59,26 @@
   var soilsAD30 = pairPlot(['Soil A', 'Soil D'], [S.means[0], S.means[3]], [S.sds[0], S.sds[3]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 6. Dot plot showing the effect of soil type (A and D) on the mean height of bean seedlings after 21 days (n = 30; error bars = ± 1 SD).');
   var soilsAB = pairPlot(['Soil A', 'Soil B'], [S.means[0], S.means[1]], [S.sds[0], S.sds[1]], { min: 40, max: 47, step: 1, minor: 5, label: 'Mean height / cm' }, 'Figure 5. Dot plot showing the effect of soil type (A and B) on the mean height of bean seedlings after 21 days (n = 10; error bars = ± 1 SD).');
 
+  /* skewed counts: the last row of the practice shore (8.00 m) */
+  var SH = WUL.data.shore, k8 = SH.dists.length - 1, c8 = SH.counts[k8];
+  var mean8 = SH.countMeans[k8], sd8 = SH.countSds[k8];
+  var SKEW = '<div style="max-width:560px">' + WUL.table({
+    caption: 'Periwinkles per quadrat at ' + SH.dists[k8].toFixed(2) + ' m from the low-tide mark (practice data)',
+    head: [['', 'Number of periwinkles per quadrat']],
+    rows: [[{ t: 'Transects 1 to ' + c8.length, th: true }, { t: c8.join(', '), el: 'k-raw' }],
+      [{ t: 'Mean', th: true }, { t: mean8.toFixed(1), el: 'k-m' }],
+      [{ t: 'Standard deviation', th: true }, { t: sd8.toFixed(2), el: 'k-s' }],
+      [{ t: 'Median', th: true }, { t: String(SH.countMedians[k8]), el: 'k-d' }]],
+    cls: 'dt--mini'
+  }) + '</div>' +
+    '<p data-el="k-calc" style="margin:12px 0 0;font:500 1rem/1.5 var(--mono)">mean − 1 SD = ' + mean8.toFixed(1) + ' − ' + sd8.toFixed(2) + ' = −' + (sd8 - mean8).toFixed(2) + '</p>' +
+    '<p data-el="k-sort" style="margin:6px 0 0;font:500 1rem/1.5 var(--mono)">in order: ' + c8.slice().sort(function (a, b) { return a - b; }).join(', ') + ' → median = ' + SH.countMedians[k8] + '</p>';
+
   var KINDS = proseTable(['Bar', 'What it shows', 'When to use it'], [
     ['[[Range|range]]', 'From the lowest value to the highest. Its two arms can differ in length.', 'Fewer than about five repeats, or IGCSE work. Simple, but one unusual value makes it much longer.'],
     ['[[Standard deviation (SD)|standard deviation]]', 'How far, typically, each value lies from the mean.', 'To show how much the data vary. The usual choice for biological data.'],
     ['[[Standard error (SE)|standard error]]', 'How precisely the mean itself is known: SD ÷ √n.', 'When your claim is about the mean. Always shorter than the SD: never choose it because it looks smaller.'],
-    ['[[Interquartile range (IQR)|interquartile range]]', 'The middle half of the data, from the first quartile to the third.', 'Skewed data, or data with outliers. Usually drawn as a box-and-whisker plot.']
+    ['[[Interquartile range (IQR)|interquartile range]]', 'The middle half of the data, from the first quartile to the third.', 'Skewed data, or data with outliers. For counts, an SD larger than the mean is the sign. Usually drawn as a box-and-whisker plot.']
   ]);
 
   WUL.station({
@@ -86,6 +103,17 @@
       { type: 'grid2', title: 'Four kinds of bar', items: [
         { label: 'Each bar answers a different question', v: { html: KINDS }, note: 'SD answers “how much do the values vary?”. SE answers “how well is the mean known?”. They are different questions.' }
       ] },
+
+      { type: 'steps', id: 'skew', title: 'Counts: when the SD is larger than the mean',
+        intro: 'Periwinkles counted in quadrats 8.00 m from the low-tide mark of a practice shore, on five transects. Press Next step.',
+        stage: { html: SKEW },
+        steps: [
+          { title: 'Five counts', show: ['k-raw'], text: 'Four quadrats held 0 or 1 periwinkle. One held 13, where a crack in the rock sheltered a group. A count can never be below 0.' },
+          { title: 'The mean and the SD', show: ['k-m', 'k-s'], focus: ['k-m', 'k-s'], text: 'Mean ' + mean8.toFixed(1) + ', SD ' + sd8.toFixed(2) + '. Compare them: the SD is __larger__ than the mean.' },
+          { title: 'A ± 1 SD bar would go below zero', show: ['k-calc'], focus: ['k-calc'], text: 'The bar would reach −' + (sd8 - mean8).toFixed(2) + ' periwinkles. No count can be negative, so these counts are not spread evenly around their mean. They are __skewed__: many low counts, and a few high ones.' },
+          { title: 'The median: the middle count', show: ['k-d', 'k-sort'], focus: ['k-d', 'k-sort'], text: 'In order, the middle count is ' + SH.countMedians[k8] + ': a typical quadrat held about one periwinkle. The one high count raises the mean to ' + mean8.toFixed(1) + '. It does not move the median.' },
+          { title: 'Describe skewed counts with the median too', show: [], focus: ['k-d'], text: 'Give the median and the [[interquartile range]] as well as the mean and SD, and draw them as a box-and-whisker plot. Tool 3 of the IB guide lists the median, the interquartile range and box-and-whisker plots.' }
+        ] },
 
       { type: 'steps', title: 'Draw the error bars', intro: 'The IB amylase data: five trials at each temperature. Press Next step.',
         stage: { plot: amyPlot },

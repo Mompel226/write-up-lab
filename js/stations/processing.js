@@ -1,6 +1,8 @@
 /* station: processing — from raw data to the numbers that answer the question.
    Means, rates, percentage change, significant figures, one worked example, spreadsheet formulas, anomalies.
-   SD itself is taught in the errorbars station: here it is only linked. */
+   What SD shows is taught in the errorbars station; here it is worked once in full (16 Oct 2026), from the IB
+   trials at 40 °C in WUL.data, so the numbers can never disagree with Table 2: mean 74 s, Σ(x − mean)² = 120,
+   120 ÷ 4 = 30, √30 = 5.5 s. IB D2.3.4: the formula need not be memorised; this shows it once in a report. */
 (function (WUL) {
   'use strict';
   var A = WUL.data.amylase, G = A.g, I = A.i;
@@ -26,6 +28,16 @@
     line('div', sum + ' ÷ 3 = ' + (sum / 3).toFixed(3) + '…') +
     line('round', (sum / 3).toFixed(3) + '… → <b>' + G.means[r50] + '</b> <span style="font:400 .92rem var(--sans);color:var(--ink-2)">whole seconds, like the raw data</span>') +
     '</div></div>';
+
+  /* the standard deviation, worked once in full: the five IB trials at 40.0 °C */
+  var t40 = I.trials[2], n40 = t40.length, s40 = t40.reduce(function (a, v) { return a + v; }, 0), m40 = s40 / n40;
+  var dev = t40.map(function (v) { return v - m40; }), sq = dev.map(function (d) { return d * d; });
+  var ss40 = sq.reduce(function (a, v) { return a + v; }, 0), var40 = ss40 / (n40 - 1), sd40 = Math.sqrt(var40);
+  var sdModel = '{1:SD = √[ Σ(x − mean)² ÷ (n − 1) ]}\n' +
+    '{2:Times at 40.0 °C: ' + t40.join(', ') + ' s, so n = ' + n40 + '. Mean = ' + s40 + ' ÷ ' + n40 + ' = ' + m40 + ' s.}\n' +
+    '{3:Σ(x − mean)² = ' + dev.map(function (d) { return d < 0 ? '(−' + (-d) + ')²' : d + '²'; }).join(' + ') + ' = ' + sq.join(' + ') + ' = ' + ss40 + ' s²}\n' +
+    '{4:' + ss40 + ' ÷ (' + n40 + ' − 1) = ' + var40 + ' s²; √' + var40 + ' = ' + sd40.toFixed(1) + ' s}, {5:one more decimal place than the mean}.\n\n' +
+    '{6:This was repeated for all five temperatures.}';
 
   WUL.station({
     id: 'processing', keepV: { v: '1n2liy', now: '1bjqe36', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'record', order: 2, title: 'Processing data', levels: 'gie',
@@ -78,6 +90,19 @@
           { n: 5, name: '“Repeated for all values”', note: 'One [[worked example]] is enough. Then say it was repeated.' }
         ] },
 
+      { type: 'anatomy', lv: 'ie', id: 'sd', title: 'A worked example of the standard deviation',
+        intro: 'The [[standard deviation]], worked once in full for the five IB amylase trials at 40.0 °C. Tap a colour to see each part.',
+        model: sdModel,
+        parts: [
+          { n: 1, name: 'The formula', note: 'x is each value; Σ means “the sum of”. Divide by n − 1, not n: that is what =STDEV.S does. =STDEV.P divides by n and gives 4.9 s here.' },
+          { n: 2, name: 'The data and the mean', note: 'Every trial at one temperature, then their mean.' },
+          { n: 3, name: 'Each difference from the mean, squared, then added', note: 'Squaring makes every difference positive, so values above and below the mean do not cancel.' },
+          { n: 4, name: 'Divide by n − 1, then the square root', note: 'The square root returns the unit to seconds.' },
+          { n: 5, name: 'The right decimal places', note: 'One more than the mean: 5.5 s (our rule).' },
+          { n: 6, name: '“Repeated for all values”', note: 'One worked example is enough. A spreadsheet does the rest: =STDEV.S(…).' }
+        ],
+        after: 'You do not need to memorise this formula: the IB guide says so in D2.3.4. As for every calculation, show it once in your report, so the examiner can follow your processing.' },
+
       { type: 'compare', title: 'Calculate a percentage change',
         bad: 'Percentage change in mass\n= (2.49 − 2.28) ÷ 2.28 × 100\n= 9.2 %',
         good: 'Percentage change in mass\n= (==2.28 − 2.49==) ÷ ==2.49== × 100\n= ==−8.4 %==',
@@ -116,7 +141,7 @@
         after: 'The cell shows 116.666… until you set its number format to 0 decimal places. Then it shows 117.' },
 
       { type: 'rules', title: 'Rules for processing data', items: [
-        'A [[mean]] has no more [[decimal places]] than the raw data. (Our rule: Cambridge questions usually state the rounding.)',
+        'A [[mean]] has no more [[decimal places]] than the raw data. (Our rule: Cambridge questions usually state the rounding.) Counts are the exception: a count has no measuring uncertainty, so a mean of counts can show one decimal place, 2.4 animals per quadrat.',
         'Round only at the end, never in the middle of a calculation.',
         'A [[rate]] has a “per time” unit: s⁻¹, cm³ min⁻¹.',
         '[[Percentage change]] = (new − original) ÷ original × 100. A decrease is negative.',
@@ -130,7 +155,7 @@
         md: 'Data analysis, top band: processing relevant to the research question, “carried out appropriately and accurately”. “Precise” means following conventions for units, decimal places and significant figures. The skills list adds: “identify and justify the removal or inclusion of outliers”.' },
 
       { type: 'frames', title: 'Sentence frames for calculations', items: [
-        'The mean ___ at ___ was (___ + ___ + ___) ÷ 3 = ___ ___.',
+        'The mean ___ at ___ was (___ + ___ + … + ___) ÷ ___ = ___ ___.',
         'The rate was calculated as 1 ÷ ___ = ___ ___. This was repeated for all values.',
         'The percentage change was (___ − ___) ÷ ___ × 100 = ___ %.',
         'The value of ___ was excluded from the mean because ___.'
