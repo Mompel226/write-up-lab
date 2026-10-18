@@ -43,6 +43,8 @@ says so.
 <details>
 <summary><b>Behind the scenes</b></summary>
 
+The `tools/` named here stay on Daniel's computer: they are not in this repository (since 18 Oct 2026).
+
 - Static files, no build step to run the site. Open `index.html` through any web server.
 - The content of each part is one file in `js/stations/`; each tool is one file in `js/widgets/`.
   `SPEC.md` is the rule book for writing either.
