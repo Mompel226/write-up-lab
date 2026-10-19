@@ -156,6 +156,18 @@ data only (`WUL.data.shore`), never a class's species, numbers, tables or analys
   no count can do (3.0 − 5.61 = −2.61): the counts are skewed. Give the median and the IQR (a box-and-whisker plot) as
   well; Tool 3 lists both.
 
+## Raw data in the body: IA and EE (Daniel, 19 Oct 2026)
+Is "raw data in the main body, or only a sample" an IB rule? Checked: no criterion says so.
+- **IA:** the 2025 guide never mentions appendices. Data analysis is marked on how the data were "recorded, processed and
+  presented" (p. 121), so the raw-data table goes in the body, then the processed-data table. A large data set (a data
+  logger): a representative sample (one full run, a table or a graph) and one worked example of taking a value from it,
+  then a table of the values from every run. That is the IB's advice in its subject reports (May 2019 onwards, compiled
+  in a teachers' "Recommendations from IB" document), and the page says it is not a criterion.
+- **EE:** examiners are not required to read appendices (EE guide p. 90): processed tables, one worked example of each
+  calculation and a representative sample of the raw data in the body; the full raw data may go in an appendix.
+- Homes: tables.js notes "What goes in the body of your IA / EE", checklist `tia` / `tee`, specimen IA "Raw data" job and
+  the EE table tile, format's Compare table. Never call it an IB rule or say it earns a mark.
+
 ## Levels — ONE report, not three (Daniel, 24 Sep 2026)
 Level colours: IGCSE green `--green`, IB IA blue `--blue`, IB EE burnt orange `--ee` (#B45309). EE was purple until
 25 Sep 2026: at dot size it could not be told from blue. `--plum` is now only a data colour (SE bars in graphs).

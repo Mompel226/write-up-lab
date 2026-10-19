@@ -95,7 +95,7 @@
             [{ t: 'First page', th: true }, 'Title, codes, word count', 'Title page: code, question, subject, word count'],
             [{ t: 'Contents page', th: true }, 'Not needed', 'Required'],
             [{ t: 'Font and pages', th: true }, 'Not set', '12-point, 1.5 spacing, page numbers'],
-            [{ t: 'Appendices', th: true }, 'Not mentioned: keep it all in the report', 'Allowed; examiners need not read them'],
+            [{ t: 'Appendices', th: true }, 'Not mentioned: everything your marks depend on goes in the report', 'Allowed; examiners need not read them'],
             [{ t: 'Drafts read', th: true }, 'One, by your teacher', 'One, by your supervisor']
           ]
         },

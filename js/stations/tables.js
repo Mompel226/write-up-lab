@@ -275,8 +275,11 @@
           { title: 'Read each SD beside its mean', text: 'At ' + f2(SH.dists[K8 - 1]) + ' m the SD of the counts, ' + SH.countSds[K8 - 1].toFixed(2) + ', is larger than the mean, ' + SH.countMeans[K8 - 1].toFixed(1) + ': these counts are skewed. [What to write about skewed counts](https://nlcsbiology.com/write-up-lab/#/part/errorbars/build/skew).', show: [], focus: ['c-cm-' + K8, 'c-cs-' + K8] }
         ] },
 
-      { type: 'note', tone: 'ee', lv: 'e', title: 'Raw data in an appendix',
-        md: 'Examiners are __not required to read appendices__. So the body holds every processed table. It is good practice to put a __representative sample__ of the raw data there too, such as all five trials at one temperature. Tables do not count towards the 4,000 words.' },
+      { type: 'note', tone: 'ib', lv: 'i', label: 'For the IA', title: 'What goes in the body of your IA',
+        md: 'Data analysis is marked on how you __recorded, processed and presented__ the data (IB Biology guide, p. 121). So your teacher and the IB moderator must see your raw data. Put the raw-data table in the __body of the report__, then the processed-data table. The IA guide does not mention appendices, so never put data that your marks depend on in one.\n\nWhen you collect a large amount of data, such as with a data logger, show a __representative sample__: one full run, as a table or a graph, with one worked example of how you took a value, such as a rate, from it. Then give the values from every run in a table. This is the IB’s advice to teachers in its subject reports, not one of the four criteria. Tables do not count towards the 3,000 words.' },
+
+      { type: 'note', tone: 'ee', lv: 'e', title: 'What goes in the body of your EE',
+        md: 'Examiners are __not required to read appendices__ (EE guide, p. 90). So the body holds everything your argument needs: every processed table, one worked example of each calculation, and a __representative sample__ of the raw data, such as all five trials at one temperature. The full raw data may go in an appendix. With a data logger, the sample can be one full run, as a table or a graph. Tables do not count towards the 4,000 words.' },
 
       { type: 'rules', title: 'Rules for a results table', items: [
         { t: 'A numbered title __above__ the table, always in the same pattern: “Table 1. Data showing the effect of … on …”.', lv: 'g' },
@@ -521,6 +524,6 @@
         cite: 'Bureau International des Poids et Mesures. *The International System of Units (SI)*. 9th ed., BIPM, 2019.' }
     ],
 
-    sources: ['Cambridge 0610 syllabus 2026–2028, p. 55', '0610 Paper 6 mark schemes and examiner reports, 2021–2025', 'IB Biology guide (2025), Data analysis criterion, pp. 120–123', 'IB Extended essay guide, first assessment 2027']
+    sources: ['Cambridge 0610 syllabus 2026–2028, p. 55', '0610 Paper 6 mark schemes and examiner reports, 2021–2025', 'IB Biology guide (2025), Data analysis criterion, pp. 120–123', 'IB Biology subject reports to teachers (May 2019 onwards): a representative sample of the raw data when a large amount of data is collected, and one worked example of how data-logger readings were processed', 'IB Extended essay guide, first assessment 2027, p. 90: examiners are not required to read appendices']
   });
 })(window.WUL);
