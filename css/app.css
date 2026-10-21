@@ -536,10 +536,13 @@ g.is-hl{filter:drop-shadow(0 0 3px rgba(255,200,0,.95)) drop-shadow(0 0 7px rgba
 .bin__h{font:650 .8rem/1.2 var(--sans);padding:8px 10px;border-bottom:1px solid var(--rule);background:var(--sheet)}
 .bin__body{padding:10px}
 .ordl{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:o}
-.ordl__i{counter-increment:o;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--sheet)}
+/* the number is a place and stays outside the card; only the card moves (21 Oct 2026) */
+.ordl__i{counter-increment:o;display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;align-items:center}
+.ordl__c{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--sheet);transition:box-shadow .5s}
+.ordl__c.is-moved{box-shadow:0 0 0 3px var(--blue);transition:none}
 .ordl__i::before{content:counter(o);font:700 .85rem/1 var(--mono);color:var(--lvl);text-align:center}
-.ordl.is-ok .ordl__i{border-color:var(--green);background:var(--green-wash)}
-.ordl.is-no .ordl__i{border-color:var(--red)}
+.ordl.is-ok .ordl__c{border-color:var(--green);background:var(--green-wash)}
+.ordl.is-no .ordl__c{border-color:var(--red)}
 .ordl__ctl{display:flex;gap:4px}
 .ordl__b{appearance:none;border:1px solid var(--rule);background:var(--sheet-2);width:34px;height:34px;border-radius:4px;cursor:pointer;font-size:.8rem}
 .ordl__b:hover{border-color:var(--ink-3)}

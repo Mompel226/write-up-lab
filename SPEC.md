@@ -254,7 +254,7 @@ For a graph, `body:{plot:…}` and each note carries `el:'label-y'` (the plot el
   to the right one: write the wrong ones as full and careful as it (`Biology Hub/docs/QUESTION-STANDARD.md` §3–4).
 - `multi` `{q, opts:[{t, ok, why}…], why}` — tick all that apply.
 - `sort` `{q, bins:[…], items:[{t, bin, why}…]}`
-- `order` `{q, items:[in the right order…], why}`
+- `order` `{q, items:[in the right order…], why}` — drawn as numbered places with a card beside each; ▲ ▼ move the card, the numbers never move (21 Oct 2026)
 - `spot` `{q, text:'… [!a:mistake] … [?:a fine phrase] …', why:{a:…}}` — include fine phrases too.
 - `build` `{q, chips:[…], answer:[…] or answers:[[…],[…]], why}` — include 1–3 distractor chips.
 - `show` (optional on any question): a table/plot/markup to look at.

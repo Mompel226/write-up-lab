@@ -255,21 +255,31 @@
         var its = q.items.map(function (t, k) { return { t: t, k: k }; });
         var sh = WUL.shuffle(its); var guard = 0;
         while (sh.every(function (x, k) { return x.k === k; }) && guard++ < 10) sh = WUL.shuffle(its);
+        /* The numbers are PLACES (1 = first) and stay where they are; only the card moves (21 Oct 2026: with the
+           number inside the line, the list read 1, 2, 3 … after every press and a pupil thought nothing had moved).
+           The two cards slide past each other and the one pressed is outlined for a moment. */
         sh.forEach(function (it) {
           var li = h('li', { class: 'ordl__i' });
           li._it = it;
-          li.appendChild(h('span', { class: 'ordl__t', html: md(it.t, { inline: true }) }));
           var up = h('button', { type: 'button', class: 'ordl__b', 'aria-label': 'Move up', text: '▲' });
           var dn = h('button', { type: 'button', class: 'ordl__b', 'aria-label': 'Move down', text: '▼' });
-          li.appendChild(h('span', { class: 'ordl__ctl' }, [up, dn]));
+          li.appendChild(h('div', { class: 'ordl__c' }, [h('span', { class: 'ordl__t', html: md(it.t, { inline: true }) }), h('span', { class: 'ordl__ctl' }, [up, dn])]));
           ol.appendChild(li);
         });
+        var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
         ol.addEventListener('click', function (e) {
           if (done) return;
           var b = e.target.closest('.ordl__b'); if (!b) return;
-          var li = b.closest('li');
-          if (b.textContent === '▲' && li.previousElementSibling) ol.insertBefore(li, li.previousElementSibling);
-          else if (b.textContent === '▼' && li.nextElementSibling) ol.insertBefore(li.nextElementSibling, li);
+          var li = b.closest('li'), other = b.textContent === '▲' ? li.previousElementSibling : li.nextElementSibling;
+          if (!other) return;
+          var cs = [li, other].map(function (x) { return x.querySelector('.ordl__c'); });
+          var was = cs.map(function (c) { return c.getBoundingClientRect().top; });
+          if (other === li.previousElementSibling) ol.insertBefore(li, other); else ol.insertBefore(other, li);
+          cs.forEach(function (c, k) {
+            var dy = was[k] - c.getBoundingClientRect().top;
+            if (dy && c.animate && !(still && still.matches)) c.animate([{ transform: 'translateY(' + dy + 'px)' }, { transform: 'none' }], { duration: 200, easing: 'ease-out' });
+          });
+          cs[0].classList.add('is-moved'); setTimeout(function () { cs[0].classList.remove('is-moved'); }, 900);
           fbHost.innerHTML = ''; ol.classList.remove('is-no');
           b.focus();
         });
