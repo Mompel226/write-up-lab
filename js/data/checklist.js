@@ -54,7 +54,7 @@
       { id: 'tig', lv: 'g', t: 'One table: the processed columns (such as the mean) to the right of the raw data.' },
       { id: 'tib', lv: 'ie', t: 'Raw data and processed data are clearly separated (our rule: two labelled tables), and each fits on one page.' },
       { id: 'twork', lv: 'ie', t: 'One worked example of every calculation.' },
-      { id: 'tia', lv: 'i', t: 'The raw data in the body of the report, not in an appendix: every reading, or a representative sample of a large amount of data (such as from a data logger).' },
+      { id: 'tia', lv: 'i', t: 'The raw data in the body of the report, not in an appendix: every reading, or a representative sample of a large number of readings (such as from a data logger).' },
       { id: 'tee', lv: 'e', t: 'Bulk raw data in an appendix, with a representative sample in the body: examiners are not required to read appendices.' }
     ]},
     { title: 'Results: the graph', part: 'graphs', items: [
