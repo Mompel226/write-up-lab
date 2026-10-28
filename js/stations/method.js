@@ -1,11 +1,11 @@
-/* station: method — numbered steps, past tense, passive voice, detailed enough to repeat. */
+/* station: method — numbered steps in the passive voice, usually in the past tense (the present passive is also right: Daniel, 26 Oct 2026), or as numbered instructions (also right: Daniel, 28 Oct 2026, "set as instructions is also used in science"), one form throughout, detailed enough to repeat. */
 WUL.station({
-  id: 'method', keepV: { v: '1filylx', now: '7qhva6', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 7, title: 'Method', levels: 'gie',
+  id: 'method', keepV: { v: '5w0ype', now: 'cuya8r', on: '2026-10-28', why: 'a method as numbered instructions is right too (Daniel, 28 Oct 2026): the instruction option became one with I or we' }, stage: 'plan', order: 7, title: 'Method', levels: 'gie',
   job: 'Write the steps so that someone else could repeat the investigation exactly.',
   where: { g: 'After the apparatus and the risk assessment.', i: 'In the methodology, after the variables and safety.', e: 'In the methodology section, with a reason for each choice.' },
 
   ladder: {
-    g: ['Numbered steps, in the past tense and the [[passive voice]]', 'A quantity and an apparatus size in every step', 'The [[equilibration]] step, the number of repeats, and what was done with the data'],
+    g: ['Numbered steps in the [[passive voice]] or as instructions, one form in every step', 'A quantity and an apparatus size in every step', 'The [[equilibration]] step, the number of repeats, and what was done with the data'],
     i: ['Specific materials and precise steps, so that it “could in principle” be repeated', 'No unnecessary or repeated detail', 'A [[pilot run]] to choose the range, the timing and the number of repeats'],
     e: ['Justify the method, and say why other methods were rejected', 'No IA content duplicated: a substantially different angle and focus']
   },
@@ -36,11 +36,11 @@ WUL.station({
 
     { type: 'callout', title: 'Reach the test temperature first', label: 'Do not miss this step', md: 'Anything living or enzymatic must reach the test temperature __before__ timing starts. That is [[equilibration]]. Without it, the temperature is not what the report says.' },
 
-    { type: 'compare', title: 'Worksheet style or report style',
-      badLabel: 'Worksheet style', goodLabel: 'Report style',
+    { type: 'compare', title: 'Too vague to repeat, or exact',
+      badLabel: 'Too vague to repeat', goodLabel: 'Exact enough to repeat',
       bad: '1. Measure 5 cm³ of starch into a tube.\n2. Put the tube in the water bath.\n3. Add the amylase and start the clock.',
-      good: '1. 5.0 cm³ of 1.0 % starch solution was measured into a test tube with a 10 cm³ graduated pipette.\n2. The tube was placed in a thermostatically controlled water bath at 30 °C for 5 minutes.\n3. 2.0 cm³ of 1.0 % amylase at 30 °C was added, and a stopwatch was started.',
-      why: 'In a report, the method is in the past tense and the passive. Every quantity has a number and a unit.' },
+      good: '1. Measure 5.0 cm³ of 1.0 % starch solution into a test tube with a 10 cm³ graduated pipette.\n2. Place the tube in a thermostatically controlled water bath at 30 °C for 5 minutes.\n3. Add 2.0 cm³ of 1.0 % amylase at 30 °C, and start a stopwatch.',
+      why: 'Both are instructions, and instructions are right for a method, as the passive is: “5.0 cm³ of starch solution was measured”. Use one form in every step. What the left one lacks is exactness: every quantity has a number and a unit, and every piece of apparatus has its size.' },
 
     { type: 'table', title: 'Change active into passive',
       spec: {
@@ -57,7 +57,7 @@ WUL.station({
 
     { type: 'rules', title: 'Rules for a method', items: [
       'Number every step, in the order it was done.',
-      'Past tense, [[passive voice]]: “was measured”, not “measure” or “I measured”.',
+      '[[Passive voice]], usually in the past tense: “was measured” (the present passive, “is measured”, is also right). Numbered instructions are right too: “Measure 5.0 cm³ …”. Use one form, and one tense, in every step. Never “I measured”.',
       'A number and a unit wherever a quantity is used: “5.0 cm³”, not “some”.',
       'The size of each piece of apparatus: “a 10 cm³ graduated pipette”, not “a pipette”.',
       'The number of repeats, and what was done with the data: a mean, and any [[anomalous result]] repeated.',
@@ -91,7 +91,7 @@ WUL.station({
       notes: {
         'tf-a': { label: 'how much?', why: 'Give the volume, the concentration and the apparatus: 5.0 cm³ of 1.0 % starch solution, measured with a 10 cm³ graduated pipette.' },
         'tf-b': { label: 'equilibration?', why: 'A step is missing. The starch and the amylase were placed in the water bath for 5 minutes __before__ they were mixed. This lets them reach the test temperature.' },
-        'tf-c': { label: 'passive; test what?', why: 'Past tense, passive, and exact: one drop of the mixture was tested with iodine solution on a spotting tile.' },
+        'tf-c': { label: 'passive; test what?', why: 'No “I”, and exact. The other steps are in the passive, so this one is too: one drop of the mixture was tested with iodine solution on a spotting tile.' },
         'tf-d': { label: 'how often?', why: 'Give the interval: every 10 s. It also sets the uncertainty of the time: ± 10 s.' },
         'tf-e': { label: 'repeats? values?', why: 'Say which temperatures, and how many repeats: “Steps 1–4 were performed three times at each of 20, 30, 40, 50 and 60 °C, and a mean was calculated.”' }
       },
@@ -125,8 +125,8 @@ WUL.station({
   test: [
     { type: 'choose', q: 'Which step is written the way a lab report method should be?',
       opts: [
-        { t: '5.0 cm³ of 1.0 % starch solution was measured into a test tube with a 10 cm³ graduated pipette.', ok: true, why: 'Past tense, passive, with a volume, a concentration and the apparatus size.' },
-        { t: 'Measure 5.0 cm³ of 1.0 % starch solution into a test tube with a 10 cm³ graduated pipette.', why: 'An instruction, like a worksheet. A report says what was done: “…was measured”.' },
+        { t: '5.0 cm³ of 1.0 % starch solution was measured into a test tube with a 10 cm³ graduated pipette.', ok: true, why: 'Past tense, passive, with a volume, a concentration and the apparatus size. As an instruction, “Measure 5.0 cm³ …”, it would be right too.' },
+        { t: 'I measured 5.0 cm³ of 1.0 % starch solution into a test tube with a 10 cm³ graduated pipette.', why: 'This says who did it. A method never uses “I”: “…was measured”, or the instruction “Measure 5.0 cm³ …”.' },
         { t: 'The student measured about 5 cm³ of starch solution into a test tube with a pipette.', why: '“About” is not a quantity, and the pipette has no size, so no one could repeat this step exactly.' },
         { t: 'Starch solution was added to a test tube, and then some amylase solution was added to the starch.', why: 'How much of each solution, and measured with what? Without them, the step cannot be repeated.' }
       ] },

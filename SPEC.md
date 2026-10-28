@@ -459,7 +459,8 @@ then what the site is checked against, then the licences.
    one standard exception in methods, used sparingly; go up → increase; find out → determine). "Amount" is never
    a property: volume, mass, concentration, number. Name the process precisely.
 3. **Second person, present tense** for teaching text ("You name the…"). **Model answers are impersonal:** third
-   person, past tense, passive, never I / we / my / our / you (the checker rejects them).
+   person, past tense, passive, never I / we / my / our / you (the checker rejects them). The models use the past tense, the
+   usual choice; a pupil's method in the present passive is also right (see *Past or present tense* below).
 4. **British spelling**, no exclamation marks, no filler, no emoji. Underline (`__`) for emphasis, not bold.
 5. **Keywords:** highlight a keyword the first time it appears in each block. Every `[[keyword]]` must be defined
    by some station (checker enforces). Define only the keywords your station owns (list below); reference the
@@ -482,6 +483,28 @@ then what the site is checked against, then the licences.
    titles are good practice but never a 0610 mark, a key IS a mark; best-fit lines are allowed at IB (Tool 3) when
    the shape is justified, never beyond the data; R² only for a fitted trend line; no confidence intervals (not in
    the IB course); Campbell 12th ed. = Urry et al.; the new EE: 30 marks, criterion E = Reflection on the RPF.
+
+## Past or present tense (Daniel, 26 Oct 2026)
+
+A colleague pointed out that IAs and EEs accept the present passive, and the IB sets no tense: it marks whether a method
+can be repeated. Published papers usually write the method in the past tense, because it records what was done. So the
+lab teaches: **the passive voice, usually the past tense; the present passive ("the tube is heated") is also right; one
+tense in every step.** The models stay in the past
+tense. The Test System's method tick (v4.128) reads the same way; the reflection's lab-report rubric too.
+
+## Instructions are right too (Daniel, 28 Oct 2026)
+
+Of a pupil's method written as numbered instructions: "this is a very good methodology, and set as instructions is also
+used in science, no?", then "yes, accept instructions in the Write-Up Lab too". A method may be numbered instructions
+("Measure 5.0 cm³ …", "Heat the solution to 40 °C"), the form of protocols and planning answers, as rightly as the
+passive; one form in every step, judged as a whole (a slip or two is a next step, never the reason a method is wrong).
+Never "I" or "we". The models stay in the past passive. Where the lab said otherwise: the method station's ladder,
+its compare card (now "Too vague to repeat, or exact": vague and exact instructions side by side, so only exactness
+differs), "Rules for a method", the red pen tf-c's why, the report station's rules, the checklist (voice, steps) and
+the specimen's Method job. Two test questions marked an instruction wrong; in each, that wrong option became a
+first-person one ("I measured …", "Next, we added …") and the right one's why says the instruction is right too, so
+both parts keep their records (`keepV`; data/parts.json byte-identical). The Test System's heart-rate prompt reads the
+same (§method-form, §method-whole).
 
 ## Keyword ownership (define only yours; `[[…]]` any)
 - variables: independent variable, dependent variable, control variable, fair test, interval, monitored variable

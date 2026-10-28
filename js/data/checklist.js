@@ -9,7 +9,7 @@
   'use strict';
   WUL.CHECKLIST = [
     { title: 'Throughout', part: 'report', items: [
-      { id: 'voice', t: 'Third person, past tense, passive voice: no I, we or my.' },
+      { id: 'voice', t: 'Third person and the passive voice, in the past or the present tense (a method may be numbered instructions): no I, we or my.' },
       { id: 'units', t: 'No vague words: every quantity has a number and a unit.' },
       { id: 'open', lv: 'i', t: 'Title, candidate code(s) and word count at the start. No more than 3,000 words (tables, graphs, equations, calculations, citations and headers do not count).' },
       { id: 'openee', lv: 'e', t: 'Title page: student code, research question, subject and word count. No names anywhere. 12-point font, 1.5 line spacing, page numbers. No more than 4,000 words.' }
@@ -38,7 +38,7 @@
       { id: 'risk', t: 'Each hazard from this method has a precaution (control measure) that matches it.' },
       { id: 'risk4', lv: 'ie', t: 'Risk assessment: hazard, risk, control measures and emergency action.' },
       { id: 'eth', lv: 'ie', t: 'Ethical and environmental issues addressed, not only safety.' },
-      { id: 'steps', t: 'The method is numbered, in the past tense and passive voice, and detailed enough to repeat.' },
+      { id: 'steps', t: 'The method is numbered, in the passive voice (past or present tense, one tense in every step) or as instructions, one form throughout, and detailed enough to repeat.' },
       { id: 'equil', t: 'Living or enzyme material was given time to reach the test temperature or pH before timing began.' },
       { id: 'reps', t: 'The number of repeats is stated, and it is clear whether they were of the same sample or of different individuals.' }
     ]},

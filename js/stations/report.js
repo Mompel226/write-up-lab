@@ -45,12 +45,12 @@
     '<span>Uploaded separately: the Reflection and Progress Form</span>' + tag('E', C.E) + '</div>';
 
   WUL.station({
-    id: 'report', keepV: { v: '8dyy71', now: '4tz6an', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'start', order: 1, title: 'What a lab report is', levels: 'gie',
+    id: 'report', keepV: { v: '8dyy71', now: 'pfx5ee', on: '2026-10-28', why: 'a method as numbered instructions is right too (Daniel, 28 Oct 2026): the instruction option became one with I or we' }, stage: 'start', order: 1, title: 'What a lab report is', levels: 'gie',
     job: 'Learn the parts of a report and their order. Learn the scientific voice that you use in every part.',
     where: 'Everywhere: use this order and this voice in the whole report.',
 
     ladder: {
-      g: ['Twelve parts, from the title to the evaluation', '[[Third person]], past tense, [[passive voice]]', 'Every quantity has a number and a unit'],
+      g: ['Twelve parts, from the title to the evaluation', '[[Third person]], [[passive voice]], usually the past tense', 'Every quantity has a number and a unit'],
       i: ['The title, candidate code(s) and word count at the start', 'Four criteria, 6 marks each: every part serves one of them', 'No more than 3,000 words'],
       e: ['A title page, a contents page and numbered pages', 'A [[discussion]] section, and five criteria (30 marks)', 'A separate reflection form: the one place for “I”']
     },
@@ -74,7 +74,7 @@
         parts: [
           { n: 1, name: 'A number', note: 'Every quantity is measured, so it has a number. Never “some” or “a bit”.' },
           { n: 2, name: 'A unit', note: 'Straight after the number: cm³, °C, min, s.' },
-          { n: 3, name: 'Past tense: was, were', note: 'The experiment is finished, so the report is in the past.' },
+          { n: 3, name: 'Past tense: was, were', note: 'The experiment is finished, so most reports use the past tense. The present passive, is or are, is also right.' },
           { n: 4, name: 'The passive verb', note: 'Was or were + transferred, placed, heated. The thing is the subject of the sentence, not the person.' }
         ],
         after: 'No person appears in either sentence. That is the [[scientific voice]].' },
@@ -101,8 +101,9 @@
 
       { type: 'rules', title: 'Rules for the scientific voice', items: [
         '[[Third person]]: never I, we, my, our or you.',
-        '__Past tense__: the experiment has already been done.',
+        '__Past tense__, the usual choice: the experiment has already been done. The present passive, “the solution is heated”, is also right. Use one tense in every step.',
         '[[Passive voice]]: “the solution was heated”, never “I heated the solution”.',
+        'A method may also be numbered instructions: “Heat the solution to 40 °C.” Use one form in every step.',
         'Every quantity has a __number and a unit__: 5.0 cm³, 40 °C, 120 s.',
         'Name the property: volume, mass, concentration. Never “amount” or “some”.',
         'A report is not a set of instructions. Not “Heat the tube”, but “The tube was heated”.'
@@ -149,9 +150,9 @@
     test: [
       { type: 'choose', q: 'Which sentence is written in the scientific voice?',
         opts: [
-          { t: '5.0 cm³ of starch solution was added to the tube.', ok: true, why: 'No person, past tense, passive, and a number with a unit.' },
+          { t: '5.0 cm³ of starch solution was added to the tube.', ok: true, why: 'No person, past tense, passive, and a number with a unit. In a method, the instruction “Add 5.0 cm³ of starch solution to the tube.” is right too.' },
           { t: '5.0 cm³ of starch solution will be added to the tube.', why: 'That is a plan: “will be added” says what is going to happen. A report says what was done: “…was added”.' },
-          { t: 'Next, add 5.0 cm³ of starch solution to the tube.', why: 'This is an instruction in the present tense. A report says what was done.' },
+          { t: 'Next, we added 5.0 cm³ of starch solution to the tube.', why: 'This says who did it. A report never uses “we”: “…was added”, or, in a method, the instruction “Add 5.0 cm³ …”.' },
           { t: 'A small volume of starch solution was added to the tube.', why: 'The voice is right, but “a small volume” is not a quantity.' }
         ] },
       { type: 'build', q: 'Rewrite in the passive: “We placed the tubes in a water bath at 40 °C.”',
@@ -175,9 +176,9 @@
         why: 'A precise report has no vague words: every quantity has a number and a unit.' },
       { type: 'choose', q: 'Why is a report written in the past tense?',
         opts: [
-          { t: 'The experiment has already been done.', ok: true, why: 'A report records what happened, so it is in the past.' },
+          { t: 'The experiment has already been done.', ok: true, why: 'A report records what happened, so most reports use the past tense. The present passive, “is added”, is also right.' },
           { t: 'The past tense sounds more scientific.', why: 'The reason is meaning, not sound: the work is finished.' },
-          { t: 'The passive voice needs the past tense.', why: 'The passive works in any tense: “is added”, “was added”. A report uses the past tense because the work is finished.' },
+          { t: 'The passive voice needs the past tense.', why: 'The passive works in any tense: “is added”, “was added”. Most reports use the past tense because the work is finished, and the present passive is also right.' },
           { t: 'The examiner reads the report later.', why: 'That is true of any writing. The tense shows the work is finished.' }
         ] },
       { type: 'choose', q: 'Which phrasal verb is standard in a method?',
@@ -230,7 +231,7 @@
       { term: 'lab report', forms: ['lab reports', 'laboratory report'], def: 'A formal written account of an experiment: the question, what was done, what was found, and what it means.', eg: 'The IGCSE amylase report has 12 parts, from the title to the evaluation.' },
       { term: 'passive voice', forms: ['passive', 'the passive'], def: 'A sentence form in which the thing acted on is the subject, and the person is not named.', eg: '“The tubes were placed in a water bath”, not “I placed the tubes…”.' },
       { term: 'third person', forms: [], def: 'Writing about things (it, they, the solution), never about yourself (I, we) or the reader (you).', eg: '“The mixture was stirred”, not “We stirred the mixture”.' },
-      { term: 'scientific voice', forms: [], def: 'The style of a report: third person, past tense, passive, with a number and a unit for every quantity.', eg: '“5.0 cm³ of 1.0 mol dm⁻³ HCl was added”, not “some acid was added”.' }
+      { term: 'scientific voice', forms: [], def: 'The style of a report: third person, passive, usually in the past tense, with a number and a unit for every quantity.', eg: '“5.0 cm³ of 1.0 mol dm⁻³ HCl was added”, not “some acid was added”.' }
     ],
 
     further: [
