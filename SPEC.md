@@ -156,6 +156,17 @@ data only (`WUL.data.shore`), never a class's species, numbers, tables or analys
   no count can do (3.0 − 5.61 = −2.61): the counts are skewed. Give the median and the IQR (a box-and-whisker plot) as
   well; Tool 3 lists both.
 
+## Solidus, and brackets also acceptable (Daniel, 29 Oct 2026)
+"Explain why it is that way … it's okay also between brackets … explain why the one is in the syllabus while the other
+is not." Every heading on the site keeps the solidus, Temperature / °C, because the 0610 syllabus (2026–2028, p. 55)
+says "The solidus (/) is to be used" and Cambridge schemes print it (0610/52 and /62 June 2020: "temperature / °C and
+time taken / s"). The why, said once on the IGCSE heading anatomy (Tables): the heading is a true equation, 40 °C ÷ °C
+= 40, the number in the cell; the SI writes headings this way. Brackets, Temperature (°C), are ALSO ACCEPTABLE (common
+in textbooks and US books; they show the unit but are only a label, not an equation). No 0610 scheme or examiner report
+on disk gives or takes a mark for brackets. Said on: the IGCSE anatomy's `after`, both anatomies' Solidus note, the
+build question's `why` (its chips unchanged), checklist `ts`. Never mark a bracketed heading wrong; the standard
+shown stays the solidus, brackets the one contrast (memory few-choices-for-students).
+
 ## Raw data in the body: IA and EE (Daniel, 19 Oct 2026)
 Is "raw data in the main body, or only a sample" an IB rule? Checked: no criterion says so.
 - **IA:** the 2025 guide never mentions appendices. Data analysis is marked on how the data were "recorded, processed and

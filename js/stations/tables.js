@@ -184,10 +184,10 @@
         } },
         parts: [
           { n: 1, name: 'Quantity', note: 'What was measured, in full words. Not “Temp” or “Time”: time for what?' },
-          { n: 2, name: 'Solidus', note: 'A slash. It means “divided by”, so the numbers below are pure numbers.' },
+          { n: 2, name: 'Solidus', note: 'A slash. It means “divided by”: 40\u00a0°C ÷ °C = 40. So the numbers below are pure numbers, with no unit.' },
           { n: 3, name: 'Unit', note: 'The symbol: s, °C, g, cm³. Written once, here, never in the cells.' }
         ],
-        after: 'Some books write Time (s). Cambridge papers print Time / s, so write that. A count or a pH has no unit, so its heading is the quantity alone, with no solidus: “Number of bubbles in 3 minutes”, “pH” (as in the 0610 Paper 61 mark schemes of November 2017 and June 2023).' },
+        after: 'Why a solidus? It makes the heading a true equation: 40\u00a0°C ÷ °C = 40, the number in the cell. This is the international rule for writing quantities and units (the SI), so the 0610 syllabus asks for it and Cambridge papers print it. Many textbooks, and most books from the USA, write Temperature\u00a0(°C). This is also acceptable: the brackets show the unit, but they are only a label, not an equation, so the syllabus does not use them. This site uses the solidus. If you use brackets, use them in every table and graph of your report. A count or a pH has no unit, so its heading is the quantity alone, with no solidus: “Number of bubbles in 3 minutes”, “pH” (as in the 0610 Paper 61 mark schemes of November 2017 and June 2023).' },
 
       { type: 'anatomy', lv: 'ie', title: 'The parts of a raw-data heading',
         intro: 'At IB a raw-data heading has up to four parts. Tap a colour to see each one.',
@@ -198,7 +198,7 @@
         } },
         parts: [
           { n: 1, name: 'Quantity', note: 'What was measured, in full words.' },
-          { n: 2, name: 'Solidus', note: 'It means “divided by”, so the numbers below are pure numbers.' },
+          { n: 2, name: 'Solidus', note: 'It means “divided by”: 40\u00a0°C ÷ °C = 40, so the numbers below are pure numbers. Brackets, Temperature\u00a0(°C), are also acceptable: use one style in every table and graph.' },
           { n: 3, name: 'Unit', note: 'The symbol, written once, here.' },
           { n: 4, name: 'Uncertainty', note: '± 10: the iodine was tested every 10 s, so each time is known only to within 10 s. The stopwatch’s 0.01 s does not matter.' }
         ],
@@ -431,7 +431,7 @@
       { type: 'build', q: 'Build the column heading for the time the starch took to disappear.',
         chips: ['Time for starch to disappear', '/', 's', '(seconds)', 'in', 'secs'],
         answer: ['Time for starch to disappear', '/', 's'],
-        why: 'Quantity, then a solidus, then the unit symbol.' },
+        why: 'Quantity, then a solidus, then the unit symbol, s (not “secs” or “seconds”). Time for starch to disappear\u00a0(s) is also acceptable, but this site uses the solidus, as the syllabus does.' },
       { type: 'sort', q: 'Where does each thing go: in the heading, or in the cells?',
         bins: ['In the heading', 'In the cells'],
         items: [

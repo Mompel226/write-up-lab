@@ -47,7 +47,7 @@
       { id: 'ttib', lv: 'ie', t: 'A numbered title above each table, in one pattern: “Table 1. Raw data showing the effect of [independent variable, with its range] on [dependent variable] (n = 5).” The processed table starts “Processed data”. When nothing was changed, as in fieldwork: “showing the relationship between … and …”.' },
       { id: 't1', t: 'The independent variable runs down the first column, not across the top row. No diagonal line in the corner: every column has its own heading.' },
       { id: 'tu', t: 'Units (and uncertainties) are in the headings only, never in the cells.' },
-      { id: 'ts', t: 'Quantity and unit separated by a solidus: Temperature / °C. A count or a pH has no unit: its name alone.' },
+      { id: 'ts', t: 'Quantity and unit separated by a solidus, as in the syllabus: Temperature / °C. Brackets, Temperature\u00a0(°C), are also acceptable: use one style in every table and graph. A count or a pH has no unit: its name alone.' },
       { id: 'tunc', lv: 'ie', t: 'Each raw-data heading gives the uncertainty of its measurement. A count has no measuring instrument, so no ±: a note under the table says so.' },
       { id: 'tdp', t: 'The same number of decimal places all the way down each column.' },
       { id: 'tblank', t: 'No blank cells; anything missing is explained.' },
