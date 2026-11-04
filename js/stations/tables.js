@@ -73,7 +73,7 @@
       rows: I.temps.map(function (T, r) {
         var n = r + 1;
         return [{ t: f1(T), el: withEl ? 'p-iv-' + n : null }, { t: String(I.means[r]), el: withEl ? 'p-mean-' + n : null },
-          { t: f1(I.sds[r]), el: withEl ? 'p-sd-' + n : null }, { t: f1(I.rates[r]), el: withEl ? 'p-rate-' + n : null }];
+          { t: String(I.sds[r]), el: withEl ? 'p-sd-' + n : null }, { t: f1(I.rates[r]), el: withEl ? 'p-rate-' + n : null }];
       })
     }, withEl ? FIT : CMP);
   }
@@ -108,8 +108,8 @@
       [{ t: 'Mean', el: 'c-sub-1' }, { t: 'Standard deviation', el: 'c-sub-2' }, { t: 'Mean', el: 'c-sub-3' }, { t: 'Standard deviation', el: 'c-sub-4' }]],
     rows: SH.dists.map(function (d, r) {
       var n = r + 1;
-      return [{ t: f2(d), el: 'c-iv-' + n }, { t: SH.countMeans[r].toFixed(1), el: 'c-cm-' + n }, { t: SH.countSds[r].toFixed(2), el: 'c-cs-' + n },
-        { t: SH.tempMeans[r].toFixed(1), el: 'c-tm-' + n }, { t: SH.tempSds[r].toFixed(2), el: 'c-ts-' + n }];
+      return [{ t: f2(d), el: 'c-iv-' + n }, { t: SH.countMeans[r].toFixed(1), el: 'c-cm-' + n }, { t: SH.countSds[r].toFixed(1), el: 'c-cs-' + n },
+        { t: SH.tempMeans[r].toFixed(1), el: 'c-tm-' + n }, { t: SH.tempSds[r].toFixed(1), el: 'c-ts-' + n }];
     })
   }, FIT);
   var fieldStage = WUL.table(fieldCount) +
@@ -224,7 +224,7 @@
         bad: { table: T({ head: [['Temperature / °C', 'Mean time / s']], rows: [['20', '180'], ['==30.0==', '==116.7=='], ['40', '==73.33=='], ['==50.00==', '53'], ['60', '==93.3==']] }) },
         good: { table: T({ head: [['Temperature / °C', 'Mean time / s']], rows: G.temps.map(function (T, r) { return [String(T), String(G.means[r])]; }) }) },
         badLabel: 'Mixed decimal places', goodLabel: 'The same d.p. all the way down',
-        why: '20, 20.0 and 19.95 say different things: measured to the nearest 1, 0.1 and 0.01. One column, one precision: Cambridge marks this. A mean with no more [[decimal places]] than the raw data is our rule; a mean of counts is the exception, with one decimal place (2.4 animals per quadrat).' },
+        why: '20, 20.0 and 19.95 say different things: measured to the nearest 1, 0.1 and 0.01. One column, one precision: Cambridge marks this. A mean with no more [[decimal places]] than the raw data is our rule; a mean of counts is the exception, with one decimal place (2.4 animals per quadrat). A mean and its [[standard deviation]] have the same decimal places.' },
 
       { type: 'grid2', title: 'IGCSE and IB tables compared',
         items: [
@@ -240,7 +240,7 @@
           { title: 'The uncertainty goes in the heading', text: '± 10 s: the iodine was tested every 10 s. That, not the stopwatch’s 0.01 s, limits each time.', show: ['r-dvh'].concat(ids('r-trial', 5)), focus: ['r-dvh'] },
           { title: 'The raw readings', text: 'Five trials at each temperature. Whole seconds, all multiples of 10.', show: ids('r-raw', 25) },
           { title: 'Table 2 holds the processed data', text: 'A second table with its own number, and a title that starts “Processed data showing the effect of …”. It holds only what was calculated.', show: ['p-title', 'p-ivh', 'p-mh', 'p-sdh', 'p-rh'].concat(ids('p-iv', 5)), focus: ['p-title'] },
-          { title: 'Mean and spread', text: 'The mean in whole seconds, like the raw data. The [[standard deviation]] has one more decimal place (our rule).', show: ids('p-mean', 5).concat(ids('p-sd', 5)) },
+          { title: 'Mean and spread', text: 'The mean in whole seconds, like the raw data, and its [[standard deviation]] too: a mean and its SD have the same decimal places (our rule).', show: ids('p-mean', 5).concat(ids('p-sd', 5)) },
           { title: 'A derived quantity', text: 'Rate = 1 ÷ mean time. In the heading Rate / 10⁻³ s⁻¹, the value 5.6 means 5.6 × 10⁻³ s⁻¹.', show: ids('p-rate', 5).concat(['p-rh']) },
           { title: 'One worked example', text: 'Each calculation once, with the numbers in it. Then: “Repeated for all temperatures.”', show: ['calc'] }
         ] },
@@ -271,8 +271,8 @@
           { title: 'The title: “the relationship between”', text: 'Nothing was changed, so the title says “showing the __relationship between__ … and …”, not “the effect of … on …”. It ends with n: (n = 5 transects).', show: ['a-title'], focus: ['a-title'] },
           { title: 'A second raw-data table for the second variable', text: 'Each measured variable gets its own raw-data table (our rule). The temperature was read from a digital probe, so its heading has a unit and a ±: Temperature of the rock surface / °C ± 0.1.', show: ['b-title', 'b-ivh', 'b-dvh'].concat(ids('b-iv', 5), ids('b-tr', 5), ids('b-raw', 25)), focus: ['b-dvh'] },
           { title: 'One processed-data table', text: 'The means and standard deviations of both variables, in one table. Each variable has a heading over its own two columns: Mean, then Standard deviation. Raw data first, then processed data: the tables are in order of the kind of data.', show: ['c-title', 'c-ivh', 'c-ch', 'c-th'].concat(ids('c-sub', 4), ids('c-iv', 5)), focus: ['c-ch', 'c-th'] },
-          { title: 'Means and standard deviations', text: 'A count has no measuring uncertainty, so a mean of counts can show one decimal place: 2.4 periwinkles per quadrat (our rule for counts). The temperatures were read to 0.1 °C, so their means are too. Each SD has one more decimal place than its mean (our rule).', show: ids('c-cm', 5).concat(ids('c-cs', 5), ids('c-tm', 5), ids('c-ts', 5)) },
-          { title: 'Read each SD beside its mean', text: 'At ' + f2(SH.dists[K8 - 1]) + ' m the SD of the counts, ' + SH.countSds[K8 - 1].toFixed(2) + ', is larger than the mean, ' + SH.countMeans[K8 - 1].toFixed(1) + ': these counts are skewed. [What to write about skewed counts](https://nlcsbiology.com/write-up-lab/#/part/errorbars/build/skew).', show: [], focus: ['c-cm-' + K8, 'c-cs-' + K8] }
+          { title: 'Means and standard deviations', text: 'A count has no measuring uncertainty, so a mean of counts can show one decimal place: 2.4 periwinkles per quadrat (our rule for counts). The temperatures were read to 0.1 °C, so their means are too. Each SD has the same decimal places as its mean (our rule).', show: ids('c-cm', 5).concat(ids('c-cs', 5), ids('c-tm', 5), ids('c-ts', 5)) },
+          { title: 'Read each SD beside its mean', text: 'At ' + f2(SH.dists[K8 - 1]) + ' m the SD of the counts, ' + SH.countSds[K8 - 1].toFixed(1) + ', is larger than the mean, ' + SH.countMeans[K8 - 1].toFixed(1) + ': these counts are skewed. [What to write about skewed counts](https://nlcsbiology.com/write-up-lab/#/part/errorbars/build/skew).', show: [], focus: ['c-cm-' + K8, 'c-cs-' + K8] }
         ] },
 
       { type: 'note', tone: 'ib', lv: 'i', label: 'For the IA', title: 'What goes in the body of your IA',
@@ -371,7 +371,7 @@
         }, RP)) + '<div style="height:14px"></div>' + WUL.table(T({
           caption: '==Table 2. Processed data== showing the effect of temperature (20.0–60.0 °C) on the mean time, standard deviation and rate of starch digestion by fungal α-amylase (n = 5).',
           head: [['Temperature / °C ± 0.5', 'Mean time / s', 'Standard deviation / s', 'Rate / 10⁻³ s⁻¹']],
-          rows: I.temps.map(function (T, r) { return [f1(T), '==' + I.means[r] + '==', f1(I.sds[r]), f1(I.rates[r])]; })
+          rows: I.temps.map(function (T, r) { return [f1(T), '==' + I.means[r] + '==', String(I.sds[r]), f1(I.rates[r])]; })
         }, RP)) },
         fixedNote: 'The raw data, with the right uncertainty, in Table 1, under a title that names both variables and n. The means, in whole seconds, in Table 2.'
       },

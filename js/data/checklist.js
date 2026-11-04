@@ -29,7 +29,8 @@
     ]},
     { title: 'Hypothesis', part: 'hypothesis', items: [
       { id: 'shape', t: 'It predicts a direction and a shape: many biological responses are optimum curves or plateaus.' },
-      { id: 'bio', t: 'It is justified with biology, not common sense.' },
+      { id: 'bio', lv: 'g', t: 'It is justified with biology, not common sense.' },
+      { id: 'hypib', lv: 'ie', t: 'Optional at IB. With a statistical test, H₀ and H₁ are plain statements, with no reason (and, for a two-tailed test, no direction). A reason from the background is allowed.' },
       { id: 'sketch', lv: 'ie', t: 'Recommended at IB: a sketch graph of the predicted shape.' }
     ]},
     { title: 'Apparatus, safety and method', part: 'method', items: [
@@ -38,7 +39,7 @@
       { id: 'risk', t: 'Each hazard from this method has a precaution (control measure) that matches it.' },
       { id: 'risk4', lv: 'ie', t: 'Risk assessment: hazard, risk, control measures and emergency action.' },
       { id: 'eth', lv: 'ie', t: 'Ethical and environmental issues addressed, not only safety.' },
-      { id: 'steps', t: 'The method is numbered, in the passive voice (past or present tense, one tense in every step) or as instructions, one form throughout, and detailed enough to repeat.' },
+      { id: 'steps', t: 'The method is in steps (numbered at IGCSE), in the passive voice (past or present tense, one tense in every step) or as instructions, one form throughout, and detailed enough to repeat.' },
       { id: 'equil', t: 'Living or enzyme material was given time to reach the test temperature or pH before timing began.' },
       { id: 'reps', t: 'The number of repeats is stated, and it is clear whether they were of the same sample or of different individuals.' }
     ]},
@@ -64,7 +65,7 @@
       { id: 'gzero', t: 'A bar chart’s y-axis starts at 0. A line graph that starts above 0 has its first number at the corner, and no zigzag.' },
       { id: 'gpts', t: 'Points plotted as small crosses: never large dots.' },
       { id: 'gline', lv: 'g', t: 'Points joined with ruled straight lines, point to point. A line of best fit only if the question asks for one, and never both. No R².' },
-      { id: 'gext', t: 'The line does not go beyond the first and last points.' },
+      { id: 'gext', lv: 'g', t: 'The line does not go beyond the first and last points.' },
       { id: 'gkey', t: 'A key if there is more than one set of data.' },
       { id: 'gcap', t: 'A numbered title below the graph, in one pattern: “Figure 1. Line graph showing the effect of [independent variable, with its range] on [dependent variable].”' },
       { id: 'gerr', lv: 'ie', t: 'Error bars on every mean, and the title ends with n and what they show: (n = 5; error bars = ± 1 SD).' },

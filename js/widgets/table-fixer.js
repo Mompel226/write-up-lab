@@ -337,12 +337,12 @@
       cap: X('title', 'Table 2. Mean percentage change in mass', 'Table 2. Processed data showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 60 min (n = 3).'),
       head: [['Concentration of sucrose solution / mol dm⁻³', X('pmcalc', 'Mean percentage change in mass / % ± 0.01', 'Mean percentage change in mass / %'), 'Standard deviation / %']],
       rows: [
-        [X('water', 'water', '0.0'), '+8.2', '0.42'],
-        ['0.2', '+3.9', '0.51'],
-        ['0.4', '−1.3', '0.35'],
-        ['0.6', X('sign', '8.5', '−8.5'), '0.60'],
-        ['0.8', X('dp', '−12', '−12.0'), '0.48'],
-        ['1.0', '−14.1', X('sd', '0.6557', '0.66')]
+        [X('water', 'water', '0.0'), '+8.2', '0.4'],
+        ['0.2', '+3.9', '0.5'],
+        ['0.4', '−1.3', '0.3'],
+        ['0.6', X('sign', '8.5', '−8.5'), '0.6'],
+        ['0.8', X('dp', '−12', '−12.0'), '0.5'],
+        ['1.0', '−14.1', X('sd', '0.6557', '0.7')]
       ],
       faults: {
         title: { q: 'What should the title be?',
@@ -374,13 +374,13 @@
             { t: '−12 %', why: 'No unit in the cell: the heading gives %.' }
           ],
           rule: 'The same decimal places down each column, even when the last digit is 0.' },
-        sd: { q: 'Every other SD has 2 d.p. How should 0.6557 be written?',
+        sd: { q: 'The means and every other SD have 1 d.p. How should 0.6557 be written?',
           opts: [
-            { t: '0.66', ok: true, why: 'Like every SD in the column: 2 d.p., one more than the means (our rule).' },
-            { t: '0.7', why: 'Every other SD has 2 d.p. Keep the column consistent: 0.66.' },
-            { t: '1', why: 'Rounded far too much, and the column has 2 d.p.' }
+            { t: '0.7', ok: true, why: 'Like every SD in the column: 1 d.p., the same as the means (our rule).' },
+            { t: '0.66', why: 'Every other SD has 1 d.p., like its mean. Keep the column consistent: 0.7.' },
+            { t: '1', why: 'Rounded far too much, and the column has 1 d.p.' }
           ],
-          rule: 'An SD has the same decimal places as the rest of its column: at most one more than the mean (our rule).' }
+          rule: 'A mean and its SD have the same decimal places, so every SD in the column matches the means (our rule).' }
       }
     };
 

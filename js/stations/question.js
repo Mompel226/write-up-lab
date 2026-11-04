@@ -89,7 +89,7 @@
         md: 'Human salivary amylase works fastest near 37 °C. Fungal α-amylase from *Aspergillus oryzae* works fastest near 55 °C (Raviyan et al. 5464).\n\nIf you compare a result near 50 °C with 37 °C, it looks like an error. The result was right; the comparison was wrong.\n\nSaliva cannot be used at IB anyway: no body fluids of any kind, not even your own.' },
 
       { type: 'note', tone: 'ib', lv: 'ie', label: 'What the IB guide asks', title: 'The IB rule for context',
-        md: 'The 5–6 band asks for a research question “described within a specific and appropriate context” (IB Biology guide, p. 120). The guide lists three parts: the variables, “a concise description of the system”, and “background theory of direct relevance”.\n\nThe measuring instrument is not one of them. It belongs in the method.' },
+        md: 'The 5–6 band asks for a research question “described within a specific and appropriate context” (IB Biology guide, p. 120). The guide lists three parts: the variables (the independent and dependent variables, or “two correlated variables”), “a concise description of the system”, and “background theory of direct relevance”.\n\nThe measuring instrument is not one of them. It belongs in the method.' },
 
       { type: 'rules', lv: 'e', title: 'Three tests for an EE question', items: [
         { t: 'It is a __question__, not a statement or a hypothesis. “To what extent…?” and “How…?” are common.', lv: 'e' },
@@ -106,6 +106,8 @@
       ] },
       { type: 'frames', lv: 'i', title: 'Sentence frames for an IA question', items: [
         'How does ___ (___ to ___) affect ___ in ___?',
+        'Is there a correlation between ___ and ___ in ___ at ___?',
+        'Is there an association between ___ and ___ in ___ at ___?',
         'The system studied was ___, because ___.',
         '___ is known to ___ (___), so ___.'
       ] },

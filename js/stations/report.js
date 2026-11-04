@@ -105,8 +105,7 @@
         '[[Passive voice]]: “the solution was heated”, never “I heated the solution”.',
         'A method may also be numbered instructions: “Heat the solution to 40 °C.” Use one form in every step.',
         'Every quantity has a __number and a unit__: 5.0 cm³, 40 °C, 120 s.',
-        'Name the property: volume, mass, concentration. Never “amount” or “some”.',
-        'A report is not a set of instructions. Not “Heat the tube”, but “The tube was heated”.'
+        'Name the property: volume, mass, concentration. Never “amount” or “some”.'
       ] },
 
       { type: 'note', tone: 'tip', label: 'One exception', title: '“Carried out”: the one exception', md: '“Carried out” is a phrasal verb, but it is standard in methods: “Five trials were carried out at each temperature.” Use it sparingly. Replace every other phrasal verb.' },
@@ -143,7 +142,7 @@
       { bad: 'I heated the solution.', good: 'The solution was heated to 40 °C.' },
       { bad: 'Some acid was added.', good: '5.0 cm³ of 1.0 mol dm⁻³ HCl was added.' },
       { bad: 'The rate went up.', good: 'The rate increased.' },
-      { bad: 'Heat the tube for 5 minutes.', good: 'The tube was heated for 5 min. A report is not a set of instructions.' },
+      { bad: 'Heat the tube. Then the amylase was added.', good: 'One form in every step: “Heat the tube in a 40 °C water bath for 5 min. Add 2.0 cm³ of amylase.”' },
       { bad: 'This was a sensible result.', good: 'The mean time was 53 s at 50 °C.' }
     ],
 

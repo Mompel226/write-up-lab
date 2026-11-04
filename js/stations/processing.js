@@ -2,7 +2,7 @@
    Means, rates, percentage change, significant figures, one worked example, spreadsheet formulas, anomalies.
    What SD shows is taught in the errorbars station; here it is worked once in full (16 Oct 2026), from the IB
    trials at 40 °C in WUL.data, so the numbers can never disagree with Table 2: mean 74 s, Σ(x − mean)² = 120,
-   120 ÷ 4 = 30, √30 = 5.5 s. IB D2.3.4: the formula need not be memorised; this shows it once in a report. */
+   120 ÷ 4 = 30, √30 = 5.48 s, given as 5 s like the mean (74 s). IB D2.3.4: the formula need not be memorised; this shows it once in a report. */
 (function (WUL) {
   'use strict';
   var A = WUL.data.amylase, G = A.g, I = A.i;
@@ -36,7 +36,7 @@
   var sdModel = '{1:SD = √[ Σ(x − mean)² ÷ (n − 1) ]}\n' +
     '{2:Times at 40.0 °C: ' + t40.join(', ') + ' s, so n = ' + n40 + '. Mean = ' + s40 + ' ÷ ' + n40 + ' = ' + m40 + ' s.}\n' +
     '{3:Σ(x − mean)² = ' + dev.map(function (d) { return d < 0 ? '(−' + (-d) + ')²' : d + '²'; }).join(' + ') + ' = ' + sq.join(' + ') + ' = ' + ss40 + ' s²}\n' +
-    '{4:' + ss40 + ' ÷ (' + n40 + ' − 1) = ' + var40 + ' s²; √' + var40 + ' = ' + sd40.toFixed(1) + ' s}, {5:one more decimal place than the mean}.\n\n' +
+    '{4:' + ss40 + ' ÷ (' + n40 + ' − 1) = ' + var40 + ' s²; √' + var40 + ' = ' + sd40.toFixed(2) + '… s}, {5:given as ' + Math.round(sd40) + ' s, the same decimal places as the mean}.\n\n' +
     '{6:This was repeated for all five temperatures.}';
 
   WUL.station({
@@ -98,7 +98,7 @@
           { n: 2, name: 'The data and the mean', note: 'Every trial at one temperature, then their mean.' },
           { n: 3, name: 'Each difference from the mean, squared, then added', note: 'Squaring makes every difference positive, so values above and below the mean do not cancel.' },
           { n: 4, name: 'Divide by n − 1, then the square root', note: 'The square root returns the unit to seconds.' },
-          { n: 5, name: 'The right decimal places', note: 'One more than the mean: 5.5 s (our rule).' },
+          { n: 5, name: 'The right decimal places', note: 'The same as the mean: 74 s, so 5 s (our rule). Round only at the end. If that would round the SD to 0, give both one more decimal place.' },
           { n: 6, name: '“Repeated for all values”', note: 'One worked example is enough. A spreadsheet does the rest: =STDEV.S(…).' }
         ],
         after: 'You do not need to memorise this formula: the IB guide says so in D2.3.4. As for every calculation, show it once in your report, so the examiner can follow your processing.' },
@@ -142,6 +142,7 @@
 
       { type: 'rules', title: 'Rules for processing data', items: [
         'A [[mean]] has no more [[decimal places]] than the raw data. (Our rule: Cambridge questions usually state the rounding.) Counts are the exception: a count has no measuring uncertainty, so a mean of counts can show one decimal place, 2.4 animals per quadrat.',
+        'A [[standard deviation]] has the same [[decimal places]] as its mean: 74 s, SD 5 s (our rule). If that would round it to 0, give both one more decimal place.',
         'Round only at the end, never in the middle of a calculation.',
         'A [[rate]] has a “per time” unit: s⁻¹, cm³ min⁻¹.',
         '[[Percentage change]] = (new − original) ÷ original × 100. A decrease is negative.',
@@ -181,11 +182,11 @@
         notes: {
           'tf-a': { label: 'show one!', why: 'Give one worked example of each calculation: mean at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s. Then write “repeated for all temperatures”.' },
           'tf-b': { label: 'unit?', why: '1 ÷ 98 s = __0.0102 s⁻¹__, which is 10.2 × 10⁻³ s⁻¹.' },
-          'tf-c': { label: 'd.p.!', why: 'The means are in whole seconds, so give the SD to one more decimal place: __8.4 s__ (our rule).' },
+          'tf-c': { label: 'd.p.!', why: 'The means are in whole seconds, so the SD is too: __8 s__. A mean and its SD have the same decimal places (our rule).' },
           'tf-d': { label: 'how do you know?', why: 'Justify it: __no trial was more than 20 s (two sampling intervals) from its mean__. The IB asks for the removal or inclusion of outliers to be justified.' },
           'tf-e': { label: 'relevant?', why: 'The research question is about the time in seconds. Processing that does not help answer it adds nothing.' }
         },
-        fixed: 'Table 2 shows the processed data. ==One worked example of each calculation is given==: mean time at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s; this was repeated for all temperatures.\n\nRate at 60.0 °C = 1 ÷ 98 s = ==0.0102 s⁻¹==.\n\nStandard deviation at 20.0 °C = ==8.4 s== (spreadsheet: =STDEV.S(B2:F2)).\n\n==All trials were included==: no trial was more than 20 s (two sampling intervals) from its mean.',
+        fixed: 'Table 2 shows the processed data. ==One worked example of each calculation is given==: mean time at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s; this was repeated for all temperatures.\n\nRate at 60.0 °C = 1 ÷ 98 s = ==0.0102 s⁻¹==.\n\nStandard deviation at 20.0 °C = ==8 s== (spreadsheet: =STDEV.S(B2:F2)), in whole seconds like the mean.\n\n==All trials were included==: no trial was more than 20 s (two sampling intervals) from its mean.',
         fixedNote: 'Every calculation is shown once. Every value has its unit and sensible decimal places. The decision about outliers is justified.'
       }
     },

@@ -130,6 +130,48 @@ IA background. Advice that holds only at IGCSE must say so, so an IB reader neve
   the research question's context, in Research design, within the 3,000 words of the whole report.
 - Proof: `node tools/smoke.mjs` fails a part whose per-level `where` shows one line, or whose IB rules are hidden.
 
+## IB hypotheses are plain; field studies change nothing on purpose (Daniel, 1 Nov 2026)
+"Everything needs to be in sync, including the hub, but clearly for IGCSE, we like the students to do the scientific
+background … when you write the hypothesis, you tend to omit it." An audit that day checked every IGCSE lab-report habit
+the site taught at every level against the IB Biology guide (2025; printed pages) and the EE guide (2027; printed pages).
+- **The hypothesis.** IGCSE keeps "If … then … because …", with a short because that points back to the background
+  (`lv: 'g'`: the rule, the frames, the checklist's `bio`). At IB a reason is allowed, not required: no IA criterion
+  marks a hypothesis (pp. 120–122); "State and explain predictions" is an inquiry skill (Inquiry 1, p. 32). The null
+  and alternative hypotheses of a statistical test (D3.2.21, p. 100) are plain statements: no reason, and no direction
+  with the usual two-tailed test. The EE guide asks for no hypothesis (a science EE usually tests one; results that do
+  not support it are as valid, EE p. 67). Now: the part header's `job` per level, an IB rule, H₀/H₁ frames, the
+  checklist's `hypib`, and the IB model titled "One way to write an IB hypothesis". The Statistics `why` that called a directional statement "the alternative
+  hypothesis" now says the two-tailed H₁ has no direction.
+- **Variables in fieldwork and databases.** An IA may select variables during fieldwork or from a database (p. 117);
+  its research question may name "two correlated variables" (p. 120). The fair-test callout is IGCSE (`lv: 'g'`); the
+  IB note adds fieldwork and databases (uncontrolled variables monitored; how the samples were chosen, p. 120); the
+  research-question part's IB note and IA frames add the correlated and association forms. "Fair test" stays an IGCSE word.
+- **Method.** Numbering every step is IGCSE (`lv: 'g'`); the IA asks for "precise procedural steps" (p. 120), the EE
+  for enough detail to repeat (EE p. 67). The leftover "A report is not a set of instructions" (the report part's rules
+  and a trap) is gone: see "Instructions are right too".
+- **Graph lines.** "Never beyond the first and last points" is IGCSE (`lv: 'g'`, also the checklist's `gext`). Tool 3
+  lists "Extrapolate and interpolate graphs" (p. 31): at IB a line of best fit may be extended as a dashed line, and the
+  text says the value is extrapolated.
+- **No mark claims the guide does not make.** "Human error" is still never written, but the guide's 1–2 band is
+  "generic methodological weaknesses" (p. 122): the rule says it names no step, not that it earns nothing. A control
+  variable "is complete" with four parts; the 5–6 band asks for methodological considerations "explained" (p. 120).
+  "Why were the repeats done?" is a Cambridge exam answer (`lv: 'g'`); the IB asks pupils to "identify and justify the
+  removal or inclusion of outliers" (Inquiry 2, p. 32). The question "Which control variable would earn the mark?" is
+  IGCSE (`lv: 'g'`, its words unchanged).
+- **Conclusion.** The IB compares with "the accepted scientific context" (p. 122): published material, published
+  values, course notes or textbooks, so not only a number (the specimen's IA Conclusion tile, the IA ladder, the IGCSE
+  "Our rule" note).
+- **Pupils' records.** No question, option, answer or red pen changed. The two new IB items went inside existing Learn
+  steps (the IB frames block, the IB variables note), so no part's fingerprint, Learn-step count or units moved, and
+  `data/parts.json` is byte-identical. `lv` is not in the fingerprint (`qText` in `js/track.js`).
+- **Left for Daniel** (they would restart a part, or are his call): the research-question option "The independent and
+  dependent variables" (+ "or two correlated variables": options only, so `keepV` could keep the records); the
+  hypothesis question "Which hypothesis has the “If … then … because …” structure…" (`lv: 'g'`, or leave); graph-paper
+  rules at IB; the four-column risk table as "our rule"; the EE evaluation's "unresolved questions" (EE p. 68); the
+  keywords "hypothesis" ("… with a scientific reason") and "independent variable" ("… change on purpose …"), whose
+  meanings the Test System's HeartRate_Lab self-check copies word for word (`src: "write-up-lab"` in
+  `0_ActiveDefault.gs`, proved by `check_self_check.py`): change both together, with one Test System paste.
+
 ## Field data and counts (Daniel, 16 Oct 2026)
 "If you cannot generate an IB table using the advice … then my advice is wrong." Checked by building real IB tables
 from the Y12 ecology mini IA (belt transects, counts per quadrat, probe readings); the site's examples use PRACTICE
@@ -148,13 +190,28 @@ data only (`WUL.data.shore`), never a class's species, numbers, tables or analys
   not of groups); the quadrats along one transect are positions. Linked to `measurement.js` block `replicates` and the
   keywords true replicate and pseudoreplication.
 - **Means of counts:** one decimal place (our rule for counts: a count has no measuring uncertainty, so 2.4 per quadrat
-  is honest); each SD one more decimal place than its mean, as everywhere.
+  is honest); its SD has the same decimal places as the mean, as everywhere (see below).
 - **The SD worked once in full** (Processing, IB step `sd`): SD = √[ Σ(x − mean)² ÷ (n − 1) ], built from the 40 °C IB
-  trials in `WUL.data`: mean 74 s, Σ(x − mean)² = 120, 120 ÷ 4 = 30, √30 = 5.5 s; n − 1 (=STDEV.S), not n (=STDEV.P,
+  trials in `WUL.data`: mean 74 s, Σ(x − mean)² = 120, 120 ÷ 4 = 30, √30 = 5.48 s, given as 5 s like the mean; n − 1 (=STDEV.S), not n (=STDEV.P,
   4.9 s). D2.3.4 still holds: the formula need not be memorised; the worked example shows the calculation in a report.
 - **Skewed counts** (Error bars, step `skew`): an SD larger than its mean means a ± 1 SD bar would go below zero, which
-  no count can do (3.0 − 5.61 = −2.61): the counts are skewed. Give the median and the IQR (a box-and-whisker plot) as
+  no count can do (3.0 − 5.6 = −2.6): the counts are skewed. Give the median and the IQR (a box-and-whisker plot) as
   well; Tool 3 lists both.
+
+## A mean and its SD: the same decimal places (Daniel, 30 Oct 2026)
+"Change both to the same decimal places" (the Write-Up Lab and the DMR spreadsheet). A mean and its standard deviation
+(and standard error) have the SAME decimal places, the mean's: the mean keeps its own rule (no more decimal places than
+the raw data; a mean of counts one), and the SD follows it. Amylase IB: 74 s, SD 5 s (5.48 before rounding); shore
+counts 3.0, SD 5.6. If the SD would round to 0, give both one more decimal place (tools/check.mjs refuses an SD of 0).
+Calculate with unrounded values (the t-test keeps SD² = 30). Until 30 Oct 2026 the site said "each SD one more decimal
+place than its mean"; an examiner audit of the Y12 mini IA model read a mean and its SD as a pair. Why: the IB Biology
+guide gives no rule (Tools: "an appropriate number of decimal places"; the IA criteria: "decimal places and
+significant figures"); the workbook asks for "consistent" decimal places; science reports round the mean to the SD's
+decimal place (Cole, Arch Dis Child 2015, 100: 608–609); Biology for Life, the IB site the workbook links, gives both
+the raw data's precision. "SD one more" appears only in some old IB teaching slides. Left as they were (each is a
+Test yourself question, and its words are the part's fingerprint): Evaluation's ranking items ("the 5.5 s SD") and its
+limitation option ("8.4 s"), and Error bars' "What does =STDEV.S give?" (5.5 s, what the function returns; its `why`
+now says to report 5 s). Change the Evaluation ones only on Daniel's go: that part would restart.
 
 ## Solidus, and brackets also acceptable (Daniel, 29 Oct 2026)
 "Explain why it is that way … it's okay also between brackets … explain why the one is in the syllabus while the other
@@ -434,14 +491,14 @@ which multiplies each p instead, so it is still compared with 0.05.
 - `WUL.data.amylase` — amylase + starch; iodine sampled every **10 s**, so times are multiples of 10 s and their
   uncertainty is **± 10 s** (the sampling interval, NOT the stopwatch's 0.01 s). IGCSE: 3 trials, means
   180/117/73/53/93 s at 20–60 °C. IB: 5 trials, fungal α-amylase from *Aspergillus oryzae*; means
-  178/118/74/54/98 s, SD 8.4/8.4/5.5/5.5/8.4 s, SE 3.7/3.7/2.4/2.4/3.7 s, rate (1 ÷ mean time) 5.6/8.5/13.5/18.5/10.2
+  178/118/74/54/98 s, SD 8/8/5/5/8 s, SE 4/4/2/2/4 s (whole seconds like the means; 8.37/5.48 and 3.74/2.45 before rounding), rate (1 ÷ mean time) 5.6/8.5/13.5/18.5/10.2
   ×10⁻³ s⁻¹. Optimum near 50 °C. Temperature ± 0.5 °C.
 - `WUL.data.soils` — bean seedlings, 4 soils A–D, n = 10: means 43.0, 43.6, 44.0, 44.3 cm; SD 1.4, 1.6, 1.3, 1.5.
   A to D differ by 1.3 cm (3 %); the SD bars overlap. The bar-chart / truncated-axis example.
 - `WUL.data.shore` — a PRACTICE rocky shore (16 Oct 2026): five transects (n = 5), a 0.25 m² quadrat every 2.00 m
   from the low-tide mark (± 0.01 m); periwinkles counted (whole numbers, no ±) and rock-surface temperature (probe,
-  ± 0.1 °C). Count means 2.4/7.0/13.8/10.8/3.0, SD 1.14/1.58/2.39/3.42/5.61, medians 2/7/14/10/1; temperature means
-  18.1/19.2/20.4/21.9/23.4 °C, SD 0.24/0.29/0.34/0.40/0.42. At 8.00 m the counts (0, 1, 13, 0, 1) are skewed. Made
+  ± 0.1 °C). Count means 2.4/7.0/13.8/10.8/3.0, SD 1.1/1.6/2.4/3.4/5.6, medians 2/7/14/10/1; temperature means
+  18.1/19.2/20.4/21.9/23.4 °C, SD 0.2/0.3/0.3/0.4/0.4. At 8.00 m the counts (0, 1, 13, 0, 1) are skewed. Made
   up for teaching; never replace it with a class's own field data.
 - Other examples are fine (pondweed and light, potato cylinders and sucrose, catalase and hydrogen peroxide,
   yeast and sugars, woodlice and humidity with a choice chamber) — biologically correct, realistic numbers.
@@ -492,7 +549,8 @@ then what the site is checked against, then the licences.
    IB Evaluation 5–6 = RELATIVE impact (rank the weaknesses); extensions are not in the 2025 IA criteria;
    Cambridge: > half the grid (not ¾), crosses or encircled dots (large dots penalised), axes need not start at 0,
    titles are good practice but never a 0610 mark, a key IS a mark; best-fit lines are allowed at IB (Tool 3) when
-   the shape is justified, never beyond the data; R² only for a fitted trend line; no confidence intervals (not in
+   the shape is justified, extended beyond the data only as a dashed line said to be extrapolated (Tool 3,
+   p. 31; 1 Nov 2026); R² only for a fitted trend line; no confidence intervals (not in
    the IB course); Campbell 12th ed. = Urry et al.; the new EE: 30 marks, criterion E = Reflection on the RPF.
 
 ## Past or present tense (Daniel, 26 Oct 2026)

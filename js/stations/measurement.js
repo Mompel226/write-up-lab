@@ -190,7 +190,7 @@
         { icon: '!', t: 'A fair test can still be invalid: counting leaves cannot answer “does fertiliser make plants taller?”. A small imperfection does not make a method invalid: bubbles of different sizes still show whether light changes the rate.' }
       ] },
 
-      { type: 'compare', title: 'Why were the repeats done?',
+      { type: 'compare', lv: 'g', title: 'Why were the repeats done? (a Cambridge exam answer)',
         bad: '“To make the results more accurate.”\n\n“To calculate an average.” (alone)\n\n“To reduce human error.”',
         good: '“To identify anomalous results, and exclude them from the mean.”\n\n“To calculate a mean, which makes the results more reliable.”',
         badLabel: 'Not credited', goodLabel: 'Credited',
@@ -294,7 +294,7 @@
         ] },
       { type: 'spot', q: 'Tap the three phrases that would lose marks.',
         text: 'The results were [!a:accurate because the three repeats were close]. [!b:Human error] affected the end point. [?:The water bath varied by about ± 2 °C, which is a random error.] The experiment was repeated [!c:to make it more accurate] [?:and to identify anomalous results].',
-        why: { a: 'Close repeats show precision, not accuracy.', b: '“Human error” is never credited. Name the error: the end point was judged by eye.', c: 'Repeats cannot fix a systematic error. “To identify anomalous results” is the reason that earns the mark.' } },
+        why: { a: 'Close repeats show precision, not accuracy.', b: '“Human error” names no step. Name the error: the end point was judged by eye.', c: 'Repeats cannot fix a systematic error. “To identify anomalous results” is the reason that earns the mark.' } },
       { type: 'multi', q: 'Which questions does validity ask?',
         opts: [
           { t: 'Did only the independent variable affect the results?', ok: true, why: 'The fair test part.' },

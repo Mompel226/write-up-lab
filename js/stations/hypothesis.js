@@ -22,7 +22,7 @@
 
   WUL.station({
     id: 'hypothesis', keepV: { v: '1av3x7c', now: '1szzikw', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'plan', order: 4, title: 'Hypothesis', levels: 'gie',
-    job: 'Predict what will happen to the dependent variable, and the shape of the graph, with a biological reason.',
+    job: { g: 'Predict what will happen to the dependent variable, and the shape of the graph, with a biological reason.', i: 'Optional in the IA: predict what will happen to the dependent variable, and the shape of the graph. A reason is allowed, not required.', e: 'Usual in a science EE, not required: a testable prediction, built from the literature, that your data could show to be false.' },
     where: { g: 'After the aim, before the method.', i: 'Inside your introduction, after the background. It is optional in the IA.', e: 'Inside the introduction, after the literature review.' },
 
     ladder: {
@@ -42,8 +42,8 @@
           { n: 4, name: 'Because: above the optimum', note: 'Bonds break, the active site changes shape, the enzyme is denatured.' }
         ] },
 
-      { type: 'anatomy', lv: 'ie', title: 'The parts of an IB hypothesis',
-        intro: 'The same structure, for the named enzyme. Tap a colour to see each part.',
+      { type: 'anatomy', lv: 'ie', title: 'One way to write an IB hypothesis',
+        intro: 'A reason is allowed, not required: the IA criteria do not mark a hypothesis. This model gives the full reason. If your background already explains it, a short reason that points back to the background is enough. Tap a colour to see each part.',
         model: '{1:If the temperature is increased from 20.0 to 60.0 °C,} {2:then the rate of starch hydrolysis by fungal α-amylase will increase to a maximum near 55 °C, then fall steeply,} {3:because enzyme and substrate molecules gain kinetic energy and collide more often, so more enzyme–substrate complexes form per second.} {4:Above the optimum, hydrogen and ionic bonds in the tertiary structure break, the active site changes shape, and the enzyme is denatured.} {5:Raviyan et al. report an optimum of 55 °C for α-amylase from *Aspergillus oryzae* (5464).}',
         parts: [
           { n: 1, name: 'If: the change', note: 'The independent variable and its range.' },
@@ -98,18 +98,22 @@
         md: 'A science essay usually states a hypothesis, built from the literature review. It must be testable: your data could show that it is false.\n\nResults that do not support it are as valid as results that do. Explain them.' },
 
       { type: 'rules', title: 'Rules for a hypothesis', items: [
-        'Use the pattern __If … then … because …__, with both variables in it.',
-        'The reason is biology: kinetic energy, collisions, the active site, denaturation. Never “heat speeds things up”.',
+        { t: 'Use the pattern __If … then … because …__, with both variables in it.', lv: 'g' },
+        'If you give a reason, it is biology: kinetic energy, collisions, the active site, denaturation. Never “heat speeds things up”.',
+        { t: 'At IB, a reason is allowed but not required: no IA or EE criterion marks a hypothesis. The null and alternative hypotheses of a statistical test are plain statements, with no reason. With the usual two-tailed test, neither has a direction.', lv: 'ie' },
         'Enzymes are not alive. They are __denatured__; they do not “die”.',
         'A hypothesis is never “proved”. The data __support__ it, or do __not support__ it.',
         { t: 'In the conclusion, answer the research question with processed data. A sentence on the hypothesis may follow.', lv: 'ie' }
       ] },
 
-      { type: 'frames', title: 'Sentence frames for a hypothesis', items: [
+      { type: 'frames', lv: 'g', title: 'Sentence frames for a hypothesis', items: [
         'If ___ is increased from ___ to ___, then ___ will ___, because ___.',
         'Above ___, ___ will ___, because ___.'
       ] },
-      { type: 'frames', lv: 'ie', title: 'More sentence frames for IB', items: [
+      { type: 'frames', lv: 'ie', title: 'Sentence frames for IB, and for statistical hypotheses', items: [
+        'H₀: there is no difference in ___ between ___ and ___. H₁: there is a difference in ___ between ___ and ___.',
+        'H₀: there is no correlation between ___ and ___. H₁: there is a correlation between ___ and ___.',
+        'H₀: there is no association between ___ and ___. H₁: there is an association between ___ and ___.',
         'The predicted optimum of about ___ comes from ___.',
         'The hypothesis was supported / not supported, because ___.'
       ] }

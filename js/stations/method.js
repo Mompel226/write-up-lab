@@ -56,7 +56,8 @@ WUL.station({
       after: 'The thing that was acted on moves to the front. Use __was__ with one thing and __were__ with more than one.' },
 
     { type: 'rules', title: 'Rules for a method', items: [
-      'Number every step, in the order it was done.',
+      { t: 'Number every step, in the order it was done.', lv: 'g' },
+      { t: 'At IB, numbered steps or short paragraphs both work: the guide asks for “precise procedural steps” that let someone repeat the investigation.', lv: 'ie' },
       '[[Passive voice]], usually in the past tense: “was measured” (the present passive, “is measured”, is also right). Numbered instructions are right too: “Measure 5.0 cm³ …”. Use one form, and one tense, in every step. Never “I measured”.',
       'A number and a unit wherever a quantity is used: “5.0 cm³”, not “some”.',
       'The size of each piece of apparatus: “a 10 cm³ graduated pipette”, not “a pipette”.',
@@ -190,7 +191,7 @@ WUL.station({
   ],
 
   words: [
-    { term: 'method', forms: ['methods', 'procedure', 'methodology'], def: 'The numbered steps that were followed, written so that someone else could repeat them.', eg: '“5.0 cm³ of starch solution was measured into a test tube…”' },
+    { term: 'method', forms: ['methods', 'procedure', 'methodology'], def: 'The steps that were followed, in order, written so that someone else could repeat them.', eg: '“5.0 cm³ of starch solution was measured into a test tube…”' },
     { term: 'equilibration', forms: ['equilibrate', 'equilibrated'], def: 'Leaving solutions in the water bath until they reach the test temperature, before timing starts.', eg: 'Starch and amylase held in the 30 °C water bath for 5 minutes before mixing.' },
     { term: 'pilot run', forms: ['pilot runs', 'pilot study'], lv: 'ie', def: 'A short trial before the real experiment, used to choose the range, the timings and the repeats.', eg: 'A pilot run showed times of 50–180 s, so drops were sampled every 10 s.' }
   ],

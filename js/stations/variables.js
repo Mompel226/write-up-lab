@@ -1,7 +1,7 @@
 /* station: variables — the reference station. Every other station follows this shape (SPEC.md). */
 WUL.station({
   id: 'variables', keepV: { v: '1vdfmvy', now: '8i2ux4', on: '2026-10-07', why: 'the options rewritten so the right one is not the longest (7 Oct 2026)' }, stage: 'plan', order: 3, title: 'Variables', levels: 'gie',
-  job: 'Name what you change, what you measure, and everything you keep the same. Then only one thing can affect the result.',
+  job: { g: 'Name what you change, what you measure, and everything you keep the same. Then only one thing can affect the result.', i: 'Name what you change or select, what you measure, and how every other variable was controlled or monitored.', e: 'Name what you change or select, what you measure, and how every other variable was controlled or monitored.' },
   where: { g: 'Straight after the aim or question.', i: 'Not a section of its own: inside your methodology, straight after the research question. Marked under Research design.', e: 'Inside your methodology section.' },
 
   ladder: {
@@ -12,7 +12,7 @@ WUL.station({
 
   build: [
     { type: 'anatomy', title: 'Three kinds of variable',
-      intro: 'Every experiment has all three. Tap a colour to see where each one is.',
+      intro: 'An experiment has all three. Tap a colour to see where each one is.',
       model: '{1:Temperature} was changed: 20, 30, 40, 50 and 60 °C.\n\n{2:The time for the starch to disappear} was measured, in seconds.\n\n{3:The volume of starch solution}, {3:the concentration of amylase} and {3:the pH} were kept the same.',
       parts: [
         { n: 1, name: 'Independent variable', note: 'The one thing you change on purpose. First column of the table; x-axis of the graph.' },
@@ -20,10 +20,10 @@ WUL.station({
         { n: 3, name: 'Control variables', note: 'Everything else that could change the result. Each one is kept the same.' }
       ] },
 
-    { type: 'callout', title: 'The fair test rule', label: 'The rule', md: 'Change __one__ thing. Measure __one__ thing. Keep __everything else__ the same. That is a [[fair test]].' },
+    { type: 'callout', lv: 'g', title: 'The fair test rule', label: 'At IGCSE', md: 'Change __one__ thing. Measure __one__ thing. Keep __everything else__ the same. That is a [[fair test]].' },
 
     { type: 'anatomy', title: 'How to write one control variable',
-      intro: 'A control variable earns the mark only with all four parts.',
+      intro: 'A control variable is complete only with all four parts.',
       model: '{1:Volume of starch solution}: {2:5.0 cm³}, {3:measured with a 10 cm³ graduated pipette}, {4:because more starch takes longer to digest}.\n\n{1:pH}: {2:6.0}, {3:kept with 2.0 cm³ of pH 6.0 buffer in every tube}, {4:because amylase activity changes with pH}.\n\n{1:Temperature of the mixture}: {2:40 °C}, {3:kept in a thermostatically controlled water bath}, {4:because temperature changes the rate of reaction}.',
       parts: [
         { n: 1, name: 'Which variable', note: 'Name the property: volume, mass, concentration, temperature. Never “amount”.' },
@@ -54,7 +54,7 @@ WUL.station({
       },
       after: 'Tables do not count towards the 3,000 words. So a table like this gives your reasons without using words from your limit.' },
 
-    { type: 'note', tone: 'ib', label: 'What the IB guide asks', title: 'What the IB guide lists', md: 'The IB lists, among “methodological considerations”: the choice of how to measure the independent and dependent variables; the range, interval and number of repeats; and “the identification of control variables and the choice of method of their control”. A list with no reasons is the most common way to lose these marks.', lv: 'ie' },
+    { type: 'note', tone: 'ib', label: 'What the IB guide asks', title: 'What the IB guide lists', md: 'The IB lists, among “methodological considerations”: the choice of how to measure the independent and dependent variables; the range, interval and number of repeats; and “the identification of control variables and the choice of method of their control”. A list with no reasons only states them: the 5–6 band asks for methodological considerations that are explained (p. 120).\n\n__Fieldwork and databases.__ An IA may select variables during fieldwork or from a database, instead of changing one (p. 117). The research question then names two correlated variables (p. 120). Variables that cannot be controlled are [[monitored|monitored variable]]: measured and recorded. Say how the samples were chosen (p. 120).', lv: 'ie' },
 
     { type: 'frames', title: 'Sentence frames for variables', items: [
       'The independent variable was ___, which was changed from ___ to ___ in steps of ___.',
@@ -109,7 +109,7 @@ WUL.station({
         { t: 'Concentration of hydrogencarbonate', bin: 2, why: 'It supplies carbon dioxide, which changes the rate, so it is kept the same.' },
         { t: 'Length of the pondweed', bin: 2, why: 'More leaf means more photosynthesis, so the same length is used each time.' }
       ] },
-    { type: 'choose', q: 'Which control variable would earn the mark?',
+    { type: 'choose', lv: 'g', q: 'Which control variable would earn the mark?',
       opts: [
         { t: 'The volume of hydrogen peroxide, 10.0 cm³, measured with a 10 cm³ measuring cylinder, because more substrate would release more oxygen.', ok: true, why: 'It has all four parts: the variable, its value, the method and the reason.' },
         { t: 'The amount of hydrogen peroxide, kept the same by pouring it from one bottle into each tube, because more substrate would release more oxygen gas.', why: '“Amount” is not a property, and there is no value and no measuring method.' },

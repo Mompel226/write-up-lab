@@ -60,7 +60,7 @@
     var D = ib ? A.i : A.g;
     var head = [{ t: 'Temperature / °C', el: 'th-x' }, { t: 'Mean time / s', el: 'th-y' }];
     if (ib) head.push({ t: 'SD / s', el: 'th-sd' });
-    var rows = D.temps.map(function (t, k) { var r = [String(t), String(D.means[k])]; if (ib) r.push(D.sds[k].toFixed(1)); return r; });
+    var rows = D.temps.map(function (t, k) { var r = [String(t), String(D.means[k])]; if (ib) r.push(String(D.sds[k])); return r; });
     var table = WUL.table({ caption: ib ? 'The means and SDs from Table 2' : 'The means from Table 1', head: [head], rows: rows });
     var plot = WUL.plot(amySpec(ib, { w: 440, h: 422, pad: { l: 70, r: 30, t: 18, b: 64 }, caption: ib ? CAP_I : CAP_G }));
     return '<div class="wd-graphs-step">' + plot + '<div class="wd-graphs-step__t">' + table + '</div></div>';
@@ -336,7 +336,8 @@
 
       { type: 'rules', title: 'How to draw the line', items: [
         { t: '__Line graph__: join the points with ruled straight lines, __point to point__ (dot to dot).', lv: 'g' },
-        'Start at the first point and stop at the last. Never go beyond them, and never to the origin unless (0, 0) is one of your results.',
+        { t: 'Start at the first point and stop at the last. Never go beyond them, and never to the origin unless (0, 0) is one of your results.', lv: 'g' },
+        { t: 'At IB, a line of best fit may be extended as a dashed line, to read a value outside the data. Say in the text that the value is [[extrapolated|extrapolate]].', lv: 'ie' },
         { t: 'Draw a __line of best fit__ only when the question asks for one: one thin straight line or smooth curve, with the points spread evenly on both sides.', lv: 'g' },
         { t: 'Never both kinds of line on one graph.', lv: 'g' },
         { t: 'No R² at IGCSE. It is not part of the syllabus.', lv: 'g' },
@@ -394,7 +395,7 @@
         'A line or scatter graph may start above zero: write the first number at the corner (20, not 0). No zigzag.',
         'Small crosses (×), each within half a small square of its value.',
         { t: 'Ruled lines from point to point, unless a line of best fit is asked for.', lv: 'g' },
-        'Stop the line at the first and last points: never to the origin.',
+        { t: 'Stop the line at the first and last points: never to the origin.', lv: 'g' },
         'Two data sets need a [[key]].',
         '[[Bar chart]]: bars of equal width, with gaps, and the y-axis starts at 0. [[Histogram]]: the bars touch.',
         'The title goes __below__ the graph, always in the same pattern: “Figure 1. Line graph showing the effect of … on …”, or “showing the relationship between … and …” when you changed nothing.',

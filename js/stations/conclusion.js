@@ -3,7 +3,7 @@
    Raviyan, Tang and Rasco (2003), J. Agric. Food Chem. 51 (18): 5462–5466, doi 10.1021/jf020906j.
    Commercial α-amylase from Aspergillus oryzae (Sigma), 0.05 M phosphate buffer pH 7.1, maltodextrin substrate:
    “The optimum temperature of 55 °C for free α-amylase confirms that of prior studies” (p. 5464).
-   Numbers (WUL.data.amylase): IGCSE 180 / 53 / 93 s; IB 54 s (SD 5.5 s) at 50 °C; rates 13.5 / 18.5 / 10.2 × 10⁻³ s⁻¹
+   Numbers (WUL.data.amylase): IGCSE 180 / 53 / 93 s; IB 54 s (SD 5 s) at 50 °C; rates 13.5 / 18.5 / 10.2 × 10⁻³ s⁻¹
    at 40 / 50 / 60 °C; SD bars at 40, 50, 60 °C do not overlap; rate 18.5 ÷ 5.6 = 3.3 times. */
 (function (WUL) {
   'use strict';
@@ -56,7 +56,7 @@
 
     ladder: {
       g: ['Say whether the results __support__ the [[hypothesis]]', 'Give the key values as evidence', 'Explain the biology with the exact terms', 'Good practice: compare with a [[published value]]'],
-      i: ['Answer the [[research question]], in its own words', 'Use [[processed data]] and its uncertainty', '[[Justify]] the answer with a cited published value: which source, and how close', 'A sentence on the hypothesis may follow'],
+      i: ['Answer the [[research question]], in its own words', 'Use [[processed data]] and its uncertainty', '[[Justify]] the answer against the accepted [[scientific context]], cited: a published value where one exists, and how close', 'A sentence on the hypothesis may follow'],
       e: ['A short [[synthesis]] that answers the research question', 'Drawn from the discussion: no new data, no new argument', 'Shorter than an IA conclusion, because the discussion already gives the detail']
     },
 
@@ -104,11 +104,11 @@
         after: 'The full reference belongs in the list at the end: ' + CITE },
 
       { type: 'note', tone: 'house', lv: 'g', title: 'Compare with a published value', label: 'Our rule',
-        md: 'Compare your result with a published value, and cite it. Cambridge does not require this, but the IB does, so start now.' },
+        md: 'Compare your result with a published value, and cite it. Cambridge does not require this; the IB asks for a comparison with the accepted scientific context, so start now.' },
 
       { type: 'anatomy', lv: 'i', title: 'An IA conclusion',
         intro: 'Tap a colour to see each part. Part 5 is optional.',
-        model: '{1:Within 20.0–60.0 °C, the rate of starch hydrolysis by *A. oryzae* α-amylase was highest at 50.0 °C, so its optimum temperature lies between 40.0 and 60.0 °C, closest to 50.0 °C.} {2:The mean time at 50.0 °C was 54 s (SD 5.5 s), a mean rate of 18.5 × 10⁻³ s⁻¹, compared with 13.5 × 10⁻³ s⁻¹ at 40.0 °C and 10.2 × 10⁻³ s⁻¹ at 60.0 °C. The SD bars of these three temperatures do not overlap, so the peak is not explained by variation between trials.}\n\n{3:Up to the optimum, the molecules gained kinetic energy, so successful collisions and enzyme–substrate complexes formed more often. Above it, hydrogen and ionic bonds in the tertiary structure broke, the active site changed shape and was no longer complementary to the substrate, and a growing proportion of the enzyme was denatured.}\n\n{4:Raviyan et al. report an optimum of 55 °C for α-amylase from *A. oryzae* (5464). This lies inside the 40.0–60.0 °C range found here, so the two agree within the 10.0 °C interval used.} {5:These results support the hypothesis that the rate would rise to an optimum and then fall.}',
+        model: '{1:Within 20.0–60.0 °C, the rate of starch hydrolysis by *A. oryzae* α-amylase was highest at 50.0 °C, so its optimum temperature lies between 40.0 and 60.0 °C, closest to 50.0 °C.} {2:The mean time at 50.0 °C was 54 s (SD 5 s), a mean rate of 18.5 × 10⁻³ s⁻¹, compared with 13.5 × 10⁻³ s⁻¹ at 40.0 °C and 10.2 × 10⁻³ s⁻¹ at 60.0 °C. The SD bars of these three temperatures do not overlap, so the peak is not explained by variation between trials.}\n\n{3:Up to the optimum, the molecules gained kinetic energy, so successful collisions and enzyme–substrate complexes formed more often. Above it, hydrogen and ionic bonds in the tertiary structure broke, the active site changed shape and was no longer complementary to the substrate, and a growing proportion of the enzyme was denatured.}\n\n{4:Raviyan et al. report an optimum of 55 °C for α-amylase from *A. oryzae* (5464). This lies inside the 40.0–60.0 °C range found here, so the two agree within the 10.0 °C interval used.} {5:These results support the hypothesis that the rate would rise to an optimum and then fall.}',
         parts: [
           { n: 1, name: 'The answer to the research question', note: 'In the question’s own words: the variables, the system and the range.' },
           { n: 2, name: 'The evidence, with its uncertainty', note: 'Processed data (means, rates, SD), and what the error bars allow you to claim.' },
@@ -181,11 +181,11 @@
         notes: {
           a: { label: 'answer the RQ', why: 'Answer the research question, with processed data. A sentence on the hypothesis may follow, but it never replaces the answer.' },
           b: { label: 'which amylase?', why: 'Name the system and the range: α-amylase from *A. oryzae*, between 20.0 and 60.0 °C. Amylases from other organisms have other optima.' },
-          c: { label: 'numbers? SD?', why: 'Use processed data with its uncertainty: a mean rate of 18.5 × 10⁻³ s⁻¹ at 50.0 °C (mean time 54 s, SD 5.5 s), and the SD bars do not overlap.' },
+          c: { label: 'numbers? SD?', why: 'Use processed data with its uncertainty: a mean rate of 18.5 × 10⁻³ s⁻¹ at 50.0 °C (mean time 54 s, SD 5 s), and the SD bars do not overlap.' },
           d: { label: 'which? how close?', why: 'Name the source and compare the numbers: Raviyan et al. report 55 °C (5464), inside the 40.0–60.0 °C range found here.' },
           e: { label: '→ evaluation', why: 'Weaknesses belong in the Evaluation, which has its own criterion. And “human error” names no step in the method.' }
         },
-        fixed: '==Within 20.0–60.0 °C, the rate of starch hydrolysis by *A. oryzae* α-amylase was highest at 50.0 °C==, so its optimum lies between 40.0 and 60.0 °C. The mean rate at 50.0 °C was ==18.5 × 10⁻³ s⁻¹ (mean time 54 s, SD 5.5 s)==, compared with 13.5 × 10⁻³ s⁻¹ at 40.0 °C and 10.2 × 10⁻³ s⁻¹ at 60.0 °C, and the SD bars do not overlap. ==Raviyan et al. report an optimum of 55 °C for this enzyme (5464)==, inside that range. These results support the hypothesis.',
+        fixed: '==Within 20.0–60.0 °C, the rate of starch hydrolysis by *A. oryzae* α-amylase was highest at 50.0 °C==, so its optimum lies between 40.0 and 60.0 °C. The mean rate at 50.0 °C was ==18.5 × 10⁻³ s⁻¹ (mean time 54 s, SD 5 s)==, compared with 13.5 × 10⁻³ s⁻¹ at 40.0 °C and 10.2 × 10⁻³ s⁻¹ at 60.0 °C, and the SD bars do not overlap. ==Raviyan et al. report an optimum of 55 °C for this enzyme (5464)==, inside that range. These results support the hypothesis.',
         fixedNote: 'The answer comes first, with processed data and its uncertainty, and the comparison is traceable. Limitations go in the evaluation.'
       },
       e: {

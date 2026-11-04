@@ -1,13 +1,13 @@
 /* station: errorbars — what an error bar is, the four kinds, how to draw them, and how to read overlap.
    Every number is computed from WUL.data or from the seven heights below, never typed in by hand:
-     seven heights 41.0–44.5 cm: mean 43.0, SD 1.29, SE 0.49 (checked with node, =STDEV.S)
-     amylase (IB) 40 °C: 74 ± 5.5 s (68.5–79.5); 50 °C: 54 ± 5.5 s (48.5–59.5) — no overlap
+     seven heights 41.0–44.5 cm: mean 43.0, SD 1.3, SE 0.5 (checked with node, =STDEV.S; each to the mean's d.p.)
+     amylase (IB) 40 °C: 74 ± 5 s (69–79); 50 °C: 54 ± 5 s (49–59) — no overlap
      soils A and D (n = 10): SD bars 41.6–44.4 and 42.8–45.8 overlap; SE bars 42.6–43.4 and 43.8–44.8 do not;
      a t-test gives t = 2.00, df = 18, p = 0.060 (the "Go further" panel).
      the same means and SDs with 30 plants per soil: t = 3.47, df = 58, p = 0.001 (checked in R, 25 Sep 2026):
      identical SD bars, a different verdict. That is why overlap never decides (Cumming et al. 2007).
-     skewed counts (16 Oct 2026): WUL.data.shore at 8.00 m, 0, 1, 13, 0, 1 periwinkles: mean 3.0, SD 5.61, median 1;
-     mean − 1 SD = −2.61, below zero, which no count can be. PRACTICE data, never a class's own field data. */
+     skewed counts (16 Oct 2026): WUL.data.shore at 8.00 m, 0, 1, 13, 0, 1 periwinkles: mean 3.0, SD 5.6, median 1;
+     mean − 1 SD = −2.6, below zero, which no count can be. PRACTICE data, never a class's own field data. */
 (function (WUL) {
   'use strict';
   /* inline markup; ± is kept on the same line as its number */
@@ -35,7 +35,7 @@
       { id: 'sd', pts: [[2.5, m7]], err: [sd7], mark: 'x', line: 'none', tone: 'blue' },
       { id: 'se', pts: [[3.5, m7]], err: [se7], mark: 'x', line: 'none', tone: 'plum' }
     ],
-    caption: 'Figure 1. Dot plot showing the distribution of the heights of seven bean seedlings (n = 7), with their mean (' + WUL.fix(m7, 1) + ' cm) drawn three times: range ' + WUL.fix(min7, 1) + '–' + WUL.fix(max7, 1) + ' cm; SD = ' + WUL.fix(sd7, 2) + ' cm; SE = ' + WUL.fix(se7, 2) + ' cm.'
+    caption: 'Figure 1. Dot plot showing the distribution of the heights of seven bean seedlings (n = 7), with their mean (' + WUL.fix(m7, 1) + ' cm) drawn three times: range ' + WUL.fix(min7, 1) + '–' + WUL.fix(max7, 1) + ' cm; SD = ' + WUL.fix(sd7, 1) + ' cm; SE = ' + WUL.fix(se7, 1) + ' cm.'
   };
 
   /* the amylase graph, built up step by step */
@@ -67,11 +67,11 @@
     head: [['', 'Number of periwinkles per quadrat']],
     rows: [[{ t: 'Transects 1 to ' + c8.length, th: true }, { t: c8.join(', '), el: 'k-raw' }],
       [{ t: 'Mean', th: true }, { t: mean8.toFixed(1), el: 'k-m' }],
-      [{ t: 'Standard deviation', th: true }, { t: sd8.toFixed(2), el: 'k-s' }],
+      [{ t: 'Standard deviation', th: true }, { t: sd8.toFixed(1), el: 'k-s' }],
       [{ t: 'Median', th: true }, { t: String(SH.countMedians[k8]), el: 'k-d' }]],
     cls: 'dt--mini'
   }) + '</div>' +
-    '<p data-el="k-calc" style="margin:12px 0 0;font:500 1rem/1.5 var(--mono)">mean − 1 SD = ' + mean8.toFixed(1) + ' − ' + sd8.toFixed(2) + ' = −' + (sd8 - mean8).toFixed(2) + '</p>' +
+    '<p data-el="k-calc" style="margin:12px 0 0;font:500 1rem/1.5 var(--mono)">mean − 1 SD = ' + mean8.toFixed(1) + ' − ' + sd8.toFixed(1) + ' = −' + (sd8 - mean8).toFixed(1) + '</p>' +
     '<p data-el="k-sort" style="margin:6px 0 0;font:500 1rem/1.5 var(--mono)">in order: ' + c8.slice().sort(function (a, b) { return a - b; }).join(', ') + ' → median = ' + SH.countMedians[k8] + '</p>';
 
   var KINDS = proseTable(['Bar', 'What it shows', 'When to use it'], [
@@ -109,8 +109,8 @@
         stage: { html: SKEW },
         steps: [
           { title: 'Five counts', show: ['k-raw'], text: 'Four quadrats held 0 or 1 periwinkle. One held 13, where a crack in the rock sheltered a group. A count can never be below 0.' },
-          { title: 'The mean and the SD', show: ['k-m', 'k-s'], focus: ['k-m', 'k-s'], text: 'Mean ' + mean8.toFixed(1) + ', SD ' + sd8.toFixed(2) + '. Compare them: the SD is __larger__ than the mean.' },
-          { title: 'A ± 1 SD bar would go below zero', show: ['k-calc'], focus: ['k-calc'], text: 'The bar would reach −' + (sd8 - mean8).toFixed(2) + ' periwinkles. No count can be negative, so these counts are not spread evenly around their mean. They are __skewed__: many low counts, and a few high ones.' },
+          { title: 'The mean and the SD', show: ['k-m', 'k-s'], focus: ['k-m', 'k-s'], text: 'Mean ' + mean8.toFixed(1) + ', SD ' + sd8.toFixed(1) + '. Compare them: the SD is __larger__ than the mean.' },
+          { title: 'A ± 1 SD bar would go below zero', show: ['k-calc'], focus: ['k-calc'], text: 'The bar would reach −' + (sd8 - mean8).toFixed(1) + ' periwinkles. No count can be negative, so these counts are not spread evenly around their mean. They are __skewed__: many low counts, and a few high ones.' },
           { title: 'The median: the middle count', show: ['k-d', 'k-sort'], focus: ['k-d', 'k-sort'], text: 'In order, the middle count is ' + SH.countMedians[k8] + ': a typical quadrat held about one periwinkle. The one high count raises the mean to ' + mean8.toFixed(1) + '. It does not move the median.' },
           { title: 'Describe skewed counts with the median too', show: [], focus: ['k-d'], text: 'Give the median and the [[interquartile range]] as well as the mean and SD, and draw them as a box-and-whisker plot. Tool 3 of the IB guide lists the median, the interquartile range and box-and-whisker plots.' }
         ] },
@@ -119,7 +119,7 @@
         stage: { plot: amyPlot },
         steps: [
           { title: 'Plot each mean', show: ['paper', 'axis-x', 'axis-y', 'ticks-x', 'ticks-y', 'label-x', 'label-y', 'pts-m', 'line-m'], text: 'Plot the mean of the five trials at each temperature as a small cross.' },
-          { title: 'Draw a bar through each mean', show: ['err-m'], text: 'At 40 °C the SD is 5.5 s, so the bar goes from 68.5 s to 79.5 s. A short cap marks each end.' },
+          { title: 'Draw a bar through each mean', show: ['err-m'], text: 'At 40 °C the SD is ' + A.i.sds[2] + ' s, so the bar goes from ' + (A.i.means[2] - A.i.sds[2]) + ' s to ' + (A.i.means[2] + A.i.sds[2]) + ' s. A short cap marks each end.' },
           { title: 'Use one kind of bar for every point', show: [], focus: ['err-m'], text: 'Every bar here is ± 1 SD. Mixing SD and SE on one graph makes the points impossible to compare.' },
           { title: 'Name the bars in the caption', show: ['caption'], text: 'Give n and say what the bars are: “(n = 5; error bars = ± 1 SD)”. If a bar is too small to see, say so. Tiny bars are a result: the repeats agreed closely.' }
         ] },
@@ -155,12 +155,12 @@
 
       { type: 'table', title: 'Calculate them in a spreadsheet',
         spec: {
-          caption: 'Spreadsheet formulas for the five trials at 40 °C, in cells B2 to F2 (70, 80, 70, 80 and 70 s)',
+          caption: 'Spreadsheet formulas for the five trials at 40 °C, in cells B2 to F2 (70, 80, 70, 80 and 70 s); each result rounded like the mean, to whole seconds',
           head: [['Result', 'Formula']],
           rows: [
             ['Mean: 74 s', '=AVERAGE(B2:F2)'],
-            ['SD: 5.5 s', '=STDEV.S(B2:F2)'],
-            ['SE: 2.4 s', '=STDEV.S(B2:F2)/SQRT(COUNT(B2:F2))'],
+            ['SD: 5 s', '=STDEV.S(B2:F2)'],
+            ['SE: 2 s', '=STDEV.S(B2:F2)/SQRT(COUNT(B2:F2))'],
             ['Range: 70–80 s', '=MIN(B2:F2) and =MAX(B2:F2)']
           ],
           cls: 'dt--mini'
@@ -224,7 +224,7 @@
         ] },
       { type: 'choose', q: 'Five trials: 70, 80, 70, 80 and 70 s. What does =STDEV.S give?',
         opts: [
-          { t: '5.5 s', ok: true, why: 'The mean is 74 s. The squared differences from it add up to 120; 120 ÷ 4 = 30; √30 = 5.5 s.' },
+          { t: '5.5 s', ok: true, why: 'The mean is 74 s. The squared differences from it add up to 120; 120 ÷ 4 = 30; √30 = 5.48 s. In a table, beside the mean of 74 s, give it as 5 s.' },
           { t: '4.9 s', why: 'That divides by n, as =STDEV.P does. =STDEV.S divides by n − 1 = 4.' },
           { t: '10 s', why: 'That is the range: 80 − 70.' },
           { t: '2.4 s', why: 'That is the standard error: 5.477 ÷ √5.' }
@@ -268,9 +268,9 @@
     ],
 
     words: [
-      { term: 'error bar', forms: ['error bars', 'uncertainty bar', 'uncertainty bars'], def: 'A line through a plotted mean that shows the spread or uncertainty of the values behind it.', eg: 'A bar from 68.5 to 79.5 s through the mean of 74 s at 40 °C.' },
+      { term: 'error bar', forms: ['error bars', 'uncertainty bar', 'uncertainty bars'], def: 'A line through a plotted mean that shows the spread or uncertainty of the values behind it.', eg: 'A bar from 69 to 79 s through the mean of 74 s at 40 °C.' },
       { term: 'dot plot', forms: ['dot plots'], def: 'A graph that shows each value, or each mean, as a point above its category, with no bars and no joining line.', eg: 'The mean heights of seedlings in soils A and D, each with its SD bar.' },
-      { term: 'standard deviation', forms: ['SD', 'standard deviations'], def: 'A measure of how far, typically, the values lie from their mean.', eg: 'Trials of 70, 80, 70, 80 and 70 s have an SD of 5.5 s.' },
+      { term: 'standard deviation', forms: ['SD', 'standard deviations'], def: 'A measure of how far, typically, the values lie from their mean.', eg: 'Trials of 70, 80, 70, 80 and 70 s: mean 74 s, SD 5 s.' },
       { term: 'standard error', forms: ['SE', 'standard errors', 'standard error of the mean'], def: 'A measure of how precisely the mean is known: the SD divided by the square root of n.', eg: 'SD 6.0 s from nine trials: SE = 6.0 ÷ √9 = 2.0 s.' },
       { term: 'range', forms: ['range of data'], def: 'The spread of repeated values, from the lowest to the highest.', eg: 'Trials of 50, 50, 60, 50 and 60 s have a range of 50–60 s.' },
       { term: 'interquartile range', forms: ['IQR', 'interquartile ranges'], def: 'The spread of the middle half of the values, from the first quartile to the third.', eg: 'The box of a box-and-whisker plot.' },

@@ -190,7 +190,7 @@
             ['Null hypothesis', { t: 'No difference between the two mean times', cs: 2, el: 'h0' }],
             ['Times / s', '70, 80, 70, 80, 70', '50, 50, 60, 50, 60'],
             ['Mean / s', { t: '74', el: 'mean-1' }, { t: '54', el: 'mean-2' }],
-            ['SD / s', { t: '5.5', el: 'sd-1' }, { t: '5.5', el: 'sd-2' }],
+            ['SD / s', { t: '5', el: 'sd-1' }, { t: '5', el: 'sd-2' }],
             ['t', { t: '(74 − 54) ÷ √(30/5 + 30/5) = 20 ÷ √12 = 5.77', cs: 2, el: 't' }],
             ['df', { t: '5 + 5 − 2 = 8', cs: 2, el: 'df' }],
             ['p', { t: '0.0004', cs: 2, el: 'p' }],
@@ -200,7 +200,7 @@
         steps: [
           { title: 'State the null hypothesis', show: ['h0'], text: 'Before testing, say what “no effect” would look like: there is no difference between the mean time at 40 °C and at 50 °C.' },
           { title: 'Find the two means', show: ['mean-1', 'mean-2'], text: '74 s at 40 °C and 54 s at 50 °C: a difference of 20 s.' },
-          { title: 'Find the two standard deviations', show: ['sd-1', 'sd-2'], text: 'Both are 5.5 s. Their spreads are similar, which this t-test needs. Keep the unrounded value: SD² = 30 exactly.' },
+          { title: 'Find the two standard deviations', show: ['sd-1', 'sd-2'], text: 'Both are 5 s, given like the means (5.48 s before rounding). Their spreads are similar, which this t-test needs. Calculate with the unrounded value: SD² = 30 exactly.' },
           { title: 'Calculate t', show: ['t'], text: '**t** compares the difference with chance. The top of the fraction is the difference between the means: 20 s. The bottom is the size of difference that chance alone typically makes, from the spreads (SD) and the number of trials (n): √(30/5 + 30/5) = 3.46 s. So t = 20 ÷ 3.46 = 5.77: the difference is almost 6 times bigger than chance typically makes.' },
           { title: 'Find the degrees of freedom', show: ['df'], text: 'For two groups, df = n₁ + n₂ − 2 = 5 + 5 − 2 = 8.' },
           { title: 'Two tails: either direction', show: [], focus: ['h0'], text: 'The null hypothesis says “no difference”. A real difference could go either way: 50 °C could be faster, or slower, than 40 °C. So a large t at __either__ end, or tail, of the chance results counts. That makes the test **two-tailed**. It is the normal t-test: spreadsheets and R do it unless you ask for something else.' },
@@ -256,10 +256,11 @@
       { type: 'note', tone: 'ib', label: 'Do it in R', title: 'Run these tests yourself, in R',
         md: 'Every test on this page can be done in R, the free programming language scientists use to analyse data. [Learn R](https://nlcsbiology.com/learn-r/) runs real R in your browser, with nothing installed on your computer. [Statistics in R](https://nlcsbiology.com/learn-r/ib.html) explains the p-value step by step, then χ², the t-test and correlation. [Starch curves in R](https://nlcsbiology.com/learn-r/starch.html) fits a calibration curve and explains what R² tells you.' },
 
-      { type: 'note', tone: 'ib', title: 'What the IB guide asks', label: 'What the IB guide asks', md: 'Tool 3 lists “Apply the t-test” and “Apply the chi-squared test”, and asks you to “Interpret values of the correlation coefficient (r)”. D3.2.21 adds the p = 0.05 level and the null hypothesis. No criterion requires a test in every IA: use one where it answers your question.' },
+      { type: 'note', tone: 'ib', title: 'What the IB guide asks', label: 'What the IB guide asks', md: 'Tool 3 lists “Apply the t-test” and “Apply the chi-squared test”, and asks you to “Interpret values of the correlation coefficient (r)”. D3.2.21 adds the p = 0.05 level and the null and alternative hypotheses. No criterion requires a test in every IA: use one where it answers your question.' },
 
       { type: 'frames', title: 'Sentences to report a test', items: [
         'The null hypothesis was that there is no difference between ___ and ___.',
+        'The alternative hypothesis was that there is a difference between ___ and ___.',
         'A ___ gave ___ = ___, df = ___, p ___ 0.05.',
         'The null hypothesis was ___, so the difference between ___ and ___ is ___.',
         'There was a ___ correlation between ___ and ___ (r = ___), but this does not show that ___ causes ___.'
@@ -318,7 +319,7 @@
       { type: 'choose', q: 'What is the null hypothesis for the amylase t-test?',
         opts: [
           { t: 'There is no difference between the mean time at 40 °C and at 50 °C.', ok: true, why: 'The null hypothesis always says “no difference” or “no relationship”.' },
-          { t: 'The mean time at 50 °C is shorter than the mean time at 40 °C.', why: 'That is the effect you expect: the alternative hypothesis.' },
+          { t: 'The mean time at 50 °C is shorter than the mean time at 40 °C.', why: 'That is a prediction with a direction. With the two-tailed test used here, the alternative hypothesis has none: there is a difference between the two mean times.' },
           { t: 'Amylase is denatured at 50 °C, so the mean time is longer there.', why: 'That is a biological claim, and 50 °C is close to this enzyme’s optimum.' },
           { t: 'The t-test will show a significant difference between the means.', why: 'The null hypothesis describes no effect. It does not predict the result of the test.' }
         ] },

@@ -2,7 +2,8 @@
    Corrections respected (BRIEF.md): a ± 2 °C fluctuation is RANDOM; a constant offset is systematic;
    extensions are not in the 2025 IA criteria; the top IA band asks for RELATIVE impact (rank the weaknesses). The ranking
    and relative impact are IA-only (lv 'i'): EE criterion D asks for strengths and limitations, explained (audit, 3 Oct 2026).
-   Numbers (WUL.data.amylase, IB): SD 8.4 / 8.4 / 5.5 / 5.5 / 8.4 s; sampling interval 10 s > 5.5 s.
+   Numbers (WUL.data.amylase, IB): SD 8 / 8 / 5 / 5 / 8 s (8.37 and 5.48 s before rounding); sampling interval 10 s > 5 s.
+   The Test yourself questions still say 5.5 s and 8.4 s (their words are the part's fingerprint): change them only on Daniel's go.
    Steepest part of the curve: 178 → 118 s over 10 °C = 6 s per °C, so ± 0.5 °C changes a time by ≤ ± 3 s,
    less than every SD. Means at 40 and 50 °C differ by 20 s = two sampling intervals.
    IGCSE: trials at each temperature differ by ≤ 20 s. */
@@ -55,7 +56,7 @@
       { type: 'callout', title: 'Three things for every error', label: 'Every error needs three things', md: 'The __step__ that caused it, what it __did__ to the results, and an __improvement__ that matches it.' },
 
       { type: 'rules', title: 'Random and systematic errors', items: [
-        '“Human error” never earns a mark: it names no step. Name __the step__ that caused the error.',
+        '“Human error” names no step, so no improvement can match it. Name __the step__ that caused the error.',
         'A [[random error]] makes results scatter. It reduces [[precision]]. Repeats and a mean reduce its effect.',
         'A [[systematic error]] shifts every result the same way. It reduces [[accuracy]]. Repeating does __not__ help.',
         'A fluctuation (± 2 °C, higher then lower) is random. A constant offset (always 2 °C high) is systematic.',
@@ -82,7 +83,7 @@
 
       { type: 'grid2', lv: 'ie', title: 'Weakness or limitation?',
         items: [
-          { label: 'Weaknesses: problems in the method', tone: 'i', v: '__Control of variables:__ the bath drifted by ± 0.5 °C.\n\n__Precision of measurement:__ the iodine was sampled only every 10 s.\n\n__Variation in the data:__ SD of up to 8.4 s at 20, 30 and 60 °C.', note: 'The three kinds of weakness named in the IB clarifications.' },
+          { label: 'Weaknesses: problems in the method', tone: 'i', v: '__Control of variables:__ the bath drifted by ± 0.5 °C.\n\n__Precision of measurement:__ the iodine was sampled only every 10 s.\n\n__Variation in the data:__ SD of up to 8 s at 20, 30 and 60 °C.', note: 'The three kinds of weakness named in the IB clarifications.' },
           { label: 'Limitations: how widely the conclusion applies', tone: 'e', v: '__Range of the data:__ 20.0–60.0 °C in 10.0 °C steps, so the optimum lies somewhere between 40.0 and 60.0 °C.\n\n__Confines of the system:__ one batch of *A. oryzae* α-amylase, at pH 6.0.\n\n__Assumptions:__ that each mixture stayed at the bath temperature for the whole reaction.', note: 'The three kinds of limitation named in the IB clarifications.' }
         ] },
 
@@ -91,9 +92,9 @@
           caption: 'Weaknesses, ranked by impact', cls: 'wd-evaluation-prose',
           head: [['Weakness, largest first', 'What it did to the data', 'Random or systematic?', 'Size compared with the SD', 'Could it change the conclusion?', 'Improvement']],
           rows: [
-            ['==1. Iodine sampled every 10 s==', 'Each time was recorded up to 10 s after the true end point', 'Both: always late (systematic), by 0–10 s, different in each trial (random)', '10 s: larger than the 5.5 s SD at 40.0 and 50.0 °C', 'It limits it: differences under 10 s, as near the optimum, cannot be detected', 'Follow the colour with a colorimeter that reads every second'],
+            ['==1. Iodine sampled every 10 s==', 'Each time was recorded up to 10 s after the true end point', 'Both: always late (systematic), by 0–10 s, different in each trial (random)', '10 s: larger than the 5 s SD at 40.0 and 50.0 °C', 'It limits it: differences under 10 s, as near the optimum, cannot be detected', 'Follow the colour with a colorimeter that reads every second'],
             ['2. Bath dial read 2.0 °C high', 'Every tube was 2.0 °C cooler than recorded', 'Systematic: reduces accuracy', 'Moves the whole curve 2.0 °C, less than the 10.0 °C interval', 'No: the optimum stays between the same two temperatures', 'Check the dial against a calibrated thermometer'],
-            ['3. Bath drift of ± 0.5 °C', 'Each time changed by at most ± 3 s', 'Random', '± 3 s: smaller than every SD (5.5–8.4 s)', 'No', 'None needed; record the temperature of each tube'],
+            ['3. Bath drift of ± 0.5 °C', 'Each time changed by at most ± 3 s', 'Random', '± 3 s: smaller than every SD (5–8 s)', 'No', 'None needed; record the temperature of each tube'],
             ['A limitation: one batch of amylase', 'Nothing measurable', 'A limitation, not an error', 'Unknown: only one batch was tested', 'It limits the scope: the answer applies to this batch', 'Repeat with a second batch: a [[true replicate]]']
           ],
           note: 'Where ± 3 s comes from: between 20.0 and 30.0 °C, the mean time changed by 60 s in 10 °C, so 6 s per °C. Half a degree changes it by 3 s.'
@@ -102,7 +103,7 @@
 
       { type: 'anatomy', lv: 'i', title: 'A model IA evaluation',
         intro: 'The largest weakness first, explained in full; the smaller ones briefly. Tap a colour.',
-        model: '{1:The largest weakness was the 10 s sampling interval: each time was recorded up to 10 s after the true end point.} {2:This is larger than the SD at 40.0 and 50.0 °C (5.5 s), so the spread at these temperatures mostly reflects the sampling, not the enzyme.} {3:Differences near the optimum, for example between 45 and 50 °C, are likely to be smaller than 10 s and could not be detected, so this weakness limits how precisely the optimum can be located.} {4:Following the colour with a colorimeter, which gives a reading every second, would reduce this uncertainty to about 1 s.}\n\n{5:The other weaknesses had a smaller impact. The dial read 2.0 °C high, a systematic error that made every temperature 2.0 °C lower than recorded; this is less than the 10.0 °C interval, so the answer stands. The bath drifted by ± 0.5 °C, a random error that changed each time by at most ± 3 s, less than every SD.}\n\n{6:Only one batch of amylase was tested, so the conclusion applies to this preparation; a second batch would show whether it can be generalised.}',
+        model: '{1:The largest weakness was the 10 s sampling interval: each time was recorded up to 10 s after the true end point.} {2:This is larger than the SD at 40.0 and 50.0 °C (5 s), so the spread at these temperatures mostly reflects the sampling, not the enzyme.} {3:Differences near the optimum, for example between 45 and 50 °C, are likely to be smaller than 10 s and could not be detected, so this weakness limits how precisely the optimum can be located.} {4:Following the colour with a colorimeter, which gives a reading every second, would reduce this uncertainty to about 1 s.}\n\n{5:The other weaknesses had a smaller impact. The dial read 2.0 °C high, a systematic error that made every temperature 2.0 °C lower than recorded; this is less than the 10.0 °C interval, so the answer stands. The bath drifted by ± 0.5 °C, a random error that changed each time by at most ± 3 s, less than every SD.}\n\n{6:Only one batch of amylase was tested, so the conclusion applies to this preparation; a second batch would show whether it can be generalised.}',
         parts: [
           { n: 1, name: 'The largest weakness, named', note: 'Specific to this method. Never generic.' },
           { n: 2, name: 'Its size, compared with the SD', note: 'This is what makes the impact “relative”.' },
@@ -155,14 +156,14 @@
         title: 'An IA evaluation. Six phrases would keep it in the bottom band.',
         body: 'Limitations:\n\n[!a:Small sample size.]\n\n[!b:Human error.]\n\n[!c:Not enough time.]\n\n[!d:The equipment was not precise.]\n\n[!e:These made the results unreliable.]\n\nIn future:\n\n[!f:investigate the effect of pH.]',
         notes: {
-          a: { label: 'specific?', why: 'Five trials is not small here. Say what the data show: SDs of 5.5–8.4 s. A weakness must be specific to this method.' },
+          a: { label: 'specific?', why: 'Five trials is not small here. Say what the data show: SDs of 5–8 s. A weakness must be specific to this method.' },
           b: { label: 'human error?', why: 'Name the step: the iodine was sampled only every 10 s.' },
           c: { label: 'generic', why: 'It could be pasted into any report. “Generic” weaknesses are the 1–2 band.' },
-          d: { label: 'which? how much?', why: 'Name it and compare its size with the SD: the 10 s sampling interval is larger than the 5.5 s SD at 40.0 and 50.0 °C.' },
+          d: { label: 'which? how much?', why: 'Name it and compare its size with the SD: the 10 s sampling interval is larger than the 5 s SD at 40.0 and 50.0 °C.' },
           e: { label: 'rank them', why: 'Say which weakness mattered most, and whether it could change the conclusion. That is the relative impact.' },
           f: { label: 'extension', why: 'Extensions are not in the 2025 criteria. Use the words for improvements to this method.' }
         },
-        fixed: 'The ==largest weakness was the 10 s sampling interval==: it is larger than the SD at 40.0 and 50.0 °C (5.5 s), so it limits how precisely the optimum can be located. A ==colorimeter reading every second== would reduce it to about 1 s. The ==bath drift of ± 0.5 °C had a smaller impact==: it changed each time by at most ± 3 s, less than every SD. ==Only one batch of amylase== was used, so the conclusion applies to this preparation only.',
+        fixed: 'The ==largest weakness was the 10 s sampling interval==: it is larger than the SD at 40.0 and 50.0 °C (5 s), so it limits how precisely the optimum can be located. A ==colorimeter reading every second== would reduce it to about 1 s. The ==bath drift of ± 0.5 °C had a smaller impact==: it changed each time by at most ± 3 s, less than every SD. ==Only one batch of amylase== was used, so the conclusion applies to this preparation only.',
         fixedNote: 'Each weakness is now specific, its size is compared with the SD, and the weaknesses are ranked.'
       },
       e: {
