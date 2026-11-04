@@ -528,7 +528,7 @@ then what the site is checked against, then the licences.
    a property: volume, mass, concentration, number. Name the process precisely.
 3. **Second person, present tense** for teaching text ("You name the…"). **Model answers are impersonal:** third
    person, past tense, passive, never I / we / my / our / you (the checker rejects them). The models use the past tense, the
-   usual choice; a pupil's method in the present passive is also right (see *Past or present tense* below).
+   best choice; a pupil's method in the present passive is accepted (see *Past or present tense* below).
 4. **British spelling**, no exclamation marks, no filler, no emoji. Underline (`__`) for emphasis, not bold.
 5. **Keywords:** highlight a keyword the first time it appears in each block. Every `[[keyword]]` must be defined
    by some station (checker enforces). Define only the keywords your station owns (list below); reference the
@@ -561,7 +561,27 @@ lab teaches: **the passive voice, usually the past tense; the present passive ("
 tense in every step.** The models stay in the past
 tense. The Test System's method tick (v4.128) reads the same way; the reflection's lab-report rubric too.
 
+**The past passive is the best choice (Daniel, 4 Nov 2026).** After the same colleague's point, Daniel asked what
+scientific writing accepts: "yes, both are accepted, but the best one is" the past. Writing guides agree that a method is
+in the past tense, because it reports finished work; the present passive reads as a protocol. The same evening: pupils
+are told why, in plain words: most scientists write a method this way, in research articles and in master's and PhD
+theses, so "it's better to start practising it now" (the method rules: "Best: … Practise it now.", then "Also
+accepted: …"; the Lab Report Guide's Method section says the same). So the lab now says:
+**best, the past passive; accepted, the present passive and numbered instructions; one form and one tense in every
+step.** Three more points from the same research: the present tense is right for what is still true ("Table 2 shows the
+means", report rules); a step never begins with a purpose before a passive verb ("To calculate the rate, the time was
+recorded" says that the time calculated it), so the reason goes at the end (method rules); and the school convention
+stays third person and passive, although *Nature* prefers the active voice (the report station's Go further). Changed:
+the method station (ladder, compare, rules, a test option's why), the report station (ladder, anatomy, rules, two test
+options' whys, `scientific voice`, Go further), the checklist (voice, steps) and the specimen's Method job. No question
+or option changed: every fingerprint and `data/parts.json` are the same. The reflection's 📋 Lab Reports guidance and
+report prompt say the same (§40.226). The Test System's marking is unchanged: a method in the present passive or as
+instructions keeps its tick, and the past passive may be named once as a next step (v4.128).
+
 ## Instructions are right too (Daniel, 28 Oct 2026)
+
+Since 4 Nov 2026 the lab calls them accepted, and the past passive the best choice (*Past or present tense*).
+
 
 Of a pupil's method written as numbered instructions: "this is a very good methodology, and set as instructions is also
 used in science, no?", then "yes, accept instructions in the Write-Up Lab too". A method may be numbered instructions
