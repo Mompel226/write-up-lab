@@ -3,7 +3,7 @@
 **Learn to write up an experiment, one part at a time** — from a Cambridge IGCSE Biology lab report to the
 IB Internal Assessment and the IB Extended Essay.
 
-Made by **Dr Daniel Mompel Riera**, NLCS Jeju.
+Made by **Dr Daniel Mompel Riera**.
 
 ![Write-Up Lab](assets/readme.png)
 
