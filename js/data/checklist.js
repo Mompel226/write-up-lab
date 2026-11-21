@@ -30,7 +30,7 @@
     { title: 'Hypothesis', part: 'hypothesis', items: [
       { id: 'shape', t: 'It predicts a direction and a shape: many biological responses are optimum curves or plateaus.' },
       { id: 'bio', lv: 'g', t: 'It is justified with biology, not common sense.' },
-      { id: 'hypib', lv: 'ie', t: 'Optional at IB. With a statistical test, H₀ and H₁ are plain statements, with no reason (and, for a two-tailed test, no direction). A reason from the background is allowed.' },
+      { id: 'hypib', lv: 'ie', t: 'Optional at IB: a prediction in words, after the background; a reason from the background is allowed. H₀ and H₁ do not go here: they go just before each test, as plain statements (for a two-tailed test, no direction).' },
       { id: 'sketch', lv: 'ie', t: 'Recommended at IB: a sketch graph of the predicted shape.' }
     ]},
     { title: 'Apparatus, safety and method', part: 'method', items: [
@@ -69,20 +69,20 @@
       { id: 'gkey', t: 'A key if there is more than one set of data.' },
       { id: 'gcap', t: 'A numbered title below the graph, in one pattern: “Figure 1. Line graph showing the effect of [independent variable, with its range] on [dependent variable].”' },
       { id: 'gerr', lv: 'ie', t: 'Error bars on every mean, and the title ends with n and what they show: (n = 5; error bars = ± 1 SD).' },
-      { id: 'gfit', lv: 'ie', t: 'One smooth curve or straight line of best fit through the means when biology predicts the shape (ruled lines, mean to mean, when it does not). R² only for a line from a fitted equation, never for a curve drawn by hand.' }
+      { id: 'gfit', lv: 'ie', t: 'One smooth curve or straight line of best fit through the means when biology predicts the shape (ruled lines, mean to mean, when it does not: the IB never penalises a dot-to-dot graph). R² only for a line from a fitted equation, never for a curve drawn by hand.' }
     ]},
     { title: 'Data analysis', part: 'analysis', items: [
       { id: 'atr', t: 'The overall trend described in words.' },
       { id: 'akey', t: 'Key values quoted with both coordinates and units: start, peak or optimum, end.' },
       { id: 'acalc', t: 'At least one calculated comparison: a percentage change, a ratio or a gradient.' },
       { id: 'aanom', t: 'Anomalies identified, or it is stated that there were none.' },
-      { id: 'aover', lv: 'ie', t: 'Overlap of error bars discussed for the comparisons that matter.' }
+      { id: 'aover', lv: 'ie', t: 'Overlap of error bars noted for the comparisons that matter (what it means for your answer goes in the conclusion).' }
     ]},
     { title: 'Conclusion', part: 'conclusion', items: [
-      { id: 'chyp', lv: 'g', t: 'States whether the hypothesis was supported.' },
+      { id: 'chyp', t: 'If you stated a hypothesis: says whether the data support it.' },
       { id: 'crq', lv: 'ie', t: 'Answers the research question, using processed data and its uncertainty.' },
       { id: 'cbio', t: 'Explains the biology behind the trend, not only the trend.' },
-      { id: 'clit', t: 'Compares the result with a published value, and cites it.' }
+      { id: 'clit', t: 'Compares the result with a published value or model, and cites it (with no published value, as in some field studies: says whether the result is reasonable).' }
     ]},
     { title: 'Evaluation', part: 'evaluation', items: [
       { id: 'erel', t: 'Reliability: number of repeats, means taken, anomalies repeated.' },

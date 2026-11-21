@@ -153,7 +153,7 @@
       ] },
 
       { type: 'note', tone: 'ib', lv: 'ie', label: 'What the IB guide asks', title: 'Accurate and relevant processing',
-        md: 'Data analysis, top band: processing relevant to the research question, “carried out appropriately and accurately”. “Precise” means following conventions for units, decimal places and significant figures. The skills list adds: “identify and justify the removal or inclusion of outliers”.' },
+        md: 'Data analysis, top band: processing relevant to the research question, “carried out appropriately and accurately”. “Precise” means following conventions for units and decimal places (significant figures are not expected in biology; if you use them, use them correctly). The skills list adds: “identify and justify the removal or inclusion of outliers”.' },
 
       { type: 'frames', title: 'Sentence frames for calculations', items: [
         'The mean ___ at ___ was (___ + ___ + … + ___) ÷ ___ = ___ ___.',
@@ -183,7 +183,7 @@
           'tf-a': { label: 'show one!', why: 'Give one worked example of each calculation: mean at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s. Then write “repeated for all temperatures”.' },
           'tf-b': { label: 'unit?', why: '1 ÷ 98 s = __0.0102 s⁻¹__, which is 10.2 × 10⁻³ s⁻¹.' },
           'tf-c': { label: 'd.p.!', why: 'The means are in whole seconds, so the SD is too: __8 s__. A mean and its SD have the same decimal places (our rule).' },
-          'tf-d': { label: 'how do you know?', why: 'Justify it: __no trial was more than 20 s (two sampling intervals) from its mean__. The IB asks for the removal or inclusion of outliers to be justified.' },
+          'tf-d': { label: 'how do you know?', why: 'Justify it: __no trial was more than 20 s (two sampling intervals) from its mean__. The IB asks for the removal or inclusion of outliers to be justified. A common rule: more than 1.5 × IQR beyond the quartiles. Never remove a value only because it does not fit; you can show the result with it and without it.' },
           'tf-e': { label: 'relevant?', why: 'The research question is about the time in seconds. Processing that does not help answer it adds nothing.' }
         },
         fixed: 'Table 2 shows the processed data. ==One worked example of each calculation is given==: mean time at 20.0 °C = (180 + 170 + 190 + 180 + 170) ÷ 5 = 178 s; this was repeated for all temperatures.\n\nRate at 60.0 °C = 1 ÷ 98 s = ==0.0102 s⁻¹==.\n\nStandard deviation at 20.0 °C = ==8 s== (spreadsheet: =STDEV.S(B2:F2)), in whole seconds like the mean.\n\n==All trials were included==: no trial was more than 20 s (two sampling intervals) from its mean.',

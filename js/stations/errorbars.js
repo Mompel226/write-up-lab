@@ -77,7 +77,7 @@
   var KINDS = proseTable(['Bar', 'What it shows', 'When to use it'], [
     ['[[Range|range]]', 'From the lowest value to the highest. Its two arms can differ in length.', 'Fewer than about five repeats, or IGCSE work. Simple, but one unusual value makes it much longer.'],
     ['[[Standard deviation (SD)|standard deviation]]', 'How far, typically, each value lies from the mean.', 'To show how much the data vary. The usual choice for biological data.'],
-    ['[[Standard error (SE)|standard error]]', 'How precisely the mean itself is known: SD ÷ √n.', 'When your claim is about the mean. Always shorter than the SD: never choose it because it looks smaller.'],
+    ['[[Standard error (SE)|standard error]]', 'How precisely the mean itself is known: SD ÷ √n.', 'When your claim is about the mean. Always shorter than the SD: never choose it because it looks smaller. At IB, only for samples larger than 30; with fewer repeats, use the SD.'],
     ['[[Interquartile range (IQR)|interquartile range]]', 'The middle half of the data, from the first quartile to the third.', 'Skewed data, or data with outliers. For counts, an SD larger than the mean is the sign. Usually drawn as a box-and-whisker plot.']
   ]);
 
@@ -88,7 +88,7 @@
 
     ladder: {
       g: [],
-      i: ['Draw an [[error bar]] on every mean, calculated from your own repeats', 'Name the bar in the caption: range, SD, SE or IQR, with n', 'Use overlap to say what you can and cannot claim'],
+      i: ['Draw an [[error bar]] on every mean, calculated from your own repeats', 'Name the bar in the caption: range, SD or IQR (SE only when n > 30), with n', 'Use overlap to say what you can and cannot claim'],
       e: ['Choose the bar that fits your claim, and support any claim of a difference with a statistical test']
     },
 

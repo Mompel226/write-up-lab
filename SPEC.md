@@ -109,8 +109,14 @@ that day against the IB Biology guide (2025) and the EE guide (2027), item by it
 - IA-only items are `lv: 'i'` (relative impact, ranking weaknesses, group raw data, extensions); EE-only `lv: 'e'`.
   The EE conclusion "notes any limitations and unresolved questions" (EE guide Figure 16): never tell an EE pupil to
   keep limitations out of the conclusion.
-- The hypothesis at IB: the conclusion answers the research question with processed data; a sentence on the
-  hypothesis may follow. Never "first" or "earns nothing alone" (the guide says neither; Daniel, 3 Oct 2026).
+- The hypothesis at IB: the conclusion answers the research question with processed data; then, if a hypothesis was
+  stated, a sentence on whether the data support it. Never "first" or "earns nothing alone" (the guide says neither;
+  Daniel, 3 Oct 2026). Since 16 Nov 2026 the site follows the IB's Biology teacher support material 2025 (copy in
+  `NLCS/IB/MY LESSONS/`): a hypothesis is optional and written in words after the background (p. 72); H₀ and H₁ go with
+  each test in the data analysis, "no need to state a null and alternative hypothesis at the beginning" (p. 75);
+  interpretation of the data (explaining the trend, published values or models, what the uncertainties mean for the
+  answer, the hypothesis) is the conclusion (p. 76, p. 79); SE only for n > 30 (p. 78); significant figures not expected
+  in biology (p. 76); a dot-to-dot graph is never penalised (p. 77).
 
 ## IGCSE advice never reads as the IB's (Daniel, 16 Oct 2026)
 An IB pupil read the background's "Five jobs, in about five sentences" (an IGCSE, in-class figure) as the length of the
@@ -181,7 +187,8 @@ data only (`WUL.data.shore`), never a class's species, numbers, tables or analys
   minutes"; June 2023 Q1(a)(i): "number of bubbles (in 3 minutes)").
 - **No ± on a count:** a count of whole organisms has no measuring instrument, so by convention its heading has no ±,
   and a note under the table says so. Its uncertainty comes from the method (the edge rule, hidden animals) and goes in
-  the evaluation. No IB document rules on counts: write it as the convention, never as an IB rule. A pH from a probe
+  the evaluation. Since 16 Nov 2026 an IB document does rule: the Biology teacher support material, "Stating uncertainties for counts
+  (± 1) is not necessary" (p. 76), though data derived from counts (a percentage, a density) may need one. A pH from a probe
   keeps ± its last digit. The same words as the rocky-shore practical ("A count has no instrument, but two people can
   count differently").
 - **Several measured variables:** one raw-data table for each (our rule), then ONE processed-data table with Mean |
@@ -544,7 +551,8 @@ then what the site is checked against, then the licences.
    Highlight the parts that matter with `==…==` or anatomy colours.
 9. **Corrections to respect** (from BRIEF.md): a ±2 °C fluctuation is RANDOM error (an offset is systematic);
    control measure = what reduces the risk, emergency action = what to do if it happens; at IB the conclusion
-   answers the RQ with processed data; a sentence on the hypothesis may follow ("evaluate hypotheses" is an IB skill),
+   answers the RQ with processed data, then (if one was stated) a sentence on whether the data support the hypothesis
+   ("evaluate hypotheses" is an IB skill; the TSM checks it, p. 79),
    never "first" or "earns nothing alone": the guide says neither (Daniel, 3 Oct 2026);
    IB Evaluation 5–6 = RELATIVE impact (rank the weaknesses); extensions are not in the 2025 IA criteria;
    Cambridge: > half the grid (not ¾), crosses or encircled dots (large dots penalised), axes need not start at 0,

@@ -27,7 +27,7 @@
 
     ladder: {
       g: ['“If … then … because …”, with a biological reason', 'A [[prediction]] of the __shape__ of the graph, not only its direction'],
-      i: ['Optional: the hypothesis is not in the IA criteria', 'A [[sketch graph]] of the predicted shape helps', 'In the conclusion, answer the research question with processed data; a sentence on the hypothesis may follow'],
+      i: ['Optional: the hypothesis is not in the IA criteria', 'A [[sketch graph]] of the predicted shape helps', 'In the conclusion, answer the research question with processed data; then, if you stated a hypothesis, say whether the data support it'],
       e: ['A hypothesis that the data could show to be false, built from the literature', 'Results that do not support it are as valid as results that do']
     },
 
@@ -92,7 +92,7 @@
         md: 'Cambridge 0610 does not require a hypothesis. In Paper 6 planning questions, predictions earn no marks.\n\nIn a written lab report, a hypothesis is standard practice. It practises a skill that the syllabus lists: to “make reasoned predictions of expected results”.' },
 
       { type: 'note', tone: 'ib', lv: 'ie', label: 'At IB', title: 'Optional, but an IB skill',
-        md: 'The hypothesis is not in the IA criteria, so it is optional. But “formulate research questions and hypotheses” and “evaluate hypotheses” are IB skills (Inquiry 1 and 3). “Sketch graphs, with labelled but unscaled axes” are a Tool 3 skill.\n\nA statistical test needs a different kind of hypothesis, the [[null hypothesis]]: see the Statistics part.' },
+        md: 'The hypothesis is not in the IA criteria, so it is optional: the IB’s teacher support material says it is “permitted … though this is not obligatory”, and that it “can help to set the research question in context”. Write it in words, after your background. “Formulate research questions and hypotheses” and “evaluate hypotheses” are IB skills (Inquiry 1 and 3). “Sketch graphs, with labelled but unscaled axes” are a Tool 3 skill.\n\nA statistical test needs a different kind of hypothesis: the [[null hypothesis]] (H₀) and the alternative hypothesis (H₁). They do not go here. They go in your data analysis, just before each test (see the Statistics part).' },
 
       { type: 'note', tone: 'ee', lv: 'e', label: 'For the Extended Essay', title: 'The hypothesis in an EE',
         md: 'A science essay usually states a hypothesis, built from the literature review. It must be testable: your data could show that it is false.\n\nResults that do not support it are as valid as results that do. Explain them.' },
@@ -103,14 +103,14 @@
         { t: 'At IB, a reason is allowed but not required: no IA or EE criterion marks a hypothesis. The null and alternative hypotheses of a statistical test are plain statements, with no reason. With the usual two-tailed test, neither has a direction.', lv: 'ie' },
         'Enzymes are not alive. They are __denatured__; they do not “die”.',
         'A hypothesis is never “proved”. The data __support__ it, or do __not support__ it.',
-        { t: 'In the conclusion, answer the research question with processed data. A sentence on the hypothesis may follow.', lv: 'ie' }
+        { t: 'In the conclusion, answer the research question with processed data. Then, if you stated a hypothesis, say whether the data support it.', lv: 'ie' }
       ] },
 
       { type: 'frames', lv: 'g', title: 'Sentence frames for a hypothesis', items: [
         'If ___ is increased from ___ to ___, then ___ will ___, because ___.',
         'Above ___, ___ will ___, because ___.'
       ] },
-      { type: 'frames', lv: 'ie', title: 'Sentence frames for IB, and for statistical hypotheses', items: [
+      { type: 'frames', lv: 'ie', title: 'Sentence frames for IB. H₀ and H₁ are written in the data analysis, just before each test', items: [
         'H₀: there is no difference in ___ between ___ and ___. H₁: there is a difference in ___ between ___ and ___.',
         'H₀: there is no correlation between ___ and ___. H₁: there is a correlation between ___ and ___.',
         'H₀: there is no association between ___ and ___. H₁: there is an association between ___ and ___.',
@@ -140,7 +140,7 @@
           'tf-a': { label: 'which amylase?', why: '37 °C is the value for __human__ salivary amylase. For α-amylase from *Aspergillus oryzae*, predict near 55 °C, and give the source (Raviyan et al. 5464).' },
           'tf-b': { label: 'why?', why: 'Give the mechanism: hydrogen and ionic bonds in the tertiary structure break, the active site changes shape, and the enzyme is denatured.' },
           'tf-c': { label: 'not a sketch', why: 'A sketch graph is drawn __before__ the data, with labelled but unscaled axes. A graph of the results is not a prediction.' },
-          'tf-d': { label: 'the RQ? “correct”?', why: 'Answer the research question with data: the rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹). A sentence on the hypothesis may follow: the hypothesis was __supported__.' }
+          'tf-d': { label: 'the RQ? “correct”?', why: 'Answer the research question with data: the rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹). Then a sentence on the hypothesis, if you stated one: the hypothesis was __supported__.' }
         },
         fixed: 'Hypothesis: if the temperature is increased from 20.0 to 60.0 °C, the rate of hydrolysis by fungal α-amylase will increase ==to a maximum near 55 °C (Raviyan et al. 5464)==, then ==fall steeply, because hydrogen and ionic bonds in the tertiary structure break, the active site changes shape and the enzyme is denatured==. ==A sketch graph with labelled, unscaled axes shows the predicted shape.==\n\nConclusion: ==The mean rate was highest at 50.0 °C (18.5 × 10⁻³ s⁻¹).== The hypothesis was ==supported==.',
         fixedNote: 'The prediction fits the enzyme that was used. The sketch comes before the data. The conclusion answers the research question with data, and says whether the hypothesis was supported.'
@@ -153,7 +153,7 @@
       { bad: 'The enzyme dies above 50 °C.', good: 'The enzyme is __denatured__: the active site changes shape.' },
       { bad: 'The hypothesis was proved.', good: 'The data __supported__ the hypothesis.' },
       { bad: 'The optimum will be 37 °C. (for a fungal enzyme)', good: 'Near 55 °C: the published value for α-amylase from *Aspergillus oryzae*.', lv: 'ie' },
-      { bad: 'A conclusion that judges the hypothesis but never answers the research question.', good: 'The research question answered with processed data. A sentence on the hypothesis may follow.', lv: 'ie' }
+      { bad: 'A conclusion that judges the hypothesis but never answers the research question.', good: 'The research question answered with processed data. Then a sentence on the hypothesis, if you stated one.', lv: 'ie' }
     ],
 
     test: [
@@ -200,10 +200,10 @@
         ] },
       { type: 'choose', lv: 'ie', q: 'At IB, what must the conclusion do with the research question and the hypothesis?',
         opts: [
-          { t: 'Answer the research question with processed data. A sentence on whether the hypothesis was supported may follow.', ok: true, why: 'The Conclusion criterion assesses how well the report answers the research question.' },
-          { t: 'Judge the hypothesis with processed data. A sentence that answers the research question is not needed.', why: 'The research question must be answered, with processed data. The sentence on the hypothesis is optional.' },
+          { t: 'Answer the research question with processed data. A sentence on whether the hypothesis was supported may follow.', ok: true, why: 'The Conclusion criterion assesses how well the report answers the research question. If you stated a hypothesis, the IB’s teacher support material also expects a sentence on whether the data support it.' },
+          { t: 'Judge the hypothesis with processed data. A sentence that answers the research question is not needed.', why: 'The research question must be answered, with processed data. The sentence on the hypothesis comes after that answer.' },
           { t: 'Remove the hypothesis, as the IB does not allow one. Describe the raw data in the results table.', why: '“Evaluate hypotheses” is an IB skill, so a sentence on it is allowed. The answer needs processed data, not raw data.' },
-          { t: 'Repeat each mean from the results table. Then say whether each mean supports the hypothesis.', why: 'A list of means is not an answer. Use the processed data to state the trend and answer the research question; a sentence on the hypothesis may follow.' }
+          { t: 'Repeat each mean from the results table. Then say whether each mean supports the hypothesis.', why: 'A list of means is not an answer. Use the processed data to state the trend and answer the research question; then a sentence on the hypothesis, if you stated one.' }
         ] },
       { type: 'multi', lv: 'ie', q: 'Which are features of a sketch graph?',
         opts: [

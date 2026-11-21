@@ -343,7 +343,7 @@
         { t: 'No R² at IGCSE. It is not part of the syllabus.', lv: 'g' },
         '__Scatter graph__: never join the points in order. Draw one line of best fit, or no line.',
         { t: 'At IB: plot the means with error bars. When biology tells you the shape, draw one smooth curve or straight line of best fit through the trend: an enzyme’s optimum, or osmosis in potato.', lv: 'ie' },
-        { t: 'Join the means point to point only when you have no reason to expect a shape.', lv: 'ie' },
+        { t: 'Join the means point to point when you have no reason to expect a shape (the IB never penalises a dot-to-dot graph).', lv: 'ie' },
         { t: 'Quote [[R²|coefficient of determination]] only for a line or curve that comes from an equation fitted to the data. A curve you draw by hand, or means joined point to point, have no R².', lv: 'ie' },
         { t: 'In a spreadsheet, never choose a “smoothed line”, or a polynomial with enough bends to pass through every mean.', lv: 'ie' }
       ] },
@@ -400,7 +400,7 @@
         '[[Bar chart]]: bars of equal width, with gaps, and the y-axis starts at 0. [[Histogram]]: the bars touch.',
         'The title goes __below__ the graph, always in the same pattern: “Figure 1. Line graph showing the effect of … on …”, or “showing the relationship between … and …” when you changed nothing.',
         { t: 'Plot the means with [[error bars|error bar]], and name them in the caption: (n = 5; error bars = ± 1 SD).', lv: 'ie' },
-        { t: 'One smooth curve or straight line of best fit through the means when biology predicts the shape. Point to point only when no shape is expected.', lv: 'ie' }
+        { t: 'One smooth curve or straight line of best fit through the means when biology predicts the shape. Point to point when no shape is expected (never penalised).', lv: 'ie' }
       ] },
 
       { type: 'note', tone: 'igcse', lv: 'g', label: 'At IGCSE', title: 'What Cambridge marks',

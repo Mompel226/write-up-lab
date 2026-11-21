@@ -56,7 +56,7 @@
 
     ladder: {
       g: ['Say whether the results __support__ the [[hypothesis]]', 'Give the key values as evidence', 'Explain the biology with the exact terms', 'Good practice: compare with a [[published value]]'],
-      i: ['Answer the [[research question]], in its own words', 'Use [[processed data]] and its uncertainty', '[[Justify]] the answer against the accepted [[scientific context]], cited: a published value where one exists, and how close', 'A sentence on the hypothesis may follow'],
+      i: ['Answer the [[research question]], in its own words', 'Use [[processed data]] and its uncertainty', '[[Justify]] the answer against the accepted [[scientific context]], cited: a published value or model where one exists, and how close (where none exists, as in some field studies, say whether the result is reasonable)', 'If you stated a hypothesis, say whether the data support it'],
       e: ['A short [[synthesis]] that answers the research question', 'Drawn from the discussion: no new data, no new argument', 'Shorter than an IA conclusion, because the discussion already gives the detail']
     },
 
@@ -107,14 +107,14 @@
         md: 'Compare your result with a published value, and cite it. Cambridge does not require this; the IB asks for a comparison with the accepted scientific context, so start now.' },
 
       { type: 'anatomy', lv: 'i', title: 'An IA conclusion',
-        intro: 'Tap a colour to see each part. Part 5 is optional.',
+        intro: 'Tap a colour to see each part. Part 5 is needed only if you stated a hypothesis.',
         model: '{1:Within 20.0–60.0 °C, the rate of starch hydrolysis by *A. oryzae* α-amylase was highest at 50.0 °C, so its optimum temperature lies between 40.0 and 60.0 °C, closest to 50.0 °C.} {2:The mean time at 50.0 °C was 54 s (SD 5 s), a mean rate of 18.5 × 10⁻³ s⁻¹, compared with 13.5 × 10⁻³ s⁻¹ at 40.0 °C and 10.2 × 10⁻³ s⁻¹ at 60.0 °C. The SD bars of these three temperatures do not overlap, so the peak is not explained by variation between trials.}\n\n{3:Up to the optimum, the molecules gained kinetic energy, so successful collisions and enzyme–substrate complexes formed more often. Above it, hydrogen and ionic bonds in the tertiary structure broke, the active site changed shape and was no longer complementary to the substrate, and a growing proportion of the enzyme was denatured.}\n\n{4:Raviyan et al. report an optimum of 55 °C for α-amylase from *A. oryzae* (5464). This lies inside the 40.0–60.0 °C range found here, so the two agree within the 10.0 °C interval used.} {5:These results support the hypothesis that the rate would rise to an optimum and then fall.}',
         parts: [
           { n: 1, name: 'The answer to the research question', note: 'In the question’s own words: the variables, the system and the range.' },
-          { n: 2, name: 'The evidence, with its uncertainty', note: 'Processed data (means, rates, SD), and what the error bars allow you to claim.' },
+          { n: 2, name: 'The evidence, with its uncertainty', note: 'Processed data (means, rates, SD), and what the uncertainty means for your answer.' },
           { n: 3, name: 'The biology', note: 'Exact terms: kinetic energy, successful collisions, enzyme–substrate complex, active site, tertiary structure, denatured.' },
           { n: 4, name: 'The comparison, cited', note: 'Which source, and how close. The citation must be traceable.' },
-          { n: 5, name: 'A sentence on the hypothesis', note: 'Optional. The criterion asks for the answer to the research question.' }
+          { n: 5, name: 'A sentence on the hypothesis', note: 'Only if you stated a hypothesis: then the IB’s teacher support material expects it. It never replaces the answer to the research question.' }
         ],
         after: 'Works Cited entry: ' + CITE },
 
@@ -122,7 +122,7 @@
         md: 'Top band (5–6): the conclusion is “justified” and “fully consistent with the analysis presented”, and it is “justified through relevant comparison to the accepted scientific context”.\n\n“Fully consistent” requires “the interpretation of processed data including associated uncertainties”. Citations must be “sufficiently detailed to allow these sources to be traceable”.' },
 
       { type: 'note', tone: 'ib', lv: 'i', title: 'The hypothesis at IB', label: 'At IB: and the hypothesis?',
-        md: 'You may add a sentence on the hypothesis. The IB lists “Evaluate hypotheses” as a skill, but the Conclusion criterion assesses how well the report answers the __research question__. So the hypothesis sentence never replaces that answer.' },
+        md: 'If you stated a hypothesis, say whether the data support it: the IB’s teacher support material lists “whether the data support any hypothesis that has been proposed” among the things a conclusion is checked for. The Conclusion criterion still assesses how well the report answers the __research question__, so the hypothesis sentence never replaces that answer.\n\nThe conclusion is also where the data are __interpreted__: the trend explained with biology, compared with published values or models, and what the uncertainties mean for your answer. The IB: “Interpretation of the data as it relates to the research question is assessed in the ‘Conclusion’ criterion.”' },
 
       { type: 'compare', lv: 'ie', title: 'Name the source and the value',
         bad: 'This agrees with the literature.',
@@ -179,7 +179,7 @@
         title: 'An IA conclusion. Five phrases need the red pen.',
         body: '[!a:The hypothesis was correct.]\n\n[!b:Amylase works best at 50 °C.]\n\n[!c:The reaction was fastest there.]\n\n[!d:This agrees with the literature.]\n\n[!e:Human error made it unreliable.]',
         notes: {
-          a: { label: 'answer the RQ', why: 'Answer the research question, with processed data. A sentence on the hypothesis may follow, but it never replaces the answer.' },
+          a: { label: 'answer the RQ', why: 'Answer the research question, with processed data. Then, if you stated a hypothesis, a sentence on whether the data support it; it never replaces the answer.' },
           b: { label: 'which amylase?', why: 'Name the system and the range: α-amylase from *A. oryzae*, between 20.0 and 60.0 °C. Amylases from other organisms have other optima.' },
           c: { label: 'numbers? SD?', why: 'Use processed data with its uncertainty: a mean rate of 18.5 × 10⁻³ s⁻¹ at 50.0 °C (mean time 54 s, SD 5 s), and the SD bars do not overlap.' },
           d: { label: 'which? how close?', why: 'Name the source and compare the numbers: Raviyan et al. report 55 °C (5464), inside the 40.0–60.0 °C range found here.' },
@@ -269,7 +269,7 @@
           { t: 'A conclusion relevant to the research question', ok: true },
           { t: 'Interpretation of processed data, including its uncertainties', ok: true },
           { t: 'A comparison with the accepted scientific context, cited so it can be traced', ok: true },
-          { t: 'A sentence saying whether the results support the hypothesis', why: 'Allowed, but it is not in the descriptor or its clarifications.' },
+          { t: 'A sentence saying whether the results support the hypothesis', why: 'Not in the descriptor itself. But if you stated a hypothesis, the IB’s teacher support material expects this sentence too.' },
           { t: 'A list of the method’s weaknesses, with an improvement for each', why: 'Weaknesses and improvements are marked by the Evaluation criterion.' }
         ],
         why: 'The three parts of the 5–6 descriptor and its clarifications (IB Biology guide, p. 122).' },

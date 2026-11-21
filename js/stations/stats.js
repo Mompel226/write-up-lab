@@ -139,7 +139,7 @@
 
     ladder: {
       g: [],
-      i: ['Choose the test that fits the data: a [[t-test]], a [[chi-squared test]] or a [[correlation coefficient]]', 'State the [[null hypothesis]] before the test', 'Report the test, the value, df and p, then one sentence of meaning'],
+      i: ['Choose the test that fits the data: a [[t-test]], a [[chi-squared test]] or a [[correlation coefficient]]', 'State the [[null hypothesis]] (H₀) and the alternative hypothesis (H₁) just before the test, not at the start of the report', 'Report the test, the value, df and p, and your decision about H₀. What it means for your question goes in the conclusion'],
       e: ['Use statistics “where appropriate”, and justify the choice of test']
     },
 
@@ -163,9 +163,9 @@
 
       { type: 'anatomy', title: 'How to report a test',
         intro: 'A test does not prove anything. Its p-value says how often chance alone would give a difference this large ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). Report it in four parts.',
-        model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.} {2:A [[two-tailed|two-tailed test]] t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
+        model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C; the alternative hypothesis, that there is a difference.} {2:A [[two-tailed|two-tailed test]] t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
         parts: [
-          { n: 1, name: 'The null hypothesis', note: 'What “no effect” would look like. State it before the test.' },
+          { n: 1, name: 'H₀ and H₁', note: 'H₀: what “no effect” would look like. H₁: that there is an effect. State both just before the test (the IB requires them with every test), not at the start of the report.' },
           { n: 2, name: 'The test', note: 'Its name. [[Two-tailed|two-tailed test]]: a difference in either direction counts. That is the normal choice.' },
           { n: 3, name: 'The numbers', note: 'The value, the degrees of freedom (df) and p.' },
           { n: 4, name: 'The meaning', note: 'One sentence in words, with the means and their units.' }

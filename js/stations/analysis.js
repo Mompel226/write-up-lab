@@ -54,12 +54,12 @@
 
   WUL.station({
     id: 'analysis', keepV: { v: 'pvxtkw', now: '1s5o9mj', on: '2026-10-07', why: 'wrong options rewritten in the third answers audit (8 Oct 2026)' }, stage: 'sense', order: 1, title: 'Data analysis', levels: 'gie',
-    job: { g: 'Describe the pattern in your results, with numbers. Do not explain it yet.', i: 'Describe the pattern in the processed data, and say what the uncertainties allow you to claim.', e: 'Describe each finding, and show how it helps to answer the research question.' },
+    job: { g: 'Describe the pattern in your results, with numbers. Do not explain it yet.', i: 'Describe the pattern in the processed data, with its error bars and your statistical test. Explaining the pattern, and what the uncertainties mean for your answer, belong in the conclusion.', e: 'Describe each finding, and show how it helps to answer the research question.' },
     where: { g: 'After the graph, before the conclusion.', i: 'The last part of your Data analysis: after the tables, graphs and any test, before the conclusion.', e: 'In the analysis section, after the results.' },
 
     ladder: {
       g: ['The overall [[trend]], with both variables named', 'Key values, with both coordinates and units', 'One calculated comparison, and any [[anomalous results|anomalous result]]'],
-      i: ['Say whether the [[error bars|error bar]] overlap, and what that allows you to claim', 'Add your statistical test here: the null hypothesis, the test, its value, df and p, and what it means', 'Describe the pattern, not every point'],
+      i: ['Say whether the [[error bars|error bar]] overlap: a hint, never proof', 'Add your statistical test here: H₀ and H₁, the test, its value, df and p, and your decision about H₀', 'Describe the pattern, not every point'],
       e: ['Build a line of argument: link each finding to the research question (criterion C)', 'Choose the processing that answers the question, and say why', 'Put the statistics, where appropriate, inside the argument as one of its steps']
     },
 
@@ -75,15 +75,15 @@
         ] },
 
       { type: 'anatomy', lv: 'ie', title: 'The parts of an IB analysis',
-        intro: 'The same four parts, then two more: what the uncertainty allows you to claim, and the statistical test.',
+        intro: 'The same four parts, then two more: what the error bars show, and the statistical test.',
         model: '{1:As the temperature increased from 20.0 °C to 50.0 °C, the mean time for the starch to disappear decreased; above 50.0 °C, it increased again.} {2:The mean time fell from 178 s at 20.0 °C to a minimum of 54 s at 50.0 °C, then rose to 98 s at 60.0 °C.} {3:This is a 70 % decrease, followed by an 81 % increase. The mean rate at 50.0 °C (18.5 × 10⁻³ s⁻¹) was 3.3 times the rate at 20.0 °C.} {4:No anomalous results were identified: at each temperature, the five trials differed by no more than 20 s.} {5:The ± 1 SD error bars at 40.0, 50.0 and 60.0 °C do not overlap.} {6:A [[two-tailed|two-tailed test]] t-test comparing 40.0 °C with 50.0 °C gave t = 5.77, df = 8, p < 0.001, so the null hypothesis of no difference is rejected: the difference is statistically significant.}',
         parts: [
           { n: 1, name: 'Overall trend', note: 'Rise, fall, peak or [[plateau]], with both variables named.' },
           { n: 2, name: 'Key values', note: 'Processed data: means, with both coordinates and units.' },
           { n: 3, name: 'A calculated comparison', note: 'A [[percentage change]], a ratio or a [[gradient]].' },
           { n: 4, name: 'Anomalies', note: 'Name them, or state that there were none.' },
-          { n: 5, name: 'What the uncertainty allows', note: 'Do the [[error bars|error bar]] overlap? Overlap is a hint, never proof.' },
-          { n: 6, name: 'The statistical test', note: 'It goes here, not in a section of its own: the [[null hypothesis]], the test, its value, df and p, and what it means. Do not define the test.' }
+          { n: 5, name: 'The error bars', note: 'Do the [[error bars|error bar]] overlap? Overlap is a hint, never proof. What the uncertainty means for your answer goes in the conclusion.' },
+          { n: 6, name: 'The statistical test', note: 'It goes here, not in a section of its own: H₀ and H₁ (the [[null hypothesis]] and the alternative), the test, its value, df and p, and your decision about H₀. Do not define the test.' }
         ] },
 
       { type: 'anatomy', lv: 'e', title: 'Build a line of argument',
@@ -126,7 +126,7 @@
           { title: 'The overall trend', text: 'Follow the line from left to right. The mean time __decreases__ to a lowest point at 50.0 °C, then __increases__.', show: ['pts-m', 'line-m'] },
           { title: 'The key values', text: 'Quote the start, the lowest point and the end: 178 s at 20.0 °C, 54 s at 50.0 °C and 98 s at 60.0 °C.', show: ['pts-k'] },
           { title: 'A calculated comparison', text: '(178 − 54) ÷ 178 × 100 = a 70 % decrease. (98 − 54) ÷ 54 × 100 = an 81 % increase.', show: [], focus: ['pts-k'] },
-          { title: 'What the error bars allow', text: 'The ± 1 SD bars at 40.0, 50.0 and 60.0 °C do not overlap, so the differences between these three means are probably real. A [[t-test]] can test this.', show: ['err-m'] },
+          { title: 'What the error bars show', text: 'The ± 1 SD bars at 40.0, 50.0 and 60.0 °C do not overlap: a hint that these differences are real. A [[t-test]] can test it.', show: ['err-m'] },
           { title: 'Anomalies', text: 'Check the raw data table. The five trials at each temperature differ by no more than 20 s, so no result is anomalous.', show: [], focus: [] }
         ] },
 
