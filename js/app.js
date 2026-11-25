@@ -187,7 +187,7 @@
     main.innerHTML = '';
     var f = PAGES[r.page] || PAGES.home;
     f(r);
-    window.scrollTo(0, 0);
+    if (!keepScroll) window.scrollTo(0, 0);
     main.focus({ preventScroll: true });
   }
   window.addEventListener('hashchange', route);
@@ -195,11 +195,15 @@
      drawn again only when its homework changed (a quiz half done must not start again); otherwise its banner is
      repainted. */
   var lastHwKey = '';
+  /* drawn again because something arrived (not because the pupil opened a page): the pupil stays where they are. Until
+     25 Nov 2026 each arrival jumped to the top, so a pupil who scrolled while the page loaded was thrown back up (Daniel). */
+  var keepScroll = false;
+  function redraw() { var y = window.scrollY; keepScroll = true; try { route(); } finally { keepScroll = false; } window.scrollTo(0, y); }
   WUL.homeworkChanged = function () {
     var r = parse(), key = JSON.stringify(hwList().map(function (x) { return [x.id, x.parts]; }));
     var changed = key !== lastHwKey; lastHwKey = key;
-    if (r.page === 'part') { if (changed && main.querySelector('.ptabs')) { lastPart = null; route(); } else repaint(); return; }
-    if (r.page === 'home' || r.page === 'hw' || r.page === 'start' || !PAGES[r.page]) route();
+    if (r.page === 'part') { if (changed && main.querySelector('.ptabs')) { lastPart = null; redraw(); } else repaint(); return; }
+    if (r.page === 'home' || r.page === 'hw' || r.page === 'start' || !PAGES[r.page]) redraw();
   };
   /* what an open part page paints from the records (its banner, the Homework set's count, the red-pen ticks),
      painted again after every change to this part's record */
