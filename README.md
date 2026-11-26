@@ -5,7 +5,7 @@ IB Internal Assessment and the IB Extended Essay.
 
 Made by **Dr Daniel Mompel Riera**.
 
-![Write-Up Lab](assets/readme.png)
+![The Write-Up Lab's front page: learn to write a lab report one part at a time, and the parts of a report laid out on two pages](assets/readme.png)
 
 ## What a student can do
 
