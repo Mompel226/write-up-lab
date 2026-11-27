@@ -25,7 +25,8 @@ density and tone.
 - A widget may add its own CSS with `WUL.css('<widget-name>', '…css…')`. Class names must start with
   `wd-<widget-name>` (e.g. `.wd-graph-doctor__grid`). Use the CSS variables from `css/app.css` (`--ink`, `--ink-2`,
   `--ink-3`, `--sheet`, `--sheet-2`, `--edge`, `--rule`, `--rule-2`, `--red`, `--red-2`, `--red-wash`, `--green`,
-  `--green-wash`, `--blue`, `--blue-wash`, `--plum`, `--plum-wash`, `--ee`, `--ee-wash`, `--amber`, `--amber-wash`,
+  `--green-wash`, `--blue`, `--blue-wash`, `--plum`, `--plum-wash`, `--ee`, `--ee-wash`, `--ext`, `--ext-wash` (the one
+  extension violet: only for something beyond the IB guide, 27 Nov 2026), `--amber`, `--amber-wash`,
   `--lvl`, `--lvl-wash`, `--hl`, `--hl-soft`, `--p1…--p6`, `--p1k…--p6k`, `--serif`, `--sans`, `--mono`,
   `--hand`, `--r`, `--shadow`, `--shadow-sm`) so light and dark themes both work. Reusable classes: `.sheet`,
   `.sheet--vis`, `.btn`, `.btn--go`, `.btn--ghost`, `.seg` (segmented buttons with aria-pressed), `.wd-panel`,
@@ -472,24 +473,59 @@ due to chance": write "statistically significant" or "chance alone would rarely 
 ## Check your data before a t-test (Daniel, 25 Sep 2026: "they really need to test for normality and homoscedasticity")
 Stepper `id: 'checks'`, "Beyond the IB guide", right after Find your test (whose t-test answer links to it). Drawn as
 his C4.1 slides 52–55, imagined heather heights: one bell (66 quadrats, 5 cm classes) → each group on its own (with
-moss mean 41.5, without 25.8, SD about 4; mixed = two peaks, which only shows the groups differ) → similar spread
-(SD 4 v 4, and 2.5 v 8; rule of thumb: larger SD under twice the smaller; the word homoscedasticity) → the two tests
-(Shapiro–Wilk; F-test, =F.TEST, var.test; H₀ = the condition holds, so p > 0.05 is no evidence of a problem, not
-proof; with 5 values nothing can show much: say normality was assumed) → if one fails (Mann–Whitney U; Welch's,
-=T.TEST(…, 2, 3)). χ² needs neither, only every E ≥ 5. Keywords: normal distribution, homoscedasticity.
+moss mean 41.5, without 25.8, SD about 4; mixed = two peaks, which only shows the groups differ) → where each check goes
+(guide 8's doctor: a child's height against children of the same age; never all the raw data in one pile) → pairs and
+lines (the differences of a paired t-test; the residuals of a line) → a similar spread, needed by Student's t-test,
+ANOVA and Pearson's r but NOT by Welch's t-test (SD 4 v 4, and 2.5 v 8; warning sign: the largest SD more than twice
+the smallest; the word homoscedasticity) → the tests (Shapiro–Wilk on each group; Levene's test, `leveneTest()` from
+R's car package; H₀ = the condition holds, so p ≥ 0.05 is no evidence of a problem, not proof; with 5 values nothing
+can show much: say normality was assumed) → if one fails (a rank test: Mann–Whitney U, at least 4 + 4 or 3 + 5).
+χ² needs neither, only every E ≥ 5. Keywords: normal distribution, homoscedasticity. Until 27 Nov 2026 the spread was
+tested first (an F-test) and Welch's t-test was the way out when it failed; since guide 8 Welch's is the default, so
+the spread is never tested before a two-group t-test (see *Which test? follows guide 8*).
 
 ## Many tests need a correction (Daniel, 25 Sep 2026)
 Wherever the lab warns against t-tests between every pair (red pen, Mistakes to avoid, Find your test), it also
-names the way out: a [[correction for multiple comparisons]]. Bonferroni, the simplest: 0.05 ÷ number of tests
+names the way out: a [[correction for multiple comparisons]]. Where it gives the risk, it is guide 8's: more than 25 %
+for 10 pairs (see *Which test? follows guide 8*). Bonferroni, the simplest: 0.05 ÷ number of tests
 (10 pairs of five temperatures: each p below 0.005). Learn R's shelf shows `pairwise.t.test(…, "bonferroni")`,
 which multiplies each p instead, so it is still compared with 0.05.
+
+## Which test? follows guide 8 (Daniel, 27 Nov 2026)
+Daniel's guide 8, *Which statistical test?* (`NLCS/Lab reports-IA-EE/8) Statistics Decision Tree - Biology IB.pdf`; every
+word is in `Sources/8) Statistics Decision Tree/build_tree.py`), and the Write-Up Lab say the same. The test chooser
+(`js/widgets/test-chooser.js`) follows its route: describe first (mean and SD, or median and IQR; the range under 5
+values; independent values only; 1–2 values: no test) → counts, a difference or a relationship → the test, its check,
+where that check goes, and the rank test if it fails. The rules:
+- **Two groups of different individuals: Welch's t-test**, with no test of the spread first (`=T.TEST(…, 2, 3)`; R's
+  `t.test()` default). Student's t-test needs a similar spread; Welch's does not. Paired values: the paired t-test;
+  one group against a fixed value: the one-sample t-test.
+- **Each normality check goes where the test looks:** each group on its own; the differences of a paired t-test; the
+  residuals of a line (Pearson's r); never all the raw data in one pile.
+- **Three or more groups:** ANOVA (or Kruskal–Wallis) first; Tukey's (or Dunn's) only if p < 0.05. Never a t-test for
+  every pair: with 5 groups (10 pairs) the risk of at least one false "significant" result is **more than 25 %**
+  (simulated in R: 27 % with n = 5, 28 % with n = 10), never "about 40 %" (1 − 0.95¹⁰ is true only for independent
+  tests). Inside the IB guide: two groups chosen before the data are collected, or a correction.
+- **A relationship:** every raw value, never the means. A straight line → Pearson's r and R² (residuals: a bell, an
+  even spread), else Spearman's rank; a curve that only rises or only falls → Spearman's rank; a rise, then a fall →
+  no correlation test: compare the groups. So the potato figure (six means) gives R² for its trend line only; the
+  site's r is the moss and light quadrats' r = −0.86 (n = 20).
+- **Labels as Tool 3 has them:** the t-test (Welch's, paired, one-sample), χ², r and R² carry "IB · Tool 3" (the blue IB
+  tag); Mann–Whitney U, Wilcoxon signed-rank, Spearman's rank, ANOVA, Kruskal–Wallis, Tukey's, Dunn's, repeated
+  measures, Friedman and Fisher's exact test carry "Beyond the IB guide" in the extension violet (`--ext`).
+- **The smallest n for a rank test to reach p < 0.05:** Mann–Whitney 4 per group (or 3 and 5), Wilcoxon signed-rank 6,
+  Spearman 5 (exact, checked in R).
+- **Error bars as guide 3:** range (fewer than 5 values), SD, SE, IQR; confidence intervals only as extension.
+- The worked t-test (40 v 50 °C) is a Welch's t-test: with equal n and equal SD, Welch's and Student's give the same
+  t = 5.77, df = 8, p = 0.0004 (R), so every report line on the site keeps its numbers. Every number on the chooser's
+  cards is listed, with its data, at the top of `test-chooser.js`.
 
 ## Overlapping error bars never decide (Daniel, 25 Sep 2026: "fix this, but make sure you explain")
 - No overlap (SD, five or more repeats): "a real difference is likely; a test can confirm it".
 - Overlap: "the graph **alone** cannot show a difference" + the test's p-value. NEVER "these data do not show a
   difference", "cannot be separated" as a rule, or "no significant difference" from overlap alone.
 - The proof on the page (errorbars.js): soils A and D with n = 10 → p = 0.06; the SAME means and SD bars with
-  n = 30 → t = 3.47, df = 58, p = 0.001 (Figure 6; checked in R). SD bars show the plants, the test weighs the means.
+  n = 30 → t = 3.47, df = 57.7, p = 0.001 (Figure 6; Welch's t-test, as guide 8; checked in R, 27 Nov 2026). SD bars show the plants, the test weighs the means.
 - Per kind of bar (Cumming, Fidler & Vaux 2007, "Go further"): SD overlap depends on n; SE bars (n ≈ 10+) that
   overlap → p > 0.05, a one-SE gap → p ≈ 0.05; 95 % CIs that do not overlap → p < 0.05, overlap of up to half an
   arm → p ≈ 0.05. Daniel's own IB R tutorial had overlapping CIs (79.4–84.0 vs 75.0–79.8) with t-test p = 0.010.

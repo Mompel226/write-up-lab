@@ -3,8 +3,8 @@
      seven heights 41.0–44.5 cm: mean 43.0, SD 1.3, SE 0.5 (checked with node, =STDEV.S; each to the mean's d.p.)
      amylase (IB) 40 °C: 74 ± 5 s (69–79); 50 °C: 54 ± 5 s (49–59) — no overlap
      soils A and D (n = 10): SD bars 41.6–44.4 and 42.8–45.8 overlap; SE bars 42.6–43.4 and 43.8–44.8 do not;
-     a t-test gives t = 2.00, df = 18, p = 0.060 (the "Go further" panel).
-     the same means and SDs with 30 plants per soil: t = 3.47, df = 58, p = 0.001 (checked in R, 25 Sep 2026):
+     a Welch's t-test gives t = 2.00, df = 17.9, p = 0.06 (the "Go further" panel; Student's: df = 18, the same p).
+     the same means and SDs with 30 plants per soil: t = 3.47, df = 57.7, p = 0.001 (Welch's, guide 8; checked in R, 27 Nov 2026):
      identical SD bars, a different verdict. That is why overlap never decides (Cumming et al. 2007).
      skewed counts (16 Oct 2026): WUL.data.shore at 8.00 m, 0, 1, 13, 0, 1 periwinkles: mean 3.0, SD 5.6, median 1;
      mean − 1 SD = −2.6, below zero, which no count can be. PRACTICE data, never a class's own field data. */
@@ -183,7 +183,7 @@
           d: { label: 'dishonest', why: 'SE answers a different question from SD. Choosing it because it looks smaller hides how much the plants varied.' },
           e: { label: '“proves”?', why: 'Nothing proves it, and here the t-test found no significant difference (p = 0.06), so the data do not support this claim.' }
         },
-        fixed: 'Figure 3 shows the mean height of the seedlings in each soil, ==with error bars of ± 1 standard deviation (n = 10)==. The standard deviations were ==calculated from the ten heights with =STDEV.S==. The bars for soils A and D overlap, ==so the graph alone cannot show a difference, and a t-test found no significant difference in height between the two soils (t = 2.00, df = 18, p = 0.06)==. ==SD bars were used because they show how much the plants varied.== ==These data do not support the claim that soil type affects growth.==',
+        fixed: 'Figure 3 shows the mean height of the seedlings in each soil, ==with error bars of ± 1 standard deviation (n = 10)==. The standard deviations were ==calculated from the ten heights with =STDEV.S==. The bars for soils A and D overlap, ==so the graph alone cannot show a difference, and a Welch’s t-test found no significant difference in height between the two soils (t = 2.00, df = 17.9, p = 0.06)==. ==SD bars were used because they show how much the plants varied.== ==These data do not support the claim that soil type affects growth.==',
         fixedNote: 'The bars are named and calculated, and the claim now rests on the test, not on the overlap.'
       }
     },
@@ -282,7 +282,7 @@
         md: '**SD bars** show the spread of the values, so their overlap depends on n. Bars that just touch give p ≈ 0.07 with three values in each group, but p ≈ 0.01 with five, and p < 0.001 with ten. Overlap alone cannot tell you.\n\n**SE bars** (about ten values or more in each group): if they overlap, p > 0.05. They need a gap of about one SE before p falls to 0.05.\n\n**95 % confidence intervals:** if they do not overlap, p < 0.05. But they can overlap by up to about half of one arm and still give p ≈ 0.05. So overlapping 95 % CIs do __not__ mean “no significant difference”.',
         cite: 'Cumming, Geoff, Fiona Fidler, and David L. Vaux. “Error Bars in Experimental Biology.” *Journal of Cell Biology*, vol. 177, no. 1, 2007, pp. 7–11.' },
       { title: 'How large a gap do SE bars need?',
-        md: 'Soils A and D show a problem. Their SE bars do __not__ overlap, yet a t-test gives t = 2.00, df = 18, p = 0.06: not significant. With about ten values in each group, SE bars need a gap of about one SE before p falls to 0.05.\n\nThe same paper gives a second rule: draw error bars only from independent repeats, never from repeat measurements of one sample.',
+        md: 'Soils A and D show a problem. Their SE bars do __not__ overlap, yet a Welch’s t-test gives t = 2.00, df = 17.9, p = 0.06: not significant. With about ten values in each group, SE bars need a gap of about one SE before p falls to 0.05.\n\nThe same paper gives a second rule: draw error bars only from independent repeats, never from repeat measurements of one sample.',
         cite: 'Cumming, Geoff, Fiona Fidler, and David L. Vaux. “Error Bars in Experimental Biology.” *Journal of Cell Biology*, vol. 177, no. 1, 2007, pp. 7–11.' }
     ],
 

@@ -249,7 +249,7 @@
           '<div class="tod__col tod__col--c"><div class="tod__h">One-tailed<small>rare in an IA</small></div>' + WUL.tailsSvg('one') + '<p class="tails__p">Only one direction counts: all 5&nbsp;% in one tail. Only if you predicted the direction before collecting any data.</p></div>' +
         '</div>' +
         '<p class="tod__trap">If there were no real difference, chance alone would put t in the red 5&nbsp;% of the time. <b>t in the red: p &lt; 0.05, significant. t in the white: not significant.</b></p>' +
-        '<p class="tod__ib">Spreadsheet: =T.TEST(range1, range2, <b>2</b>, 2): the first 2 means two tails. R: t.test() is two-tailed unless you change it.</p>' +
+        '<p class="tod__ib">Spreadsheet: =T.TEST(range1, range2, <b>2</b>, 3): the 2 means two tails, and the 3 means Welch’s t-test. R: t.test() is two-tailed, and a Welch’s t-test, unless you change it.</p>' +
       '</div>';
     },
     data: function (hi) {

@@ -3,8 +3,12 @@
      t-test, IB amylase 40 °C (70, 80, 70, 80, 70) vs 50 °C (50, 50, 60, 50, 60):
        means 74 and 54 s; SD² = 30 exactly for both (SD 5.477 s); SE of the difference = √(30/5 + 30/5) = √12 = 3.464;
        t = 20 ÷ √12 = 5.77; df = 8; two-tailed p = 0.00042 (critical t at p = 0.05, df = 8: 2.306)
+       Welch's t-test, the default since Daniel's guide 8 (27 Nov 2026), gives the same t, df and p here, because n and SD
+       are equal: df = (6 + 6)² ÷ (6²/4 + 6²/4) = 144 ÷ 18 = 8 (R: t.test(…, var.equal = FALSE) and TRUE agree)
      woodlice 32 : 8 against 20 : 20: (O − E)²/E = 7.2 + 7.2, χ² = 14.4, df = 1, p = 0.00015 (critical 3.84)
-     potato cylinders (0–1.0 mol dm⁻³): straight line of best fit r = −0.993, R² = 0.986 (residuals scatter, no curve) */
+     potato cylinders (0–1.0 mol dm⁻³): straight line of best fit through the six means, R² = 0.986 (residuals scatter, no curve).
+       R² describes how well that line fits the means; a test of r uses every raw value, never the means (guide 8), so the
+       figure gives R² only. The r of the site's correlation examples is the moss and light quadrats' r = −0.86 (n = 20). */
 (function (WUL) {
   'use strict';
   /* inline markup; ± is kept on the same line as its number */
@@ -28,7 +32,7 @@
     x: { min: 0, max: 1, step: 0.2, minor: 4, label: 'Concentration of sucrose / mol dm⁻³' },
     y: { min: -30, max: 20, step: 5, minor: 5, label: 'Change in mass / %', fmt: minus },
     series: [{ id: 'p', pts: POTATO, mark: 'x', line: 'best' }],
-    caption: 'Figure 1. Line graph showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 24 hours (n = 5), with a straight line of best fit (r = −0.99, R² = 0.99).'
+    caption: 'Figure 1. Line graph showing the effect of sucrose concentration (0.0–1.0 mol dm⁻³) on the mean percentage change in mass of potato cylinders after 24 hours (n = 5), with a straight line of best fit (R² = 0.99).'
   };
 
   /* a stage built only in the page (plot.js is not loaded by tools/check.mjs); the stub names its parts for the check */
@@ -80,6 +84,9 @@
     }), /^[oed]-\d$/) + '</div></div>'; }, ['h0', 'o-1', 'o-2', 'o-3', 'o-4', 'tot-1', 'tot-2', 'tot-3', 'tot-4', 'tot-5', 'e-1', 'e-2', 'e-3', 'e-4', 'chi', 'df', 'dec', 'd-1', 'd-2', 'd-3', 'd-4', 'd-5']);
 
   /* ---------- Beyond the IB guide: the two conditions of a t-test ----------
+     Since Daniel's guide 8 (27 Nov 2026): Welch's t-test is the default for two groups, so the spread is never tested
+     first (no F-test or Levene gate before a t-test); a similar spread matters for Student's t-test, ANOVA and Pearson's r.
+     Each normality check goes where the test looks: each group on its own, the differences of pairs, the residuals of a line.
      Drawn as in Daniel's C4.1 slides 52–55. Imagined heather heights: 66 quadrats in 5 cm
      classes (mean 33.3, SD 8.65); with moss 50 quadrats (mean 41.5, SD 3.85) and without
      moss 50 (mean 25.8, SD 3.89), 2 cm classes. The panes take turns in one place. */
@@ -117,17 +124,17 @@
       '<div>' + hist({ title: 'Both mixed: two peaks', f: WITH.map(function (v, i) { return v + WITHOUT[i]; }), lo: 16, cw: 2, every: 10, ymax: 12, ystep: 4 }) + '</div>' +
     '</div></div>' +
     '<div class="pane" data-el="spr"><div class="pane-2">' +
-      '<div>' + spread('Same spread ✓ (SD 4 and 4 cm)', 4, 4) + '</div>' +
-      '<div>' + spread('Different spread ✗ (SD 2.5 and 8 cm)', 2.5, 8) + '</div>' +
+      '<div>' + spread('Similar spread ✓ (SD 4 and 4 cm)', 4, 4) + '</div>' +
+      '<div>' + spread('Very different spread (SD 2.5 and 8 cm)', 2.5, 8) + '</div>' +
     '</div></div>' +
     '<div class="pane" data-el="tst">' + WUL.table({
       head: [['', 'A normal distribution', 'A similar spread']],
       rows: [
-        ['Look at', 'a histogram of each group: one bell?', 'the two SDs: is the larger less than twice the smaller?'],
-        ['Test', 'Shapiro–Wilk test, on each group', 'F-test'],
-        ['In R', 'shapiro.test(x)', 'var.test(x, y)'],
-        ['In a spreadsheet', 'not built in', '=F.TEST(B2:B6, C2:C6)'],
-        ['If it fails', { t: 'Mann–Whitney U test', el: 'tstf-1' }, { t: 'Welch’s t-test: =T.TEST(B2:B6, C2:C6, 2, 3)', el: 'tstf-2' }]
+        ['Needed by', 'every t-test, ANOVA and Pearson’s r', 'Student’s t-test, ANOVA and Pearson’s r: __not__ Welch’s t-test'],
+        ['Look at', 'a dot plot or histogram of each group: one bell?', 'the SDs: is the largest more than twice the smallest?'],
+        ['Test', 'Shapiro–Wilk test, on each group', 'Levene’s test'],
+        ['In R', 'shapiro.test(x)', 'leveneTest(y ~ group), from the car package'],
+        ['If it fails', { t: 'a rank test: Mann–Whitney U (two groups), Wilcoxon signed-rank (pairs), Spearman’s rank (a line)', el: 'tstf-1' }, { t: 'Welch’s t-test (two groups), Welch’s ANOVA (three or more groups), Spearman’s rank (a line)', el: 'tstf-2' }]
       ]
     }) + '</div>' +
   '</div>'; }, ['nd', 'grp', 'spr', 'tst', 'tstf-1', 'tstf-2']);
@@ -151,22 +158,24 @@
       { type: 'widget', title: 'Find your test', name: 'test-chooser' },
 
       { type: 'steps', id: 'checks', title: 'Beyond the IB guide: check your data before a t-test',
-        intro: 'The IB does not ask for this. But a t-test assumes two things about your data. If they are false, its p-value can mislead you, so check them first. Press Next step.',
+        intro: 'The IB does not ask for this. But every test assumes something about your data, and a false assumption can make its p-value mislead you. So check first. Press Next step.',
         stage: CHECKS_STAGE,
         steps: [
           { title: 'Condition 1: a normal distribution', show: ['nd'], focus: [], text: 'A [[normal distribution]] is one bell: most values near the middle, fewer and fewer towards both ends, and the two sides roughly the same. These heather heights from 66 quadrats form one bell (imagined data).' },
-          { title: 'Check each group on its own', show: ['grp'], hide: ['nd'], focus: [], text: 'A t-test compares two groups, so check each group separately. Heather with moss forms one bell (mean about 42 cm). Heather without moss forms another (about 26 cm). Mixed together, the same 100 heights have two peaks: that only shows the groups differ.' },
-          { title: 'Condition 2: a similar spread', show: ['spr'], hide: ['grp'], focus: [], text: 'The standard t-test also needs a similar spread in both groups: similar standard deviations (SD). This is called [[homoscedasticity]]. A rule of thumb: the larger SD is less than twice the smaller. Left: 4 and 4 cm, fine. Right: 8 cm is more than twice 2.5 cm.' },
-          { title: 'The two tests', show: ['tst', 'tstf'], hide: ['spr'], focus: [], text: 'Each condition has its own test. In both, H₀ says the condition is met, so p > 0.05 means no evidence of a problem, not proof. With only 5 values in a group, no histogram or test can show much: say in your evaluation that a normal distribution was assumed.' },
-          { title: 'If a check fails', show: [], focus: ['tstf'], text: 'Not normal: use the Mann–Whitney U test. Different spreads: use Welch’s t-test, which does not need a similar spread. A χ² test needs neither check, because it uses counts in categories. It needs every expected count to be at least 5.' }
+          { title: 'Check each group on its own', show: ['grp'], hide: ['nd'], focus: [], text: 'Welch’s t-test compares two groups, so check each group separately. Heather with moss forms one bell (mean about 42 cm). Heather without moss forms another (about 26 cm). Mixed together, the same 100 heights have two peaks: that only shows the groups differ.' },
+          { title: 'Where each check goes', show: [], focus: ['grp'], text: 'A doctor compares a child’s height with children of the same age, not with all children. In the same way, a check compares each value with its own group. Never check all the raw data in one pile.' },
+          { title: 'Pairs and lines', show: [], focus: [], text: 'A paired t-test: check the differences within the pairs. A line (Pearson’s r): check the residuals, the distances of the points above or below the line.' },
+          { title: 'Condition 2: a similar spread, but not for Welch’s t-test', show: ['spr'], hide: ['grp'], focus: [], text: 'Student’s t-test, ANOVA and Pearson’s r also need a similar spread: similar standard deviations (SD), called [[homoscedasticity]]. A warning sign: the largest SD is more than twice the smallest, as on the right (8 and 2.5 cm). Welch’s t-test does not need a similar spread, so for two groups you do not test the spread.' },
+          { title: 'The tests', show: ['tst', 'tstf'], hide: ['spr'], focus: [], text: 'Each condition has its own test. In both, H₀ says the condition is met, so p ≥ 0.05 means no evidence of a problem, not proof. With only 5 values in a group, no histogram or test can show much: say in your evaluation that a normal distribution was assumed.' },
+          { title: 'If a check fails', show: [], focus: ['tstf'], text: 'Not a bell shape: use a rank test, which uses the order of the values and needs no bell shape. For two groups it is the Mann–Whitney U test, with at least 4 values in each group (or 3 and 5) to reach p < 0.05. A χ² test needs neither check, only every expected count at least 5.' }
         ] },
 
       { type: 'anatomy', title: 'How to report a test',
         intro: 'A test does not prove anything. Its p-value says how often chance alone would give a difference this large ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). Report it in four parts.',
-        model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C; the alternative hypothesis, that there is a difference.} {2:A [[two-tailed|two-tailed test]] t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
+        model: '{1:The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C; the alternative hypothesis, that there is a difference.} {2:A [[two-tailed|two-tailed test]] Welch’s t-test} gave {3:t = 5.77, df = 8, p < 0.001}. {4:The null hypothesis was rejected: the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s).}',
         parts: [
           { n: 1, name: 'H₀ and H₁', note: 'H₀: what “no effect” would look like. H₁: that there is an effect. State both just before the test (the IB requires them with every test), not at the start of the report.' },
-          { n: 2, name: 'The test', note: 'Its name. [[Two-tailed|two-tailed test]]: a difference in either direction counts. That is the normal choice.' },
+          { n: 2, name: 'The test', note: 'Its full name, such as Welch’s t-test. [[Two-tailed|two-tailed test]]: a difference in either direction counts. That is the normal choice.' },
           { n: 3, name: 'The numbers', note: 'The value, the degrees of freedom (df) and p.' },
           { n: 4, name: 'The meaning', note: 'One sentence in words, with the means and their units.' }
         ] },
@@ -182,9 +191,9 @@
       ] },
 
       { type: 'steps', title: 'A worked t-test',
-        intro: 'The IB amylase data, five trials at each temperature. Press Next step.',
+        intro: 'A Welch’s t-test on the IB amylase data, five trials at each temperature. Press Next step.',
         stage: { table: {
-          caption: 'Table 1. Processed data showing the effect of temperature (40.0 and 50.0 °C) on the time taken for fungal α-amylase to digest starch, with a two-tailed t-test (n = 5).',
+          caption: 'Table 1. Processed data showing the effect of temperature (40.0 and 50.0 °C) on the time taken for fungal α-amylase to digest starch, with a two-tailed Welch’s t-test (n = 5).',
           head: [['', '40 °C', '50 °C']],
           rows: [
             ['Null hypothesis', { t: 'No difference between the two mean times', cs: 2, el: 'h0' }],
@@ -200,11 +209,11 @@
         steps: [
           { title: 'State the null hypothesis', show: ['h0'], text: 'Before testing, say what “no effect” would look like: there is no difference between the mean time at 40 °C and at 50 °C.' },
           { title: 'Find the two means', show: ['mean-1', 'mean-2'], text: '74 s at 40 °C and 54 s at 50 °C: a difference of 20 s.' },
-          { title: 'Find the two standard deviations', show: ['sd-1', 'sd-2'], text: 'Both are 5 s, given like the means (5.48 s before rounding). Their spreads are similar, which this t-test needs. Calculate with the unrounded value: SD² = 30 exactly.' },
+          { title: 'Find the two standard deviations', show: ['sd-1', 'sd-2'], text: 'Both are 5 s, given like the means (5.48 s before rounding). Welch’s t-test does not need similar spreads, but it uses both SDs. Calculate with the unrounded value: SD² = 30 exactly.' },
           { title: 'Calculate t', show: ['t'], text: '**t** compares the difference with chance. The top of the fraction is the difference between the means: 20 s. The bottom is the size of difference that chance alone typically makes, from the spreads (SD) and the number of trials (n): √(30/5 + 30/5) = 3.46 s. So t = 20 ÷ 3.46 = 5.77: the difference is almost 6 times bigger than chance typically makes.' },
-          { title: 'Find the degrees of freedom', show: ['df'], text: 'For two groups, df = n₁ + n₂ − 2 = 5 + 5 − 2 = 8.' },
+          { title: 'Find the degrees of freedom', show: ['df'], text: 'For Welch’s t-test, df comes from the SDs and n: R calculates it for you. It is never more than n₁ + n₂ − 2, and here it is exactly that, because both groups have the same n and the same SD: 5 + 5 − 2 = 8. With different SDs, df is often not a whole number, for example df = 8.4.' },
           { title: 'Two tails: either direction', show: [], focus: ['h0'], text: 'The null hypothesis says “no difference”. A real difference could go either way: 50 °C could be faster, or slower, than 40 °C. So a large t at __either__ end, or tail, of the chance results counts. That makes the test **two-tailed**. It is the normal t-test: spreadsheets and R do it unless you ask for something else.' },
-          { title: 'Find p, and decide', show: ['p', 'dec'], text: 'In a spreadsheet, =T.TEST(B2:B6, C2:C6, 2, 2) gives p directly ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). The first 2 means two tails. The second 2 means two separate groups with similar spreads. With a table of critical values: for df = 8, t must be above 2.31 for p < 0.05. Here t is 5.77.' }
+          { title: 'Find p, and decide', show: ['p', 'dec'], text: 'In a spreadsheet, =T.TEST(B2:B6, C2:C6, 2, 3) gives p directly ([what p means](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)). The 2 means two tails. The 3 means Welch’s t-test: two separate groups, with no need for similar spreads. With a table of critical values: for df = 8, t must be above 2.31 for p < 0.05. Here t is 5.77.' }
         ] },
 
       { type: 'grid2', title: 'Two tails or one?', items: [
@@ -244,8 +253,8 @@
           { title: 'What it does not show', show: [], focus: ['dec'], text: 'An association is not a cause. The moss may need the shade and damp under the heather, or both may avoid the paths trampled by walkers. Only an experiment, such as removing the heather, could test a cause.' }
         ] },
 
-      { type: 'plot', title: 'Correlation and R²', spec: potato,
-        after: 'r = −0.99: a strong negative [[correlation]]. R² = 0.99: the straight line explains 99 % of the variation in the change in mass. Use R² only with a fitted trend line.' },
+      { type: 'plot', title: 'R² for a trend line', spec: potato,
+        after: 'R² = 0.99: the straight line fits the six means closely, and explains 99 % of the variation between them. Use R² only with a fitted trend line. To test a [[correlation]] with r and its p-value, plot every raw value (all 30 cylinders), never the means.' },
 
       { type: 'compare', title: 'Correlation is not causation',
         bad: 'Ponds with more water lilies had more frogs (r = 0.82), ==so water lilies cause the number of frogs to increase==.',
@@ -276,7 +285,7 @@
           a: { label: '“proved”?', why: 'A test never proves. Write “showed a significant difference”, or “the null hypothesis was rejected”.' },
           b: { label: 'df? p?', why: 'Report the value, the degrees of freedom and p: t = 5.77, df = 8, p < 0.001.' },
           c: { label: 'wrong meaning', why: 'p < 0.05 means: if there were no real difference, a difference this large would happen by chance less than 5 % of the time.' },
-          d: { label: 'too many tests', why: 'With many tests at p = 0.05, about 1 in 20 looks significant by chance alone. Plan one comparison before you collect the data. To test several pairs, apply a [[correction for multiple comparisons]]: with 10 tests, each p must be below 0.005 (0.05 ÷ 10).' }
+          d: { label: 'too many tests', why: 'Ten t-tests between the pairs of five temperatures give a risk of more than 25 % of at least one false “significant” result, not 5 %. Plan one comparison before you collect the data, or use ANOVA (beyond the IB guide). To test several pairs, apply a [[correction for multiple comparisons]]: with 10 tests, each p must be below 0.005 (0.05 ÷ 10).' }
         },
         fixed: '==The null hypothesis was that there is no difference between the mean time at 40 °C and at 50 °C.== A [[two-tailed|two-tailed test]] t-test ==showed== that the mean time at 50 °C (54 s) was significantly shorter than at 40 °C (74 s) ==(t = 5.77, df = 8, p < 0.001)==. ==If there were no real difference, a difference this large would arise by chance less than 0.1 % of the time.== ==This one comparison was planned before the data were collected.== It tests whether the rate still rises between 40 °C and 50 °C, below the published optimum of 55 °C.',
         fixedNote: 'The null hypothesis, the full numbers, a correct meaning of p, and one planned comparison.'
@@ -332,7 +341,7 @@
         ] },
       { type: 'choose', q: 'A t-test compares two groups of five trials. How many degrees of freedom?',
         opts: [
-          { t: '8', ok: true, why: 'df = n₁ + n₂ − 2 = 5 + 5 − 2 = 8.' },
+          { t: '8', ok: true, why: 'df = n₁ + n₂ − 2 = 5 + 5 − 2 = 8. Welch’s t-test gives 8 too when the two SDs are the same, as in the amylase data.' },
           { t: '10', why: 'Subtract 2: one for each group.' },
           { t: '4', why: 'That is for one group. Two groups give 5 + 5 − 2.' },
           { t: '9', why: 'Subtract one for each of the two groups: 10 − 2 = 8.' }
@@ -362,7 +371,7 @@
     ],
 
     words: [
-      { term: 'two-tailed test', forms: ['two-tailed', 'two tails', 'two-tailed t-test'], def: 'A test in which a difference in either direction counts: it looks at both ends, or tails, of the chance results. The normal choice, and the default in spreadsheets and in R.', eg: '=T.TEST(B2:B6, C2:C6, 2, 2): the first 2 means two tails.', fig: 'tails' },
+      { term: 'two-tailed test', forms: ['two-tailed', 'two tails', 'two-tailed t-test'], def: 'A test in which a difference in either direction counts: it looks at both ends, or tails, of the chance results. The normal choice, and the default in spreadsheets and in R.', eg: '=T.TEST(B2:B6, C2:C6, 2, 3): the 2 means two tails.', fig: 'tails' },
       { term: 'measured variable', forms: ['measured variables', 'measurement', 'measurements'], def: 'A variable recorded as a number: measured on a scale (continuous) or counted (discrete).', eg: 'Time in s; the number of stomata in a field of view.', fig: 'data', hi: 'quant' },
       { term: 'discrete variable', forms: ['discrete variables', 'discrete', 'discrete data'], def: 'A numerical variable that can take only separate values, usually whole-number counts.', eg: 'The number of seeds in a pod: 4 or 5, never 4.5.', fig: 'data', hi: 'discrete' },
       { term: 't-test', forms: ['t-tests', 't test', "Student's t-test"], def: 'A statistical test of whether the means of two groups differ by more than chance would explain. Its value, t, is the difference divided by the size of difference that chance alone typically makes.', eg: 'Mean time at 40 °C (74 s) against 50 °C (54 s): t = 5.77.' },
@@ -370,9 +379,9 @@
       { term: 'null hypothesis', forms: ['null hypotheses', 'H₀'], def: 'The statement that there is no difference or no relationship, which a statistical test may reject.', eg: 'There is no difference between the mean time at 40 °C and at 50 °C.' },
       { term: 'p-value', forms: ['p value', 'p-values'], def: 'Pretend there is no real difference: p is how often chance alone would then give a difference as big as yours. Below 0.05: significant. [More](https://nlcsbiology.com/write-up-lab/#/part/stats/build/pvalue)', eg: 'p = 0.0004: 4 times in 10,000.' },
       { term: 'normal distribution', forms: ['normal distributions', 'normally distributed', 'normality', 'bell-shaped'], def: 'A spread of values shaped like one bell: most values near the mean, fewer and fewer towards both ends, the two sides roughly the same. The t-test assumes it in each group.', eg: 'Heather heights in 66 quadrats: most near 33 cm, few below 15 cm or above 50 cm.' },
-      { term: 'homoscedasticity', forms: ['homoscedastic', 'equal variance', 'equal variances', 'similar spread'], def: 'When groups have a similar spread: similar standard deviations. The standard t-test assumes it; Welch’s t-test does not.', eg: 'SD 4 cm and 4 cm: similar. SD 2.5 cm and 8 cm: not similar.' },
+      { term: 'homoscedasticity', forms: ['homoscedastic', 'equal variance', 'equal variances', 'similar spread'], def: 'When groups have a similar spread: similar standard deviations. Student’s t-test and ANOVA assume it; Welch’s t-test does not.', eg: 'SD 4 cm and 4 cm: similar. SD 2.5 cm and 8 cm: not similar.' },
       { term: 'correction for multiple comparisons', forms: ['corrections for multiple comparisons', 'multiple comparisons', 'Bonferroni correction'], def: 'A stricter line for p when you run several tests on the same data, so a false “significant” result stays rare. The simplest is the Bonferroni correction: divide 0.05 by the number of tests. With 10 tests, each p must be below 0.005.' },
-      { term: 'correlation coefficient', forms: ['correlation coefficients', 'r', "Pearson's r"], def: 'A number, r, from −1 to +1, showing the strength and direction of a straight-line relationship.', eg: 'r = −0.99 for potato mass change and sucrose concentration.' },
+      { term: 'correlation coefficient', forms: ['correlation coefficients', 'r', "Pearson's r"], def: 'A number, r, from −1 to +1, showing the strength and direction of a straight-line relationship.', eg: 'r = −0.86 for light intensity and moss cover in 20 quadrats.' },
       { term: 'coefficient of determination', forms: ['R²', 'R2', 'R squared'], def: 'R², from 0 to 1: how well a trend line fits, as the fraction of the variation it explains.', eg: 'R² = 0.99: the line explains 99 % of the variation.' },
       { term: 'statistically significant', forms: ['significant', 'significantly', 'statistical significance', 'significance'], def: 'A result that chance alone would rarely give if there were no real difference: p below 0.05.', eg: 'The mean time at 50 °C was significantly shorter (p < 0.001).' },
       { term: 'correlation', forms: ['correlations', 'correlated', 'positive correlation', 'negative correlation'], def: 'A relationship in which one variable changes as another changes.', eg: 'Ponds with more water lilies had more frogs.' },
@@ -384,7 +393,7 @@
         md: 'The t-test was published in 1908 by William Gosset, a scientist at the Guinness brewery in Dublin. The brewery asked its staff to use pen names, so he signed it “Student”: that is why it is also called __Student’s t-test__. The letter t itself has no agreed meaning. What matters is what t measures: how many times bigger your difference is than the difference chance typically makes.',
         cite: 'Student. “The Probable Error of a Mean.” *Biometrika*, vol. 6, no. 1, 1908, pp. 1–25.' },
       { title: 'Comparing three or more groups: ANOVA',
-        md: 'To compare three or more means in one test, biologists use analysis of variance (ANOVA). It tests all the groups together, so the chance of a false “significant” result stays at 5 %. If ANOVA finds a difference, a second test shows which groups differ, and it corrects for multiple comparisons itself. You do not need any of this for the IB, but you will see it in university research papers.',
+        md: 'To compare three or more means in one test, biologists use analysis of variance (ANOVA). It tests all the groups together, so the chance of a false “significant” result stays at 5 %. It shows only whether at least one group is different.\n\nOnly if p < 0.05, Tukey’s test then shows which pairs differ, and it corrects for multiple comparisons itself. For groups that are not a bell shape, use the Kruskal–Wallis test, then Dunn’s test.\n\nThe IB guide does not name these tests. If you use one in your IA, name the test and say why you chose it.',
         cite: 'Whitlock, Michael C., and Dolph Schluter. *The Analysis of Biological Data*. 3rd ed., Macmillan Learning, 2020.' }
     ],
 

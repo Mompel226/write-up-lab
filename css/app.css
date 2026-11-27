@@ -16,6 +16,7 @@
   --blue:#1E4FA8; --blue-wash:rgba(30,79,168,.09);
   --plum:#6B3A9E; --plum-wash:rgba(107,58,158,.10);
   --ee:#B45309; --ee-wash:rgba(180,83,9,.10);
+  --ext:#7243C0; --ext-wash:rgba(114,67,192,.12);   /* the one extension violet of every site (Daniel, 10 Nov 2026): here, a test beyond the IB guide */
   --amber:#8F6400; --amber-wash:rgba(214,160,20,.15);
   --hl:rgba(255,222,64,.62); --hl-soft:rgba(255,222,64,.30);
   --kw:rgba(255,214,51,.45);
@@ -43,6 +44,7 @@
     --blue:#8BAEFF; --blue-wash:rgba(139,174,255,.11);
     --plum:#C8A4FF; --plum-wash:rgba(200,164,255,.11);
     --ee:#FDBA74; --ee-wash:rgba(253,186,116,.12);
+    --ext:#B388FF; --ext-wash:rgba(179,136,255,.13);
     --amber:#F0C24A; --amber-wash:rgba(240,194,74,.12);
     --hl:rgba(255,222,64,.30); --hl-soft:rgba(255,222,64,.16); --kw:rgba(255,214,51,.24);
     --p1:rgba(255,221,64,.28); --p2:rgba(255,140,190,.26); --p3:rgba(100,215,135,.24);
@@ -62,6 +64,7 @@
   --blue:#8BAEFF; --blue-wash:rgba(139,174,255,.11);
   --plum:#C8A4FF; --plum-wash:rgba(200,164,255,.11);
   --ee:#FDBA74; --ee-wash:rgba(253,186,116,.12);
+  --ext:#B388FF; --ext-wash:rgba(179,136,255,.13);
   --amber:#F0C24A; --amber-wash:rgba(240,194,74,.12);
   --hl:rgba(255,222,64,.30); --hl-soft:rgba(255,222,64,.16); --kw:rgba(255,214,51,.24);
   --p1:rgba(255,221,64,.28); --p2:rgba(255,140,190,.26); --p3:rgba(100,215,135,.24);
