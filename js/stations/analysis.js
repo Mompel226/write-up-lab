@@ -5,7 +5,9 @@
    Trials differ by ≤ 20 s at every temperature (both levels), so there are no anomalies.
    IB SD bars (± 1 SD) at 40/50/60 °C: 68.5–79.5, 48.5–59.5, 89.6–106.4 s: no overlap.
    Unpaired t-test 40 °C v 50 °C (5 trials each): t = 5.77, df = 8, p = 0.0004 (< 0.001).
-   Pondweed anomaly example (not amylase): 12, 25, 14 at 40 cm; repeat 13; mean (12 + 14 + 13) ÷ 3 = 13. */
+   Pondweed anomaly example (not amylase): 12, 25, 14 at 40 cm; repeat 13; mean (12 + 14 + 13) ÷ 3 = 13.
+   A rate or a total (catalase, not amylase): the same hydrogen peroxide in both tubes, so both reach 40 cm³;
+   the first 5 minutes give liver 30 ÷ 5 = 6 and carrot 10 ÷ 5 = 2 cm³ per minute. */
 (function (WUL) {
   'use strict';
   var A = WUL.data.amylase, S = WUL.data.soils;
@@ -50,6 +52,26 @@
     head: [[{ t: 'Distance from lamp / cm', rs: 2 }, { t: 'Number of bubbles per minute', cs: 4 }], ['Trial 1', 'Trial 2', 'Trial 3', 'Mean']],
     rows: [['10', '48', '46', '50', '48'], ['20', '31', '33', '29', '31'], ['30', '20', '19', '21', '20'], ['40', '12', '==25== *', '14', '13'], ['50', '7', '8', '6', '7']],
     note: '* Anomalous result: excluded from the mean. A repeat gave 13, so the mean at 40 cm is (12 + 14 + 13) ÷ 3 = 13.'
+  };
+
+  /* Daniel, 23 Nov 2026: a greater rate is not a greater volume. One pair of graphs of the same two tubes: the totals
+     are equal and the rates are not, so a pupil sees why "more" is the wrong word for a rate. */
+  var plotTotal = {
+    w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 }, key: true, keyAt: 'br',
+    x: { min: 0, max: 30, step: 5, minor: 5, label: 'Time / minutes' },
+    y: { min: 0, max: 50, step: 10, minor: 2, label: 'Total volume of oxygen / cm³' },
+    series: [
+      { id: 'liver', pts: [[0, 0], [5, 30], [10, 38], [15, 40], [20, 40], [25, 40], [30, 40]], line: 'ruled', mark: 'x', tone: 'lvl', label: 'Liver' },
+      { id: 'carrot', pts: [[0, 0], [5, 10], [10, 19], [15, 27], [20, 33], [25, 38], [30, 40]], line: 'ruled', mark: 'circle', tone: 'grey', label: 'Carrot' }
+    ],
+    caption: 'Figure 1. Line graph showing the effect of the tissue (liver and carrot) on the total volume of oxygen released from hydrogen peroxide.'
+  };
+  var plotRate = {
+    w: 380, h: 290, pad: { l: 58, r: 14, t: 14, b: 50 },
+    x: { cat: ['Liver', 'Carrot'], label: 'Tissue' },
+    y: { min: 0, max: 8, step: 2, minor: 2, label: 'Rate of oxygen release / cm³ per minute' },
+    bars: { items: [{ label: 'Liver', v: 6, tone: 'lvl' }, { label: 'Carrot', v: 2 }] },
+    caption: 'Figure 2. Bar chart showing the effect of the tissue (liver and carrot) on the rate of oxygen release from hydrogen peroxide in the first 5 minutes.'
   };
 
   WUL.station({
@@ -153,6 +175,13 @@
         items: [
           { label: 'Error bars overlap', v: { plot: plotSoils }, note: 'The four soils differ by only 1.3 cm (3 %), and every SD bar overlaps. The graph __alone__ cannot separate the soils: only a statistical test can decide.' },
           { label: 'Error bars do not overlap', v: { plot: plotAmyl }, note: 'No pair of SD bars overlaps. The differences are probably real; a [[t-test]] can test whether they are [[statistically significant]].' }
+        ] },
+
+      { type: 'grid2', title: 'A rate or a total?',
+        intro: 'Read the unit on the y-axis before you describe a graph. A volume in cm³ is a total. A volume “per minute” or “per hour” is a [[rate]]: how fast something happens.',
+        items: [
+          { label: 'A total: cm³', v: { plot: plotTotal }, note: 'Both tubes held the same volume and concentration of hydrogen peroxide. Both tubes released __the same total volume__ of oxygen: 40 cm³.' },
+          { label: 'A rate: cm³ per minute', v: { plot: plotRate }, note: 'The tube with liver released oxygen at a __higher rate__. For a rate, write “faster” or “a higher rate”. Never write “more” alone: the total volume was the same.' }
         ] },
 
       { type: 'frames', lv: 'g', title: 'Sentences for your analysis', items: [
